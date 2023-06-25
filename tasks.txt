@@ -1,0 +1,4 @@
+// tasks has been done
+1.  router
+2.  tailwind
+3.  firebase
