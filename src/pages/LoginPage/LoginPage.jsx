@@ -1,6 +1,6 @@
 import { Helmet } from "react-helmet-async";
 import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import Container from "../../components/Container/Container";
 import SocialLogin from "../../components/SocialLogin/SocialLogin";
 import { loadCaptchaEnginge, LoadCanvasTemplate, validateCaptcha } from "react-simple-captcha";
@@ -10,9 +10,15 @@ import useAuth from "../../hooks/useAuth";
 import Swal from "sweetalert2";
 
 const LoginPage = () => {
-  const { authenticationUsingEmailPassword, user } = useAuth();
+  const { authenticationUsingEmailPassword } = useAuth();
   const [disableLoginBtn, setDisableLoginBtn] = useState(true);
   const [showPassword, setShowPassword] = useState(false);
+
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  const from = location.state?.from?.pathname || "/";
+  // console.log(from);
   const {
     register,
     handleSubmit,
@@ -37,17 +43,18 @@ const LoginPage = () => {
   const submitHandler = (data) => {
     const { email, password } = data;
     authenticationUsingEmailPassword(email, password)
-      .then((userCredential) => {
-        const loggedInUser = userCredential.user;
-        console.log(loggedInUser);
+      .then((result) => {
+        const loggedInUser = result.user;
         reset();
         Swal.fire({
           position: "center",
           icon: "success",
-          title: `${user?.displayName} login success!`,
+          title: `login success!`,
           showConfirmButton: false,
           timer: 1500,
         });
+        console.log(`Logged in user ${JSON.stringify(loggedInUser)}`);
+        navigate(from, { replace: true });
       })
       .catch((error) => {
         const errorMessage = error.message;

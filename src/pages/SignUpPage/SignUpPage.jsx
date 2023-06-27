@@ -1,6 +1,6 @@
 import { Helmet } from "react-helmet-async";
 import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import SocialLogin from "../../components/SocialLogin/SocialLogin";
 import Container from "../../components/Container/Container";
 import { useState } from "react";
@@ -9,8 +9,9 @@ import useAuth from "../../hooks/useAuth";
 import Swal from "sweetalert2";
 
 const SignUpPage = () => {
-  const { createUserUsingEmailPassword, updateUserProfile, user } = useAuth();
+  const { createUserUsingEmailPassword, updateUserProfile } = useAuth();
   const [showPassword, setShowPassword] = useState(false);
+  const navigate = useNavigate();
   const {
     register,
     reset,
@@ -20,11 +21,10 @@ const SignUpPage = () => {
 
   const submitHandler = (data) => {
     const { email, password, name, photo } = data;
-    console.log(data);
+    // console.log(data);
     createUserUsingEmailPassword(email, password)
-      .then((userCredential) => {
-        const loggedInUser = userCredential.user;
-        console.log(loggedInUser);
+      .then((result) => {
+        const loggedInUser = result.user;
         reset();
         // update user profile function
         updateUserProfile(name, photo)
@@ -32,10 +32,12 @@ const SignUpPage = () => {
             Swal.fire({
               position: "center",
               icon: "success",
-              title: `${user?.displayName} sign up success!`,
+              title: `sign up success!`,
               showConfirmButton: false,
               timer: 1500,
             });
+            console.log(`Logged in user ${JSON.stringify(loggedInUser)}`);
+            navigate("/");
           })
           .catch((error) => {
             console.log(error.message);

@@ -1,26 +1,54 @@
-import { Link, NavLink } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Container from "../Container/Container";
 import Button from "../Button/Button";
+import useAuth from "../../hooks/useAuth";
+import ActiveLink from "../ActiveLink/ActiveLink";
 
 const Header = () => {
+  const { user, logOutUser } = useAuth();
+  const navigate = useNavigate();
   const menuItems = (
     <>
       <li>
-        <NavLink to="/">Home</NavLink>
+        <ActiveLink to="/">Home</ActiveLink>
       </li>
       <li>
-        <NavLink to="/instructors">Instructors</NavLink>
+        <ActiveLink to="/instructors">Instructors</ActiveLink>
       </li>
       <li>
-        <NavLink to="/classes">Classes</NavLink>
+        <ActiveLink to="/classes">Classes</ActiveLink>
+      </li>
+
+      <li>
+        <ActiveLink to="/contact">Contact us</ActiveLink>
+      </li>
+
+      <li>
+        <ActiveLink to="/dashboard">Dashboard</ActiveLink>
+      </li>
+      <li>
+        <ActiveLink to="/test">test</ActiveLink>
       </li>
     </>
   );
 
+  // handle logout
+  const logOutUserHandler = () => {
+    logOutUser()
+      .then(() => {
+        navigate("/");
+        // Sign-out successful.
+      })
+      .catch((error) => {
+        // An error happened.
+        console.log(error.message);
+      });
+  };
+
   return (
     <div className="">
       <Container>
-        <div className="navbar bg-slate-200 p-0">
+        <div className="navbar bg-slate-200 p-4">
           <div className="navbar-start">
             <div className="dropdown">
               <label tabIndex={0} className="btn btn-ghost lg:hidden">
@@ -28,7 +56,7 @@ const Header = () => {
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h8m-8 6h16" />
                 </svg>
               </label>
-              <ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52 ms-auto">
+              <ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52 ms-auto gap-2 z-20">
                 {menuItems}
               </ul>
             </div>
@@ -44,17 +72,37 @@ const Header = () => {
           </div>
           <div className="navbar-end">
             <div className="inline-flex items-center gap-2">
-              <button className="inline-flex items-center">
-                <div className="avatar">
-                  <div className="w-8 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
-                    <img src="/images/stock/photo-1534528741775-53994a69daeb.jpg" />
+              {user && user?.displayName && (
+                <button title={user.displayName} className="inline-flex items-center">
+                  <div className="avatar">
+                    <div className="w-8 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
+                      <img src={user?.photoURL} />
+                    </div>
                   </div>
-                </div>
-              </button>
-              <Link to="/login">
-                <Button>login</Button>
-              </Link>
-              <Button>logout</Button>
+                </button>
+              )}
+
+              {user && !user?.displayName && (
+                <button title="no user name" className="inline-flex items-center">
+                  <div className="avatar">
+                    <div className="w-8 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
+                      <img src="http://placehold.it/32x32" />
+                    </div>
+                  </div>
+                </button>
+              )}
+
+              {!user && (
+                <Link to="/login">
+                  <Button className="btn-secondary">login</Button>
+                </Link>
+              )}
+
+              {user && (
+                <Button className="btn-secondary" onClick={logOutUserHandler}>
+                  logout
+                </Button>
+              )}
             </div>
           </div>
         </div>

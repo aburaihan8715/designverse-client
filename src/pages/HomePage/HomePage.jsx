@@ -1,10 +1,16 @@
-import Container from "../../components/Container/Container";
+import PopularClasses from "./PopularClasses/PopularClasses";
+import PopularInstructors from "./PopularInstructors/PopularInstructors";
+import Slider from "./Slider/Slider";
+import Testimonial from "./Testimonial/Testimonial";
 
 const HomePage = () => {
   return (
-    <div>
-      <Container>home page</Container>
-    </div>
+    <>
+      <Slider></Slider>
+      <PopularClasses></PopularClasses>
+      <PopularInstructors></PopularInstructors>
+      <Testimonial></Testimonial>
+    </>
   );
 };
 

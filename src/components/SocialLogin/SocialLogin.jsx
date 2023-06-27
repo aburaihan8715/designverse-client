@@ -1,14 +1,20 @@
+import { useLocation, useNavigate } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
 
 const SocialLogin = () => {
   const { authenticationUsingGoogle, authenticationUsingGithub } = useAuth();
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  const from = location.state?.from?.pathname || "/";
 
   // google authentication handler
   const authenticationUsingGoogleHandler = () => {
     authenticationUsingGoogle()
       .then((result) => {
-        const user = result.user;
-        console.log(user);
+        const loggedInUser = result.user;
+        console.log(loggedInUser);
+        navigate(from, { replace: true });
       })
       .catch((error) => {
         const errorMessage = error.message;
@@ -20,8 +26,9 @@ const SocialLogin = () => {
   const authenticationUsingGithubHandler = () => {
     authenticationUsingGithub()
       .then((result) => {
-        const user = result.user;
-        console.log(user);
+        const loggedInUser = result.user;
+        console.log(loggedInUser);
+        navigate(from, { replace: true });
       })
       .catch((error) => {
         const errorMessage = error.message;

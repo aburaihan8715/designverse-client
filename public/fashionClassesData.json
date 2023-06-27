@@ -1,0 +1,222 @@
+[
+  {
+    "className": "Introduction to Fashion Design",
+    "classImage": "http://placehold.it/400x300",
+    "instructorName": "Emily Johnson",
+    "instructorImage": "http://placehold.it/400x300",
+    "instructorEmail": "emily@example.com",
+    "seats": 30,
+    "price": 50,
+    "students": 3,
+    "status": "Pending"
+  },
+  {
+    "className": "Fashion Illustration Techniques",
+    "classImage": "http://placehold.it/400x300",
+    "instructorName": "Sophia Lee",
+    "instructorImage": "http://placehold.it/400x300",
+    "instructorEmail": "sophia@example.com",
+    "seats": 20,
+    "price": 40,
+    "students": 2,
+    "status": "Pending"
+  },
+  {
+    "className": "Patternmaking Workshop",
+    "classImage": "http://placehold.it/400x300",
+    "instructorName": "Jonson roy",
+    "instructorImage": "http://placehold.it/400x300",
+    "instructorEmail": "michael@example.com",
+    "seats": 15,
+    "price": 60,
+    "students": 3,
+    "status": "Pending"
+  },
+  {
+    "className": "Fashion Marketing and Branding",
+    "classImage": "http://placehold.it/400x300",
+    "instructorName": "Ava Martinez",
+    "instructorImage": "http://placehold.it/400x300",
+    "instructorEmail": "ava@example.com",
+    "seats": 25,
+    "price": 45,
+    "students": 3,
+    "status": "Pending"
+  },
+  {
+    "className": "Advanced Sewing Techniques",
+    "classImage": "http://placehold.it/400x300",
+    "instructorName": "Benjamin Taylor",
+    "instructorImage": "http://placehold.it/400x300",
+    "instructorEmail": "benjamin@example.com",
+    "seats": 18,
+    "price": 55,
+    "students": 1,
+    "status": "Pending"
+  },
+  {
+    "className": "Textile Design Fundamentals",
+    "classImage": "http://placehold.it/400x300",
+    "instructorName": "Robin Taylor",
+    "instructorImage": "http://placehold.it/400x300",
+    "instructorEmail": "olivia@example.com",
+    "seats": 12,
+    "price": 35,
+    "students": 0,
+    "status": "Pending"
+  },
+  {
+    "className": "Fashion Photography Workshop",
+    "classImage": "http://placehold.it/400x300",
+    "instructorName": "Noah Davis",
+    "instructorImage": "http://placehold.it/400x300",
+    "instructorEmail": "noah@example.com",
+    "seats": 15,
+    "price": 65,
+    "students": 5,
+    "status": "Pending"
+  },
+  {
+    "className": "Fashion Styling Basics",
+    "classImage": "http://placehold.it/400x300",
+    "instructorName": "Sophie Anderson",
+    "instructorImage": "http://placehold.it/400x300",
+    "instructorEmail": "sophie@example.com",
+    "seats": 20,
+    "price": 45,
+    "students": 0,
+    "status": "Pending"
+  },
+  {
+    "className": "Fashion History and Trends",
+    "classImage": "http://placehold.it/400x300",
+    "instructorName": "William Clark",
+    "instructorImage": "http://placehold.it/400x300",
+    "instructorEmail": "william@example.com",
+    "seats": 30,
+    "price": 40,
+    "students": 4,
+    "status": "Pending"
+  },
+  {
+    "className": "Fashion Merchandising Strategies",
+    "classImage": "http://placehold.it/400x300",
+    "instructorName": "Lily Evans",
+    "instructorImage": "http://placehold.it/400x300",
+    "instructorEmail": "lily@example.com",
+    "seats": 25,
+    "price": 50,
+    "students": 1,
+    "status": "Pending"
+  },
+  {
+    "className": "Fashion Runway Production",
+    "classImage": "http://placehold.it/400x300",
+    "instructorName": "Tony Evans",
+    "instructorImage": "http://placehold.it/400x300",
+    "instructorEmail": "ethan@example.com",
+    "seats": 15,
+    "price": 70,
+    "students": 2,
+    "status": "Pending"
+  },
+  {
+    "className": "Fashion Design Portfolio Development",
+    "classImage": "http://placehold.it/400x300",
+    "instructorName": "Aria Wilson",
+    "instructorImage": "http://placehold.it/400x300",
+    "instructorEmail": "aria@example.com",
+    "seats": 10,
+    "price": 60,
+    "students": 0,
+    "status": "Pending"
+  },
+  {
+    "className": "Fashion Business and Entrepreneurship",
+    "classImage": "http://placehold.it/400x300",
+    "instructorName": "David Rodriguez",
+    "instructorImage": "http://placehold.it/400x300",
+    "instructorEmail": "david@example.com",
+    "seats": 20,
+    "price": 55,
+    "students": 3,
+    "status": "Pending"
+  },
+  {
+    "className": "Fashion Trend Forecasting",
+    "classImage": "http://placehold.it/400x300",
+    "instructorName": "Emma Carter",
+    "instructorImage": "http://placehold.it/400x300",
+    "instructorEmail": "emma@example.com",
+    "seats": 15,
+    "price": 40,
+    "students": 1,
+    "status": "Pending"
+  },
+  {
+    "className": "Fashion Draping Techniques",
+    "classImage": "http://placehold.it/400x300",
+    "instructorName": "Nathan Foster",
+    "instructorImage": "http://placehold.it/400x300",
+    "instructorEmail": "nathan@example.com",
+    "seats": 12,
+    "price": 65,
+    "students": 2,
+    "status": "Pending"
+  },
+  {
+    "className": "Fashion Brand Management",
+    "classImage": "http://placehold.it/400x300",
+    "instructorName": "Sophia Ramirez",
+    "instructorImage": "http://placehold.it/400x300",
+    "instructorEmail": "sophia.r@example.com",
+    "seats": 25,
+    "price": 50,
+    "students": 0,
+    "status": "Pending"
+  },
+  {
+    "className": "Fashion Retail Buying",
+    "classImage": "http://placehold.it/400x300",
+    "instructorName": "Sonia Ramirez",
+    "instructorImage": "http://placehold.it/400x300",
+    "instructorEmail": "michael.c@example.com",
+    "seats": 18,
+    "price": 55,
+    "students": 4,
+    "status": "Pending"
+  },
+  {
+    "className": "Fashion Trend Analysis",
+    "classImage": "http://placehold.it/400x300",
+    "instructorName": "Brandon Ramirez",
+    "instructorImage": "http://placehold.it/400x300",
+    "instructorEmail": "ava.p@example.com",
+    "seats": 20,
+    "price": 40,
+    "students": 2,
+    "status": "Pending"
+  },
+  {
+    "className": "Fashion Branding Strategies",
+    "classImage": "http://placehold.it/400x300",
+    "instructorName": "Daniel Smith",
+    "instructorImage": "http://placehold.it/400x300",
+    "instructorEmail": "daniel.s@example.com",
+    "seats": 15,
+    "price": 50,
+    "students": 1,
+    "status": "Pending"
+  },
+  {
+    "className": "Sustainable Fashion Design",
+    "classImage": "http://placehold.it/400x300",
+    "instructorName": "Olivia Anderson",
+    "instructorImage": "http://placehold.it/400x300",
+    "instructorEmail": "olivia.a@example.com",
+    "seats": 20,
+    "price": 60,
+    "students": 3,
+    "status": "Pending"
+  }
+]

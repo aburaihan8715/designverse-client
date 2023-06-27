@@ -2,9 +2,9 @@ import Container from "../Container/Container";
 
 const Footer = () => {
   return (
-    <div>
+    <div className="">
       <Container>
-        <footer className="footer bg-base-300 text-base-content">
+        <footer className="footer bg-base-300 text-base-content p-4">
           <div>
             <span className="footer-title">Services</span>
             <a className="link link-hover">Branding</a>
