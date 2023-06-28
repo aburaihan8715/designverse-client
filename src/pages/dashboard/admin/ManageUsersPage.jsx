@@ -4,9 +4,15 @@ import { FaTrashAlt } from "react-icons/fa";
 import SectionHeading from "../../../components/SectionHeading/SectionHeading";
 import { useQuery } from "react-query";
 import Swal from "sweetalert2";
+import LoadingSpinner from "../../../components/LoadingSpinner/LoadingSpinner";
 
 const ManageUsersPage = () => {
-  const { data: users = [], refetch } = useQuery({
+  const {
+    data: users = [],
+    refetch,
+    isLoading,
+    error,
+  } = useQuery({
     queryKey: ["users"],
     queryFn: async () => {
       const data = await fetch(`http://localhost:5000/users`);
@@ -89,6 +95,13 @@ const ManageUsersPage = () => {
       });
   };
 
+  if (isLoading) {
+    return <LoadingSpinner></LoadingSpinner>;
+  }
+  if (error) {
+    return <p className="text-center text-red-600">something went wrong {error.message}</p>;
+  }
+
   return (
     <div className="">
       <Helmet>
@@ -111,7 +124,8 @@ const ManageUsersPage = () => {
                 <th>#</th>
                 <th>name</th>
                 <th>email</th>
-                <th className="text-center">make role</th>
+                <th>role</th>
+                <th className="text-center">change role</th>
                 <th>action</th>
               </tr>
             </thead>
@@ -122,6 +136,7 @@ const ManageUsersPage = () => {
                   <th>{index + 1}</th>
                   <td>{item.name}</td>
                   <td>{item.email}</td>
+                  <td>{item?.role ? item.role : "student"}</td>
 
                   <td className="space-x-2">
                     <button disabled={item.role} onClick={() => makeAdminHandler(item)} className="btn btn-xs">

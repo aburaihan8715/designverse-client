@@ -1,10 +1,14 @@
 import { useNavigate } from "react-router-dom";
 import Container from "../../components/Container/Container";
+import { Helmet } from "react-helmet-async";
 
 const NotFoundPage = () => {
   const navigate = useNavigate();
   return (
     <div className="py-4">
+      <Helmet>
+        <title>FashionVerse | NotFoundPage</title>
+      </Helmet>
       <Container>
         <button onClick={() => navigate(-1)} className="btn btn-accent btn-xs">
           go back

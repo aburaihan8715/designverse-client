@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import Container from "../../components/Container/Container";
 import LoadingSpinner from "../../components/LoadingSpinner/LoadingSpinner";
 import useClassesData from "../../hooks/useClassesData";
+import { Helmet } from "react-helmet-async";
 
 const InstructorsPage = () => {
   const [classesData, classesLoading, classesError] = useClassesData();
@@ -15,6 +16,9 @@ const InstructorsPage = () => {
   }
   return (
     <div className="py-8">
+      <Helmet>
+        <title>FashionVerse | InstructorsPage</title>
+      </Helmet>
       <Container>
         <div className="overflow-x-auto">
           <table className="table">

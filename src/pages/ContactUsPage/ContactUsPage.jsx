@@ -1,9 +1,13 @@
+import { Helmet } from "react-helmet-async";
 import Container from "../../components/Container/Container";
 import SectionHeading from "../../components/SectionHeading/SectionHeading";
 
 const ContactUsPage = () => {
   return (
     <div className="py-8">
+      <Helmet>
+        <title>FashionVerse | ContactUsPage</title>
+      </Helmet>
       <Container>
         <div className="border p-8 max-w-xl mx-auto">
           <SectionHeading subHeading={`Send Us a Message`} heading={`contact form`}></SectionHeading>
