@@ -14,33 +14,34 @@ const ManageUsersPage = () => {
     },
   });
 
-  // const deleteHandler = (user) => {
-  //   Swal.fire({
-  //     title: "Are you sure?",
-  //     text: "You won't be able to revert this!",
-  //     icon: "warning",
-  //     showCancelButton: true,
-  //     confirmButtonColor: "#3085d6",
-  //     cancelButtonColor: "#d33",
-  //     confirmButtonText: "Yes, delete it!",
-  //   }).then((result) => {
-  //     if (result.isConfirmed) {
-  //       fetch(`http://localhost:5000/users/${user._id}`, {
-  //         method: "DELETE",
-  //       })
-  //         .then((res) => res.json())
-  //         .then((data) => {
-  //           refetch();
-  //           if (data.deletedCount > 0) {
-  //             Swal.fire("Deleted!", "Your file has been deleted.", "success");
-  //           }
-  //         })
-  //         .catch((error) => {
-  //           console.log(error.message);
-  //         });
-  //     }
-  //   });
-  // };
+  // delete user
+  const deleteHandler = (item) => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        fetch(`http://localhost:5000/users/${item._id}`, {
+          method: "DELETE",
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            refetch();
+            if (data.deletedCount > 0) {
+              Swal.fire("Deleted!", "Your file has been deleted.", "success");
+            }
+          })
+          .catch((error) => {
+            console.log(error.message);
+          });
+      }
+    });
+  };
 
   // make admin handler
   const makeAdminHandler = (item) => {
@@ -132,7 +133,7 @@ const ManageUsersPage = () => {
                   </td>
 
                   <th>
-                    <button className="btn btn-xs bg-red-600 text-white hover:bg-red-800">
+                    <button onClick={() => deleteHandler(item)} className="btn btn-xs bg-red-600 text-white hover:bg-red-800">
                       <FaTrashAlt></FaTrashAlt>
                     </button>
                   </th>
