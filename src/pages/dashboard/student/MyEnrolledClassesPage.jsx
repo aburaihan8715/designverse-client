@@ -1,7 +1,11 @@
+import Container from "../../../components/Container/Container";
+
 const MyEnrolledClassesPage = () => {
   return (
     <div>
-      <div>my enrolled classes</div>
+      <Container>
+        <div>my enrolled classes</div>
+      </Container>
     </div>
   );
 };

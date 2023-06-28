@@ -1,6 +1,7 @@
 import { Helmet } from "react-helmet-async";
 import { useForm } from "react-hook-form";
 import Container from "../../../components/Container/Container";
+import useAuth from "../../../hooks/useAuth";
 
 const AddClassPage = () => {
   const {
@@ -9,9 +10,26 @@ const AddClassPage = () => {
     formState: { errors },
   } = useForm();
 
+  const { user } = useAuth();
+  const img_hosting_token = import.meta.env.VITE_image_hosting_api_key;
+  const img_hosting_url = `https://api.imgbb.com/1/upload?&key=${img_hosting_token}`;
+
   const submitHandler = (data) => {
-    // console.log(data);
-    console.log(data.classImage[0].name);
+    console.log(data);
+    const formData = new FormData();
+    formData.append("classImage", data.classImage[0]);
+
+    fetch(img_hosting_url, {
+      method: "PUT",
+      body: formData,
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+      })
+      .catch((error) => {
+        console.log(error.message);
+      });
   };
 
   return (
@@ -97,6 +115,8 @@ const AddClassPage = () => {
                     <input
                       {...register("instructorName", { required: true })}
                       type="text"
+                      defaultValue={user?.displayName}
+                      readOnly
                       placeholder="Enter instructor name"
                       className="input input-bordered w-full "
                     />
@@ -111,6 +131,8 @@ const AddClassPage = () => {
                     <input
                       {...register("instructorEmail", { required: true })}
                       type="text"
+                      defaultValue={user?.email}
+                      readOnly
                       placeholder="Enter instructor email"
                       className="input input-bordered w-full "
                     />

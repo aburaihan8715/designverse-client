@@ -3,10 +3,14 @@ import Container from "../Container/Container";
 import Button from "../Button/Button";
 import useAuth from "../../hooks/useAuth";
 import ActiveLink from "../ActiveLink/ActiveLink";
+import { FaShoppingCart } from "react-icons/fa";
+import useSelectedClassesData from "../../hooks/useSelectedClassesData";
 
 const Header = () => {
   const { user, logOutUser } = useAuth();
+  const [selectedData] = useSelectedClassesData();
   const navigate = useNavigate();
+  // console.log(selectedData);
   const menuItems = (
     <>
       <li>
@@ -27,7 +31,14 @@ const Header = () => {
         <ActiveLink to="/dashboard">Dashboard</ActiveLink>
       </li>
       <li>
-        <ActiveLink to="/test">test</ActiveLink>
+        <Link to="/dashboard/mySelectedClasses" className="p-0 bg-transparent hover:bg-transparent">
+          <button className="btn btn-sm bg-transparent hover:bg-transparent">
+            <span className="text-error">
+              <FaShoppingCart></FaShoppingCart>
+            </span>
+            <div className="badge badge-success text-white">+0{selectedData?.data?.length}</div>
+          </button>
+        </Link>
       </li>
     </>
   );
@@ -46,9 +57,9 @@ const Header = () => {
   };
 
   return (
-    <div className="">
+    <div className="sticky top-0 z-10">
       <Container>
-        <div className="navbar bg-slate-200 p-4">
+        <div className="navbar bg-slate-200 p-4 border-b-2 border-purple-600">
           <div className="navbar-start">
             <div className="dropdown">
               <label tabIndex={0} className="btn btn-ghost lg:hidden">
@@ -62,8 +73,8 @@ const Header = () => {
             </div>
             <Link to="/" className="uppercase">
               <div className="inline-flex flex-col">
-                <h1 className="text-3xl tracking-tighter">FashionVerse</h1>
-                <span className="tracking-[7px]">school</span>
+                <h1 className="text-3xl tracking-tighter text-secondary">FashionVerse</h1>
+                <span className="tracking-[25px]">school</span>
               </div>
             </Link>
           </div>

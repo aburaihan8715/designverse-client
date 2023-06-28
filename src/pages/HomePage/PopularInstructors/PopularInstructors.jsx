@@ -6,8 +6,8 @@ import { Link } from "react-router-dom";
 
 const PopularClasses = () => {
   const [classesData, classesLoading, classesError] = useClassesData();
-  const sortedInstructors = classesData.sort((a, b) => b.students - a.students);
-  const popularSixInstructors = sortedInstructors.slice(0, 6);
+  const sortedInstructors = classesData?.sort((a, b) => b.students - a.students);
+  const popularSixInstructors = sortedInstructors?.slice(0, 6);
 
   if (classesLoading) {
     return <LoadingSpinner></LoadingSpinner>;
@@ -20,7 +20,7 @@ const PopularClasses = () => {
       <Container>
         <SectionHeading subHeading={`stay with`} heading={`popular instructors`}></SectionHeading>
         <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-8">
-          {popularSixInstructors.map((item) => (
+          {popularSixInstructors?.map((item) => (
             <div key={item._id} className="card bg-base-100 shadow-md rounded">
               <figure>
                 <img src={item.instructorImage} alt="instructor" />
