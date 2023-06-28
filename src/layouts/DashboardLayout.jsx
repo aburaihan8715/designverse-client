@@ -1,12 +1,15 @@
 import { Outlet } from "react-router-dom";
 import { FaBook, FaBookOpen, FaBookReader, FaBox, FaEnvelope, FaHome, FaPlus, FaUsers, FaWallet } from "react-icons/fa";
 import ActiveLink from "../components/ActiveLink/ActiveLink";
+import useUsersData from "../hooks/useUsersData";
 
 const DashboardLayout = () => {
   // TODO: show nav options based on role
+  const { users } = useUsersData();
+  console.log(users);
 
-  const isAdmin = true;
-  const isInstructor = true;
+  const isAdmin = false;
+  const isInstructor = false;
 
   return (
     <div className="">

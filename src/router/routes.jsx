@@ -69,7 +69,11 @@ const router = createBrowserRouter([
 
   {
     path: "dashboard",
-    element: <DashboardLayout></DashboardLayout>,
+    element: (
+      <PrivateRoute>
+        <DashboardLayout></DashboardLayout>
+      </PrivateRoute>
+    ),
     errorElement: <NotFoundPage></NotFoundPage>,
     children: [
       // student routes
@@ -83,7 +87,11 @@ const router = createBrowserRouter([
       },
       {
         path: "mySelectedClasses",
-        element: <MySelectedClassesPage></MySelectedClassesPage>,
+        element: (
+          <PrivateRoute>
+            <MySelectedClassesPage></MySelectedClassesPage>
+          </PrivateRoute>
+        ),
       },
       {
         path: "payment",

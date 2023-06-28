@@ -1,24 +1,24 @@
 import { Helmet } from "react-helmet-async";
-// import Swal from "sweetalert2";
 import { FaTrashAlt } from "react-icons/fa";
 import SectionHeading from "../../../components/SectionHeading/SectionHeading";
-import { useQuery } from "react-query";
 import Swal from "sweetalert2";
 import LoadingSpinner from "../../../components/LoadingSpinner/LoadingSpinner";
+import useUsersData from "../../../hooks/useUsersData";
 
 const ManageUsersPage = () => {
-  const {
-    data: users = [],
-    refetch,
-    isLoading,
-    error,
-  } = useQuery({
-    queryKey: ["users"],
-    queryFn: async () => {
-      const data = await fetch(`http://localhost:5000/users`);
-      return data.json();
-    },
-  });
+  const { users, refetch, userIsLoading, userError } = useUsersData();
+  // const {
+  //   data: users = [],
+  //   refetch,
+  //   isLoading,
+  //   error,
+  // } = useQuery({
+  //   queryKey: ["users"],
+  //   queryFn: async () => {
+  //     const data = await fetch(`http://localhost:5000/users`);
+  //     return data.json();
+  //   },
+  // });
 
   // delete user
   const deleteHandler = (item) => {
@@ -95,11 +95,11 @@ const ManageUsersPage = () => {
       });
   };
 
-  if (isLoading) {
+  if (userIsLoading) {
     return <LoadingSpinner></LoadingSpinner>;
   }
-  if (error) {
-    return <p className="text-center text-red-600">something went wrong {error.message}</p>;
+  if (userError) {
+    return <p className="text-center text-red-600">something went wrong {userError.message}</p>;
   }
 
   return (
