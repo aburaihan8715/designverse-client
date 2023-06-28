@@ -7,7 +7,7 @@ const useSelectedClassesData = () => {
     error: selectedDataError,
     data: selectedData,
     refetch,
-  } = useQuery("selectedClasses", () => axios.get("http://localhost:5000/selectedClasses"));
+  } = useQuery("selectedClasses", () => axios.get("https://fashion-verse-server.vercel.app/selectedClasses"));
 
   return [selectedData, selectedDataLoading, selectedDataError, refetch];
 };
