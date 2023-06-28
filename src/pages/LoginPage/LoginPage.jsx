@@ -45,7 +45,7 @@ const LoginPage = () => {
     authenticationUsingEmailPassword(email, password)
       .then((result) => {
         const loggedInUser = result.user;
-        reset();
+        console.log(loggedInUser);
         Swal.fire({
           position: "center",
           icon: "success",
@@ -53,7 +53,7 @@ const LoginPage = () => {
           showConfirmButton: false,
           timer: 1500,
         });
-        console.log(`Logged in user ${JSON.stringify(loggedInUser)}`);
+        reset();
         navigate(from, { replace: true });
       })
       .catch((error) => {

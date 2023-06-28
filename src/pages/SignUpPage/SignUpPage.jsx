@@ -25,19 +25,36 @@ const SignUpPage = () => {
     createUserUsingEmailPassword(email, password)
       .then((result) => {
         const loggedInUser = result.user;
-        reset();
+        console.log(loggedInUser);
+
         // update user profile function
         updateUserProfile(name, photo)
           .then(() => {
-            Swal.fire({
-              position: "center",
-              icon: "success",
-              title: `sign up success!`,
-              showConfirmButton: false,
-              timer: 1500,
-            });
-            console.log(`Logged in user ${JSON.stringify(loggedInUser)}`);
-            navigate("/");
+            const userData = { name, email };
+            fetch("http://localhost:5000/users", {
+              method: "POST",
+              headers: {
+                "Content-type": "application/json",
+              },
+              body: JSON.stringify(userData),
+            })
+              .then((res) => res.json())
+              .then((data) => {
+                if (data.acknowledged) {
+                  Swal.fire({
+                    position: "center",
+                    icon: "success",
+                    title: `sign up success!`,
+                    showConfirmButton: false,
+                    timer: 1500,
+                  });
+                  reset();
+                  navigate("/");
+                }
+              })
+              .catch((error) => {
+                console.log(error.message);
+              });
           })
           .catch((error) => {
             console.log(error.message);

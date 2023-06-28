@@ -37,7 +37,7 @@ const Card = ({ item }) => {
       });
     } else {
       axios
-        .post("https://fashion-verse-server.vercel.app/selected", selectedData)
+        .post("http://localhost:5000/selected", selectedData)
         .then((data) => {
           if (data.data.acknowledged) {
             refetch();
@@ -73,7 +73,7 @@ const Card = ({ item }) => {
           </button>
         </div>
       </div>
-      {!item.seats && <div className="absolute w-full h-full bg-red-400 top-0 left-0 opacity-50"></div>}
+      {!item.seats && <div className="absolute w-full h-full bg-red-400 top-0 left-0 opacity-50 rounded"></div>}
     </div>
   );
 };

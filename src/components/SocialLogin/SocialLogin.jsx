@@ -13,7 +13,23 @@ const SocialLogin = () => {
     authenticationUsingGoogle()
       .then((result) => {
         const loggedInUser = result.user;
-        console.log(loggedInUser);
+        const userData = { name: loggedInUser.displayName, email: loggedInUser.email };
+
+        fetch("http://localhost:5000/users", {
+          method: "POST",
+          headers: {
+            "Content-type": "application/json",
+          },
+          body: JSON.stringify(userData),
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            console.log(data);
+          })
+          .catch((error) => {
+            console.log(error.message);
+          });
+
         navigate(from, { replace: true });
       })
       .catch((error) => {
@@ -27,7 +43,22 @@ const SocialLogin = () => {
     authenticationUsingGithub()
       .then((result) => {
         const loggedInUser = result.user;
-        console.log(loggedInUser);
+        const userData = { name: loggedInUser.displayName, email: loggedInUser.email };
+
+        fetch("http://localhost:5000/users", {
+          method: "POST",
+          headers: {
+            "Content-type": "application/json",
+          },
+          body: JSON.stringify(userData),
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            console.log(data);
+          })
+          .catch((error) => {
+            console.log(error.message);
+          });
         navigate(from, { replace: true });
       })
       .catch((error) => {
