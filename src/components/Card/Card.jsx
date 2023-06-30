@@ -37,7 +37,7 @@ const Card = ({ item }) => {
       });
     } else {
       axios
-        .post("http://localhost:5000/selected", selectedData)
+        .post("http://localhost:5000/selectedClasses", selectedData)
         .then((data) => {
           if (data.data.acknowledged) {
             refetch();

@@ -14,12 +14,13 @@ import { useEffect } from "react";
 import { useState } from "react";
 const auth = getAuth(app);
 import app from "../firebase/firebase.config";
+import axios from "axios";
 
 export const AuthContext = createContext(null);
 const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState("");
+  const [authError, setAuthError] = useState("");
 
   // TODO: send verification email
 
@@ -69,7 +70,17 @@ const AuthProvider = ({ children }) => {
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
-      setLoading(false);
+      // get and set token
+      axios
+        .post("http://localhost:5000/jwt", { email: currentUser?.email })
+        .then((data) => {
+          console.log(data.data);
+          setLoading(false);
+          setAuthError("");
+        })
+        .catch((error) => {
+          setAuthError(error.message);
+        });
       // console.log(currentUser);
     });
     return () => {
@@ -83,8 +94,8 @@ const AuthProvider = ({ children }) => {
     user,
     loading,
     setLoading,
-    error,
-    setError,
+    authError,
+    setAuthError,
     logOutUser,
     updateUserProfile,
     authenticationUsingGoogle,

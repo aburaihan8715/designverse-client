@@ -13,7 +13,8 @@ const ContactUsPage = () => {
           <SectionHeading subHeading={`Send Us a Message`} heading={`contact form`}></SectionHeading>
 
           <div className="">
-            <form>
+            {/* FIXME: div with form*/}
+            <div>
               <div className="">
                 <div className="grid sm:grid-cols-2 gap-4 ">
                   <div className="form-control w-full ">
@@ -60,7 +61,7 @@ const ContactUsPage = () => {
                   <button className="btn btn-secondary btn-sm">Send Message 🚀</button>
                 </div>
               </div>
-            </form>
+            </div>
           </div>
         </div>
       </Container>

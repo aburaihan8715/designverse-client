@@ -9,7 +9,7 @@ import useAuth from "../../hooks/useAuth";
 import Swal from "sweetalert2";
 
 const SignUpPage = () => {
-  const { createUserUsingEmailPassword, updateUserProfile } = useAuth();
+  const { createUserUsingEmailPassword, updateUserProfile, authError, setAuthError } = useAuth();
   const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
   const {
@@ -53,16 +53,18 @@ const SignUpPage = () => {
                 }
               })
               .catch((error) => {
+                setAuthError(error.message);
                 console.log(error.message);
               });
           })
           .catch((error) => {
+            setAuthError(error.message);
             console.log(error.message);
           });
       })
       .catch((error) => {
-        const errorMessage = error.message;
-        console.log(errorMessage);
+        setAuthError(error.message);
+        console.log(error.message);
       });
   };
 
@@ -79,6 +81,20 @@ const SignUpPage = () => {
               <div className="text-center ">
                 <h4 className="text-4xl capitalize">Sign up</h4>
               </div>
+              {/* error message */}
+              {authError && (
+                <div className="alert alert-error rounded-md">
+                  <svg xmlns="http://www.w3.org/2000/svg" className="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24">
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="2"
+                      d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"
+                    />
+                  </svg>
+                  <span>{authError}</span>
+                </div>
+              )}
 
               {/* name input */}
               <div className="w-full ">

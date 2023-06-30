@@ -7,18 +7,6 @@ import useUsersData from "../../../hooks/useUsersData";
 
 const ManageUsersPage = () => {
   const { users, refetch, userIsLoading, userError } = useUsersData();
-  // const {
-  //   data: users = [],
-  //   refetch,
-  //   isLoading,
-  //   error,
-  // } = useQuery({
-  //   queryKey: ["users"],
-  //   queryFn: async () => {
-  //     const data = await fetch(`http://localhost:5000/users`);
-  //     return data.json();
-  //   },
-  // });
 
   // delete user
   const deleteHandler = (item) => {
@@ -49,51 +37,71 @@ const ManageUsersPage = () => {
     });
   };
 
-  // make admin handler
-  const makeAdminHandler = (item) => {
-    fetch(`http://localhost:5000/users/admin/${item._id}`, {
+  // make role handler
+  const makeRoleHandler = (item, role) => {
+    fetch(`http://localhost:5000/users/role/${item._id}`, {
       method: "PATCH",
+      body: JSON.stringify({
+        role,
+      }),
+      headers: {
+        "Content-type": "application/json; charset=UTF-8",
+      },
     })
       .then((res) => res.json())
-      .then((data) => {
-        if (data.modifiedCount) {
-          refetch();
-          Swal.fire({
-            position: "center",
-            icon: "success",
-            title: `${item.name} is admin now!`,
-            showConfirmButton: false,
-            timer: 1500,
-          });
-        }
+      .then(() => {
+        refetch();
       })
       .catch((error) => {
         console.log(error.message);
       });
   };
 
+  // make admin handler
+  // const makeAdminHandler = (item) => {
+  //   fetch(`http://localhost:5000/users/admin/${item._id}`, {
+  //     method: "PATCH",
+  //   })
+  //     .then((res) => res.json())
+  //     .then((data) => {
+  //       if (data.modifiedCount) {
+  //         refetch();
+  //         Swal.fire({
+  //           position: "center",
+  //           icon: "success",
+  //           title: `${item.name} is admin now!`,
+  //           showConfirmButton: false,
+  //           timer: 1500,
+  //         });
+  //       }
+  //     })
+  //     .catch((error) => {
+  //       console.log(error.message);
+  //     });
+  // };
+
   // make instructor handler
-  const makeInstructorHandler = (item) => {
-    fetch(`http://localhost:5000/users/instructor/${item._id}`, {
-      method: "PATCH",
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        if (data.modifiedCount) {
-          refetch();
-          Swal.fire({
-            position: "center",
-            icon: "success",
-            title: `${item.name} is instructor now!`,
-            showConfirmButton: false,
-            timer: 1500,
-          });
-        }
-      })
-      .catch((error) => {
-        console.log(error.message);
-      });
-  };
+  // const makeInstructorHandler = (item) => {
+  //   fetch(`http://localhost:5000/users/instructor/${item._id}`, {
+  //     method: "PATCH",
+  //   })
+  //     .then((res) => res.json())
+  //     .then((data) => {
+  //       if (data.modifiedCount) {
+  //         refetch();
+  //         Swal.fire({
+  //           position: "center",
+  //           icon: "success",
+  //           title: `${item.name} is instructor now!`,
+  //           showConfirmButton: false,
+  //           timer: 1500,
+  //         });
+  //       }
+  //     })
+  //     .catch((error) => {
+  //       console.log(error.message);
+  //     });
+  // };
 
   if (userIsLoading) {
     return <LoadingSpinner></LoadingSpinner>;
@@ -139,10 +147,10 @@ const ManageUsersPage = () => {
                   <td>{item?.role ? item.role : "student"}</td>
 
                   <td className="space-x-2">
-                    <button disabled={item.role} onClick={() => makeAdminHandler(item)} className="btn btn-xs">
+                    <button disabled={item.role} onClick={() => makeRoleHandler(item, "admin")} className="btn btn-xs">
                       make admin
                     </button>
-                    <button disabled={item.role} onClick={() => makeInstructorHandler(item)} className="btn btn-xs">
+                    <button disabled={item.role} onClick={() => makeRoleHandler(item, "instructor")} className="btn btn-xs">
                       make instructor
                     </button>
                   </td>

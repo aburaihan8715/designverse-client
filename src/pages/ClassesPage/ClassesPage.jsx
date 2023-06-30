@@ -1,3 +1,4 @@
+import { Helmet } from "react-helmet-async";
 import Card from "../../components/Card/Card";
 import Container from "../../components/Container/Container";
 import LoadingSpinner from "../../components/LoadingSpinner/LoadingSpinner";
@@ -15,6 +16,9 @@ const ClassesPage = () => {
   }
   return (
     <div className="py-8">
+      <Helmet>
+        <title>FashionVerse | ClassesPage</title>
+      </Helmet>
       <Container>
         <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-8">
           {classesData?.map((item) => (
