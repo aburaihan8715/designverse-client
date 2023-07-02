@@ -4,9 +4,11 @@ import ActiveLink from "../components/ActiveLink/ActiveLink";
 import { Helmet } from "react-helmet-async";
 import useRole from "../hooks/useRole";
 import LoadingSpinner from "../components/LoadingSpinner/LoadingSpinner";
+import useSelectedClassesData from "../hooks/useSelectedClassesData";
 
 const DashboardLayout = () => {
   const { data, isRoleLoading } = useRole();
+  const { selectedData } = useSelectedClassesData();
 
   if (isRoleLoading) {
     return <LoadingSpinner></LoadingSpinner>;
@@ -48,9 +50,10 @@ const DashboardLayout = () => {
                   </ActiveLink>
                 </li>
                 <li>
-                  <ActiveLink to="/dashboard/mySelectedClasses">
+                  <ActiveLink className="" to="/dashboard/mySelectedClasses">
                     <FaBookOpen />
                     <span>My Selected Classes</span>
+                    <span className="badge badge-success text-white">+0{selectedData?.length}</span>
                   </ActiveLink>
                 </li>
                 <li>

@@ -21,6 +21,7 @@ import AdminHomePage from "../pages/dashboard/admin/AdminHomePage";
 import SeeClasses from "../pages/SeeClasses/SeeClasses";
 import PrivateRoute from "./PrivateRoute";
 import AdminRoute from "./AdminRoute";
+import InstructorRoute from "./InstructorRoute";
 
 // function for dynamic home route
 const router = createBrowserRouter([
@@ -97,11 +98,19 @@ const router = createBrowserRouter([
       },
       {
         path: "addClass",
-        element: <AddClassPage></AddClassPage>,
+        element: (
+          <InstructorRoute>
+            <AddClassPage></AddClassPage>
+          </InstructorRoute>
+        ),
       },
       {
         path: "myClasses",
-        element: <MyClassesPage></MyClassesPage>,
+        element: (
+          <InstructorRoute>
+            <MyClassesPage></MyClassesPage>
+          </InstructorRoute>
+        ),
       },
       // admin routes
       {
