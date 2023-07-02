@@ -19,7 +19,7 @@ import axios from "axios";
 export const AuthContext = createContext(null);
 const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
-  const [loading, setLoading] = useState(true);
+  const [authLoading, setAuthLoading] = useState(true);
   const [authError, setAuthError] = useState("");
 
   // TODO: send verification email
@@ -27,13 +27,13 @@ const AuthProvider = ({ children }) => {
   // TODO: send password reset email
   // create user using email and password
   const createUserUsingEmailPassword = (email, password) => {
-    setLoading(true);
+    setAuthLoading(true);
     return createUserWithEmailAndPassword(auth, email, password);
   };
 
   // update user profile
   const updateUserProfile = (name, photo) => {
-    setLoading(true);
+    setAuthLoading(true);
     return updateProfile(auth.currentUser, {
       displayName: name,
       photoURL: photo,
@@ -42,27 +42,27 @@ const AuthProvider = ({ children }) => {
 
   // authentication using email and password
   const authenticationUsingEmailPassword = (email, password) => {
-    setLoading(true);
+    setAuthLoading(true);
     return signInWithEmailAndPassword(auth, email, password);
   };
 
   // authentication using google
   const authenticationUsingGoogle = () => {
-    setLoading(true);
+    setAuthLoading(true);
     const googleProvider = new GoogleAuthProvider();
     return signInWithPopup(auth, googleProvider);
   };
 
   // authentication using github
   const authenticationUsingGithub = () => {
-    setLoading(true);
+    setAuthLoading(true);
     const githubProvider = new GithubAuthProvider();
     return signInWithPopup(auth, githubProvider);
   };
 
   // sign out user
   const logOutUser = () => {
-    setLoading(true);
+    setAuthLoading(true);
     return signOut(auth);
   };
 
@@ -71,16 +71,22 @@ const AuthProvider = ({ children }) => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
       // get and set token
-      axios
-        .post("http://localhost:5000/jwt", { email: currentUser?.email })
-        .then((data) => {
-          console.log(data.data);
-          setLoading(false);
-          setAuthError("");
-        })
-        .catch((error) => {
-          setAuthError(error.message);
-        });
+      if (currentUser) {
+        axios
+          .post("http://localhost:5000/jwt", { email: currentUser?.email })
+          .then((data) => {
+            const token = data.data.token;
+            localStorage.setItem("access_token", token);
+            setAuthLoading(false);
+            setAuthError("");
+          })
+          .catch((error) => {
+            setAuthError(error.message);
+          });
+      } else {
+        localStorage.removeItem("access_token");
+      }
+
       // console.log(currentUser);
     });
     return () => {
@@ -92,8 +98,8 @@ const AuthProvider = ({ children }) => {
     createUserUsingEmailPassword,
     authenticationUsingEmailPassword,
     user,
-    loading,
-    setLoading,
+    authLoading,
+    setAuthLoading,
     authError,
     setAuthError,
     logOutUser,

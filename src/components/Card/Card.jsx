@@ -8,7 +8,7 @@ const Card = ({ item }) => {
   const navigate = useNavigate();
   const location = useLocation();
   const { user } = useAuth();
-  const [, , , refetch] = useSelectedClassesData();
+  const { refetch } = useSelectedClassesData();
   const selectedClassesHandler = (selectedItem) => {
     const selectedData = {
       selectedId: selectedItem._id,

@@ -1,15 +1,23 @@
 import { Outlet } from "react-router-dom";
 import { FaBook, FaBookOpen, FaBookReader, FaBox, FaEnvelope, FaHome, FaPlus, FaUsers, FaWallet } from "react-icons/fa";
 import ActiveLink from "../components/ActiveLink/ActiveLink";
+import { Helmet } from "react-helmet-async";
+import useRole from "../hooks/useRole";
+import LoadingSpinner from "../components/LoadingSpinner/LoadingSpinner";
 
 const DashboardLayout = () => {
-  // TODO: show nav options based on role
+  const { data, isRoleLoading } = useRole();
 
-  const isAdmin = true;
-  const isInstructor = false;
+  if (isRoleLoading) {
+    return <LoadingSpinner></LoadingSpinner>;
+  }
 
   return (
     <div className="">
+      <Helmet>
+        <title>FashionVerse | DashboardLayout</title>
+      </Helmet>
+
       <div className="drawer lg:drawer-open">
         <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
         <div className="drawer-content flex flex-col items-center justify-center">
@@ -24,10 +32,10 @@ const DashboardLayout = () => {
           <ul className="menu p-4 w-80 h-full text-base-content bg-orange-50">
             {/* Sidebar content here */}
             {/* student navigation */}
-            {!isAdmin && !isInstructor && (
+            {data?.role === "student" && (
               <>
                 <li>
-                  <ActiveLink to="/dashboard/studentHome">
+                  <ActiveLink to="/dashboard/student">
                     <FaHome></FaHome>
                     <span>Student home</span>
                   </ActiveLink>
@@ -55,10 +63,10 @@ const DashboardLayout = () => {
             )}
 
             {/* instructor navigation */}
-            {isInstructor && (
+            {data?.role === "instructor" && (
               <>
                 <li>
-                  <ActiveLink to="/dashboard/instructorHome">
+                  <ActiveLink to="/dashboard/instructor">
                     <FaHome />
                     <span>Instructor home</span>
                   </ActiveLink>
@@ -79,10 +87,10 @@ const DashboardLayout = () => {
             )}
 
             {/* admin navigation */}
-            {isAdmin && (
+            {data?.role === "admin" && (
               <>
                 <li>
-                  <ActiveLink to="/dashboard/adminHome">
+                  <ActiveLink to="/dashboard/admin">
                     <FaHome />
                     <span>Admin home</span>
                   </ActiveLink>

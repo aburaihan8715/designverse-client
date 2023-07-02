@@ -5,12 +5,14 @@ import useAuth from "../../hooks/useAuth";
 import ActiveLink from "../ActiveLink/ActiveLink";
 import { FaShoppingCart } from "react-icons/fa";
 import useSelectedClassesData from "../../hooks/useSelectedClassesData";
+import useRole from "../../hooks/useRole";
 
 const Header = () => {
   const { user, logOutUser } = useAuth();
-  const [selectedData] = useSelectedClassesData();
   const navigate = useNavigate();
-  // console.log(selectedData);
+  const { selectedData } = useSelectedClassesData();
+  const { data } = useRole();
+
   const menuItems = (
     <>
       <li>
@@ -27,16 +29,18 @@ const Header = () => {
         <ActiveLink to="/contact">Contact us</ActiveLink>
       </li>
 
-      <li>
-        <ActiveLink to="/dashboard">Dashboard</ActiveLink>
-      </li>
+      {user && (
+        <li>
+          <ActiveLink to={`/dashboard/${data?.role}`}>Dashboard</ActiveLink>
+        </li>
+      )}
       <li>
         <Link to="/dashboard/mySelectedClasses" className="p-0 bg-transparent hover:bg-transparent">
           <button className="btn btn-sm bg-transparent hover:bg-transparent">
             <span className="text-error">
               <FaShoppingCart></FaShoppingCart>
             </span>
-            <div className="badge badge-success text-white">+0{selectedData?.data?.length}</div>
+            <div className="badge badge-success text-white">+0{selectedData?.length}</div>
           </button>
         </Link>
       </li>

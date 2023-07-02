@@ -1,15 +1,15 @@
 import { Helmet } from "react-helmet-async";
 import SectionHeading from "../../../components/SectionHeading/SectionHeading";
 import { FaTrashAlt } from "react-icons/fa";
-import useSelectedClassesData from "../../../hooks/useSelectedClassesData";
-import LoadingSpinner from "../../../components/LoadingSpinner/LoadingSpinner";
-import Swal from "sweetalert2";
 import { Link } from "react-router-dom";
+import useSelectedClassesData from "../../../hooks/useSelectedClassesData";
+import Swal from "sweetalert2";
+import LoadingSpinner from "../../../components/LoadingSpinner/LoadingSpinner";
 
 const MySelectedClassesPage = () => {
-  const [selectedData, selectedDataLoading, selectedDataError, refetch] = useSelectedClassesData();
-  // console.log(selectedData?.data);
-  const totalPrice = selectedData?.data?.reduce((accumulator, currentItem) => {
+  const { selectedData, selectedDataLoading, selectedDataError, refetch } = useSelectedClassesData();
+  // console.log(selectedData);
+  const totalPrice = selectedData?.reduce((accumulator, currentItem) => {
     return accumulator + currentItem.price;
   }, 0);
 
@@ -59,11 +59,11 @@ const MySelectedClassesPage = () => {
         <div className="flex text-3xl space-x-20">
           <div className="">
             <span>Total selected classes: </span>
-            <span>{selectedData.data.length}</span>
+            <span>{selectedData?.length}</span>
           </div>
           <div>
             <span>Total Price: </span>
-            <span>${totalPrice.toFixed(2)}</span>
+            <span>${totalPrice}</span>
           </div>
           <div>
             <Link to="/dashboard/payment">
@@ -88,7 +88,7 @@ const MySelectedClassesPage = () => {
             </thead>
             <tbody>
               {/* row start */}
-              {selectedData?.data?.map((item, index) => (
+              {selectedData?.map((item, index) => (
                 <tr key={item._id}>
                   <th>{index + 1}</th>
                   <td>

@@ -57,52 +57,6 @@ const ManageUsersPage = () => {
       });
   };
 
-  // make admin handler
-  // const makeAdminHandler = (item) => {
-  //   fetch(`http://localhost:5000/users/admin/${item._id}`, {
-  //     method: "PATCH",
-  //   })
-  //     .then((res) => res.json())
-  //     .then((data) => {
-  //       if (data.modifiedCount) {
-  //         refetch();
-  //         Swal.fire({
-  //           position: "center",
-  //           icon: "success",
-  //           title: `${item.name} is admin now!`,
-  //           showConfirmButton: false,
-  //           timer: 1500,
-  //         });
-  //       }
-  //     })
-  //     .catch((error) => {
-  //       console.log(error.message);
-  //     });
-  // };
-
-  // make instructor handler
-  // const makeInstructorHandler = (item) => {
-  //   fetch(`http://localhost:5000/users/instructor/${item._id}`, {
-  //     method: "PATCH",
-  //   })
-  //     .then((res) => res.json())
-  //     .then((data) => {
-  //       if (data.modifiedCount) {
-  //         refetch();
-  //         Swal.fire({
-  //           position: "center",
-  //           icon: "success",
-  //           title: `${item.name} is instructor now!`,
-  //           showConfirmButton: false,
-  //           timer: 1500,
-  //         });
-  //       }
-  //     })
-  //     .catch((error) => {
-  //       console.log(error.message);
-  //     });
-  // };
-
   if (userIsLoading) {
     return <LoadingSpinner></LoadingSpinner>;
   }

@@ -19,9 +19,10 @@ import StudentHomePage from "../pages/dashboard/student/StudentHomePage";
 import InstructorHomePage from "../pages/dashboard/instructor/InstructorHomePage";
 import AdminHomePage from "../pages/dashboard/admin/AdminHomePage";
 import SeeClasses from "../pages/SeeClasses/SeeClasses";
-import Test from "../pages/Test";
 import PrivateRoute from "./PrivateRoute";
+import AdminRoute from "./AdminRoute";
 
+// function for dynamic home route
 const router = createBrowserRouter([
   {
     path: "/",
@@ -56,14 +57,6 @@ const router = createBrowserRouter([
         path: "seeClasses",
         element: <SeeClasses></SeeClasses>,
       },
-      {
-        path: "test",
-        element: (
-          <PrivateRoute>
-            <Test></Test>
-          </PrivateRoute>
-        ),
-      },
     ],
   },
 
@@ -78,7 +71,7 @@ const router = createBrowserRouter([
     children: [
       // student routes
       {
-        path: "studentHome",
+        path: "student",
         element: <StudentHomePage></StudentHomePage>,
       },
       {
@@ -99,7 +92,7 @@ const router = createBrowserRouter([
       },
       // instructors routes
       {
-        path: "instructorHome",
+        path: "instructor",
         element: <InstructorHomePage></InstructorHomePage>,
       },
       {
@@ -112,16 +105,24 @@ const router = createBrowserRouter([
       },
       // admin routes
       {
-        path: "adminHome",
+        path: "admin",
         element: <AdminHomePage></AdminHomePage>,
       },
       {
         path: "manageClasses",
-        element: <ManageClassesPage></ManageClassesPage>,
+        element: (
+          <AdminRoute>
+            <ManageClassesPage></ManageClassesPage>
+          </AdminRoute>
+        ),
       },
       {
         path: "manageUsers",
-        element: <ManageUsersPage></ManageUsersPage>,
+        element: (
+          <AdminRoute>
+            <ManageUsersPage></ManageUsersPage>
+          </AdminRoute>
+        ),
       },
     ],
   },

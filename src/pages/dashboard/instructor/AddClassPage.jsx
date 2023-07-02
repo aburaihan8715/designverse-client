@@ -2,34 +2,68 @@ import { Helmet } from "react-helmet-async";
 import { useForm } from "react-hook-form";
 import Container from "../../../components/Container/Container";
 import useAuth from "../../../hooks/useAuth";
+import axios from "axios";
+import Swal from "sweetalert2";
 
 const AddClassPage = () => {
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm();
 
   const { user } = useAuth();
-  const img_hosting_token = import.meta.env.VITE_image_hosting_api_key;
-  const img_hosting_url = `https://api.imgbb.com/1/upload?&key=${img_hosting_token}`;
+  // FIXME:
+  // const img_hosting_token = import.meta.env.VITE_image_hosting_api_key;
+  // const img_hosting_url = `https://api.imgbb.com/1/upload?&key=${img_hosting_token}`;
 
   const submitHandler = (data) => {
-    console.log(data);
-    const formData = new FormData();
-    formData.append("classImage", data.classImage[0]);
-
-    fetch(img_hosting_url, {
-      method: "PUT",
-      body: formData,
-    })
-      .then((res) => res.json())
+    const classData = {
+      className: data.className,
+      classImage: data.classImage,
+      instructorName: data.instructorName,
+      instructorImage: data.instructorImage,
+      instructorEmail: data.instructorEmail,
+      seats: Number(data.seats),
+      price: Number(data.price),
+    };
+    console.log(classData);
+    // send data to server using axios
+    axios
+      .post("http://localhost:5000/classes", classData)
       .then((data) => {
-        console.log(data);
+        if (data.data.insertedId) {
+          Swal.fire({
+            position: "center",
+            icon: "success",
+            title: "Class added successfully!",
+            showConfirmButton: false,
+            timer: 1500,
+          });
+        }
       })
       .catch((error) => {
         console.log(error.message);
       });
+
+    reset();
+
+    // FIXME: upload image on image bb
+    // const formData = new FormData();
+    // formData.append("classImage", data.classImage[0]);
+
+    // fetch(img_hosting_url, {
+    //   method: "PUT",
+    //   body: formData,
+    // })
+    //   .then((res) => res.json())
+    //   .then((data) => {
+    //     console.log(data);
+    //   })
+    //   .catch((error) => {
+    //     console.log(error.message);
+    //   });
   };
 
   return (
@@ -91,8 +125,9 @@ const AddClassPage = () => {
                     {errors.price?.type === "required" && <span className="text-error">Price is required</span>}
                   </div>
 
-                  {/* class image input */}
-                  <div className="w-full ">
+                  {/* class image input type file */}
+                  {/* // FIXME: */}
+                  {/* <div className="w-full ">
                     <label className="label">
                       <span className="label-text">Class image*</span>
                     </label>
@@ -100,6 +135,20 @@ const AddClassPage = () => {
                       {...register("classImage", { required: true })}
                       type="file"
                       className="file-input file-input-bordered file-input-warning w-full"
+                    />
+                    {errors.classImage?.type === "required" && <span className="text-error">Class image is required</span>}
+                  </div> */}
+
+                  {/* class image input type url */}
+                  <div className="w-full ">
+                    <label className="label">
+                      <span className="label-text">Class image*</span>
+                    </label>
+                    <input
+                      {...register("classImage", { required: true })}
+                      type="url"
+                      className="input input-bordered w-full"
+                      placeholder="Enter class image url"
                     />
                     {errors.classImage?.type === "required" && <span className="text-error">Class image is required</span>}
                   </div>
@@ -139,8 +188,9 @@ const AddClassPage = () => {
                     {errors.instructorEmail?.type === "required" && <span className="text-error">Instructor email is required</span>}
                   </div>
 
-                  {/* instructor image input */}
-                  <div className="w-full ">
+                  {/* instructor image input type file*/}
+                  {/* // FIXME: */}
+                  {/* <div className="w-full ">
                     <label className="label">
                       <span className="label-text">Instructor image*</span>
                     </label>
@@ -148,6 +198,19 @@ const AddClassPage = () => {
                       {...register("instructorImage", { required: true })}
                       type="file"
                       className="file-input file-input-bordered file-input-warning w-full"
+                    />
+                    {errors.instructorImage?.type === "required" && <span className="text-error">Instructor image is required</span>}
+                  </div> */}
+                  {/* instructor image input type url*/}
+                  <div className="w-full ">
+                    <label className="label">
+                      <span className="label-text">Instructor image*</span>
+                    </label>
+                    <input
+                      {...register("instructorImage", { required: true })}
+                      type="url"
+                      className="input input-bordered w-full"
+                      placeholder="Enter instructor image url"
                     />
                     {errors.instructorImage?.type === "required" && <span className="text-error">Instructor image is required</span>}
                   </div>
