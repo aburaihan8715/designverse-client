@@ -14,39 +14,50 @@ https://i.ibb.co/W3FzCjW/user6.png
 https://i.ibb.co/W2zQKHd/user7.png
 
 //classes
-1.Introduction to Fashion Design
-2.Fashion Illustration Techniques
-3.patternmaking Workshop
-4.Fashion Marketing and Branding
-5.Advanced Sewing Techniques
-6.Textile Design Fundamentals
-7.Fashion Photography Workshop
-8.Fashion Styling Basics
-9.Fashion History and Trends
-10.Fashion Merchandising Strategies
-11.Fashion Runway Production
-12.Fashion Design Portfolio Development
-13.Fashion Business and Entrepreneurship
-14.Fashion Trend Forecasting
-15.Fashion Draping Techniques
+1.Fashion Illustration and Sketching Techniques
+2.Fashion Design Principles
+
+3.Pattern Making and Garment Construction
+4.Textile and Fabric Design for Fashion
+
+5.Fashion Styling and Image Consulting
+6.Draping and Creative Pattern Cutting
+
+7.Fashion Marketing and Branding Strategies
+8.Fashion Accessories Design
+
+9.Sustainable Fashion Design and Ethical Practices
+10.Fashion Portfolio Development and Presentation
+
+11.Fashion Trends and Forecasting
+12.Couture Techniques and Haute Couture Design
+
 
 //class cover images
-https://i.ibb.co/pw9gXwH/class-cover-1.jpg
 https://i.ibb.co/7tQvNZp/class-cover-2.jpg
 https://i.ibb.co/dpmJ1dn/class-cover-3.jpg
+
 https://i.ibb.co/CQcrJNL/class-cover-4.jpg
 https://i.ibb.co/wMR8db8/class-cover-5.jpg
+
 https://i.ibb.co/pdv3sRB/class-cover-6.jpg
 https://i.ibb.co/p1v3DYQ/class-cover-7.jpg
+
 https://i.ibb.co/Bszf5PN/class-cover-8.jpg
 https://i.ibb.co/Wpmvch6/class-cover-9.jpg
+
 https://i.ibb.co/NK35wcX/class-cover-10.jpg
 
 //instructor cover images
 https://i.ibb.co/XjwCw6K/instructor-1.jpg
+
 https://i.ibb.co/Fnw3yvR/instructor-2.jpg
+
 https://i.ibb.co/pW9QPJK/instructor-3.jpg
+
 https://i.ibb.co/9yz5XZB/instructor-4.jpg
+
 https://i.ibb.co/PNm5XKr/instructor-5.jpg
+
 https://i.ibb.co/R9RkBjF/instructor-6.jpg
 https://i.ibb.co/28080k5/instructor-7.jpg

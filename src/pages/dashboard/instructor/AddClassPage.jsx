@@ -27,6 +27,7 @@ const AddClassPage = () => {
       instructorEmail: data.instructorEmail,
       seats: Number(data.seats),
       price: Number(data.price),
+      status: "pending",
     };
     console.log(classData);
     // send data to server using axios
