@@ -24,7 +24,12 @@
 
 # live link
 
-# others info
+# admin info
 
-- admin pass:
-- admin user name:
+- admin pass: Ra@123
+- admin user name: admin
+
+# instructor info
+
+- instructor pass: Ra@123
+- instructor user name: instructor
