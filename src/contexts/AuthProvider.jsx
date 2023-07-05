@@ -73,7 +73,7 @@ const AuthProvider = ({ children }) => {
       // get and set token
       if (currentUser) {
         axios
-          .post("https://fashion-verse-server.vercel.app/jwt", { email: currentUser?.email })
+          .post("http://localhost:5000/jwt", { email: currentUser?.email })
           .then((data) => {
             const token = data.data.token;
             localStorage.setItem("access_token", token);

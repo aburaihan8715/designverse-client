@@ -25,7 +25,7 @@ const MySelectedClassesPage = () => {
       confirmButtonText: "Yes, delete it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        fetch(`https://fashion-verse-server.vercel.app/selectedClasses/${id}`, {
+        fetch(`http://localhost:5000/selectedClasses/${id}`, {
           method: "DELETE",
         })
           .then((res) => res.json())
