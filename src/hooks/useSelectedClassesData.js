@@ -19,7 +19,7 @@ const useSelectedClassesData = () => {
     },
 
     // queryFn: async () => {
-    //   const res = await axios.get(`http://localhost:5000/selectedClasses?email=${user?.email}`, {
+    //   const res = await axios.get(`https://fashion-verse-server.vercel.app/selectedClasses?email=${user?.email}`, {
     //     headers: {
     //       authorization: `bearer ${token}`,
     //     },

@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import useAuth from "./useAuth";
 
 const axiosSecure = axios.create({
-  baseURL: "http://localhost:5000",
+  baseURL: "https://fashion-verse-server.vercel.app",
 });
 
 const useAxiosSecure = () => {
@@ -25,7 +25,7 @@ const useAxiosSecure = () => {
       async (error) => {
         if (error.response && (error.response.status === 401 || error.response.status === 403)) {
           await logOutUser();
-          navigate("/login");
+          navigate("/");
         }
         return Promise.reject(error);
       }
