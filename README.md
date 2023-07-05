@@ -20,9 +20,15 @@
 
 # client code link
 
+https://github.com/programming-hero-web-course1/b712-summer-camp-client-side-aburaihan8715
+
 # server code link
 
+https://github.com/programming-hero-web-course1/b7a12-summer-camp-server_side-aburaihan8715
+
 # live link
+
+https://fashionverse-ffe6b.web.app/
 
 # admin info
 
