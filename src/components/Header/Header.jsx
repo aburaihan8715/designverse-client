@@ -76,7 +76,7 @@ const Header = () => {
                 {menuItems}
               </ul>
             </div>
-            <Link to="/" className="uppercase">
+            <Link to="/" className="uppercase hidden sm:inline-block">
               <div className="inline-flex flex-col">
                 <h1 className="text-3xl tracking-tighter text-secondary">FashionVerse</h1>
                 <span className="tracking-[25px]">school</span>

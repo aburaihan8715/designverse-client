@@ -26,6 +26,7 @@
     "react-responsive-carousel": "^3.2.23",
     "react-router-dom": "^6.14.0",
     "react-simple-captcha": "^9.0.13",
+    "recharts": "^2.7.2",
     "sort-by": "^1.2.0",
     "sweetalert2": "^11.7.12",
     "swiper": "^9.4.1"

@@ -76,7 +76,7 @@ const MySelectedClassesPage = () => {
         <div className="overflow-x-auto mt-8">
           <table className="table border border-success">
             {/* head */}
-            <thead className="">
+            <thead className="capitalize">
               <tr className="border border-success">
                 <th>#</th>
                 <th>image</th>
