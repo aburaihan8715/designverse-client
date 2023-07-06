@@ -1,23 +1,34 @@
 import { Helmet } from "react-helmet-async";
-import useClassesData from "../../../hooks/useClassesData";
 import SectionHeading from "../../../components/SectionHeading/SectionHeading";
+import useAuth from "../../../hooks/useAuth";
+import LoadingSpinner from "../../../components/LoadingSpinner/LoadingSpinner";
+import useMyClassesData from "../../../hooks/useMyClassesData";
 
 const MyClassesPage = () => {
-  const [classesData] = useClassesData();
+  const { authLoading } = useAuth();
+  const { myClassesDataLoading, myClassesDataError, myClassesData } = useMyClassesData();
+
+  if (myClassesDataLoading || authLoading) {
+    return <LoadingSpinner></LoadingSpinner>;
+  }
+  if (myClassesDataError) {
+    return <p>something went wrong ${myClassesDataError.message}</p>;
+  }
+
   return (
     <div className="ml-3">
       <Helmet>
         <title>FashionVerse | MyClassesPage</title>
       </Helmet>
       <div>
-        <SectionHeading subHeading={`how many`} heading={`classes`}></SectionHeading>
+        <SectionHeading subHeading={`how many`} heading={`my classes`}></SectionHeading>
       </div>
-      <p className="text-xl">Total classes :{classesData?.length}</p>
+      <p className="text-xl">Total classes :{myClassesData?.length}</p>
       <div className="overflow-x-auto">
-        <table className="table">
+        <table className="table border border-success">
           {/* head */}
-          <thead>
-            <tr>
+          <thead className="capitalize">
+            <tr className="border border-success">
               <th>#</th>
               <th>image</th>
               <th>name</th>
@@ -31,26 +42,23 @@ const MyClassesPage = () => {
           </thead>
           <tbody>
             {/* row 1 */}
-            {classesData?.map((item, index) => (
+            {myClassesData?.map((item, index) => (
               <tr key={item._id}>
                 <th>{index + 1}</th>
                 <td>
                   <div className="avatar">
                     <div className="mask mask-squircle w-12 h-12">
-                      <img src="http://placehold.it/40x40" alt="class cover photo" />
+                      <img src={item?.classImage} alt="class cover photo" />
                     </div>
                   </div>
                 </td>
 
-                <td>Sustainable Fashion Design and Ethical Practices</td>
-                <td>25</td>
-                <td>$ 35</td>
-                <td>pending</td>
-                <td>12</td>
-                <td>
-                  Lorem ipsum dolor, sit amet consectetur adipisicing elit. Sunt, ratione. Necessitatibus reiciendis possimus voluptates esse
-                  explicabo expedita nemo velit, cumque, ducimus vitae ad cum similique, assumenda dicta sint aspernatur voluptatum?
-                </td>
+                <td>{item?.className}</td>
+                <td>{item?.seats}</td>
+                <td>$ {item?.price}</td>
+                <td>{item?.status}</td>
+                <td>{item?.enrolled ? item.enrolled : "not enrolled yet"}</td>
+                <td>{item?.feedback ? item.feedback : "no feedback"}</td>
 
                 <th className="space-y-2">
                   <button className="btn btn-info btn-xs">update</button>

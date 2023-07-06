@@ -1,11 +1,40 @@
 import { Helmet } from "react-helmet-async";
 import SectionHeading from "../../../components/SectionHeading/SectionHeading";
+import useAuth from "../../../hooks/useAuth";
+import useAxiosSecure from "../../../hooks/useAxiosSecure";
+import { useQuery } from "react-query";
+import LoadingSpinner from "../../../components/LoadingSpinner/LoadingSpinner";
 
 const MyEnrolledClassesPage = () => {
+  const { user, authLoading } = useAuth();
+  const [axiosSecure] = useAxiosSecure();
+  const {
+    isLoading: enrolledClassesDataLoading,
+    error: enrolledClassesDataError,
+    data: enrolledClassesData,
+  } = useQuery({
+    queryKey: ["enrolledClasses", user?.email],
+    enabled: !authLoading,
+    queryFn: async () => {
+      const res = await axiosSecure.get(`/payments?email=${user?.email}`);
+      return res.data;
+    },
+  });
+
+  console.log(enrolledClassesData);
+
+  if (enrolledClassesDataLoading || authLoading) {
+    return <LoadingSpinner></LoadingSpinner>;
+  }
+
+  if (enrolledClassesDataError) {
+    return <p>something went wrong ${enrolledClassesDataError.message}</p>;
+  }
+
   return (
     <div className="ml-3">
       <Helmet>
-        <title>FashionVerse | MyClassesPage</title>
+        <title>FashionVerse | MyEnrolledClassesPage</title>
       </Helmet>
       <div>
         <SectionHeading subHeading={`how many`} heading={`classes enrolled`}></SectionHeading>

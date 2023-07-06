@@ -35,16 +35,18 @@ const Header = () => {
         </li>
       )}
 
-      <li>
-        <Link to="/dashboard/mySelectedClasses" className="p-0 bg-transparent hover:bg-transparent">
-          <button className="btn btn-sm bg-transparent hover:bg-transparent">
-            <span className="text-error">
-              <FaShoppingCart></FaShoppingCart>
-            </span>
-            <div className="badge badge-success text-white">+0{selectedData?.length}</div>
-          </button>
-        </Link>
-      </li>
+      {user && (
+        <li>
+          <Link to="/dashboard/mySelectedClasses" className="p-0 bg-transparent hover:bg-transparent">
+            <button className="btn btn-sm bg-transparent hover:bg-transparent">
+              <span className="text-error">
+                <FaShoppingCart></FaShoppingCart>
+              </span>
+              <div className="badge badge-success text-white">+0{selectedData?.length}</div>
+            </button>
+          </Link>
+        </li>
+      )}
     </>
   );
 
