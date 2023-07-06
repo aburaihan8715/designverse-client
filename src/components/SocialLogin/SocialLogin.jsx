@@ -15,7 +15,7 @@ const SocialLogin = () => {
         const loggedInUser = result.user;
         const userData = { name: loggedInUser.displayName, email: loggedInUser.email };
 
-        fetch("http://localhost:5000/users", {
+        fetch("https://fashion-verse-server-aburaihan8715.vercel.app/users", {
           method: "POST",
           headers: {
             "Content-type": "application/json",
@@ -45,7 +45,7 @@ const SocialLogin = () => {
         const loggedInUser = result.user;
         const userData = { name: loggedInUser.displayName, email: loggedInUser.email };
 
-        fetch("http://localhost:5000/users", {
+        fetch("https://fashion-verse-server-aburaihan8715.vercel.app/users", {
           method: "POST",
           headers: {
             "Content-type": "application/json",

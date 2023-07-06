@@ -37,7 +37,7 @@ const Card = ({ item }) => {
       });
     } else {
       axios
-        .post("http://localhost:5000/selectedClasses", selectedData)
+        .post("https://fashion-verse-server-aburaihan8715.vercel.app/selectedClasses", selectedData)
         .then((data) => {
           if (data.data.acknowledged) {
             refetch();
