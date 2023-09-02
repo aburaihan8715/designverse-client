@@ -1,9 +1,7 @@
-import Container from "../Container/Container";
-
 const Footer = () => {
   return (
     <div className="">
-      <Container>
+      <div>
         <footer className="footer bg-base-300 text-base-content p-4">
           <div>
             <span className="footer-title">Services</span>
@@ -45,7 +43,7 @@ const Footer = () => {
             <p>Copyright © 2023 - All right reserved by FashionVerse school</p>
           </div>
         </footer>
-      </Container>
+      </div>
     </div>
   );
 };

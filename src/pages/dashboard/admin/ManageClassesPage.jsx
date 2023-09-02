@@ -11,7 +11,7 @@ const ManageClassesPage = () => {
   const userRoleHandler = (id, status) => {
     // console.log(id);
     // console.log(status);
-    fetch(`https://fashion-verse-server-aburaihan8715.vercel.app/classes/${id}`, {
+    fetch(`https://fashion-verse-server.vercel.app/classes/${id}`, {
       method: "PATCH",
       body: JSON.stringify({
         status,

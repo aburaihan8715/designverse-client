@@ -1,0 +1,16 @@
+// tasks has been done
+1.  router
+2.  tailwind
+3.  firebase
+
+
+
+
+
+// tasks have to be implemented
+1. all page responsive
+2. image change for card
+3. rating dynamic
+4. scroll to top
+5. some animation (framer motion or AOS)
+6. text background (image or gradient)

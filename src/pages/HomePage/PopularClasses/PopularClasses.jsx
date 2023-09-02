@@ -1,4 +1,3 @@
-import Container from "../../../components/Container/Container";
 import SectionHeading from "../../../components/SectionHeading/SectionHeading";
 import useClassesData from "../../../hooks/useClassesData";
 import LoadingSpinner from "../../../components/LoadingSpinner/LoadingSpinner";
@@ -16,14 +15,14 @@ const PopularClasses = () => {
     return <p>something went wrong {classesError.message}</p>;
   }
   return (
-    <Container>
+    <div className="">
       <SectionHeading subHeading={`connect with`} heading={`popular classes`}></SectionHeading>
       <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-8">
         {popularSixClasses?.map((item) => (
           <Card key={item._id} item={item}></Card>
         ))}
       </div>
-    </Container>
+    </div>
   );
 };
 

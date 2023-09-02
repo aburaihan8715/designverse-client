@@ -37,7 +37,7 @@ const Card = ({ item }) => {
       });
     } else {
       axios
-        .post("https://fashion-verse-server-aburaihan8715.vercel.app/selectedClasses", selectedData)
+        .post("https://fashion-verse-server.vercel.app/selectedClasses", selectedData)
         .then((data) => {
           if (data.data.acknowledged) {
             refetch();
@@ -56,9 +56,9 @@ const Card = ({ item }) => {
     }
   };
   return (
-    <div className="card card-compact bg-base-100 shadow-md rounded relative">
+    <div className="bg-base-100 shadow-md rounded relative">
       <figure>
-        <img src={item.classImage} alt="Shoes" />
+        <img className="w-full h-60 object-cover" src={item.classImage} alt="Shoes" />
       </figure>
       <div className="badge badge-success absolute right-5 top-5">
         <strong className="text-slate-50">Price: ${item.price}</strong>

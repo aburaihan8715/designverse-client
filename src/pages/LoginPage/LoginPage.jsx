@@ -1,7 +1,6 @@
 import { Helmet } from "react-helmet-async";
 import { useForm } from "react-hook-form";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import Container from "../../components/Container/Container";
 import SocialLogin from "../../components/SocialLogin/SocialLogin";
 import { loadCaptchaEnginge, LoadCanvasTemplate, validateCaptcha } from "react-simple-captcha";
 import { useEffect, useState } from "react";
@@ -68,7 +67,7 @@ const LoginPage = () => {
         <title>FashionVerse | Login</title>
       </Helmet>
 
-      <Container className="">
+      <div className="">
         <div className="border max-w-md mx-auto p-8">
           <form onSubmit={handleSubmit(submitHandler)}>
             <div className="space-y-3">
@@ -162,7 +161,7 @@ const LoginPage = () => {
           {/* social login */}
           <SocialLogin></SocialLogin>
         </div>
-      </Container>
+      </div>
     </div>
   );
 };

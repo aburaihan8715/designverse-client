@@ -20,7 +20,7 @@ const ManageUsersPage = () => {
       confirmButtonText: "Yes, delete it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        fetch(`https://fashion-verse-server-aburaihan8715.vercel.app/users/${item._id}`, {
+        fetch(`https://fashion-verse-server.vercel.app/users/${item._id}`, {
           method: "DELETE",
         })
           .then((res) => res.json())
@@ -39,7 +39,7 @@ const ManageUsersPage = () => {
 
   // make role handler
   const makeRoleHandler = (item, role) => {
-    fetch(`https://fashion-verse-server-aburaihan8715.vercel.app/users/role/${item._id}`, {
+    fetch(`https://fashion-verse-server.vercel.app/users/role/${item._id}`, {
       method: "PATCH",
       body: JSON.stringify({
         role,

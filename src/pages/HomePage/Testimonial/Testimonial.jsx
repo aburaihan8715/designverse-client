@@ -7,12 +7,11 @@ import "swiper/css";
 import "swiper/css/navigation";
 // import required modules
 import { Navigation } from "swiper";
-import Container from "../../../components/Container/Container";
 
 const Testimonial = () => {
   return (
     <div className="py-8">
-      <Container>
+      <div>
         <SectionHeading subHeading={`What Our Clients Say`} heading={`testimonials`}></SectionHeading>
         <div className="text-center">
           <Swiper navigation={true} modules={[Navigation]} className="mySwiper">
@@ -39,7 +38,7 @@ const Testimonial = () => {
             ))}
           </Swiper>
         </div>
-      </Container>
+      </div>
     </div>
   );
 };

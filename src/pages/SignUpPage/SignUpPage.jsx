@@ -2,7 +2,6 @@ import { Helmet } from "react-helmet-async";
 import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
 import SocialLogin from "../../components/SocialLogin/SocialLogin";
-import Container from "../../components/Container/Container";
 import { useState } from "react";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import useAuth from "../../hooks/useAuth";
@@ -31,7 +30,7 @@ const SignUpPage = () => {
         updateUserProfile(name, photo)
           .then(() => {
             const userData = { name, email };
-            fetch("https://fashion-verse-server-aburaihan8715.vercel.app/users", {
+            fetch("https://fashion-verse-server.vercel.app/users", {
               method: "POST",
               headers: {
                 "Content-type": "application/json",
@@ -74,7 +73,7 @@ const SignUpPage = () => {
         <title>FashionVerse | SignUp</title>
       </Helmet>
 
-      <Container className="">
+      <div className="">
         <div className="border max-w-md mx-auto p-8">
           <form onSubmit={handleSubmit(submitHandler)}>
             <div className="space-y-3">
@@ -182,7 +181,7 @@ const SignUpPage = () => {
           {/* social login */}
           <SocialLogin></SocialLogin>
         </div>
-      </Container>
+      </div>
     </div>
   );
 };

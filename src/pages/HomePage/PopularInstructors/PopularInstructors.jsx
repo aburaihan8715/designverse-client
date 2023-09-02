@@ -1,4 +1,3 @@
-import Container from "../../../components/Container/Container";
 import SectionHeading from "../../../components/SectionHeading/SectionHeading";
 import useClassesData from "../../../hooks/useClassesData";
 import LoadingSpinner from "../../../components/LoadingSpinner/LoadingSpinner";
@@ -17,13 +16,13 @@ const PopularClasses = () => {
   }
   return (
     <div className="py-8">
-      <Container>
+      <div>
         <SectionHeading subHeading={`stay with`} heading={`popular instructors`}></SectionHeading>
         <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-8">
           {popularSixInstructors?.map((item) => (
             <div key={item._id} className="card bg-base-100 shadow-md rounded">
               <figure>
-                <img src={item.instructorImage} alt="instructor" />
+                <img className="w-full h-60 object-cover" src={item.instructorImage} alt="instructor" />
               </figure>
               <div className="card-body">
                 <h2 className="card-title">Name: {item.instructorName}</h2>
@@ -37,7 +36,7 @@ const PopularClasses = () => {
             </div>
           ))}
         </div>
-      </Container>
+      </div>
     </div>
   );
 };

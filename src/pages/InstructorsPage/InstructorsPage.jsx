@@ -1,5 +1,4 @@
 import { Link } from "react-router-dom";
-import Container from "../../components/Container/Container";
 import LoadingSpinner from "../../components/LoadingSpinner/LoadingSpinner";
 import useClassesData from "../../hooks/useClassesData";
 import { Helmet } from "react-helmet-async";
@@ -19,7 +18,7 @@ const InstructorsPage = () => {
       <Helmet>
         <title>FashionVerse | InstructorsPage</title>
       </Helmet>
-      <Container>
+      <div>
         <div className="overflow-x-auto">
           <table className="table">
             {/* head */}
@@ -63,7 +62,7 @@ const InstructorsPage = () => {
             </tbody>
           </table>
         </div>
-      </Container>
+      </div>
     </div>
   );
 };

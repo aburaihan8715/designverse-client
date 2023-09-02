@@ -1,14 +1,13 @@
 import { Helmet } from "react-helmet-async";
-import Container from "../../components/Container/Container";
 
 const SeeClasses = () => {
   return (
     <div className="py-8">
-      <Container>
-        <Helmet>
-          <title>FashionVerse | MyClassesPage</title>
-        </Helmet>
+      <Helmet>
+        <title>FashionVerse | MyClassesPage</title>
+      </Helmet>
 
+      <div>
         <div className="text-center text-2xl">coming soon..........</div>
         {/* <div className="ml-3">
           <Helmet>
@@ -56,7 +55,7 @@ const SeeClasses = () => {
             </table>
           </div>
         </div> */}
-      </Container>
+      </div>
     </div>
   );
 };

@@ -1,5 +1,4 @@
 import { Helmet } from "react-helmet-async";
-import Container from "../../components/Container/Container";
 import SectionHeading from "../../components/SectionHeading/SectionHeading";
 
 const ContactUsPage = () => {
@@ -8,7 +7,7 @@ const ContactUsPage = () => {
       <Helmet>
         <title>FashionVerse | ContactUsPage</title>
       </Helmet>
-      <Container>
+      <div>
         <div className="border p-8 max-w-xl mx-auto">
           <SectionHeading subHeading={`Send Us a Message`} heading={`contact form`}></SectionHeading>
 
@@ -64,7 +63,7 @@ const ContactUsPage = () => {
             </div>
           </div>
         </div>
-      </Container>
+      </div>
     </div>
   );
 };

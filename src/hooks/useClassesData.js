@@ -6,7 +6,7 @@ const useClassesData = () => {
     error: classesError,
     data: classesData = [],
     refetch,
-  } = useQuery("classes", () => fetch("https://fashion-verse-server-aburaihan8715.vercel.app/classes").then((res) => res.json()));
+  } = useQuery("classes", () => fetch("https://fashion-verse-server.vercel.app/classes").then((res) => res.json()));
 
   return [classesData, classesLoading, classesError, refetch];
 };

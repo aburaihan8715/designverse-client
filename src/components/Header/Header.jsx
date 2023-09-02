@@ -1,5 +1,4 @@
 import { Link, useNavigate } from "react-router-dom";
-import Container from "../Container/Container";
 import Button from "../Button/Button";
 import useAuth from "../../hooks/useAuth";
 import ActiveLink from "../ActiveLink/ActiveLink";
@@ -64,8 +63,8 @@ const Header = () => {
   };
 
   return (
-    <div className="sticky top-0 z-10">
-      <Container>
+    <div className="fixed top-0 left-0 right-0 h-80 z-10">
+      <div>
         <div className="navbar bg-slate-200 p-4 border-b-2 border-purple-600">
           <div className="navbar-start">
             <div className="dropdown">
@@ -124,7 +123,7 @@ const Header = () => {
             </div>
           </div>
         </div>
-      </Container>
+      </div>
     </div>
   );
 };

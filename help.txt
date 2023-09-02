@@ -1,7 +1,9 @@
-// tasks has been done
-1.  router
-2.  tailwind
-3.  firebase
+
+// live server (verCel)
+https://fashion-verse-server.vercel.app
+
+// localhost server
+https://fashion-verse-server.vercel.app
 
 
 //user images
