@@ -15,7 +15,7 @@ const PaymentPage = () => {
   const price = Number(total.toFixed(2));
 
   return (
-    <div className="px-2">
+    <div className="px-2 w-full">
       <Helmet>
         <title>FashionVerse | PaymentPage</title>
       </Helmet>
