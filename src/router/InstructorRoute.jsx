@@ -1,14 +1,17 @@
 import { Navigate, useLocation } from "react-router-dom";
 import useAuth from "../hooks/useAuth";
 import useRole from "../hooks/useRole";
-import LoadingSpinner from "../components/LoadingSpinner/LoadingSpinner";
+import LoadingSpinner from "../ui/LoadingSpinner";
+// import useAuth from "../hooks/useAuth";
+// import useRole from "../hooks/useRole";
+// import LoadingSpinner from "../components/LoadingSpinner/LoadingSpinner";
 
 const InstructorRoute = ({ children }) => {
   const { user, authLoading } = useAuth();
-  const { data, isRoleLoading } = useRole();
+  const { data, roleDataLoading } = useRole();
   const location = useLocation();
 
-  if (authLoading || isRoleLoading) {
+  if (authLoading || roleDataLoading) {
     return <LoadingSpinner></LoadingSpinner>;
   }
 

@@ -20,7 +20,6 @@ export const AuthContext = createContext(null);
 const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [authLoading, setAuthLoading] = useState(true);
-  const [authError, setAuthError] = useState("");
 
   // TODO: send verification email
 
@@ -73,24 +72,23 @@ const AuthProvider = ({ children }) => {
       // get and set token
       if (currentUser) {
         axios
-          .post("https://fashion-verse-server.vercel.app/jwt", { email: currentUser?.email })
+          .post("http://localhost:5000/jwt", { email: currentUser?.email })
           .then((data) => {
             const token = data.data.token;
             localStorage.setItem("access_token", token);
             setAuthLoading(false);
-            setAuthError("");
           })
           .catch((error) => {
-            setAuthError(error.message);
+            console.log(error.message);
           });
       } else {
         localStorage.removeItem("access_token");
+        setAuthLoading(false);
       }
-
-      // console.log(currentUser);
+      console.log(currentUser);
     });
     return () => {
-      return unsubscribe;
+      return unsubscribe();
     };
   }, []);
 
@@ -98,10 +96,9 @@ const AuthProvider = ({ children }) => {
     createUserUsingEmailPassword,
     authenticationUsingEmailPassword,
     user,
+    setUser,
     authLoading,
     setAuthLoading,
-    authError,
-    setAuthError,
     logOutUser,
     updateUserProfile,
     authenticationUsingGoogle,

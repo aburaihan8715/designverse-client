@@ -2,12 +2,13 @@ import { useQuery } from "react-query";
 import useAxiosSecure from "./useAxiosSecure";
 
 const useUsersData = () => {
-  const [axiosSecure] = useAxiosSecure();
+  const { axiosSecure } = useAxiosSecure();
   const {
     data: users = [],
     refetch,
-    isLoading: userIsLoading,
+    isLoading: userLoading,
     error: userError,
+    isError: isUserError,
   } = useQuery({
     queryKey: ["users"],
     queryFn: async () => {
@@ -15,7 +16,7 @@ const useUsersData = () => {
       return data.data;
     },
   });
-  return { users, refetch, userIsLoading, userError };
+  return { users, userLoading, userError, isUserError, refetch };
 };
 
 export default useUsersData;

@@ -3,12 +3,13 @@ import { useQuery } from "react-query";
 const useClassesData = () => {
   const {
     isLoading: classesLoading,
-    error: classesError,
     data: classesData = [],
+    error: classesError,
+    isError: isClassesError,
     refetch,
-  } = useQuery("classes", () => fetch("https://fashion-verse-server.vercel.app/classes").then((res) => res.json()));
+  } = useQuery("classes", () => fetch("http://localhost:5000/classes").then((res) => res.json()));
 
-  return [classesData, classesLoading, classesError, refetch];
+  return { classesData, classesLoading, classesError, isClassesError, refetch };
 };
 
 export default useClassesData;

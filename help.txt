@@ -1,9 +1,9 @@
 
 // live server (verCel)
-https://fashion-verse-server.vercel.app
+http://localhost:5000
 
 // localhost server
-https://fashion-verse-server.vercel.app
+http://localhost:5000
 
 
 //user images
@@ -15,51 +15,53 @@ https://i.ibb.co/N9LRKT5/user5.png
 https://i.ibb.co/W3FzCjW/user6.png
 https://i.ibb.co/W2zQKHd/user7.png
 
-//classes
-1.Fashion Illustration and Sketching Techniques
-2.Fashion Design Principles
 
-3.Pattern Making and Garment Construction
-4.Textile and Fabric Design for Fashion
-
-5.Fashion Styling and Image Consulting
-6.Draping and Creative Pattern Cutting
-
-7.Fashion Marketing and Branding Strategies
-8.Fashion Accessories Design
-
-9.Sustainable Fashion Design and Ethical Practices
-10.Fashion Portfolio Development and Presentation
-
-11.Fashion Trends and Forecasting
-12.Couture Techniques and Haute Couture Design
+// classes nave v2
+1. Fashion Sketching and Illustration
+2. Pattern Making and Garment Construction
+3. Textile Design and Fabrication
+4. Fashion History and Trends Analysis
+5. Fashion Branding and Marketing Strategies
+6. Sustainable Fashion Design
+7. Couture Sewing Techniques
+8. Draping and Dressmaking
+9. Fashion Portfolio Development
+10. Fashion Styling and Image Consulting
+11. Fashion Photography and Styling
+12. Fashion Retail Management and Merchandising
 
 
 //class cover images
-https://i.ibb.co/7tQvNZp/class-cover-2.jpg
+https://i.ibb.co/tBBg1rT/class-cover-1.png
+https://i.ibb.co/DV94ss6/class-cover-2.png
 https://i.ibb.co/dpmJ1dn/class-cover-3.jpg
-
 https://i.ibb.co/CQcrJNL/class-cover-4.jpg
 https://i.ibb.co/wMR8db8/class-cover-5.jpg
-
 https://i.ibb.co/pdv3sRB/class-cover-6.jpg
 https://i.ibb.co/p1v3DYQ/class-cover-7.jpg
-
 https://i.ibb.co/Bszf5PN/class-cover-8.jpg
 https://i.ibb.co/Wpmvch6/class-cover-9.jpg
+https://i.ibb.co/HNDbMDk/class-cover-10.png
+https://i.ibb.co/72dy69W/class-cover-11.png
+https://i.ibb.co/YTKTnzX/class-cover-12.png
+https://i.ibb.co/m5DPtss/class-cover-13.png
 
-https://i.ibb.co/NK35wcX/class-cover-10.jpg
 
 //instructor cover images
 https://i.ibb.co/XjwCw6K/instructor-1.jpg
-
 https://i.ibb.co/Fnw3yvR/instructor-2.jpg
-
 https://i.ibb.co/pW9QPJK/instructor-3.jpg
-
 https://i.ibb.co/9yz5XZB/instructor-4.jpg
-
 https://i.ibb.co/PNm5XKr/instructor-5.jpg
-
 https://i.ibb.co/R9RkBjF/instructor-6.jpg
 https://i.ibb.co/28080k5/instructor-7.jpg
+https://i.ibb.co/7Gt41sz/instructor-8.png
+https://i.ibb.co/xCh9Dr7/instructor-9.png
+https://i.ibb.co/sbtt2YR/instructor-10.png
+https://i.ibb.co/02VnN2y/instructor-11.png
+https://i.ibb.co/PgX3zKp/instructor-12.png
+
+
+
+
+

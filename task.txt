@@ -14,3 +14,4 @@
 4. scroll to top
 5. some animation (framer motion or AOS)
 6. text background (image or gradient)
+7. card component should be optimized 
