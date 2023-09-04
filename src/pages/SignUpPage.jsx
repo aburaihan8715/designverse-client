@@ -30,7 +30,7 @@ const SignUpPage = () => {
         // update user profile function
         updateUserProfile(name, photo).then(() => {
           const userData = { name, email };
-          fetch("http://localhost:5000/users", {
+          fetch("https://fashion-verse-server.vercel.app/users", {
             method: "POST",
             headers: {
               "Content-type": "application/json",
