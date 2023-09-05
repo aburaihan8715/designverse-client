@@ -4,11 +4,6 @@ import { useLocation, useNavigate } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
 import useCartData from "../../hooks/useCartData";
 import useRole from "../../hooks/useRole";
-// ==aos==
-import AOS from "aos";
-import "aos/dist/aos.css"; // You can also use <link> for styles
-// ..
-AOS.init();
 
 const PopularClassesCard = ({ item }) => {
   const { roleData } = useRole();
@@ -47,7 +42,7 @@ const PopularClassesCard = ({ item }) => {
       return;
     } else {
       axios
-        .post("http://localhost:5000/cart", cartData)
+        .post("https://fashion-verse-server.vercel.app/cart", cartData)
         .then((data) => {
           if (data.data.acknowledged) {
             refetch();
