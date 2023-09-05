@@ -46,7 +46,7 @@ const AddClassPage = () => {
     console.log(classData);
     // send data to server using axios
     axios
-      .post("https://fashion-verse-server.vercel.app/classes", classData)
+      .post("http://localhost:5000/classes", classData)
       .then((data) => {
         if (data.data.insertedId) {
           Swal.fire({

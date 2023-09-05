@@ -14,7 +14,7 @@ const InstructorHomePage = () => {
           <h2 className="text-2xl capitalize">Hi, Welcome back!</h2>
         </div>
 
-        <div className="grid sm:grid-cols-3 gap-5 border">
+        <div className="grid sm:grid-cols-3 gap-5">
           <div className="flex text-white capitalize bg-green-200 py-8 px-24 gap-4 items-center rounded">
             <div className="text-3xl">
               <FaBook></FaBook>
@@ -46,8 +46,8 @@ const InstructorHomePage = () => {
           </div>
         </div>
 
-        <div className="grid sm:grid-cols-2 mt-4">
-          <div className="bg-blue-50 sm:border-r-2  border-orange-300 p-8 ">
+        <div className="grid sm:grid-cols-2 mt-4 gap-4">
+          <div className="bg-blue-50 sm:border-l-2 border-orange-300 p-8 rounded">
             <div className="flex justify-center">
               <div className="text-center">
                 <div className="avatar ">
@@ -60,7 +60,7 @@ const InstructorHomePage = () => {
             </div>
           </div>
 
-          <div className="bg-cyan-100 sm:border-l-2 border-orange-300 p-8">
+          <div className="bg-cyan-100 sm:border-l-2 border-orange-300 p-8 rounded">
             <h3 className="text-2xl">Your Activities</h3>
             <div className="flex gap-4 items-center text-blue-500">
               <span>

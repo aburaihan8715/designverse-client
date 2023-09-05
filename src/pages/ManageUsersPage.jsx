@@ -20,7 +20,7 @@ const ManageUsersPage = () => {
       confirmButtonText: "Yes, delete it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        fetch(`https://fashion-verse-server.vercel.app/users/${item._id}`, {
+        fetch(`http://localhost:5000/users/${item._id}`, {
           method: "DELETE",
         })
           .then((res) => res.json())
@@ -39,7 +39,7 @@ const ManageUsersPage = () => {
 
   // make role handler
   const makeRoleHandler = (item, role) => {
-    fetch(`https://fashion-verse-server.vercel.app/users/role/${item._id}`, {
+    fetch(`http://localhost:5000/users/role/${item._id}`, {
       method: "PATCH",
       body: JSON.stringify({
         role,
@@ -100,13 +100,15 @@ const ManageUsersPage = () => {
                   <td>{item.email}</td>
                   <td>{item?.role ? item.role : "student"}</td>
 
-                  <td className="space-y-2">
-                    <button disabled={item.role} onClick={() => makeRoleHandler(item, "admin")} className="btn btn-xs">
-                      make admin
-                    </button>
-                    <button disabled={item.role} onClick={() => makeRoleHandler(item, "instructor")} className="btn btn-xs">
-                      make instructor
-                    </button>
+                  <td className="">
+                    <div className="flex flex-col gap-2 ">
+                      <button disabled={item.role} onClick={() => makeRoleHandler(item, "admin")} className="btn btn-xs h-7">
+                        make admin
+                      </button>
+                      <button disabled={item.role} onClick={() => makeRoleHandler(item, "instructor")} className="btn btn-xs h-7">
+                        make instructor
+                      </button>
+                    </div>
                   </td>
 
                   <th>

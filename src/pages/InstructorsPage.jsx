@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import useClassesData from "../hooks/useClassesData";
 import LoadingSpinner from "../ui/LoadingSpinner";
+import SectionHeading from "../ui/SectionHeading";
 
 const InstructorsPage = () => {
   const { classesData, classesLoading, classesError, isClassesError } = useClassesData();
@@ -19,6 +20,9 @@ const InstructorsPage = () => {
         <title>FashionVerse | InstructorsPage</title>
       </Helmet>
       <div className="">
+        <div>
+          <SectionHeading heading={`Your instructor`} subHeading={`stay with`} />
+        </div>
         <div className="overflow-x-auto">
           <table className="table">
             {/* head */}

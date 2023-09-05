@@ -1,9 +1,9 @@
 
 // live server (verCel)
-https://fashion-verse-server.vercel.app
+http://localhost:5000
 
 // localhost server
-https://fashion-verse-server.vercel.app
+http://localhost:5000
 
 
 //user images

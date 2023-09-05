@@ -56,12 +56,12 @@ const AdminHomePage = () => {
           </div>
         </div>
 
-        <div className="grid sm:grid-cols-2 mt-4">
-          <div className="bg-blue-50  border-orange-300 p-4 ">
+        <div className="grid sm:grid-cols-2 mt-4 border p-2 rounded gap-4">
+          <div className="bg-blue-50  border-orange-300 p-4 rounded">
             <ShapeBarChart></ShapeBarChart>
           </div>
 
-          <div className="bg-cyan-100  border-orange-300 p-4">
+          <div className="bg-cyan-100  border-orange-300 p-4 rounded">
             <CustomPieChart></CustomPieChart>
           </div>
         </div>

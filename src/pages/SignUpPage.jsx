@@ -11,6 +11,7 @@ const SignUpPage = () => {
   const { createUserUsingEmailPassword, updateUserProfile } = useAuth();
   const [authError, setAuthError] = useState("");
   const [showPassword, setShowPassword] = useState(false);
+  const [signUpLoading, setSignUpLoading] = useState(false);
   const navigate = useNavigate();
   const {
     register,
@@ -20,6 +21,7 @@ const SignUpPage = () => {
   } = useForm();
 
   const submitHandler = (data) => {
+    setSignUpLoading(true);
     const { email, password, name, photo } = data;
     // console.log(data);
     createUserUsingEmailPassword(email, password)
@@ -30,7 +32,7 @@ const SignUpPage = () => {
         // update user profile function
         updateUserProfile(name, photo).then(() => {
           const userData = { name, email };
-          fetch("https://fashion-verse-server.vercel.app/users", {
+          fetch("http://localhost:5000/users", {
             method: "POST",
             headers: {
               "Content-type": "application/json",
@@ -39,6 +41,8 @@ const SignUpPage = () => {
           })
             .then((res) => res.json())
             .then((data) => {
+              setSignUpLoading(false);
+
               if (data.acknowledged) {
                 Swal.fire({
                   position: "center",
@@ -54,6 +58,7 @@ const SignUpPage = () => {
         });
       })
       .catch((error) => {
+        setSignUpLoading(false);
         setAuthError(error.message);
         console.log(error.message);
       });
@@ -156,7 +161,9 @@ const SignUpPage = () => {
 
               {/* sign up button*/}
               <div className="w-full ">
-                <input type="submit" value="Sign Up" className="btn btn-block btn-primary" />
+                <button type="submit" className="btn btn-block btn-primary">
+                  {signUpLoading ? <img className="rounded-full" src="/spinner.gif" alt="spinner" /> : "login"}
+                </button>
               </div>
             </div>
           </form>

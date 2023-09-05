@@ -13,6 +13,7 @@ const LoginPage = () => {
   const [disableLoginBtn, setDisableLoginBtn] = useState(true);
   const [showPassword, setShowPassword] = useState(false);
   const [authError, setAuthError] = useState("");
+  const [loginLoading, setLoginLoading] = useState(false);
 
   const location = useLocation();
   const navigate = useNavigate();
@@ -41,9 +42,11 @@ const LoginPage = () => {
   };
 
   const submitHandler = (data) => {
+    setLoginLoading(true);
     const { email, password } = data;
     authenticationUsingEmailPassword(email, password)
       .then((result) => {
+        setLoginLoading(false);
         const loggedInUser = result.user;
         console.log(loggedInUser);
         Swal.fire({
@@ -57,6 +60,7 @@ const LoginPage = () => {
         navigate(from, { replace: true });
       })
       .catch((error) => {
+        setLoginLoading(false);
         setAuthError(error.message);
         console.log(error.message);
       });
@@ -145,7 +149,9 @@ const LoginPage = () => {
 
               {/* login button*/}
               <div className="w-full ">
-                <input type="submit" value="Login" className="btn btn-block btn-primary" disabled={disableLoginBtn} />
+                <button type="submit" className="btn btn-block btn-primary" disabled={disableLoginBtn}>
+                  {loginLoading ? <img className="rounded-full" src="/spinner.gif" alt="spinner" /> : "login"}
+                </button>
               </div>
             </div>
           </form>

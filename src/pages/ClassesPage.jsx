@@ -2,6 +2,7 @@ import { Helmet } from "react-helmet-async";
 import useClassesData from "../hooks/useClassesData";
 import LoadingSpinner from "../ui/LoadingSpinner";
 import ClassCard from "../features/classes/ClassCard";
+import SectionHeading from "../ui/SectionHeading";
 
 const ClassesPage = () => {
   const { classesData, classesLoading, classesError, isClassesError } = useClassesData();
@@ -18,6 +19,10 @@ const ClassesPage = () => {
       <Helmet>
         <title>FashionVerse | ClassesPage</title>
       </Helmet>
+
+      <div>
+        <SectionHeading heading={`your classes`} subHeading={`collect`} />
+      </div>
       <div>
         <div className="grid sm:grid-cols-2 md:grid-cols-4 gap-8">
           {classesData?.map((item) => (

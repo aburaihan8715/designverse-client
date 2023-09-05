@@ -3,10 +3,12 @@ import Swal from "sweetalert2";
 import { useLocation, useNavigate } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
 import useCartData from "../../hooks/useCartData";
+import useRole from "../../hooks/useRole";
 
 const ClassCard = ({ item }) => {
   const navigate = useNavigate();
   const location = useLocation();
+  const { roleData } = useRole();
   const { user } = useAuth();
   const { refetch } = useCartData();
   const addToCartHandler = (item) => {
@@ -34,9 +36,12 @@ const ClassCard = ({ item }) => {
           navigate("/login", { state: { from: location } });
         }
       });
+    } else if (roleData?.role !== "student") {
+      Swal.fire(`${roleData?.role} are not allow to take this course!!`);
+      return;
     } else {
       axios
-        .post("https://fashion-verse-server.vercel.app/cart", cartData)
+        .post("http://localhost:5000/cart", cartData)
         .then((data) => {
           if (data.data.acknowledged) {
             refetch();
@@ -55,9 +60,9 @@ const ClassCard = ({ item }) => {
     }
   };
   return (
-    <div className="bg-base-100 shadow-md rounded relative">
+    <div data-aos="zoom-in" className="card shadow-md rounded relative hover:shadow-xl">
       <figure>
-        <img className="w-full h-40 object-cover" src={item.class.image} alt="Shoes" />
+        <img className="w-full h-40 object-cover transition duration-700 hover:scale-105" src={item.class.image} alt="Shoes" />
       </figure>
       <div className="badge badge-warning absolute right-5 top-5">
         <strong className="text-slate-50">Price: ${item.class.price}</strong>

@@ -14,4 +14,6 @@
 4. scroll to top
 5. some animation (framer motion or AOS)
 6. text background (image or gradient)
-7. card component should be optimized 
+7. card component should be optimized
+8. slider have to be changed
+9. instructor my-class action have to be implemented 

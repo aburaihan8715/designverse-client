@@ -19,10 +19,12 @@ const PaymentPage = () => {
       <Helmet>
         <title>FashionVerse | PaymentPage</title>
       </Helmet>
-      <SectionHeading subHeading={`please process`} heading={`payment`}></SectionHeading>
-      <Elements stripe={stripePromise}>
-        <CheckoutForm price={price} cartData={cartData}></CheckoutForm>
-      </Elements>
+      <div className="border mt-2 py-10 px-2 sm:max-w-2xl mx-auto shadow-lg">
+        <SectionHeading subHeading={`please process`} heading={`payment`}></SectionHeading>
+        <Elements stripe={stripePromise}>
+          <CheckoutForm price={price} cartData={cartData}></CheckoutForm>
+        </Elements>
+      </div>
     </div>
   );
 };
