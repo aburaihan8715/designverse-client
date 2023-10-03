@@ -16,7 +16,7 @@ const InstructorMyClassesPage = () => {
 
   useEffect(() => {
     setMyClassLoading(true);
-    fetch(`https://fashion-verse-server.vercel.app/classes?email=${user?.email}`)
+    fetch(`http://localhost:5000/classes?email=${user?.email}`)
       .then((res) => res.json())
       .then((data) => {
         setMyClassLoading(false);

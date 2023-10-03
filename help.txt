@@ -1,22 +1,52 @@
 
 // live server (verCel)
-https://fashion-verse-server.vercel.app
+http://localhost:5000
 
 // localhost server
-https://fashion-verse-server.vercel.app
+http://localhost:5000
 
 
-//user images
-https://i.ibb.co/bPbybsH/user1.png
-https://i.ibb.co/f24Bn5x/user2.png
-https://i.ibb.co/mGL96yn/user3.png
-https://i.ibb.co/qWgcQWZ/user4.png
-https://i.ibb.co/N9LRKT5/user5.png
-https://i.ibb.co/W3FzCjW/user6.png
-https://i.ibb.co/W2zQKHd/user7.png
+// name of instructor
+1.Sarah Anderson
+gender-female
+phoneNo +880 1711111111
+address Dhaka-1111
+
+2.David Chang
+gender-male
+phoneNo +880 1722222222
+address Dhaka-2222
+
+3.Elena Rodriguez
+gender-female
+phoneNo +880 1733333333
+address Dhaka-3333
+
+4.Michael Lee
+gender-male
+phoneNo +880 1744444444
+address Dhaka-4444
+
+5.Emily Patel
+gender-female
+phoneNo +880 1755555555
+address Dhaka-5555
+
+6.Daniel Carter
+gender-male
+phoneNo +880 1766666666
+address Dhaka-6666
+
+// images of instructors
+https://i.ibb.co/XjwCw6K/instructor-1.jpg
+https://i.ibb.co/Fnw3yvR/instructor-2.jpg
+https://i.ibb.co/pW9QPJK/instructor-3.jpg
+https://i.ibb.co/9yz5XZB/instructor-4.jpg
+https://i.ibb.co/PNm5XKr/instructor-5.jpg
+https://i.ibb.co/R9RkBjF/instructor-6.jpg
 
 
-// classes nave v2
+// name of classes v2
 1. Fashion Sketching and Illustration
 2. Pattern Making and Garment Construction
 3. Textile Design and Fabrication
@@ -30,8 +60,7 @@ https://i.ibb.co/W2zQKHd/user7.png
 11. Fashion Photography and Styling
 12. Fashion Retail Management and Merchandising
 
-
-//class cover images
+//images of class
 https://i.ibb.co/tBBg1rT/class-cover-1.png
 https://i.ibb.co/DV94ss6/class-cover-2.png
 https://i.ibb.co/dpmJ1dn/class-cover-3.jpg
@@ -44,16 +73,23 @@ https://i.ibb.co/Wpmvch6/class-cover-9.jpg
 https://i.ibb.co/HNDbMDk/class-cover-10.png
 https://i.ibb.co/72dy69W/class-cover-11.png
 https://i.ibb.co/YTKTnzX/class-cover-12.png
-https://i.ibb.co/m5DPtss/class-cover-13.png
 
 
-//instructor cover images
-https://i.ibb.co/XjwCw6K/instructor-1.jpg
-https://i.ibb.co/Fnw3yvR/instructor-2.jpg
-https://i.ibb.co/pW9QPJK/instructor-3.jpg
-https://i.ibb.co/9yz5XZB/instructor-4.jpg
-https://i.ibb.co/PNm5XKr/instructor-5.jpg
-https://i.ibb.co/R9RkBjF/instructor-6.jpg
+
+
+
+// info
+1. instructor 2 has feedback
+2. instructor 3 has one class pending
+3. instructor 4 has 1 class rating and message(**rating is not possible without enrolled)
+4. instructor 4 has 1 enrolled
+5. instructor 5 has 1 follower
+6. instructor 5 has 1 class offer
+7. instructor 6 has 1 class zero seat(that means all seats enrolled)
+
+
+//==================future need data==============
+//-------image of instructor-----------
 https://i.ibb.co/28080k5/instructor-7.jpg
 https://i.ibb.co/7Gt41sz/instructor-8.png
 https://i.ibb.co/xCh9Dr7/instructor-9.png
@@ -61,7 +97,11 @@ https://i.ibb.co/sbtt2YR/instructor-10.png
 https://i.ibb.co/02VnN2y/instructor-11.png
 https://i.ibb.co/PgX3zKp/instructor-12.png
 
-
-
-
+//----------- images of users---------
+1.https://i.ibb.co/bPbybsH/user1.png
+2.https://i.ibb.co/f24Bn5x/user2.png
+3.https://i.ibb.co/mGL96yn/user3.png
+4.https://i.ibb.co/qWgcQWZ/user4.png
+5.https://i.ibb.co/N9LRKT5/user5.png
+6.https://i.ibb.co/W3FzCjW/user6.png
 

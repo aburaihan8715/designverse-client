@@ -82,7 +82,7 @@ const SeeInstructorClasses = () => {
   // } = useQuery({
   //   queryKey: ["classes", id],
   //   queryFn: async () => {
-  //     const res = await fetch(`https://fashion-verse-server.vercel.app/classes/${id}`);
+  //     const res = await fetch(`http://localhost:5000/classes/${id}`);
   //     return res.data;
   //   },
   // });
@@ -90,7 +90,7 @@ const SeeInstructorClasses = () => {
 
   useEffect(() => {
     setSeeInstructorClassDataLoading(true);
-    fetch(`https://fashion-verse-server.vercel.app/classes/${id}`)
+    fetch(`http://localhost:5000/classes/${id}`)
       .then((res) => res.json())
       .then((data) => {
         setSeeInstructorClassDataLoading(false);

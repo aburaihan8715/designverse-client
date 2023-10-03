@@ -41,7 +41,7 @@ const ClassCard = ({ item }) => {
       return;
     } else {
       axios
-        .post("https://fashion-verse-server.vercel.app/cart", cartData)
+        .post("http://localhost:5000/cart", cartData)
         .then((data) => {
           if (data.data.acknowledged) {
             refetch();
