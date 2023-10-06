@@ -21,7 +21,7 @@ const InstructorsPage = () => {
       </Helmet>
       <div className="">
         <div>
-          <SectionHeading heading={`Your instructor`} subHeading={`stay with`} />
+          <SectionHeading heading={`Instructors`} subHeading={`stay with`} />
         </div>
         <div className="overflow-x-auto">
           <table className="table">
@@ -45,19 +45,19 @@ const InstructorsPage = () => {
                     <div className="flex items-center space-x-3">
                       <div className="avatar">
                         <div className="mask mask-squircle w-12 h-12">
-                          <img src={item.user.image} alt="instructor" />
+                          <img src={item.user.userImage} alt="instructor" />
                         </div>
                       </div>
                     </div>
                   </td>
 
-                  <td>{item.user.name}</td>
+                  <td>{item.user.userName}</td>
 
-                  <td>{item.user.email}</td>
-                  <td>{item.class.name}</td>
+                  <td>{item.user.userEmail}</td>
+                  <td>{item.className}</td>
 
                   <th>
-                    <Link to={`/seeClasses/${item._id}`}>
+                    <Link to={`/seeClasses/${item.user.userEmail}`}>
                       <button className="btn btn-sm btn-secondary">See Classes</button>
                     </Link>
                   </th>

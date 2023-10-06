@@ -1,108 +1,110 @@
-// import { Helmet } from "react-helmet-async";
-
-// const SeeInstructorClasses = () => {
-//   return (
-//     <div className="py-8">
-//       <Helmet>
-//         <title>FashionVerse | MyClassesPage</title>
-//       </Helmet>
-
-//       <div>
-//         <div className="text-center text-2xl">coming soon..........</div>
-//         {/* <div className="ml-3">
-//           <Helmet>
-//             <title>FashionVerse | MyClassesPage</title>
-//           </Helmet>
-//           <div>
-//             <SectionHeading subHeading={`how many`} heading={`classes`}></SectionHeading>
-//           </div>
-//           <p className="text-xl">Total classes :{myClassesData?.length}</p>
-//           <div className="overflow-x-auto">
-//             <table className="table border border-success">
-
-//               <thead className="capitalize">
-//                 <tr className="border border-success">
-//                   <th>#</th>
-//                   <th>image</th>
-//                   <th>name</th>
-//                   <th>seats</th>
-//                   <th>price</th>
-
-//                   <th>enrolled</th>
-//                 </tr>
-//               </thead>
-//               <tbody>
-
-//                 {myClassesData?.map((item, index) => (
-//                   <tr key={item._id}>
-//                     <th>{index + 1}</th>
-//                     <td>
-//                       <div className="avatar">
-//                         <div className="mask mask-squircle w-12 h-12">
-//                           <img src={item?.classImage} alt="class cover photo" />
-//                         </div>
-//                       </div>
-//                     </td>
-
-//                     <td>{item?.className}</td>
-//                     <td>{item?.seats}</td>
-//                     <td>$ {item?.price}</td>
-
-//                     <td>{item?.enrolled ? item.enrolled : "not enrolled yet"}</td>
-//                   </tr>
-//                 ))}
-//               </tbody>
-//             </table>
-//           </div>
-//         </div> */}
-//       </div>
-//     </div>
-//   );
-// };
-
-// export default SeeInstructorClasses;
-
-import { useParams } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { useState } from "react";
 import { useEffect } from "react";
 import LoadingSpinner from "../ui/LoadingSpinner";
 import SectionHeading from "../ui/SectionHeading";
+import useRole from "../hooks/useRole";
+import useAuth from "../hooks/useAuth";
+import useCartData from "../hooks/useCartData";
+import Swal from "sweetalert2";
+import axios from "axios";
+// import { useQuery } from "react-query";
 
 const SeeInstructorClasses = () => {
-  const [seeInstructorClassData, setInstructorClassData] = useState({});
+  const [seeInstructorClassData, setInstructorClassData] = useState([]);
   const [seeInstructorClassDataLoading, setSeeInstructorClassDataLoading] = useState(true);
   const [seeInstructorClassDataError, setSeeInstructorClassDataError] = useState("");
-  const { id } = useParams();
+  const { email } = useParams();
+
+  const { roleData } = useRole();
+  const navigate = useNavigate();
+  const location = useLocation();
+  const { user } = useAuth();
+  const { refetch } = useCartData();
+
+  const addToCartHandler = (item) => {
+    const addToCartData = {
+      selectedClassId: item._id,
+      classImage: item.classImage,
+      className: item.className,
+      instructorName: item.user.userName,
+      price: item.price,
+      email: user?.email,
+    };
+    // console.log(item);
+
+    if (!user) {
+      Swal.fire({
+        title: "Please login first!",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Login",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          // navigate to the login page
+          navigate("/login", { state: { from: location } });
+        }
+      });
+    } else if (roleData?.role !== "student") {
+      Swal.fire(`${roleData?.role} are not allow to take this course!!`);
+      return;
+    } else {
+      axios
+        .post("http://localhost:5000/cart", addToCartData)
+        .then((data) => {
+          if (data.data.acknowledged) {
+            refetch();
+            Swal.fire({
+              position: "center",
+              title: "Class has been added to cart!",
+              showConfirmButton: false,
+              timer: 1500,
+            });
+          }
+
+          if (data.data.alreadyAdded) {
+            Swal.fire("Already added the class!!");
+          }
+        })
+        .catch((error) => {
+          console.log(error.message);
+        });
+    }
+  };
+
+  // console.log(seeInstructorClassData);
 
   // const {
-  //   isLoading: isInstructorClassLoading,
-  //   data: instructorClassData,
-  //   error: instructorClassError,
-  //   isError: isInstructorClassError,
+  //   isLoading: seeInstructorClassDataLoading,
+  //   data: seeInstructorClassData = [],
+  //   error: seeInstructorClassDataError,
+  //   isError: isSeeInstructorClassError,
   // } = useQuery({
-  //   queryKey: ["classes", id],
+  //   queryKey: ["classes", email],
   //   queryFn: async () => {
-  //     const res = await fetch(`http://localhost:5000/classes/${id}`);
+  //     const res = await fetch(`http://localhost:5000/classes/${email}`);
   //     return res.data;
   //   },
   // });
-  // console.log(instructorClassData);
+  // console.log(seeInstructorClassData);
 
   useEffect(() => {
-    setSeeInstructorClassDataLoading(true);
-    fetch(`http://localhost:5000/classes/${id}`)
-      .then((res) => res.json())
-      .then((data) => {
+    const getInstructorClassesByEmail = async () => {
+      setSeeInstructorClassDataLoading(true);
+      try {
+        const res = await fetch(`http://localhost:5000/classes/${email}`);
+        const data = await res.json();
         setSeeInstructorClassDataLoading(false);
         setInstructorClassData(data);
-        console.log(data);
-      })
-      .catch((error) => {
+      } catch (error) {
         setSeeInstructorClassDataLoading(false);
         setSeeInstructorClassDataError(error.message);
         console.log(error.message);
-      });
-  }, [id]);
+      }
+    };
+    getInstructorClassesByEmail();
+  }, [email]);
 
   if (seeInstructorClassDataLoading) {
     return <LoadingSpinner></LoadingSpinner>;
@@ -113,28 +115,38 @@ const SeeInstructorClasses = () => {
   return (
     <div className="py-10">
       <div className="mb-10">
-        <SectionHeading subHeading={`glance over`} heading={`Your Class`} />
+        <SectionHeading subHeading={`glance over`} heading={`The Instructor Classes`} />
       </div>
 
-      <div className="sm:flex justify-center gap-10">
-        <figure className="border p-5">
-          <img className="rounded" src={seeInstructorClassData?.class.image} alt="Movie" />
-        </figure>
-        <div className="border p-5 flex flex-col justify-between">
-          <div className="flex flex-col gap-5">
-            <h2 className="card-title">{seeInstructorClassData?.class.name}!</h2>
-            <p>Seats : {seeInstructorClassData?.class.available_seats}</p>
-            <p>Enroll : {seeInstructorClassData?.class.enroll_student}</p>
-            <p>Price : {seeInstructorClassData?.class.price}</p>
-          </div>
+      <ul className="flex flex-col gap-10 max-w-5xl mx-auto">
+        {seeInstructorClassData?.map((item) => (
+          <li data-aos="zoom-in" className="shadow-xl rounded relative" key={item._id}>
+            <div className="sm:flex gap-10">
+              <figure className="flex-1 p-5">
+                <img className="rounded" src={item?.classImage} alt="Movie" />
+              </figure>
 
-          <div className="text-end">
-            <button onClick={() => alert("Implementation coming soon....")} className="btn btn-sm btn-secondary">
-              select now
-            </button>
-          </div>
-        </div>
-      </div>
+              <div className="flex-1 p-5 flex flex-col justify-between">
+                <div className="flex flex-col gap-5">
+                  <h2 className="card-title">{item?.className}!</h2>
+                  <p>Seats : {item?.seats}</p>
+                  <p>Enroll : {item.studentEnrolled}</p>
+                  <p>Price : {item.price}</p>
+                  <p>Rating : {item.rating}</p>
+                </div>
+
+                <div className="text-end">
+                  <button onClick={() => addToCartHandler(item)} className="btn btn-sm btn-secondary" disabled={!item.seats}>
+                    select now
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            {!item.seats && <div className="absolute w-full h-full bg-red-400 top-0 left-0 opacity-50 rounded"></div>}
+          </li>
+        ))}
+      </ul>
     </div>
   );
 };

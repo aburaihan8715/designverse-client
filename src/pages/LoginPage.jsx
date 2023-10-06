@@ -51,7 +51,6 @@ const LoginPage = () => {
         console.log(loggedInUser);
         Swal.fire({
           position: "center",
-          icon: "success",
           title: `login success!`,
           showConfirmButton: false,
           timer: 1500,

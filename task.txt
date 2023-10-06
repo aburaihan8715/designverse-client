@@ -17,3 +17,5 @@
 7. card component should be optimized
 8. slider have to be changed
 9. instructor my-class action have to be implemented 
+10. one class can not be selected twice
+11. There is add to cart logic repetition that has to be shareable

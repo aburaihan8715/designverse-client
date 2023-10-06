@@ -94,16 +94,16 @@ const CheckoutForm = ({ price, cartData }) => {
         date: new Date(),
         quantity: cartData.length,
         selectedIClassesIds: cartData.map((item) => item._id),
-        classItemsIds: cartData.map((item) => item.selectedId),
+        classItemsIds: cartData.map((item) => item.selectedClassId),
         classNames: cartData.map((item) => item.className),
       };
+      // console.log(payment);
       axiosSecure.post("/payments", payment).then((res) => {
         // console.log(res.data);
         if (res.data.insertResult.acknowledged) {
           refetch();
           Swal.fire({
             position: "center",
-            icon: "success",
             title: "Payments success!",
             showConfirmButton: false,
             timer: 1500,

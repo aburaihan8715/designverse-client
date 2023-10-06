@@ -24,7 +24,6 @@ const Card = ({ item }) => {
       Swal.fire({
         title: "Please login first!",
         text: "then you will be able to select class",
-        icon: "warning",
         showCancelButton: true,
         confirmButtonColor: "#3085d6",
         cancelButtonColor: "#d33",
@@ -43,7 +42,6 @@ const Card = ({ item }) => {
             refetch();
             Swal.fire({
               position: "center",
-              icon: "success",
               title: "Class has been selected!",
               showConfirmButton: false,
               timer: 1500,

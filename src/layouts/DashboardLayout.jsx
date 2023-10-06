@@ -46,16 +46,16 @@ const DashboardLayout = () => {
                 </li>
 
                 <li>
-                  <ActiveLink to="/dashboard/myEnrolledClasses">
+                  <ActiveLink to="/dashboard/enrolledClasses">
                     <FaBook />
                     <span>My Enrolled Classes</span>
                   </ActiveLink>
                 </li>
                 <li>
-                  <ActiveLink className="" to="/dashboard/mySelectedClasses">
+                  <ActiveLink className="" to="/dashboard/selectedClasses">
                     <FaBookOpen />
                     <span>My Selected Classes</span>
-                    <span className="badge badge-success text-white">+0{cartData?.length}</span>
+                    <span className="badge badge-success text-white">+{cartData?.length || 0}</span>
                   </ActiveLink>
                 </li>
                 <li>
@@ -82,7 +82,7 @@ const DashboardLayout = () => {
                   </ActiveLink>
                 </li>
                 <li>
-                  <ActiveLink to="/dashboard/myClasses">
+                  <ActiveLink to="/dashboard/instructorClasses">
                     <FaBookReader />
                     <span>My classes</span>
                   </ActiveLink>

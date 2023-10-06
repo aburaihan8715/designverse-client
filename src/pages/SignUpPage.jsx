@@ -9,7 +9,7 @@ import Swal from "sweetalert2";
 
 const SignUpPage = () => {
   const { createUserUsingEmailPassword, updateUserProfile } = useAuth();
-  const [authError, setAuthError] = useState("");
+  const [signUpError, setSignUpError] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [signUpLoading, setSignUpLoading] = useState(false);
   const navigate = useNavigate();
@@ -20,48 +20,79 @@ const SignUpPage = () => {
     formState: { errors },
   } = useForm();
 
-  const submitHandler = (data) => {
+  const submitHandler = async (data) => {
+    setSignUpError(false);
     setSignUpLoading(true);
     const { email, password, name, photo } = data;
-    // console.log(data);
-    createUserUsingEmailPassword(email, password)
-      .then((result) => {
-        const loggedInUser = result.user;
-        console.log(loggedInUser);
-
-        // update user profile function
-        updateUserProfile(name, photo).then(() => {
-          const userData = { name, email };
-          fetch("http://localhost:5000/users", {
-            method: "POST",
-            headers: {
-              "Content-type": "application/json",
-            },
-            body: JSON.stringify(userData),
-          })
-            .then((res) => res.json())
-            .then((data) => {
-              setSignUpLoading(false);
-
-              if (data.acknowledged) {
-                Swal.fire({
-                  position: "center",
-                  icon: "success",
-                  title: `sign up success!`,
-                  showConfirmButton: false,
-                  timer: 1500,
-                });
-                reset();
-                navigate("/login");
-              }
-            });
-        });
-      })
-      .catch((error) => {
-        setSignUpLoading(false);
-        setAuthError(error.message);
-        console.log(error.message);
+    try {
+      await createUserUsingEmailPassword(email, password);
+      await updateUserProfile(name, photo);
+      const res = await fetch("http://localhost:5000/users", {
+        method: "POST",
+        headers: {
+          "Content-type": "application/json",
+        },
+        body: JSON.stringify({ name, email }),
       });
+
+      const data = await res.json();
+      if (data.acknowledged) {
+        setSignUpLoading(false);
+        Swal.fire({
+          position: "center",
+          title: `sign up success!`,
+          showConfirmButton: false,
+          timer: 1500,
+        });
+        reset();
+        navigate("/login");
+      }
+    } catch (error) {
+      setSignUpLoading(false);
+      setSignUpError(error.message);
+      console.log(error.message);
+    }
+
+    // setSignUpLoading(true);
+    // const { email, password, name, photo } = data;
+    // // console.log(data);
+    // createUserUsingEmailPassword(email, password)
+    //   .then((result) => {
+    //     const loggedInUser = result.user;
+    //     console.log(loggedInUser);
+
+    //     // update user profile function
+    //     updateUserProfile(name, photo).then(() => {
+    //       const userData = { name, email };
+    //       fetch("http://localhost:5000/users", {
+    //         method: "POST",
+    //         headers: {
+    //           "Content-type": "application/json",
+    //         },
+    //         body: JSON.stringify(userData),
+    //       })
+    //         .then((res) => res.json())
+    //         .then((data) => {
+    //           setSignUpLoading(false);
+
+    //           if (data.acknowledged) {
+    //             Swal.fire({
+    //               position: "center",
+    //               title: `sign up success!`,
+    //               showConfirmButton: false,
+    //               timer: 1500,
+    //             });
+    //             reset();
+    //             navigate("/login");
+    //           }
+    //         });
+    //     });
+    //   })
+    //   .catch((error) => {
+    //     setSignUpLoading(false);
+    //     setAuthError(error.message);
+    //     console.log(error.message);
+    //   });
   };
 
   return (
@@ -78,7 +109,7 @@ const SignUpPage = () => {
                 <h4 className="text-4xl capitalize">Sign up</h4>
               </div>
               {/* error message */}
-              {authError && (
+              {signUpError && (
                 <div className="alert alert-error rounded-md">
                   <svg xmlns="http://www.w3.org/2000/svg" className="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24">
                     <path
@@ -88,7 +119,7 @@ const SignUpPage = () => {
                       d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"
                     />
                   </svg>
-                  <span>{authError}</span>
+                  <span>{signUpError}</span>
                 </div>
               )}
 

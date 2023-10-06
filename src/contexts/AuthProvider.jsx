@@ -25,44 +25,44 @@ const AuthProvider = ({ children }) => {
 
   // TODO: send password reset email
   // create user using email and password
-  const createUserUsingEmailPassword = (email, password) => {
+  const createUserUsingEmailPassword = async (email, password) => {
     setAuthLoading(true);
-    return createUserWithEmailAndPassword(auth, email, password);
+    return await createUserWithEmailAndPassword(auth, email, password);
   };
 
   // update user profile
-  const updateUserProfile = (name, photo) => {
+  const updateUserProfile = async (name, photo) => {
     setAuthLoading(true);
-    return updateProfile(auth.currentUser, {
+    return await updateProfile(auth.currentUser, {
       displayName: name,
       photoURL: photo,
     });
   };
 
   // authentication using email and password
-  const authenticationUsingEmailPassword = (email, password) => {
+  const authenticationUsingEmailPassword = async (email, password) => {
     setAuthLoading(true);
-    return signInWithEmailAndPassword(auth, email, password);
+    return await signInWithEmailAndPassword(auth, email, password);
   };
 
   // authentication using google
-  const authenticationUsingGoogle = () => {
+  const authenticationUsingGoogle = async () => {
     setAuthLoading(true);
     const googleProvider = new GoogleAuthProvider();
-    return signInWithPopup(auth, googleProvider);
+    return await signInWithPopup(auth, googleProvider);
   };
 
   // authentication using github
-  const authenticationUsingGithub = () => {
+  const authenticationUsingGithub = async () => {
     setAuthLoading(true);
     const githubProvider = new GithubAuthProvider();
-    return signInWithPopup(auth, githubProvider);
+    return await signInWithPopup(auth, githubProvider);
   };
 
   // sign out user
-  const logOutUser = () => {
+  const logOutUser = async () => {
     setAuthLoading(true);
-    return signOut(auth);
+    return await signOut(auth);
   };
 
   // authentication state observer
@@ -85,12 +85,13 @@ const AuthProvider = ({ children }) => {
         localStorage.removeItem("access_token");
         setAuthLoading(false);
       }
-      console.log(currentUser);
     });
     return () => {
       return unsubscribe();
     };
   }, []);
+
+  console.log(user);
 
   const authInfo = {
     createUserUsingEmailPassword,

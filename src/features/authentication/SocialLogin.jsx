@@ -9,56 +9,43 @@ const SocialLogin = () => {
   const from = location.state?.from?.pathname || "/";
 
   // google authentication handler
-  const authenticationUsingGoogleHandler = () => {
-    authenticationUsingGoogle()
-      .then((result) => {
-        const loggedInUser = result.user;
-        const userData = { name: loggedInUser.displayName, email: loggedInUser.email };
-
-        fetch("http://localhost:5000/users", {
-          method: "POST",
-          headers: {
-            "Content-type": "application/json",
-          },
-          body: JSON.stringify(userData),
-        })
-          .then((res) => res.json())
-          .then((data) => {
-            console.log(data);
-          });
-
-        navigate(from, { replace: true });
-      })
-      .catch((error) => {
-        const errorMessage = error.message;
-        console.log(errorMessage);
+  const authenticationUsingGoogleHandler = async () => {
+    try {
+      const result = await authenticationUsingGoogle();
+      const loggedInUser = result.user;
+      const userData = { name: loggedInUser.displayName, email: loggedInUser.email };
+      await fetch("http://localhost:5000/users", {
+        method: "POST",
+        headers: {
+          "Content-type": "application/json",
+        },
+        body: JSON.stringify(userData),
       });
+
+      navigate(from, { replace: true });
+    } catch (error) {
+      console.log(error.message);
+    }
   };
 
   // github authentication handler
-  const authenticationUsingGithubHandler = () => {
-    authenticationUsingGithub()
-      .then((result) => {
-        const loggedInUser = result.user;
-        const userData = { name: loggedInUser.displayName, email: loggedInUser.email };
+  const authenticationUsingGithubHandler = async () => {
+    try {
+      const result = await authenticationUsingGithub();
+      const loggedInUser = result.user;
+      const userData = { name: loggedInUser.displayName, email: loggedInUser.email };
 
-        fetch("http://localhost:5000/users", {
-          method: "POST",
-          headers: {
-            "Content-type": "application/json",
-          },
-          body: JSON.stringify(userData),
-        })
-          .then((res) => res.json())
-          .then((data) => {
-            console.log(data);
-          });
-        navigate(from, { replace: true });
-      })
-      .catch((error) => {
-        const errorMessage = error.message;
-        console.log(errorMessage);
+      await fetch("http://localhost:5000/users", {
+        method: "POST",
+        headers: {
+          "Content-type": "application/json",
+        },
+        body: JSON.stringify(userData),
       });
+      navigate(from, { replace: true });
+    } catch (error) {
+      console.log(error.message);
+    }
   };
 
   return (

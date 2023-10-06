@@ -53,7 +53,7 @@ const router = createBrowserRouter([
         element: <ContactUsPage></ContactUsPage>,
       },
       {
-        path: "seeClasses/:id",
+        path: "seeClasses/:email",
         element: <SeeInstructorClasses />,
       },
     ],
@@ -70,11 +70,11 @@ const router = createBrowserRouter([
         element: <StudentHomePage></StudentHomePage>,
       },
       {
-        path: "dashboard/myEnrolledClasses",
+        path: "dashboard/enrolledClasses",
         element: <StudentEnrolledClassesPage></StudentEnrolledClassesPage>,
       },
       {
-        path: "dashboard/mySelectedClasses",
+        path: "dashboard/selectedClasses",
         element: (
           <PrivateRoute>
             <StudentSelectedClassesPage></StudentSelectedClassesPage>
@@ -95,7 +95,7 @@ const router = createBrowserRouter([
         element: <AddClassPage></AddClassPage>,
       },
       {
-        path: "dashboard/myClasses",
+        path: "dashboard/instructorClasses",
         element: <InstructorMyClassesPage />,
       },
       // admin routes

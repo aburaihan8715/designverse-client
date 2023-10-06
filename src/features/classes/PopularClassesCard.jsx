@@ -13,12 +13,12 @@ const PopularClassesCard = ({ item }) => {
   const { refetch } = useCartData();
 
   const addToCartHandler = (item) => {
-    const cartData = {
+    const addToCartData = {
       selectedClassId: item._id,
-      classImage: item.class.image,
-      className: item.class.name,
-      instructorName: item.user.name,
-      price: item.class.price,
+      classImage: item.classImage,
+      className: item.className,
+      instructorName: item.user.userName,
+      price: item.price,
       email: user?.email,
     };
     // console.log(cartData);
@@ -26,7 +26,6 @@ const PopularClassesCard = ({ item }) => {
     if (!user) {
       Swal.fire({
         title: "Please login first!",
-        icon: "warning",
         showCancelButton: true,
         confirmButtonColor: "#3085d6",
         cancelButtonColor: "#d33",
@@ -42,17 +41,19 @@ const PopularClassesCard = ({ item }) => {
       return;
     } else {
       axios
-        .post("http://localhost:5000/cart", cartData)
+        .post("http://localhost:5000/cart", addToCartData)
         .then((data) => {
           if (data.data.acknowledged) {
             refetch();
             Swal.fire({
               position: "center",
-              icon: "success",
               title: "Class has been added to cart!",
               showConfirmButton: false,
               timer: 1500,
             });
+          }
+          if (data.data.alreadyAdded) {
+            Swal.fire("Already added the class!!");
           }
         })
         .catch((error) => {
@@ -60,26 +61,27 @@ const PopularClassesCard = ({ item }) => {
         });
     }
   };
+
   return (
     <div data-aos="zoom-in" className="card shadow-md rounded relative hover:shadow-xl">
       <figure>
-        <img className="w-full h-40 object-cover transition duration-700 hover:scale-105" src={item.class.image} alt="Shoes" />
+        <img className="w-full h-40 object-cover transition duration-700 hover:scale-105" src={item.classImage} alt="Shoes" />
       </figure>
       <div className="badge badge-success absolute right-5 top-5">
-        <strong className="text-slate-50">Price: ${item.class.price}</strong>
+        <strong className="text-slate-50">Price: ${item.price}</strong>
       </div>
       <div className="card-body">
-        <h2 className="card-title">{item.class.name}</h2>
-        <p>Available seats: {item.class.available_seats}</p>
-        <p>Instructor: {item.user.name}</p>
+        <h2 className="card-title">{item.className}</h2>
+        <p>Available seats: {item.seats}</p>
+        <p>Instructor: {item.user.userName}</p>
 
         <div className="card-actions justify-end">
-          <button onClick={() => addToCartHandler(item)} disabled={!item.class.available_seats} className="btn btn-secondary btn-outline btn-sm">
+          <button onClick={() => addToCartHandler(item)} disabled={!item.seats} className="btn btn-secondary btn-outline btn-sm">
             Select Now
           </button>
         </div>
       </div>
-      {!item.class.available_seats && <div className="absolute w-full h-full bg-red-400 top-0 left-0 opacity-50 rounded"></div>}
+      {!item.seats && <div className="absolute w-full h-full bg-red-400 top-0 left-0 opacity-50 rounded"></div>}
     </div>
   );
 };

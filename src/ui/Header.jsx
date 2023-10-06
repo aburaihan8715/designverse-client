@@ -5,9 +5,11 @@ import useCartData from "../hooks/useCartData";
 import useRole from "../hooks/useRole";
 import ActiveLink from "./ActiveLink";
 import Button from "./Button";
+import { useState } from "react";
 
 const Header = () => {
-  const { user, logOutUser, authLoading } = useAuth();
+  const { user, logOutUser } = useAuth();
+  const [logoutLoading, setLogoutLoading] = useState(false);
 
   // const navigate = useNavigate();
   const { cartData } = useCartData();
@@ -48,12 +50,12 @@ const Header = () => {
 
       {user && roleData?.role === "student" && (
         <li>
-          <Link to="/dashboard/mySelectedClasses" className="p-0 bg-transparent hover:bg-transparent">
+          <Link to="/dashboard/selectedClasses" className="p-0 bg-transparent hover:bg-transparent">
             <button className="btn btn-sm bg-transparent hover:bg-transparent">
               <span className="text-error">
                 <FaShoppingCart></FaShoppingCart>
               </span>
-              <div className="badge badge-success text-white">+0{cartData?.length}</div>
+              <div className="badge badge-success text-white">+{cartData?.length || 0}</div>
             </button>
           </Link>
         </li>
@@ -62,16 +64,16 @@ const Header = () => {
   );
 
   // handle logout
-  const logOutUserHandler = () => {
-    logOutUser()
-      .then(() => {
-        Navigate("/");
-        // Sign-out successful.
-      })
-      .catch((error) => {
-        // An error happened.
-        console.log(error.message);
-      });
+  const logOutUserHandler = async () => {
+    setLogoutLoading(true);
+    try {
+      await logOutUser();
+      setLogoutLoading(false);
+      Navigate("/");
+    } catch (error) {
+      setLogoutLoading(false);
+      console.log(error.message);
+    }
   };
 
   return (
@@ -129,7 +131,7 @@ const Header = () => {
 
               {user && (
                 <Button className="btn-secondary" onClick={logOutUserHandler}>
-                  {authLoading ? "loading" : "logout"}
+                  {logoutLoading ? "loading" : "logout"}
                 </Button>
               )}
             </div>
