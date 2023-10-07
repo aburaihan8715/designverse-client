@@ -74,29 +74,29 @@ const ManageClassesPage = () => {
                     <div className="flex items-center space-x-3">
                       <div className="avatar">
                         <div className="mask mask-squircle w-12 h-12">
-                          <img src={item.class.image} />
+                          <img src={item.classImage} />
                         </div>
                       </div>
                     </div>
                   </td>
 
-                  <td className="">{item.class.name}</td>
-                  <td className="">{item.user.name}</td>
-                  <td className="">{item.user.email}</td>
-                  <td className="">{item.class.available_seats}</td>
-                  <td className="">{item.class.price}</td>
-                  <td className="capitalize">{item.class.status}</td>
+                  <td className="">{item.className}</td>
+                  <td className="">{item.user.userName}</td>
+                  <td className="">{item.user.userEmail}</td>
+                  <td className="">{item.seats}</td>
+                  <td className="">{item.price}</td>
+                  <td className="capitalize">{item.status}</td>
 
                   <th className="flex flex-col gap-2">
                     <button
-                      disabled={item.class.status === "approved" || item.class.status === "denied"}
+                      disabled={item.status === "approved" || item.status === "denied"}
                       onClick={() => userRoleHandler(item._id, "approved")}
                       className="btn btn-success btn-xs "
                     >
                       approve
                     </button>
                     <button
-                      disabled={item.class.status === "approved" || item.class.status === "denied"}
+                      disabled={item.status === "approved" || item.status === "denied"}
                       onClick={() => userRoleHandler(item._id, "denied")}
                       className="btn btn-error btn-xs "
                     >

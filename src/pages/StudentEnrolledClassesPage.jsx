@@ -10,10 +10,12 @@ const StudentEnrolledClassesPage = () => {
   const { user, authLoading } = useAuth();
   const { axiosSecure } = useAxiosSecure();
   const { classesData, classesLoading, classesError, isClassesError } = useClassesData();
+
   const {
     isLoading: enrolledClassesDataLoading,
-    error: enrolledClassesDataError,
     data: enrolledClassesData,
+    error: enrolledClassesDataError,
+    isError: isEnrolledClassesError,
   } = useQuery({
     queryKey: ["enrolledClasses", user?.email],
     enabled: !authLoading,
@@ -34,7 +36,7 @@ const StudentEnrolledClassesPage = () => {
   });
 
   const totalSpend = totalEnrolledClasses?.reduce((total, item) => {
-    return total + item.price;
+    return total + item?.price;
   }, 0);
   // console.log(totalSpend);
   // console.log(totalEnrolledClasses);
@@ -43,7 +45,7 @@ const StudentEnrolledClassesPage = () => {
     return <LoadingSpinner></LoadingSpinner>;
   }
 
-  if (enrolledClassesDataError || isClassesError) {
+  if (enrolledClassesDataError || isEnrolledClassesError || isClassesError) {
     return <p>something went wrong ${enrolledClassesDataError.message || classesError.message}</p>;
   }
   return (
@@ -71,21 +73,21 @@ const StudentEnrolledClassesPage = () => {
           </thead>
           <tbody>
             {/* row 1 */}
-            {totalEnrolledClasses.map((item, index) => (
+            {totalEnrolledClasses?.map((item, index) => (
               <tr key={index}>
                 <th>{index + 1}</th>
                 <td>
                   <div className="avatar">
                     <div className="mask mask-squircle w-12 h-12">
-                      <img src={item.classImage} alt="class cover photo" />
+                      <img src={item?.classImage} alt="class cover photo" />
                     </div>
                   </div>
                 </td>
 
-                <td>{item.className}</td>
-                <td>{item.user.userName}</td>
-                <td>{item.user.userEmail}</td>
-                <td>$ {item.price}</td>
+                <td>{item?.className}</td>
+                <td>{item?.user.userName}</td>
+                <td>{item?.user.userEmail}</td>
+                <td>$ {item?.price}</td>
               </tr>
             ))}
           </tbody>

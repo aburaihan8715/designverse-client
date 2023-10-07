@@ -1,8 +1,8 @@
 import { Helmet } from "react-helmet-async";
-import Slider from "../ui/Slider";
 import PopularClasses from "../features/classes/PopularClasses";
 import PopularInstructors from "../features/classes/PopularInstructors";
 import Testimonial from "../features/users/Testimonial";
+import Banner from "../ui/Banner";
 // import PopularClasses from "../features/classes/PopularClasses";
 // import PopularInstructors from "../features/classes/PopularInstructors";
 // import Testimonial from "../features/users/Testimonial";
@@ -13,7 +13,7 @@ const HomePage = () => {
       <Helmet>
         <title>FashionVerse | Home</title>
       </Helmet>
-      <Slider />
+      <Banner />
       <PopularClasses />
       <PopularInstructors />
       <Testimonial />

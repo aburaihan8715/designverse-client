@@ -105,3 +105,15 @@ https://i.ibb.co/PgX3zKp/instructor-12.png
 5.https://i.ibb.co/N9LRKT5/user5.png
 6.https://i.ibb.co/W3FzCjW/user6.png
 
+
+
+// heading and description
+heading- 
+"Fashion Dreams Start Here: Join Our FashionVerse School"
+
+desc- 
+At our fashion design institute, we believe in nurturing dreams and turning them into successful careers. Our comprehensive curriculum and industry connections provide the perfect launchpad for your fashion aspirations. Join us to embark on an exciting journey in the world of fashion.
+
+
+
+

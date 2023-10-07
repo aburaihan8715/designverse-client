@@ -67,7 +67,7 @@ const ClassCard = ({ item }) => {
       <figure>
         <img className="w-full h-40 object-cover transition duration-700 hover:scale-105" src={item.classImage} alt="Shoes" />
       </figure>
-      <div className="badge badge-warning absolute right-5 top-5">
+      <div className="badge badge-success absolute right-5 top-5">
         <strong className="text-slate-50">Price: ${item.price}</strong>
       </div>
       <div className="card-body">

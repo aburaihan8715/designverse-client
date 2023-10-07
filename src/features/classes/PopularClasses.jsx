@@ -17,15 +17,17 @@ const PopularClasses = () => {
     return <p>something went wrong {classesError}</p>;
   }
   return (
-    <div className="sm:max-w-6xl mx-auto px-2 mb-10">
-      <SectionHeading subHeading={`connect with`} heading={`popular classes`}></SectionHeading>
-      <div className="grid sm:grid-cols-2 md:grid-cols-4 gap-8">
-        {/* FIXME: */}
-        {popularThreeClasses?.map((item) => (
-          <PopularClassesCard key={item._id} item={item} />
-        ))}
+    <section className="bg-gradient-to-r from-violet-200 to-fuchsia-200 py-10">
+      <div className="sm:max-w-6xl mx-auto px-2">
+        <SectionHeading subHeading={`connect with`} heading={`popular classes`}></SectionHeading>
+        <div className="grid sm:grid-cols-2 md:grid-cols-4 gap-8">
+          {/* FIXME: */}
+          {popularThreeClasses?.map((item) => (
+            <PopularClassesCard key={item._id} item={item} />
+          ))}
+        </div>
       </div>
-    </div>
+    </section>
   );
 };
 

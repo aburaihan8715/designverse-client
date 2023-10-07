@@ -1,11 +1,8 @@
+
 // tasks has been done
 1.  router
 2.  tailwind
 3.  firebase
-
-
-
-
 
 // tasks have to be implemented
 1. all page responsive

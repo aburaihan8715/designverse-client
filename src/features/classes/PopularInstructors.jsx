@@ -16,7 +16,7 @@ const PopularInstructors = () => {
     return <p>something went wrong {classesError.message}</p>;
   }
   return (
-    <div className="py-8">
+    <div className="py-8 bg-gradient-to-r from-lime-100 to-pink-200">
       <div className="max-w-6xl mx-auto p-2">
         <SectionHeading subHeading={`stay with`} heading={`popular instructors`}></SectionHeading>
         <div className="grid sm:grid-cols-2 md:grid-cols-4 gap-8">

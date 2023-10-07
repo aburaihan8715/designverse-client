@@ -6,7 +6,7 @@ import LoadingSpinner from "../ui/LoadingSpinner";
 import SectionHeading from "../ui/SectionHeading";
 
 const ManageUsersPage = () => {
-  const { users, refetch, userIsLoading, userError } = useUsersData();
+  const { users, userLoading, userError, isUserError, refetch } = useUsersData();
 
   // delete user
   const deleteHandler = (item) => {
@@ -57,10 +57,10 @@ const ManageUsersPage = () => {
       });
   };
 
-  if (userIsLoading) {
+  if (userLoading) {
     return <LoadingSpinner></LoadingSpinner>;
   }
-  if (userError) {
+  if (isUserError) {
     return <p className="text-center text-red-600">something went wrong {userError.message}</p>;
   }
 

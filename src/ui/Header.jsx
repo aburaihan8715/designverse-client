@@ -39,8 +39,8 @@ const Header = () => {
           Contact us
         </ActiveLink>
       </li>
-
-      {user && (
+      {/* { pointerEvents: "none", backgroundColor: "grey" } */}
+      {user && roleData?.role && (
         <li>
           <ActiveLink className="uppercase font-semibold" to={`/dashboard/${roleData?.role}`}>
             Dashboard
@@ -48,7 +48,7 @@ const Header = () => {
         </li>
       )}
 
-      {user && roleData?.role === "student" && (
+      {user && roleData?.role === "student" && cartData?.length > 0 && (
         <li>
           <Link to="/dashboard/selectedClasses" className="p-0 bg-transparent hover:bg-transparent">
             <button className="btn btn-sm bg-transparent hover:bg-transparent">
@@ -77,9 +77,9 @@ const Header = () => {
   };
 
   return (
-    <div className="fixed top-0 left-0 right-0 z-10">
-      <div>
-        <div className="navbar px-4 border-b-2 h-20 bg-base-200 border-purple-600">
+    <div className="fixed top-0 left-0 right-0 z-20">
+      <div className="">
+        <div className="navbar px-10 border-b-2 h-20 bg-gradient-to-r from-lime-50 to-pink-200 border-purple-600">
           <div className="navbar-start">
             <div className="dropdown">
               <label tabIndex={0} className="btn btn-ghost lg:hidden">
@@ -93,7 +93,9 @@ const Header = () => {
             </div>
             <Link to="/" className="uppercase hidden sm:inline-block">
               <div className="inline-flex flex-col">
-                <h1 className="text-3xl tracking-tighter text-secondary">FashionVerse</h1>
+                <h1 className="text-3xl tracking-tighter text-secondary bg-gradient-to-r from-pink-500 to-purple-200 bg-clip-text text-transparent">
+                  FashionVerse
+                </h1>
                 <span className="tracking-[25px]">school</span>
               </div>
             </Link>
