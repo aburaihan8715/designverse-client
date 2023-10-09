@@ -7,41 +7,12 @@ import SectionHeading from "../ui/SectionHeading";
 import useCartData from "../hooks/useCartData";
 
 const StudentSelectedClassesPage = () => {
-  const { cartLoading, cartError, isCartError, cartData, refetch } = useCartData();
+  const { cartLoading, cartError, isCartError, cartData } = useCartData();
 
   // console.log(selectedData);
   const totalPrice = cartData?.reduce((accumulator, currentItem) => {
     return accumulator + currentItem.price;
   }, 0);
-
-  // delete handler
-  const deleteHandler = (id) => {
-    Swal.fire({
-      title: "Are you sure?",
-      text: "You won't be able to revert this!",
-
-      showCancelButton: true,
-      confirmButtonColor: "#3085d6",
-      cancelButtonColor: "#d33",
-      confirmButtonText: "Yes, delete it!",
-    }).then((result) => {
-      if (result.isConfirmed) {
-        fetch(`http://localhost:5000/cart/${id}`, {
-          method: "DELETE",
-        })
-          .then((res) => res.json())
-          .then((data) => {
-            refetch();
-            if (data.deletedCount > 0) {
-              Swal.fire("Deleted!", "Your file has been deleted.!");
-            }
-          })
-          .catch((error) => {
-            console.log(error.message);
-          });
-      }
-    });
-  };
 
   if (cartLoading) {
     return <LoadingSpinner></LoadingSpinner>;
@@ -56,8 +27,11 @@ const StudentSelectedClassesPage = () => {
         <title>Bistro | My selected class</title>
       </Helmet>
       <div>
-        <SectionHeading subHeading={`selected classes`} heading={`want to add more`}></SectionHeading>
-        <div className="flex text-3xl space-x-20">
+        <SectionHeading
+          subHeading={`selected classes`}
+          heading={`want to add more`}
+        ></SectionHeading>
+        <div className="flex space-x-20 text-3xl">
           <div className="">
             <span>Total selected classes: </span>
             <span>{cartData?.length}</span>
@@ -68,13 +42,13 @@ const StudentSelectedClassesPage = () => {
           </div>
           <div>
             <Link to="/dashboard/payment">
-              <button className="btn btn-secondary">pay</button>
+              <button className="btn-secondary btn">pay</button>
             </Link>
           </div>
         </div>
 
         {/* table */}
-        <div className="overflow-x-auto mt-8">
+        <div className="mt-8 overflow-x-auto">
           <table className="table border border-success">
             {/* head */}
             <thead className="capitalize">
@@ -95,7 +69,7 @@ const StudentSelectedClassesPage = () => {
                   <td>
                     <div className="flex items-center space-x-3">
                       <div className="avatar">
-                        <div className="mask mask-squircle w-12 h-12">
+                        <div className="mask mask-squircle h-12 w-12">
                           <img src={item.classImage} />
                         </div>
                       </div>
@@ -105,9 +79,10 @@ const StudentSelectedClassesPage = () => {
                   <td className="">$ {item.price}</td>
                   <td className="">{item.instructorName}</td>
                   <th>
-                    <button onClick={() => deleteHandler(item._id)} className="btn-sm btn btn-error text-white hover:bg-red-800">
-                      <FaTrashAlt></FaTrashAlt>
-                    </button>
+                    <StudentSelectedClassDeleteBtn
+                      key={item._id}
+                      id={item._id}
+                    />
                   </th>
                 </tr>
               ))}
@@ -121,3 +96,45 @@ const StudentSelectedClassesPage = () => {
 };
 
 export default StudentSelectedClassesPage;
+
+//student selected class delete button component
+const StudentSelectedClassDeleteBtn = ({ id }) => {
+  const { refetch } = useCartData();
+
+  // delete handler
+  const deleteHandler = () => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        fetch(`http://localhost:5000/cart/${id}`, {
+          method: "DELETE",
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            refetch();
+            if (data.deletedCount > 0) {
+              Swal.fire("Class has been deleted.!");
+            }
+          })
+          .catch((error) => {
+            console.log(error.message);
+          });
+      }
+    });
+  };
+
+  return (
+    <button
+      onClick={deleteHandler}
+      className="btn-error btn-sm btn text-white hover:bg-red-800"
+    >
+      <FaTrashAlt></FaTrashAlt>
+    </button>
+  );
+};

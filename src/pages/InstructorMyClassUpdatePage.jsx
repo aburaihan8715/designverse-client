@@ -1,17 +1,33 @@
+import axios from "axios";
 import { Helmet } from "react-helmet-async";
 import { useForm } from "react-hook-form";
-import axios from "axios";
+import { useNavigate, useParams } from "react-router-dom";
 import Swal from "sweetalert2";
-import useAuth from "../hooks/useAuth";
 
-const AddClassPage = () => {
-  const { user } = useAuth();
-  const {
-    register,
-    handleSubmit,
-    reset,
-    formState: { errors },
-  } = useForm();
+const InstructorMyClassUpdatePage = () => {
+  const { id } = useParams();
+  const navigate = useNavigate();
+  const form = useForm({
+    defaultValues: async () => {
+      const res = await fetch(`http://localhost:5000/classes/${id}`);
+      const data = await res.json();
+      return {
+        className: data?.className,
+        classImage: data?.classImage,
+        price: data?.price,
+        seats: data?.seats,
+        offer: data?.offerPercent,
+        instructorName: data?.user?.userName,
+        instructorEmail: data?.user?.userEmail,
+        instructorImage: data?.user?.userImage,
+        phone: data?.user?.phoneNumber,
+        gender: data?.user?.gender,
+        address: data?.user?.address,
+      };
+    },
+  });
+  const { register, handleSubmit, formState, reset } = form;
+  const { errors } = formState;
 
   // FIXME:
   // const img_hosting_token = import.meta.env.VITE_image_hosting_api_key;
@@ -19,44 +35,7 @@ const AddClassPage = () => {
 
   const submitHandler = (data) => {
     // console.log(data);
-    // {
-    //   "classId": 1,
-    //   "className": "Fashion Sketching and Illustration",
-    //   "classImage": "https://i.ibb.co/tBBg1rT/class-cover-1.png",
-    //   "seats": 20,
-    //   "price": 30,
-    //   "status": "approved",
-    //   "studentEnrolled": null,
-    //   "adminFeedback": "",
-    //   "rating": null,
-    //   "ratingMessage": "",
-    //   "offerPercent": null,
-    //   "user": {
-    //     "userId": 1,
-    //     "userName": "Sarah Anderson",
-    //     "userImage": "https://i.ibb.co/XjwCw6K/instructor-1.jpg",
-    //     "userEmail": "sarah@gmail.com",
-    //     "numberOfClasses": 2,
-    //     "nameOfClasses": ["Fashion Sketching and Illustration", "Pattern Making and Garment Construction"],
-    //     "role": "instructor",
-    //     "follower": null,
-    //     "phoneNumber": "+880 1711111111",
-    //     "address": "Dhaka-1111",
-    //     "gender": "female"
-    //   }
-    // }
 
-    // {className
-    //   classImage
-    //   price
-    //   seats
-    //   offer
-    //   instructorName
-    //   instructorEmail
-    //   instructorImage
-    //   phone
-    //   gender
-    //   address}
     const classData = {
       className: data.className,
       classImage: data.classImage,
@@ -68,6 +47,7 @@ const AddClassPage = () => {
       rating: null,
       ratingMessage: "",
       offerPercent: Number(data.offer) || null,
+
       user: {
         userName: data.instructorName,
         userImage: data.instructorImage,
@@ -81,25 +61,27 @@ const AddClassPage = () => {
         address: data.address,
       },
     };
-    // console.log(classData);
+    console.log(classData);
+
     // send data to server using axios
     axios
-      .post("http://localhost:5000/classes", classData)
+      .put(`http://localhost:5000/classes/${id}`, classData)
       .then((data) => {
-        if (data.data.insertedId) {
+        console.log(data);
+        if (data.data.acknowledged) {
           Swal.fire({
             position: "center",
-            title: "Class added successfully!",
+            title: "Class updated successfully!",
             showConfirmButton: false,
             timer: 1500,
           });
+          reset();
+          navigate("/dashboard/instructorClasses");
         }
       })
       .catch((error) => {
         console.log(error.message);
       });
-
-    reset();
 
     // FIXME: upload image on image bb
     // const formData = new FormData();
@@ -121,7 +103,7 @@ const AddClassPage = () => {
   return (
     <div className="my-4">
       <Helmet>
-        <title>FashionVerse | Add class</title>
+        <title>FashionVerse | Update class</title>
       </Helmet>
 
       <div className="p-1">
@@ -130,7 +112,7 @@ const AddClassPage = () => {
             <div className="space-y-3">
               <div className="text-center ">
                 <h4 className="text-3xl uppercase underline decoration-secondary underline-offset-4">
-                  Add class
+                  Update class
                 </h4>
               </div>
 
@@ -233,7 +215,6 @@ const AddClassPage = () => {
                       <input
                         {...register("instructorName", { required: true })}
                         type="text"
-                        defaultValue={user?.displayName}
                         readOnly
                         placeholder="Enter instructor name"
                         className="input-bordered input w-full "
@@ -256,7 +237,6 @@ const AddClassPage = () => {
                       <input
                         {...register("instructorEmail", { required: true })}
                         type="email"
-                        defaultValue={user?.email}
                         readOnly
                         placeholder="Enter instructor email"
                         className="input-bordered input w-full "
@@ -393,4 +373,4 @@ const AddClassPage = () => {
   );
 };
 
-export default AddClassPage;
+export default InstructorMyClassUpdatePage;

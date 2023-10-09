@@ -5,6 +5,11 @@ import SectionHeading from "../ui/SectionHeading";
 import { useState } from "react";
 import { useEffect } from "react";
 import LoadingSpinner from "../ui/LoadingSpinner";
+import { Link } from "react-router-dom";
+import Swal from "sweetalert2";
+import useClassesData from "../hooks/useClassesData";
+
+// import axios from "axios";
 
 const InstructorMyClassesPage = () => {
   const [myClassData, setMyClassData] = useState([]);
@@ -42,7 +47,10 @@ const InstructorMyClassesPage = () => {
         <title>FashionVerse | MyClassesPage</title>
       </Helmet>
       <div>
-        <SectionHeading subHeading={`how many`} heading={`my classes`}></SectionHeading>
+        <SectionHeading
+          subHeading={`how many`}
+          heading={`my classes`}
+        ></SectionHeading>
       </div>
       <p className="text-xl">Total classes :{myClassData?.length}</p>
       <div className="overflow-x-auto">
@@ -61,30 +69,40 @@ const InstructorMyClassesPage = () => {
               <th>actions</th>
             </tr>
           </thead>
-          <tbody>
+          <tbody className="">
             {/* row 1 */}
             {myClassData?.map((item, index) => (
               <tr key={item._id}>
                 <th>{index + 1}</th>
                 <td>
                   <div className="avatar">
-                    <div className="mask mask-squircle w-12 h-12">
-                      <img src={item?.class.image} alt="class cover photo" />
+                    <div className="mask mask-squircle h-12 w-12">
+                      <img src={item?.classImage} alt="class cover photo" />
                     </div>
                   </div>
                 </td>
 
-                <td>{item?.class.name}</td>
-                <td>{item?.class.available_seats}</td>
-                <td>$ {item?.class.price}</td>
-                <td>{item?.class.status}</td>
-                <td>{item?.class.enroll_student ? item.class.enroll_student : "not enrolled yet"}</td>
-                <td>{item?.class.feedback ? item.class.feedback : "no feedback"}</td>
+                <td>{item?.className}</td>
+                <td>{item?.seats}</td>
+                <td>$ {item?.price}</td>
+                <td>{item?.status}</td>
+                <td>
+                  {item?.studentEnrolled
+                    ? item.studentEnrolled
+                    : "not enrolled yet"}
+                </td>
+                <td>
+                  {item?.adminFeedback ? item.adminFeedback : "no feedback"}
+                </td>
 
-                <th className="space-y-2">
-                  <button className="btn btn-info btn-xs">update</button>
-                  <button className="btn btn-error btn-xs">delete</button>
-                </th>
+                <td className="">
+                  <div className="flex gap-2">
+                    <Link to={`/dashboard/updateClass/${item._id}`}>
+                      <button className="btn-info btn-xs btn">update</button>
+                    </Link>
+                    <InstrMyClassDeleteBtn key={item._id} id={item._id} />
+                  </div>
+                </td>
               </tr>
             ))}
           </tbody>
@@ -95,3 +113,46 @@ const InstructorMyClassesPage = () => {
 };
 
 export default InstructorMyClassesPage;
+
+// instructor my class delete button component
+const InstrMyClassDeleteBtn = ({ id }) => {
+  const [classDeleteLoading, setClassDeleteLoading] = useState(false);
+
+  const { refetch } = useClassesData();
+
+  const classDeleteHandler = () => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        setClassDeleteLoading(true);
+        fetch(`http://localhost:5000/classes/${id}`, {
+          method: "DELETE",
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            if (data.deletedCount > 0) {
+              setClassDeleteLoading(false);
+              Swal.fire("Class has been deleted.!");
+              refetch();
+            }
+          })
+          .catch((error) => {
+            setClassDeleteLoading(false);
+            console.log(error.message);
+          });
+      }
+    });
+  };
+
+  return (
+    <button onClick={classDeleteHandler} className="btn-error btn-xs btn">
+      {classDeleteLoading ? "loading.." : "delete"}
+    </button>
+  );
+};

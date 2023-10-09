@@ -91,7 +91,7 @@ const AuthProvider = ({ children }) => {
     };
   }, []);
 
-  console.log(user);
+  // console.log(user);
 
   const authInfo = {
     createUserUsingEmailPassword,
@@ -105,7 +105,9 @@ const AuthProvider = ({ children }) => {
     authenticationUsingGoogle,
     authenticationUsingGithub,
   };
-  return <AuthContext.Provider value={authInfo}>{children}</AuthContext.Provider>;
+  return (
+    <AuthContext.Provider value={authInfo}>{children}</AuthContext.Provider>
+  );
 };
 
 export default AuthProvider;

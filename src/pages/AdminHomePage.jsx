@@ -14,8 +14,8 @@ const AdminHomePage = () => {
           <h2 className="text-2xl capitalize">Hi, Welcome back!</h2>
         </div>
 
-        <div className="grid sm:grid-cols-4 gap-4">
-          <div className="flex text-white capitalize bg-green-200 p-8 gap-4 items-center rounded">
+        <div className="grid gap-4 sm:grid-cols-4">
+          <div className="flex items-center gap-4 rounded bg-green-200 p-8 capitalize text-white">
             <div className="text-3xl">
               <FaWallet></FaWallet>
             </div>
@@ -25,7 +25,7 @@ const AdminHomePage = () => {
             </div>
           </div>
 
-          <div className="flex text-white capitalize bg-orange-200 p-8 gap-4 items-center rounded">
+          <div className="flex items-center gap-4 rounded bg-orange-200 p-8 capitalize text-white">
             <div className="text-3xl">
               <FaUsers></FaUsers>
             </div>
@@ -35,7 +35,7 @@ const AdminHomePage = () => {
             </div>
           </div>
 
-          <div className="flex text-white capitalize bg-purple-200 p-8 gap-4 items-center rounded">
+          <div className="flex items-center gap-4 rounded bg-purple-200 p-8 capitalize text-white">
             <div className="text-3xl">
               <FaBook></FaBook>
             </div>
@@ -45,7 +45,7 @@ const AdminHomePage = () => {
             </div>
           </div>
 
-          <div className="flex text-white capitalize bg-purple-200 p-8 gap-4 items-center rounded">
+          <div className="flex items-center gap-4 rounded bg-purple-200 p-8 capitalize text-white">
             <div className="text-3xl">
               <FaCalendarCheck></FaCalendarCheck>
             </div>
@@ -56,12 +56,12 @@ const AdminHomePage = () => {
           </div>
         </div>
 
-        <div className="grid sm:grid-cols-2 mt-4 border p-2 rounded gap-4">
-          <div className="bg-blue-50  border-orange-300 p-4 rounded">
+        <div className="mt-4 grid gap-4 rounded border p-2 sm:grid-cols-2">
+          <div className="rounded  border-orange-300 bg-blue-50 p-4">
             <ShapeBarChart></ShapeBarChart>
           </div>
 
-          <div className="bg-cyan-100  border-orange-300 p-4 rounded">
+          <div className="rounded  border-orange-300 bg-cyan-100 p-4">
             <CustomPieChart></CustomPieChart>
           </div>
         </div>

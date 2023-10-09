@@ -5,7 +5,8 @@ import LoadingSpinner from "../ui/LoadingSpinner";
 import SectionHeading from "../ui/SectionHeading";
 
 const InstructorsPage = () => {
-  const { classesData, classesLoading, classesError, isClassesError } = useClassesData();
+  const { classesData, classesLoading, classesError, isClassesError } =
+    useClassesData();
   // console.log(classesData);
 
   if (classesLoading) {
@@ -15,7 +16,7 @@ const InstructorsPage = () => {
     return <p>something went wrong {classesError}</p>;
   }
   return (
-    <div className="py-8 max-w-6xl mx-auto">
+    <div className="mx-auto max-w-6xl py-8">
       <Helmet>
         <title>FashionVerse | InstructorsPage</title>
       </Helmet>
@@ -44,7 +45,7 @@ const InstructorsPage = () => {
                   <td>
                     <div className="flex items-center space-x-3">
                       <div className="avatar">
-                        <div className="mask mask-squircle w-12 h-12">
+                        <div className="mask mask-squircle h-12 w-12">
                           <img src={item.user.userImage} alt="instructor" />
                         </div>
                       </div>
@@ -58,7 +59,9 @@ const InstructorsPage = () => {
 
                   <th>
                     <Link to={`/seeClasses/${item.user.userEmail}`}>
-                      <button className="btn btn-sm btn-secondary">See Classes</button>
+                      <button className="btn-secondary btn-sm btn">
+                        See Classes
+                      </button>
                     </Link>
                   </th>
                 </tr>

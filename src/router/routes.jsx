@@ -20,6 +20,7 @@ import AdminHomePage from "../pages/AdminHomePage";
 import ManageClassesPage from "../pages/ManageClassesPage";
 import ManageUsersPage from "../pages/ManageUsersPage";
 import InstructorMyClassesPage from "../pages/InstructorMyClassesPage";
+import InstructorMyClassUpdatePage from "../pages/InstructorMyClassUpdatePage";
 
 // function for dynamic home route
 const router = createBrowserRouter([
@@ -61,20 +62,21 @@ const router = createBrowserRouter([
 
   // dashboard layout
   {
+    path: "dashboard",
     element: <DashboardLayout></DashboardLayout>,
     errorElement: <NotFoundPage></NotFoundPage>,
     children: [
       // student routes
       {
-        path: "dashboard/student",
+        path: "student",
         element: <StudentHomePage></StudentHomePage>,
       },
       {
-        path: "dashboard/enrolledClasses",
+        path: "enrolledClasses",
         element: <StudentEnrolledClassesPage></StudentEnrolledClassesPage>,
       },
       {
-        path: "dashboard/selectedClasses",
+        path: "selectedClasses",
         element: (
           <PrivateRoute>
             <StudentSelectedClassesPage></StudentSelectedClassesPage>
@@ -82,33 +84,37 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path: "dashboard/payment",
+        path: "payment",
         element: <PaymentPage></PaymentPage>,
       },
       // instructors routes
       {
-        path: "dashboard/instructor",
+        path: "instructor",
         element: <InstructorHomePage></InstructorHomePage>,
       },
       {
-        path: "dashboard/addClass",
+        path: "addClass",
         element: <AddClassPage></AddClassPage>,
       },
       {
-        path: "dashboard/instructorClasses",
+        path: "instructorClasses",
         element: <InstructorMyClassesPage />,
+      },
+      {
+        path: "updateClass/:id",
+        element: <InstructorMyClassUpdatePage />,
       },
       // admin routes
       {
-        path: "dashboard/admin",
+        path: "admin",
         element: <AdminHomePage></AdminHomePage>,
       },
       {
-        path: "dashboard/manageClasses",
+        path: "manageClasses",
         element: <ManageClassesPage></ManageClassesPage>,
       },
       {
-        path: "dashboard/manageUsers",
+        path: "manageUsers",
         element: <ManageUsersPage></ManageUsersPage>,
       },
     ],

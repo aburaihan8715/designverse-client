@@ -63,9 +63,16 @@ const ClassCard = ({ item }) => {
   };
 
   return (
-    <div data-aos="zoom-in" className="card shadow-md rounded relative hover:shadow-xl">
+    <div
+      data-aos="zoom-in"
+      className="card relative rounded shadow-md hover:shadow-xl"
+    >
       <figure>
-        <img className="w-full h-40 object-cover transition duration-700 hover:scale-105" src={item.classImage} alt="Shoes" />
+        <img
+          className="h-40 w-full object-cover transition duration-700 hover:scale-105"
+          src={item.classImage}
+          alt="Shoes"
+        />
       </figure>
       <div className="badge badge-success absolute right-5 top-5">
         <strong className="text-slate-50">Price: ${item.price}</strong>
@@ -76,12 +83,18 @@ const ClassCard = ({ item }) => {
         <p>Instructor: {item.user.userName}</p>
 
         <div className="card-actions justify-end">
-          <button onClick={() => addToCartHandler(item)} disabled={!item.seats} className="btn btn-secondary btn-outline btn-sm">
+          <button
+            onClick={() => addToCartHandler(item)}
+            disabled={!item.seats}
+            className="btn-secondary btn-outline btn-sm btn"
+          >
             Select Now
           </button>
         </div>
       </div>
-      {!item.seats && <div className="absolute w-full h-full bg-red-400 top-0 left-0 opacity-50 rounded"></div>}
+      {!item.seats && (
+        <div className="absolute left-0 top-0 h-full w-full rounded bg-red-400 opacity-50"></div>
+      )}
     </div>
   );
 };

@@ -2,7 +2,11 @@ import { Helmet } from "react-helmet-async";
 import { useForm } from "react-hook-form";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import SocialLogin from "../features/authentication/SocialLogin";
-import { loadCaptchaEnginge, LoadCanvasTemplate, validateCaptcha } from "react-simple-captcha";
+import {
+  loadCaptchaEnginge,
+  LoadCanvasTemplate,
+  validateCaptcha,
+} from "react-simple-captcha";
 import { useEffect, useState } from "react";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import useAuth from "../hooks/useAuth";
@@ -45,10 +49,10 @@ const LoginPage = () => {
     setLoginLoading(true);
     const { email, password } = data;
     authenticationUsingEmailPassword(email, password)
-      .then((result) => {
+      .then(() => {
         setLoginLoading(false);
-        const loggedInUser = result.user;
-        console.log(loggedInUser);
+        // const loggedInUser = result.user;
+        // console.log(loggedInUser);
         Swal.fire({
           position: "center",
           title: `login success!`,
@@ -72,7 +76,7 @@ const LoginPage = () => {
       </Helmet>
 
       <div className="">
-        <div className="border max-w-md mx-auto p-8">
+        <div className="mx-auto max-w-md border p-8">
           <form onSubmit={handleSubmit(submitHandler)}>
             <div className="space-y-3">
               <div className="text-center ">
@@ -82,7 +86,12 @@ const LoginPage = () => {
               {/* error message */}
               {authError && (
                 <div className="alert alert-error rounded-md">
-                  <svg xmlns="http://www.w3.org/2000/svg" className="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="h-6 w-6 shrink-0 stroke-current"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                  >
                     <path
                       strokeLinecap="round"
                       strokeLinejoin="round"
@@ -95,7 +104,7 @@ const LoginPage = () => {
               )}
 
               {/* email input */}
-              <div className="w-full relative">
+              <div className="relative w-full">
                 <label className="label">
                   <span className="label-text">Email</span>
                 </label>
@@ -103,13 +112,15 @@ const LoginPage = () => {
                   {...register("email", { required: true })}
                   type="email"
                   placeholder="Enter your email"
-                  className="input input-bordered w-full "
+                  className="input-bordered input w-full "
                 />
-                {errors.email?.type === "required" && <span className="text-error">Email is required</span>}
+                {errors.email?.type === "required" && (
+                  <span className="text-error">Email is required</span>
+                )}
               </div>
 
               {/* password input */}
-              <div className="w-full relative">
+              <div className="relative w-full">
                 <label className="label">
                   <span className="label-text">Password</span>
                 </label>
@@ -121,15 +132,22 @@ const LoginPage = () => {
                     pattern: /(?=.*[A-Z])(?=.*[!@#$&*])(?=.*[0-9])(?=.*[a-z])/i,
                   })}
                   placeholder="Enter your password"
-                  className="input input-bordered w-full "
+                  className="input-bordered input w-full "
                   type={showPassword ? "text" : "password"}
                 />
 
-                <span className="absolute right-6 top-1/2 translate-y-1/4" onClick={() => setShowPassword(!showPassword)}>
-                  {!showPassword && <FaEyeSlash className="h-6 w-6 text-gray-500" />}
+                <span
+                  className="absolute right-6 top-1/2 translate-y-1/4"
+                  onClick={() => setShowPassword(!showPassword)}
+                >
+                  {!showPassword && (
+                    <FaEyeSlash className="h-6 w-6 text-gray-500" />
+                  )}
                   {showPassword && <FaEye className="h-6 w-6 text-gray-500" />}
                 </span>
-                {errors.password?.type === "required" && <span className="text-error">Password is required</span>}
+                {errors.password?.type === "required" && (
+                  <span className="text-error">Password is required</span>
+                )}
               </div>
 
               {/* captcha input */}
@@ -140,29 +158,41 @@ const LoginPage = () => {
                   name="captcha"
                   type="text"
                   placeholder="Type captcha"
-                  className="input input-bordered w-full"
+                  className="input-bordered input w-full"
                   required
                 />
-                <span className="btn btn-accent btn-xs mt-2">Check</span>
+                <span className="btn-accent btn-xs btn mt-2">Check</span>
               </div>
 
               {/* login button*/}
               <div className="w-full ">
-                <button type="submit" className="btn btn-block btn-primary" disabled={disableLoginBtn}>
-                  {loginLoading ? <img className="rounded-full" src="/spinner.gif" alt="spinner" /> : "login"}
+                <button
+                  type="submit"
+                  className="btn-primary btn-block btn"
+                  disabled={disableLoginBtn}
+                >
+                  {loginLoading ? (
+                    <img
+                      className="rounded-full"
+                      src="/spinner.gif"
+                      alt="spinner"
+                    />
+                  ) : (
+                    "login"
+                  )}
                 </button>
               </div>
             </div>
           </form>
 
-          <p className="text-center mt-2">
+          <p className="mt-2 text-center">
             New here?
             <Link className="text-orange-700 hover:underline" to="/signUp">
               Create an account
             </Link>
           </p>
 
-          <p className="text-center mb-2">Or login with</p>
+          <p className="mb-2 text-center">Or login with</p>
 
           {/* social login */}
           <SocialLogin></SocialLogin>

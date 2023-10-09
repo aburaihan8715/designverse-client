@@ -4,7 +4,9 @@
 2.  tailwind
 3.  firebase
 
-// tasks have to be implemented
+
+
+// tasks pending
 1. all page responsive
 2. image change for card
 3. rating dynamic
@@ -16,3 +18,13 @@
 9. instructor my-class action have to be implemented 
 10. one class can not be selected twice
 11. There is add to cart logic repetition that has to be shareable
+12. add class image have to be used image hosting site like image bb
+13. after login user will not be able to go to login or register page
+14. after only login user will be able to go to private pages not after **register
+
+
+
+
+
+// =========warning==========
+1. ***after deleting instructor my class refetch function is not working

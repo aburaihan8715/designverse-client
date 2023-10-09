@@ -12,15 +12,17 @@ import axios from "axios";
 
 const SeeInstructorClasses = () => {
   const [seeInstructorClassData, setInstructorClassData] = useState([]);
-  const [seeInstructorClassDataLoading, setSeeInstructorClassDataLoading] = useState(true);
-  const [seeInstructorClassDataError, setSeeInstructorClassDataError] = useState("");
+  const [seeInstructorClassDataLoading, setSeeInstructorClassDataLoading] =
+    useState(true);
+  const [seeInstructorClassDataError, setSeeInstructorClassDataError] =
+    useState("");
   const { email } = useParams();
 
   const { roleData } = useRole();
   const navigate = useNavigate();
   const location = useLocation();
   const { user } = useAuth();
-  const { refetch } = useCartData();
+  const { refetch } = useCartData(true);
 
   const addToCartHandler = (item) => {
     const addToCartData = {
@@ -93,7 +95,7 @@ const SeeInstructorClasses = () => {
     const getInstructorClassesByEmail = async () => {
       setSeeInstructorClassDataLoading(true);
       try {
-        const res = await fetch(`http://localhost:5000/classes/${email}`);
+        const res = await fetch(`http://localhost:5000/classes?email=${email}`);
         const data = await res.json();
         setSeeInstructorClassDataLoading(false);
         setInstructorClassData(data);
@@ -110,23 +112,34 @@ const SeeInstructorClasses = () => {
     return <LoadingSpinner></LoadingSpinner>;
   }
   if (seeInstructorClassDataError) {
-    return <p className="text-red-400 text-center mt-10">something went wrong ${seeInstructorClassDataError}</p>;
+    return (
+      <p className="mt-10 text-center text-red-400">
+        something went wrong ${seeInstructorClassDataError}
+      </p>
+    );
   }
   return (
     <div className="py-10">
       <div className="mb-10">
-        <SectionHeading subHeading={`glance over`} heading={`The Instructor Classes`} />
+        <SectionHeading
+          subHeading={`glance over`}
+          heading={`The Instructor Classes`}
+        />
       </div>
 
-      <ul className="flex flex-col gap-10 max-w-5xl mx-auto">
+      <ul className="mx-auto flex max-w-5xl flex-col gap-10">
         {seeInstructorClassData?.map((item) => (
-          <li data-aos="zoom-in" className="shadow-xl rounded relative" key={item._id}>
-            <div className="sm:flex gap-10">
+          <li
+            data-aos="zoom-in"
+            className="relative rounded shadow-xl"
+            key={item._id}
+          >
+            <div className="gap-10 sm:flex">
               <figure className="flex-1 p-5">
                 <img className="rounded" src={item?.classImage} alt="Movie" />
               </figure>
 
-              <div className="flex-1 p-5 flex flex-col justify-between">
+              <div className="flex flex-1 flex-col justify-between p-5">
                 <div className="flex flex-col gap-5">
                   <h2 className="card-title">{item?.className}!</h2>
                   <p>Seats : {item?.seats}</p>
@@ -136,14 +149,20 @@ const SeeInstructorClasses = () => {
                 </div>
 
                 <div className="text-end">
-                  <button onClick={() => addToCartHandler(item)} className="btn btn-sm btn-secondary" disabled={!item.seats}>
+                  <button
+                    onClick={() => addToCartHandler(item)}
+                    className="btn-secondary btn-sm btn"
+                    disabled={!item.seats}
+                  >
                     select now
                   </button>
                 </div>
               </div>
             </div>
 
-            {!item.seats && <div className="absolute w-full h-full bg-red-400 top-0 left-0 opacity-50 rounded"></div>}
+            {!item.seats && (
+              <div className="absolute left-0 top-0 h-full w-full rounded bg-red-400 opacity-50"></div>
+            )}
           </li>
         ))}
       </ul>

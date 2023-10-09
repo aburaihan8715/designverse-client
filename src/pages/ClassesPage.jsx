@@ -5,7 +5,8 @@ import ClassCard from "../features/classes/ClassCard";
 import SectionHeading from "../ui/SectionHeading";
 
 const ClassesPage = () => {
-  const { classesData, classesLoading, classesError, isClassesError } = useClassesData();
+  const { classesData, classesLoading, classesError, isClassesError } =
+    useClassesData();
   // console.log(classesData);
 
   if (classesLoading) {
@@ -15,7 +16,7 @@ const ClassesPage = () => {
     return <p>something went wrong ${classesError}</p>;
   }
   return (
-    <div className="py-8 max-w-6xl mx-auto px-2">
+    <div className="mx-auto max-w-6xl px-2 py-8">
       <Helmet>
         <title>FashionVerse | ClassesPage</title>
       </Helmet>
@@ -24,7 +25,7 @@ const ClassesPage = () => {
         <SectionHeading heading={`your classes`} subHeading={`collect`} />
       </div>
       <div>
-        <div className="grid sm:grid-cols-2 md:grid-cols-4 gap-8">
+        <div className="grid gap-8 sm:grid-cols-2 md:grid-cols-4">
           {classesData?.map((item) => (
             <ClassCard key={item._id} item={item} />
           ))}

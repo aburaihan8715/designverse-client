@@ -72,7 +72,7 @@ const Card = ({ item }) => {
           </button>
         </div>
       </div>
-      {!item.class.available_seats && <div className="absolute w-full h-full bg-red-400 top-0 left-0 opacity-50 rounded"></div>}
+      {!item.class.available_seats && <div className="w-full h-full bg-red-400 top-0 left-0 opacity-50 rounded absolute"></div>}
     </div>
   );
 };

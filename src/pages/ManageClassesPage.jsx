@@ -5,7 +5,8 @@ import SectionHeading from "../ui/SectionHeading";
 import AdminFeedback from "../features/users/AdminFeedback";
 
 const ManageClassesPage = () => {
-  const { classesData, classesLoading, classesError, isClassesError, refetch } = useClassesData();
+  const { classesData, classesLoading, classesError, isClassesError, refetch } =
+    useClassesData();
   // console.log(classesData);
 
   const userRoleHandler = (id, status) => {
@@ -34,7 +35,11 @@ const ManageClassesPage = () => {
     return <LoadingSpinner></LoadingSpinner>;
   }
   if (isClassesError) {
-    return <p className="text-center text-red-600">something went wrong {classesError}</p>;
+    return (
+      <p className="text-center text-red-600">
+        something went wrong {classesError}
+      </p>
+    );
   }
   return (
     <div className=" ml-2">
@@ -42,7 +47,10 @@ const ManageClassesPage = () => {
         <title>Bistro | My selected class</title>
       </Helmet>
       <div>
-        <SectionHeading subHeading={`manage`} heading={`all classes`}></SectionHeading>
+        <SectionHeading
+          subHeading={`manage`}
+          heading={`all classes`}
+        ></SectionHeading>
         <div className="text-3xl ">
           <div className="">
             <span>Total classes: </span>
@@ -51,7 +59,7 @@ const ManageClassesPage = () => {
         </div>
 
         {/* table */}
-        <div className="overflow-x-auto mt-8">
+        <div className="mt-8 overflow-x-auto">
           <table className="table border border-success">
             {/* head */}
             <thead className="">
@@ -73,7 +81,7 @@ const ManageClassesPage = () => {
                   <td>
                     <div className="flex items-center space-x-3">
                       <div className="avatar">
-                        <div className="mask mask-squircle w-12 h-12">
+                        <div className="mask mask-squircle h-12 w-12">
                           <img src={item.classImage} />
                         </div>
                       </div>
@@ -89,20 +97,27 @@ const ManageClassesPage = () => {
 
                   <th className="flex flex-col gap-2">
                     <button
-                      disabled={item.status === "approved" || item.status === "denied"}
+                      disabled={
+                        item.status === "approved" || item.status === "denied"
+                      }
                       onClick={() => userRoleHandler(item._id, "approved")}
-                      className="btn btn-success btn-xs "
+                      className="btn-success btn-xs btn "
                     >
                       approve
                     </button>
                     <button
-                      disabled={item.status === "approved" || item.status === "denied"}
+                      disabled={
+                        item.status === "approved" || item.status === "denied"
+                      }
                       onClick={() => userRoleHandler(item._id, "denied")}
-                      className="btn btn-error btn-xs "
+                      className="btn-error btn-xs btn "
                     >
                       deny
                     </button>
-                    <button className="btn btn-warning btn-xs" onClick={() => window.my_modal_3.showModal()}>
+                    <button
+                      className="btn-warning btn-xs btn"
+                      onClick={() => window.my_modal_3.showModal()}
+                    >
                       feedback
                     </button>
                   </th>

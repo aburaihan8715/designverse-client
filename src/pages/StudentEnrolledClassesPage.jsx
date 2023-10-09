@@ -9,7 +9,8 @@ import SectionHeading from "../ui/SectionHeading";
 const StudentEnrolledClassesPage = () => {
   const { user, authLoading } = useAuth();
   const { axiosSecure } = useAxiosSecure();
-  const { classesData, classesLoading, classesError, isClassesError } = useClassesData();
+  const { classesData, classesLoading, classesError, isClassesError } =
+    useClassesData();
 
   const {
     isLoading: enrolledClassesDataLoading,
@@ -46,7 +47,12 @@ const StudentEnrolledClassesPage = () => {
   }
 
   if (enrolledClassesDataError || isEnrolledClassesError || isClassesError) {
-    return <p>something went wrong ${enrolledClassesDataError.message || classesError.message}</p>;
+    return (
+      <p>
+        something went wrong $
+        {enrolledClassesDataError.message || classesError.message}
+      </p>
+    );
   }
   return (
     <div className="ml-3">
@@ -54,9 +60,14 @@ const StudentEnrolledClassesPage = () => {
         <title>FashionVerse | MyEnrolledClassesPage</title>
       </Helmet>
       <div>
-        <SectionHeading subHeading={`how many`} heading={`classes enrolled`}></SectionHeading>
+        <SectionHeading
+          subHeading={`how many`}
+          heading={`classes enrolled`}
+        ></SectionHeading>
       </div>
-      <h2 className="font-bold">{totalEnrolledClasses?.length} classes enrolled</h2>
+      <h2 className="font-bold">
+        {totalEnrolledClasses?.length} classes enrolled
+      </h2>
       <h2 className="font-bold">${totalSpend} dollars spend</h2>
       <div className="overflow-x-auto">
         <table className="table">
@@ -78,7 +89,7 @@ const StudentEnrolledClassesPage = () => {
                 <th>{index + 1}</th>
                 <td>
                   <div className="avatar">
-                    <div className="mask mask-squircle w-12 h-12">
+                    <div className="mask mask-squircle h-12 w-12">
                       <img src={item?.classImage} alt="class cover photo" />
                     </div>
                   </div>
