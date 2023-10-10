@@ -15,9 +15,9 @@ const InstructorMyClassesPage = () => {
   const [myClassData, setMyClassData] = useState([]);
   const [myClassLoading, setMyClassLoading] = useState(false);
   const [myClassError, setMyClassError] = useState("");
-
   const { user, authLoading } = useAuth();
-  // console.log(user);
+  const { refetch, classesData, classesLoading } = useClassesData();
+  // console.log(classesData);
 
   useEffect(() => {
     setMyClassLoading(true);
@@ -32,9 +32,9 @@ const InstructorMyClassesPage = () => {
         setMyClassError(error.message);
         console.log(error.message);
       });
-  }, [user?.email]);
+  }, [user?.email, classesData]);
 
-  if (myClassLoading || authLoading) {
+  if (myClassLoading || authLoading || classesLoading) {
     return <LoadingSpinner></LoadingSpinner>;
   }
   if (myClassError) {
@@ -100,7 +100,11 @@ const InstructorMyClassesPage = () => {
                     <Link to={`/dashboard/updateClass/${item._id}`}>
                       <button className="btn-info btn-xs btn">update</button>
                     </Link>
-                    <InstrMyClassDeleteBtn key={item._id} id={item._id} />
+                    <InstrMyClassDeleteBtn
+                      key={item._id}
+                      id={item._id}
+                      refetch={refetch}
+                    />
                   </div>
                 </td>
               </tr>
@@ -115,10 +119,8 @@ const InstructorMyClassesPage = () => {
 export default InstructorMyClassesPage;
 
 // instructor my class delete button component
-const InstrMyClassDeleteBtn = ({ id }) => {
+const InstrMyClassDeleteBtn = ({ id, refetch }) => {
   const [classDeleteLoading, setClassDeleteLoading] = useState(false);
-
-  const { refetch } = useClassesData();
 
   const classDeleteHandler = () => {
     Swal.fire({

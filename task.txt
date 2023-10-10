@@ -21,6 +21,7 @@
 12. add class image have to be used image hosting site like image bb
 13. after login user will not be able to go to login or register page
 14. after only login user will be able to go to private pages not after **register
+15. handling password and email validation for login and registration in the context of using React Hook Form***
 
 
 

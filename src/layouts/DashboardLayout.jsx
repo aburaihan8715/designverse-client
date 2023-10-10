@@ -4,11 +4,24 @@ import useRole from "../hooks/useRole";
 import LoadingSpinner from "../ui/LoadingSpinner";
 import { Outlet } from "react-router-dom";
 import ActiveLink from "../ui/ActiveLink";
-import { FaBook, FaBookOpen, FaBookReader, FaBox, FaEnvelope, FaHome, FaPlus, FaUsers, FaWallet } from "react-icons/fa";
+import {
+  FaBook,
+  FaBookOpen,
+  FaBookReader,
+  FaBox,
+  FaCommentAlt,
+  FaEnvelope,
+  FaHistory,
+  FaHome,
+  FaPlus,
+  FaUsers,
+  FaWallet,
+} from "react-icons/fa";
 import useAuth from "../hooks/useAuth";
 
 const DashboardLayout = () => {
-  const { roleData, roleDataLoading, roleDataError, isRoleDataError } = useRole();
+  const { roleData, roleDataLoading, roleDataError, isRoleDataError } =
+    useRole();
   const { cartLoading, cartError, isCartError, cartData } = useCartData();
   const { user } = useAuth();
   // console.log(roleData);
@@ -18,7 +31,11 @@ const DashboardLayout = () => {
   }
 
   if (isRoleDataError || isCartError) {
-    return <p className="text-red-400 text-center mt-10">something went wrong ${roleDataError || cartError}</p>;
+    return (
+      <p className="mt-10 text-center text-red-400">
+        something went wrong ${roleDataError || cartError}
+      </p>
+    );
   }
 
   return (
@@ -30,14 +47,17 @@ const DashboardLayout = () => {
       <div className="drawer lg:drawer-open">
         <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
         <div className="drawer-content flex flex-col items-center justify-center">
-          <label htmlFor="my-drawer-2" className="btn btn-secondary btn-xs drawer-button lg:hidden self-end mt-2">
+          <label
+            htmlFor="my-drawer-2"
+            className="btn-secondary drawer-button btn-xs btn mt-2 self-end lg:hidden"
+          >
             Open drawer
           </label>
           <Outlet></Outlet>
         </div>
         <div className="drawer-side">
           <label htmlFor="my-drawer-2" className="drawer-overlay"></label>
-          <ul className="menu p-4 w-80 h-full text-base-content bg-orange-50 gap-2">
+          <ul className="menu h-full w-80 gap-2 bg-orange-50 p-4 text-base-content">
             {user && roleData?.role === "student" && (
               <>
                 <li>
@@ -53,19 +73,35 @@ const DashboardLayout = () => {
                     <span>My Enrolled Classes</span>
                   </ActiveLink>
                 </li>
-                {user && roleData?.role === "student" && cartData?.length > 0 && (
-                  <li>
-                    <ActiveLink className="" to="/dashboard/selectedClasses">
-                      <FaBookOpen />
-                      <span>My Selected Classes</span>
-                      <span className="badge badge-success text-white">+{cartData?.length || 0}</span>
-                    </ActiveLink>
-                  </li>
-                )}
+                {user &&
+                  roleData?.role === "student" &&
+                  cartData?.length > 0 && (
+                    <li>
+                      <ActiveLink className="" to="/dashboard/selectedClasses">
+                        <FaBookOpen />
+                        <span>My Selected Classes</span>
+                        <span className="badge badge-success text-white">
+                          +{cartData?.length || 0}
+                        </span>
+                      </ActiveLink>
+                    </li>
+                  )}
                 <li>
                   <ActiveLink to="/dashboard/payment">
                     <FaWallet />
                     <span>Payment</span>
+                  </ActiveLink>
+                </li>
+                <li>
+                  <ActiveLink to="/dashboard/paymentHistory">
+                    <FaHistory />
+                    <span>Payment History</span>
+                  </ActiveLink>
+                </li>
+                <li>
+                  <ActiveLink to="/dashboard/addReview">
+                    <FaCommentAlt />
+                    <span>Add Review</span>
                   </ActiveLink>
                 </li>
               </>

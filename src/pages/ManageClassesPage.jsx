@@ -2,7 +2,7 @@ import { Helmet } from "react-helmet-async";
 import useClassesData from "../hooks/useClassesData";
 import LoadingSpinner from "../ui/LoadingSpinner";
 import SectionHeading from "../ui/SectionHeading";
-import AdminFeedback from "../features/users/AdminFeedback";
+import AdminFeedback from "../features/admin/AdminFeedback";
 
 const ManageClassesPage = () => {
   const { classesData, classesLoading, classesError, isClassesError, refetch } =

@@ -21,37 +21,39 @@ import ManageClassesPage from "../pages/ManageClassesPage";
 import ManageUsersPage from "../pages/ManageUsersPage";
 import InstructorMyClassesPage from "../pages/InstructorMyClassesPage";
 import InstructorMyClassUpdatePage from "../pages/InstructorMyClassUpdatePage";
+import PaymentHistoryPage from "../pages/PaymentHistoryPage";
+import AddReviewPage from "../pages/AddReviewPage";
 
 // function for dynamic home route
 const router = createBrowserRouter([
   {
-    element: <MainLayout></MainLayout>,
-    errorElement: <NotFoundPage></NotFoundPage>,
+    element: <MainLayout />,
+    errorElement: <NotFoundPage />,
     children: [
       {
         path: "/",
-        element: <HomePage></HomePage>,
+        element: <HomePage />,
       },
       {
         path: "instructors",
-        element: <InstructorsPage></InstructorsPage>,
+        element: <InstructorsPage />,
       },
 
       {
         path: "classes",
-        element: <ClassesPage></ClassesPage>,
+        element: <ClassesPage />,
       },
       {
         path: "login",
-        element: <LoginPage></LoginPage>,
+        element: <LoginPage />,
       },
       {
         path: "signUp",
-        element: <SignUpPage></SignUpPage>,
+        element: <SignUpPage />,
       },
       {
         path: "contact",
-        element: <ContactUsPage></ContactUsPage>,
+        element: <ContactUsPage />,
       },
       {
         path: "seeClasses/:email",
@@ -63,38 +65,46 @@ const router = createBrowserRouter([
   // dashboard layout
   {
     path: "dashboard",
-    element: <DashboardLayout></DashboardLayout>,
-    errorElement: <NotFoundPage></NotFoundPage>,
+    element: <DashboardLayout />,
+    errorElement: <NotFoundPage />,
     children: [
       // student routes
       {
         path: "student",
-        element: <StudentHomePage></StudentHomePage>,
+        element: <StudentHomePage />,
       },
       {
         path: "enrolledClasses",
-        element: <StudentEnrolledClassesPage></StudentEnrolledClassesPage>,
+        element: <StudentEnrolledClassesPage />,
       },
       {
         path: "selectedClasses",
         element: (
           <PrivateRoute>
-            <StudentSelectedClassesPage></StudentSelectedClassesPage>
+            <StudentSelectedClassesPage />
           </PrivateRoute>
         ),
       },
       {
+        path: "paymentHistory",
+        element: <PaymentHistoryPage />,
+      },
+      {
+        path: "addReview",
+        element: <AddReviewPage />,
+      },
+      {
         path: "payment",
-        element: <PaymentPage></PaymentPage>,
+        element: <PaymentPage />,
       },
       // instructors routes
       {
         path: "instructor",
-        element: <InstructorHomePage></InstructorHomePage>,
+        element: <InstructorHomePage />,
       },
       {
         path: "addClass",
-        element: <AddClassPage></AddClassPage>,
+        element: <AddClassPage />,
       },
       {
         path: "instructorClasses",
@@ -107,15 +117,15 @@ const router = createBrowserRouter([
       // admin routes
       {
         path: "admin",
-        element: <AdminHomePage></AdminHomePage>,
+        element: <AdminHomePage />,
       },
       {
         path: "manageClasses",
-        element: <ManageClassesPage></ManageClassesPage>,
+        element: <ManageClassesPage />,
       },
       {
         path: "manageUsers",
-        element: <ManageUsersPage></ManageUsersPage>,
+        element: <ManageUsersPage />,
       },
     ],
   },

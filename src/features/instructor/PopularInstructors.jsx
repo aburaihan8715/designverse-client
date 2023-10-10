@@ -1,11 +1,13 @@
-import SectionHeading from "../../ui/SectionHeading";
 import useClassesData from "../../hooks/useClassesData";
 import LoadingSpinner from "../../ui/LoadingSpinner";
+import SectionHeading from "../../ui/SectionHeading";
 import PopularInstructorCard from "./PopularInstructorCard";
 
 const PopularInstructors = () => {
   const { classesData, classesLoading, classesError } = useClassesData();
-  const sortedInstructor = classesData?.sort((a, b) => b.studentEnrolled - a.studentEnrolled);
+  const sortedInstructor = classesData?.sort(
+    (a, b) => b.studentEnrolled - a.studentEnrolled,
+  );
   const popularFourInstructor = sortedInstructor?.slice(0, 4);
   // console.log(popularFourInstructor);
 
@@ -16,10 +18,13 @@ const PopularInstructors = () => {
     return <p>something went wrong {classesError.message}</p>;
   }
   return (
-    <div className="py-8 bg-gradient-to-r from-lime-100 to-pink-200">
-      <div className="max-w-6xl mx-auto p-2">
-        <SectionHeading subHeading={`stay with`} heading={`popular instructors`}></SectionHeading>
-        <div className="grid sm:grid-cols-2 md:grid-cols-4 gap-8">
+    <div className="bg-gradient-to-r from-lime-100 to-pink-200 py-8">
+      <div className="mx-auto max-w-6xl p-2">
+        <SectionHeading
+          subHeading={`stay with`}
+          heading={`popular instructors`}
+        ></SectionHeading>
+        <div className="grid gap-8 sm:grid-cols-2 md:grid-cols-4">
           {/* FIXME: */}
           {popularFourInstructor?.map((item) => (
             <PopularInstructorCard key={item._id} item={item} />

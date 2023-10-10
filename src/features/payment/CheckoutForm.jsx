@@ -68,15 +68,16 @@ const CheckoutForm = ({ price, cartData }) => {
 
     // confirm card payment
     setProcessing(true);
-    const { paymentIntent, error: intentError } = await stripe.confirmCardPayment(clientSecret, {
-      payment_method: {
-        card: card,
-        billing_details: {
-          email: user?.email || "unknown",
-          name: user?.displayName || "anonymous",
+    const { paymentIntent, error: intentError } =
+      await stripe.confirmCardPayment(clientSecret, {
+        payment_method: {
+          card: card,
+          billing_details: {
+            email: user?.email || "unknown",
+            name: user?.displayName || "anonymous",
+          },
         },
-      },
-    });
+      });
 
     if (intentError) {
       console.log(intentError);
@@ -113,7 +114,7 @@ const CheckoutForm = ({ price, cartData }) => {
     }
   };
   return (
-    <div className="border max-w-lg mx-auto p-8 rounded">
+    <div className="mx-auto max-w-lg rounded border p-8">
       <form onSubmit={handleSubmit}>
         <CardElement
           options={{
@@ -132,13 +133,21 @@ const CheckoutForm = ({ price, cartData }) => {
           }}
         />
         <div className="mt-4 text-right">
-          <button className="btn btn-xs btn-secondary rounded" type="submit" disabled={!stripe || !clientSecret || processing}>
+          <button
+            className="btn-secondary btn-xs btn rounded"
+            type="submit"
+            disabled={!stripe || !clientSecret || processing}
+          >
             Pay
           </button>
         </div>
       </form>
       {cardError && <p className="text-warning">{cardError}</p>}
-      {transactionId && <p className="text-green-600">Transaction complete with transaction ID: {transactionId}</p>}
+      {transactionId && (
+        <p className="text-green-600">
+          Transaction complete with transaction ID: {transactionId}
+        </p>
+      )}
     </div>
   );
 };

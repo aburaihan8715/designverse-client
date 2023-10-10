@@ -51,6 +51,7 @@ const LoginPage = () => {
     authenticationUsingEmailPassword(email, password)
       .then(() => {
         setLoginLoading(false);
+        setAuthError("");
         // const loggedInUser = result.user;
         // console.log(loggedInUser);
         Swal.fire({
