@@ -8,7 +8,7 @@ const PopularInstructors = () => {
   const sortedInstructor = classesData?.sort(
     (a, b) => b.studentEnrolled - a.studentEnrolled,
   );
-  const popularFourInstructor = sortedInstructor?.slice(0, 4);
+  const popularFourInstructor = sortedInstructor?.slice(0, 8);
   // console.log(popularFourInstructor);
 
   if (classesLoading) {

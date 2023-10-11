@@ -5,6 +5,7 @@ import Swal from "sweetalert2";
 import useCartData from "../../hooks/useCartData";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import useAuth from "../../hooks/useAuth";
+import { useNavigate } from "react-router-dom";
 
 // import useAxiosSecure from "../../hooks/useAxiosSecure";
 // import useAuth from "../../hooks/useAuth";
@@ -21,6 +22,8 @@ const CheckoutForm = ({ price, cartData }) => {
   const { user } = useAuth();
   const [processing, setProcessing] = useState(false);
   const [transactionId, setTransactionId] = useState("");
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     // Create PaymentIntent as soon as the page loads
@@ -110,6 +113,7 @@ const CheckoutForm = ({ price, cartData }) => {
             timer: 1500,
           });
         }
+        navigate("/dashboard/enrolledClasses");
       });
     }
   };
