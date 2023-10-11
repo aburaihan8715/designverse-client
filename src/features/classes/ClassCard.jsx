@@ -46,6 +46,7 @@ const ClassCard = ({ item }) => {
             refetch();
             Swal.fire({
               position: "center",
+              icon: "success",
               title: "Class has been added to cart!",
               showConfirmButton: false,
               timer: 1500,
