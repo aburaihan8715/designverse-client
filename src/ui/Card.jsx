@@ -36,7 +36,10 @@ const Card = ({ item }) => {
       });
     } else {
       axios
-        .post("http://localhost:5000/selectedClasses", selectedData)
+        .post(
+          "https://fashion-verse-server.vercel.app/selectedClasses",
+          selectedData,
+        )
         .then((data) => {
           if (data.data.acknowledged) {
             refetch();
@@ -54,9 +57,13 @@ const Card = ({ item }) => {
     }
   };
   return (
-    <div className="bg-base-100 shadow-md rounded relative">
+    <div className="relative rounded bg-base-100 shadow-md">
       <figure>
-        <img className="w-full h-40 object-cover" src={item.class.image} alt="Shoes" />
+        <img
+          className="h-40 w-full object-cover"
+          src={item.class.image}
+          alt="Shoes"
+        />
       </figure>
       <div className="badge badge-success absolute right-5 top-5">
         <strong className="text-slate-50">Price: ${item.class.price}</strong>
@@ -67,12 +74,18 @@ const Card = ({ item }) => {
         <p>Instructor: {item.user.name}</p>
 
         <div className="card-actions justify-end">
-          <button onClick={() => selectedClassesHandler(item)} disabled={!item.class.available_seats} className="btn btn-secondary btn-sm">
+          <button
+            onClick={() => selectedClassesHandler(item)}
+            disabled={!item.class.available_seats}
+            className="btn-secondary btn-sm btn"
+          >
             Select Now
           </button>
         </div>
       </div>
-      {!item.class.available_seats && <div className="w-full h-full bg-red-400 top-0 left-0 opacity-50 rounded absolute"></div>}
+      {!item.class.available_seats && (
+        <div className="absolute left-0 top-0 h-full w-full rounded bg-red-400 opacity-50"></div>
+      )}
     </div>
   );
 };

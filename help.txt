@@ -1,11 +1,4 @@
 
-// live server (verCel)
-http://localhost:5000
-
-// localhost server
-http://localhost:5000
-
-
 // name of instructor
 1.Sarah Anderson
 gender-female

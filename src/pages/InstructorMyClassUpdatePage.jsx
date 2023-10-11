@@ -9,7 +9,9 @@ const InstructorMyClassUpdatePage = () => {
   const navigate = useNavigate();
   const form = useForm({
     defaultValues: async () => {
-      const res = await fetch(`http://localhost:5000/classes/${id}`);
+      const res = await fetch(
+        `https://fashion-verse-server.vercel.app/classes/${id}`,
+      );
       const data = await res.json();
       return {
         className: data?.className,
@@ -65,7 +67,7 @@ const InstructorMyClassUpdatePage = () => {
 
     // send data to server using axios
     axios
-      .put(`http://localhost:5000/classes/${id}`, classData)
+      .put(`https://fashion-verse-server.vercel.app/classes/${id}`, classData)
       .then((data) => {
         console.log(data);
         if (data.data.acknowledged) {

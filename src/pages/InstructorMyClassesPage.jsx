@@ -21,7 +21,9 @@ const InstructorMyClassesPage = () => {
 
   useEffect(() => {
     setMyClassLoading(true);
-    fetch(`http://localhost:5000/classes?email=${user?.email}`)
+    fetch(
+      `https://fashion-verse-server.vercel.app/classes?email=${user?.email}`,
+    )
       .then((res) => res.json())
       .then((data) => {
         setMyClassLoading(false);
@@ -133,7 +135,7 @@ const InstrMyClassDeleteBtn = ({ id, refetch }) => {
     }).then((result) => {
       if (result.isConfirmed) {
         setClassDeleteLoading(true);
-        fetch(`http://localhost:5000/classes/${id}`, {
+        fetch(`https://fashion-verse-server.vercel.app/classes/${id}`, {
           method: "DELETE",
         })
           .then((res) => res.json())

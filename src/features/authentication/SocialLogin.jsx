@@ -13,8 +13,11 @@ const SocialLogin = () => {
     try {
       const result = await authenticationUsingGoogle();
       const loggedInUser = result.user;
-      const userData = { name: loggedInUser.displayName, email: loggedInUser.email };
-      await fetch("http://localhost:5000/users", {
+      const userData = {
+        name: loggedInUser.displayName,
+        email: loggedInUser.email,
+      };
+      await fetch("https://fashion-verse-server.vercel.app/users", {
         method: "POST",
         headers: {
           "Content-type": "application/json",
@@ -33,9 +36,12 @@ const SocialLogin = () => {
     try {
       const result = await authenticationUsingGithub();
       const loggedInUser = result.user;
-      const userData = { name: loggedInUser.displayName, email: loggedInUser.email };
+      const userData = {
+        name: loggedInUser.displayName,
+        email: loggedInUser.email,
+      };
 
-      await fetch("http://localhost:5000/users", {
+      await fetch("https://fashion-verse-server.vercel.app/users", {
         method: "POST",
         headers: {
           "Content-type": "application/json",
@@ -50,7 +56,7 @@ const SocialLogin = () => {
 
   return (
     <>
-      <div className="flex gap-6 justify-center">
+      <div className="flex justify-center gap-6">
         {/* <button className="avatar">
           <div className="w-5 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
             <img src="https://i.ibb.co/Y7nTmxp/facebook.png" />
@@ -58,13 +64,13 @@ const SocialLogin = () => {
         </button> */}
 
         <button onClick={authenticationUsingGoogleHandler} className="avatar">
-          <div className="w-5 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
+          <div className="w-5 rounded-full ring ring-primary ring-offset-2 ring-offset-base-100">
             <img src="https://i.ibb.co/72bXZqD/google.png" />
           </div>
         </button>
 
         <button onClick={authenticationUsingGithubHandler} className="avatar">
-          <div className="w-5 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
+          <div className="w-5 rounded-full ring ring-primary ring-offset-2 ring-offset-base-100">
             <img src="https://i.ibb.co/JHJ7PMt/github.png" />
           </div>
         </button>

@@ -27,7 +27,7 @@ const SignUpPage = () => {
     try {
       await createUserUsingEmailPassword(email, password);
       await updateUserProfile(name, photo);
-      const res = await fetch("http://localhost:5000/users", {
+      const res = await fetch("https://fashion-verse-server.vercel.app/users", {
         method: "POST",
         headers: {
           "Content-type": "application/json",
@@ -64,7 +64,7 @@ const SignUpPage = () => {
     //     // update user profile function
     //     updateUserProfile(name, photo).then(() => {
     //       const userData = { name, email };
-    //       fetch("http://localhost:5000/users", {
+    //       fetch("https://fashion-verse-server.vercel.app/users", {
     //         method: "POST",
     //         headers: {
     //           "Content-type": "application/json",
@@ -102,7 +102,7 @@ const SignUpPage = () => {
       </Helmet>
 
       <div className="">
-        <div className="border max-w-md mx-auto p-8">
+        <div className="mx-auto max-w-md border p-8">
           <form onSubmit={handleSubmit(submitHandler)}>
             <div className="space-y-3">
               <div className="text-center ">
@@ -111,7 +111,12 @@ const SignUpPage = () => {
               {/* error message */}
               {signUpError && (
                 <div className="alert alert-error rounded-md">
-                  <svg xmlns="http://www.w3.org/2000/svg" className="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="h-6 w-6 shrink-0 stroke-current"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                  >
                     <path
                       strokeLinecap="round"
                       strokeLinejoin="round"
@@ -128,8 +133,15 @@ const SignUpPage = () => {
                 <label className="label">
                   <span className="label-text">Name</span>
                 </label>
-                <input {...register("name", { required: true })} type="text" placeholder="Enter your name" className="input input-bordered w-full " />
-                {errors.name?.type === "required" && <span className="text-error">Name is required</span>}
+                <input
+                  {...register("name", { required: true })}
+                  type="text"
+                  placeholder="Enter your name"
+                  className="input-bordered input w-full "
+                />
+                {errors.name?.type === "required" && (
+                  <span className="text-error">Name is required</span>
+                )}
               </div>
 
               {/* photo url input */}
@@ -137,8 +149,15 @@ const SignUpPage = () => {
                 <label className="label">
                   <span className="label-text">Photo</span>
                 </label>
-                <input {...register("photo", { required: true })} type="url" placeholder="Enter photo url" className="input input-bordered w-full " />
-                {errors.name?.type === "required" && <span className="text-error">Photo url is required</span>}
+                <input
+                  {...register("photo", { required: true })}
+                  type="url"
+                  placeholder="Enter photo url"
+                  className="input-bordered input w-full "
+                />
+                {errors.name?.type === "required" && (
+                  <span className="text-error">Photo url is required</span>
+                )}
               </div>
 
               {/* email input */}
@@ -150,13 +169,15 @@ const SignUpPage = () => {
                   {...register("email", { required: true })}
                   type="email"
                   placeholder="Enter your email"
-                  className="input input-bordered w-full "
+                  className="input-bordered input w-full "
                 />
-                {errors.email?.type === "required" && <span className="text-error">Email is required</span>}
+                {errors.email?.type === "required" && (
+                  <span className="text-error">Email is required</span>
+                )}
               </div>
 
               {/* password input */}
-              <div className="w-full relative">
+              <div className="relative w-full">
                 <label className="label">
                   <span className="label-text">Password</span>
                 </label>
@@ -168,45 +189,71 @@ const SignUpPage = () => {
                     pattern: /(?=.*[A-Z])(?=.*[!@#$&*])(?=.*[0-9])(?=.*[a-z])/i,
                   })}
                   placeholder="Enter your password"
-                  className="input input-bordered w-full "
+                  className="input-bordered input w-full "
                   type={showPassword ? "text" : "password"}
                 />
 
                 {/* password hide and show handler */}
-                <span className="absolute right-6 top-1/2 translate-y-1/4" onClick={() => setShowPassword(!showPassword)}>
-                  {!showPassword && <FaEyeSlash className="h-6 w-6 text-gray-500" />}
+                <span
+                  className="absolute right-6 top-1/2 translate-y-1/4"
+                  onClick={() => setShowPassword(!showPassword)}
+                >
+                  {!showPassword && (
+                    <FaEyeSlash className="h-6 w-6 text-gray-500" />
+                  )}
                   {showPassword && <FaEye className="h-6 w-6 text-gray-500" />}
                 </span>
 
                 {/* error message for password */}
-                {errors.password?.type === "required" && <span className="text-error">Password is required</span>}
+                {errors.password?.type === "required" && (
+                  <span className="text-error">Password is required</span>
+                )}
 
-                {errors.password?.type === "minLength" && <span className="text-error">Password need to be minimum 6 characters!</span>}
+                {errors.password?.type === "minLength" && (
+                  <span className="text-error">
+                    Password need to be minimum 6 characters!
+                  </span>
+                )}
 
-                {errors.password?.type === "maxLength" && <span className="text-error">Password should not exceeds 20 characters!</span>}
+                {errors.password?.type === "maxLength" && (
+                  <span className="text-error">
+                    Password should not exceeds 20 characters!
+                  </span>
+                )}
 
                 {errors.password?.type === "pattern" && (
-                  <span className="text-error">Password should have one uppercase, one lowercase, one special character and one digits!</span>
+                  <span className="text-error">
+                    Password should have one uppercase, one lowercase, one
+                    special character and one digits!
+                  </span>
                 )}
               </div>
 
               {/* sign up button*/}
               <div className="w-full ">
-                <button type="submit" className="btn btn-block btn-primary">
-                  {signUpLoading ? <img className="rounded-full" src="/spinner.gif" alt="spinner" /> : "login"}
+                <button type="submit" className="btn-primary btn-block btn">
+                  {signUpLoading ? (
+                    <img
+                      className="rounded-full"
+                      src="/spinner.gif"
+                      alt="spinner"
+                    />
+                  ) : (
+                    "login"
+                  )}
                 </button>
               </div>
             </div>
           </form>
 
-          <p className="text-center mt-2">
+          <p className="mt-2 text-center">
             Already registered?
             <Link className="text-orange-700 hover:underline" to="/login">
               Go to login
             </Link>
           </p>
 
-          <p className="text-center mb-2">Or sign up with</p>
+          <p className="mb-2 text-center">Or sign up with</p>
 
           {/* social login */}
           <SocialLogin></SocialLogin>
