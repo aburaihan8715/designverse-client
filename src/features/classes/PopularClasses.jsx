@@ -20,7 +20,7 @@ const PopularClasses = () => {
     return <p>something went wrong {classesError}</p>;
   }
   return (
-    <section className="bg-gradient-to-r from-violet-200 to-fuchsia-200 py-10">
+    <section className="py-10">
       <div className="mx-auto px-2 sm:max-w-6xl">
         <SectionHeading
           subHeading={`connect with`}

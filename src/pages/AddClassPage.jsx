@@ -84,11 +84,12 @@ const AddClassPage = () => {
     // console.log(classData);
     // send data to server using axios
     axios
-      .post("https://fashion-verse-server.vercel.app/classes", classData)
+      .post("http://localhost:5000/classes", classData)
       .then((data) => {
         if (data.data.insertedId) {
           Swal.fire({
             position: "center",
+            icon: "success",
             title: "Class added successfully!",
             showConfirmButton: false,
             timer: 1500,
@@ -125,7 +126,7 @@ const AddClassPage = () => {
       </Helmet>
 
       <div className="p-1">
-        <div className="mx-auto max-w-xl border bg-slate-50 p-8">
+        <div className="mx-auto max-w-xl border  p-8">
           <form onSubmit={handleSubmit(submitHandler)}>
             <div className="space-y-3">
               <div className="text-center ">
@@ -313,7 +314,7 @@ const AddClassPage = () => {
                         {...register("gender", { required: true })}
                         className="input-bordered input w-full"
                       >
-                        <option value="">select gender</option>
+                        <option value="">Select gender</option>
                         <option value="male">male</option>
                         <option value="female">female</option>
                       </select>

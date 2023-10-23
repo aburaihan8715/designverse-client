@@ -23,6 +23,7 @@ import InstructorMyClassesPage from "../pages/InstructorMyClassesPage";
 import InstructorMyClassUpdatePage from "../pages/InstructorMyClassUpdatePage";
 import PaymentHistoryPage from "../pages/PaymentHistoryPage";
 import AddReviewPage from "../pages/AddReviewPage";
+import TestImageHosting from "../pages/TestImageHosting";
 
 // function for dynamic home route
 const router = createBrowserRouter([
@@ -58,6 +59,10 @@ const router = createBrowserRouter([
       {
         path: "seeClasses/:email",
         element: <SeeInstructorClasses />,
+      },
+      {
+        path: "testImageHosting",
+        element: <TestImageHosting />,
       },
     ],
   },

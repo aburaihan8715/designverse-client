@@ -40,7 +40,7 @@ const ClassCard = ({ item }) => {
       return;
     } else {
       axios
-        .post("https://fashion-verse-server.vercel.app/cart", addToCartData)
+        .post("http://localhost:5000/cart", addToCartData)
         .then((data) => {
           if (data.data.acknowledged) {
             refetch();
@@ -66,11 +66,11 @@ const ClassCard = ({ item }) => {
   return (
     <div
       data-aos="zoom-in"
-      className="card relative rounded shadow-md hover:shadow-xl"
+      className="card relative rounded shadow-md hover:shadow-white"
     >
       <figure>
         <img
-          className="h-40 w-full object-cover transition duration-700 hover:scale-105"
+          className="h-40 w-full object-cover transition duration-500 hover:scale-105"
           src={item.classImage}
           alt="Shoes"
         />

@@ -53,7 +53,7 @@ const SeeInstructorClasses = () => {
       return;
     } else {
       axios
-        .post("https://fashion-verse-server.vercel.app/cart", addToCartData)
+        .post("http://localhost:5000/cart", addToCartData)
         .then((data) => {
           if (data.data.acknowledged) {
             refetch();
@@ -85,7 +85,7 @@ const SeeInstructorClasses = () => {
   // } = useQuery({
   //   queryKey: ["classes", email],
   //   queryFn: async () => {
-  //     const res = await fetch(`https://fashion-verse-server.vercel.app/classes/${email}`);
+  //     const res = await fetch(`http://localhost:5000/classes/${email}`);
   //     return res.data;
   //   },
   // });
@@ -95,9 +95,7 @@ const SeeInstructorClasses = () => {
     const getInstructorClassesByEmail = async () => {
       setSeeInstructorClassDataLoading(true);
       try {
-        const res = await fetch(
-          `https://fashion-verse-server.vercel.app/classes?email=${email}`,
-        );
+        const res = await fetch(`http://localhost:5000/classes?email=${email}`);
         const data = await res.json();
         setSeeInstructorClassDataLoading(false);
         setInstructorClassData(data);

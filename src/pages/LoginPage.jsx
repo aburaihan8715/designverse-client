@@ -2,19 +2,19 @@ import { Helmet } from "react-helmet-async";
 import { useForm } from "react-hook-form";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import SocialLogin from "../features/authentication/SocialLogin";
-import {
-  loadCaptchaEnginge,
-  LoadCanvasTemplate,
-  validateCaptcha,
-} from "react-simple-captcha";
-import { useEffect, useState } from "react";
+// import {
+//   loadCaptchaEnginge,
+//   LoadCanvasTemplate,
+//   validateCaptcha,
+// } from "react-simple-captcha";
+import { useState } from "react";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import useAuth from "../hooks/useAuth";
 import Swal from "sweetalert2";
 
 const LoginPage = () => {
   const { authenticationUsingEmailPassword } = useAuth();
-  const [disableLoginBtn, setDisableLoginBtn] = useState(true);
+  // const [disableLoginBtn, setDisableLoginBtn] = useState(true);
   const [showPassword, setShowPassword] = useState(false);
   const [authError, setAuthError] = useState("");
   const [loginLoading, setLoginLoading] = useState(false);
@@ -31,19 +31,19 @@ const LoginPage = () => {
     formState: { errors },
   } = useForm();
 
-  useEffect(() => {
-    loadCaptchaEnginge(6);
-  }, []);
+  // useEffect(() => {
+  //   loadCaptchaEnginge(6);
+  // }, []);
 
   // captcha validation handler
-  const captchaHandler = (event) => {
-    const user_captcha_value = event.target.value;
-    if (validateCaptcha(user_captcha_value)) {
-      setDisableLoginBtn(false);
-    } else {
-      setDisableLoginBtn(true);
-    }
-  };
+  // const captchaHandler = (event) => {
+  //   const user_captcha_value = event.target.value;
+  //   if (validateCaptcha(user_captcha_value)) {
+  //     setDisableLoginBtn(false);
+  //   } else {
+  //     setDisableLoginBtn(true);
+  //   }
+  // };
 
   const submitHandler = (data) => {
     setLoginLoading(true);
@@ -152,7 +152,7 @@ const LoginPage = () => {
               </div>
 
               {/* captcha input */}
-              <div className="w-full ">
+              {/* <div className="w-full ">
                 <LoadCanvasTemplate />
                 <input
                   onBlur={captchaHandler}
@@ -163,14 +163,14 @@ const LoginPage = () => {
                   required
                 />
                 <span className="btn-accent btn-xs btn mt-2">Check</span>
-              </div>
+              </div> */}
 
               {/* login button*/}
               <div className="w-full ">
                 <button
                   type="submit"
                   className="btn-primary btn-block btn"
-                  disabled={disableLoginBtn}
+                  // disabled={disableLoginBtn}
                 >
                   {loginLoading ? (
                     <img

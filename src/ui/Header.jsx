@@ -5,6 +5,7 @@ import useCartData from "../hooks/useCartData";
 import useRole from "../hooks/useRole";
 import ActiveLink from "./ActiveLink";
 import Button from "./Button";
+import BrandLogo from "./BrandLogo";
 
 const Header = () => {
   const { user, logOutUser } = useAuth();
@@ -78,7 +79,7 @@ const Header = () => {
   return (
     <div className="fixed left-0 right-0 top-0 z-20">
       <div className="">
-        <div className="navbar h-20 border-b-2 border-purple-600 bg-gradient-to-r from-lime-50 to-pink-200 px-10">
+        <div className="navbar h-20 bg-base-100 px-10 shadow-md">
           <div className="navbar-start">
             <div className="dropdown">
               <label tabIndex={0} className="btn-ghost btn lg:hidden">
@@ -104,20 +105,16 @@ const Header = () => {
                 {menuItems}
               </ul>
             </div>
-            <Link to="/" className="hidden uppercase sm:inline-block">
-              <div className="inline-flex flex-col">
-                <h1 className="bg-gradient-to-r from-pink-500 to-purple-200 bg-clip-text text-3xl tracking-tighter text-secondary text-transparent">
-                  FashionVerse
-                </h1>
-                <span className="tracking-[25px]">school</span>
-              </div>
-            </Link>
+
+            <div>
+              <BrandLogo isHidden={true} />
+            </div>
           </div>
-          <div className="navbar-center hidden lg:flex">
+          <div className="navbar-center hidden  lg:flex">
             <ul className="menu menu-horizontal gap-2 px-1">{menuItems}</ul>
           </div>
           <div className="navbar-end">
-            <div className="inline-flex items-center gap-2">
+            <div className="inline-flex items-center gap-4">
               {user && user?.displayName && (
                 <button
                   title={user.displayName}
@@ -146,12 +143,15 @@ const Header = () => {
 
               {!user && (
                 <Link to="/login">
-                  <Button className="btn-secondary">login</Button>
+                  <Button className="btn-secondary text-white">login</Button>
                 </Link>
               )}
 
               {user && (
-                <Button className="btn-secondary" onClick={logOutUserHandler}>
+                <Button
+                  className="btn-secondary text-white"
+                  onClick={logOutUserHandler}
+                >
                   logout
                 </Button>
               )}

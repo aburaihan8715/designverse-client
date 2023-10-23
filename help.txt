@@ -113,6 +113,10 @@ test instructor one 👔
 https://i.ibb.co/bPbybsH/user1.png
 
 
+// default demo user link
+https://i.ibb.co/nCCcPC7/demo-user.jpg
+
+
 
 
 

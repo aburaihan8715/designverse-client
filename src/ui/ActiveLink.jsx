@@ -7,7 +7,7 @@ const ActiveLink = (props) => {
       style={({ isActive }) => {
         return {
           backgroundColor: isActive ? "#8e28c9" : "",
-          color: isActive ? "white" : "black",
+          color: isActive ? "white" : "white",
         };
       }}
     >

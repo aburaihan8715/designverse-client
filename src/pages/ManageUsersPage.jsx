@@ -94,7 +94,7 @@ const MakeAdminBtn = ({ item, admin }) => {
 
   const makeAdminHandler = (item, role) => {
     setMakeAdminLoading(true);
-    fetch(`https://fashion-verse-server.vercel.app/users/role/${item._id}`, {
+    fetch(`http://localhost:5000/users/role/${item._id}`, {
       method: "PATCH",
       body: JSON.stringify({
         role,
@@ -131,7 +131,7 @@ const MakeInstructorBtn = ({ item, instructor }) => {
 
   const makeInstructorHandler = (item, role) => {
     setMakeInstructorLoading(true);
-    fetch(`https://fashion-verse-server.vercel.app/users/role/${item._id}`, {
+    fetch(`http://localhost:5000/users/role/${item._id}`, {
       method: "PATCH",
       body: JSON.stringify({
         role,
@@ -177,7 +177,7 @@ const UserDeleteBtn = ({ item }) => {
     }).then((result) => {
       if (result.isConfirmed) {
         setDeleteLoading(true);
-        fetch(`https://fashion-verse-server.vercel.app/users/${item._id}`, {
+        fetch(`http://localhost:5000/users/${item._id}`, {
           method: "DELETE",
         })
           .then((res) => res.json())

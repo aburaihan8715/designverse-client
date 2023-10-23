@@ -18,6 +18,7 @@ import {
   FaWallet,
 } from "react-icons/fa";
 import useAuth from "../hooks/useAuth";
+import BrandLogo from "../ui/BrandLogo";
 
 const DashboardLayout = () => {
   const { roleData, roleDataLoading, roleDataError, isRoleDataError } =
@@ -49,7 +50,7 @@ const DashboardLayout = () => {
         <div className="drawer-content flex flex-col items-center justify-center">
           <label
             htmlFor="my-drawer-2"
-            className="btn-secondary drawer-button btn-xs btn mt-2 self-end lg:hidden"
+            className="btn-secondary drawer-button btn-xs btn mt-2 lg:hidden"
           >
             Open drawer
           </label>
@@ -57,7 +58,10 @@ const DashboardLayout = () => {
         </div>
         <div className="drawer-side">
           <label htmlFor="my-drawer-2" className="drawer-overlay"></label>
-          <ul className="menu h-full w-80 gap-2 bg-orange-50 p-4 text-base-content">
+          <ul className="menu h-full w-80 gap-2 bg-gradient-to-b from-base-100 to-pink-300 p-4 text-base-content">
+            <div>
+              <BrandLogo isHidden={false} />
+            </div>
             {user && roleData?.role === "student" && (
               <>
                 <li>

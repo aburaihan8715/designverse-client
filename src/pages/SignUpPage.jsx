@@ -23,11 +23,11 @@ const SignUpPage = () => {
   const submitHandler = async (data) => {
     setSignUpError(false);
     setSignUpLoading(true);
-    const { email, password, name, photo } = data;
+    const { email, password, name } = data;
     try {
       await createUserUsingEmailPassword(email, password);
-      await updateUserProfile(name, photo);
-      const res = await fetch("https://fashion-verse-server.vercel.app/users", {
+      await updateUserProfile(name);
+      const res = await fetch("http://localhost:5000/users", {
         method: "POST",
         headers: {
           "Content-type": "application/json",
@@ -52,47 +52,6 @@ const SignUpPage = () => {
       setSignUpError(error.message);
       console.log(error.message);
     }
-
-    // setSignUpLoading(true);
-    // const { email, password, name, photo } = data;
-    // // console.log(data);
-    // createUserUsingEmailPassword(email, password)
-    //   .then((result) => {
-    //     const loggedInUser = result.user;
-    //     console.log(loggedInUser);
-
-    //     // update user profile function
-    //     updateUserProfile(name, photo).then(() => {
-    //       const userData = { name, email };
-    //       fetch("https://fashion-verse-server.vercel.app/users", {
-    //         method: "POST",
-    //         headers: {
-    //           "Content-type": "application/json",
-    //         },
-    //         body: JSON.stringify(userData),
-    //       })
-    //         .then((res) => res.json())
-    //         .then((data) => {
-    //           setSignUpLoading(false);
-
-    //           if (data.acknowledged) {
-    //             Swal.fire({
-    //               position: "center",
-    //               title: `sign up success!`,
-    //               showConfirmButton: false,
-    //               timer: 1500,
-    //             });
-    //             reset();
-    //             navigate("/login");
-    //           }
-    //         });
-    //     });
-    //   })
-    //   .catch((error) => {
-    //     setSignUpLoading(false);
-    //     setAuthError(error.message);
-    //     console.log(error.message);
-    //   });
   };
 
   return (
@@ -145,7 +104,7 @@ const SignUpPage = () => {
               </div>
 
               {/* photo url input */}
-              <div className="w-full ">
+              {/* <div className="w-full ">
                 <label className="label">
                   <span className="label-text">Photo</span>
                 </label>
@@ -158,7 +117,7 @@ const SignUpPage = () => {
                 {errors.name?.type === "required" && (
                   <span className="text-error">Photo url is required</span>
                 )}
-              </div>
+              </div> */}
 
               {/* email input */}
               <div className="w-full ">

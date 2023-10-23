@@ -15,12 +15,15 @@ const PaymentPage = () => {
   const price = Number(total.toFixed(2));
 
   return (
-    <div className="px-2 w-full">
+    <div className="w-full px-2">
       <Helmet>
         <title>FashionVerse | PaymentPage</title>
       </Helmet>
-      <div className="border mt-2 py-10 px-2 sm:max-w-2xl mx-auto shadow-lg">
-        <SectionHeading subHeading={`please process`} heading={`payment`}></SectionHeading>
+      <div className=" mx-auto mt-2 px-2 py-10 sm:max-w-2xl">
+        <SectionHeading
+          subHeading={`please process`}
+          heading={`payment`}
+        ></SectionHeading>
         <Elements stripe={stripePromise}>
           <CheckoutForm price={price} cartData={cartData}></CheckoutForm>
         </Elements>

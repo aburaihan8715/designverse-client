@@ -5,8 +5,8 @@ const AddReviewForm = () => {
   };
 
   return (
-    <div className="mx-auto max-w-lg p-10 shadow-md">
-      <h3 className="bg-gradient-to-r from-pink-700 to-purple-900 bg-clip-text text-center text-3xl font-semibold uppercase text-transparent">
+    <div className="mx-auto max-w-lg rounded border p-10 ">
+      <h3 className="bg-gradient-to-r from-fuchsia-500 to-pink-500 bg-clip-text text-center text-3xl font-semibold uppercase text-transparent">
         Rate Us
       </h3>
       <div className="mt-2 text-center text-3xl">
@@ -19,7 +19,7 @@ const AddReviewForm = () => {
       <form onSubmit={submitHandler}>
         <div className="mt-4">
           <textarea
-            className="w-full border p-2 ring-1  focus:outline-none"
+            className="textarea-bordered textarea w-full"
             name=""
             id=""
             rows="5"

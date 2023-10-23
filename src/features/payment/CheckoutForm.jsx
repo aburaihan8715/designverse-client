@@ -138,11 +138,11 @@ const CheckoutForm = ({ price, cartData }) => {
         />
         <div className="mt-4 text-right">
           <button
-            className="btn-secondary btn-xs btn rounded"
+            className="btn-secondary btn-sm btn rounded"
             type="submit"
             disabled={!stripe || !clientSecret || processing}
           >
-            Pay
+            submit
           </button>
         </div>
       </form>

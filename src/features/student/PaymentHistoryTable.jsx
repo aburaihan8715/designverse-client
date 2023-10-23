@@ -18,7 +18,7 @@ const PaymentHistoryTable = () => {
     enabled: !!user,
     queryFn: async () => {
       const res = await axiosSecure.get(
-        `https://fashion-verse-server.vercel.app/payments?email=${user?.email}`,
+        `http://localhost:5000/payments?email=${user?.email}`,
       );
       return res.data;
     },

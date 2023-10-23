@@ -31,7 +31,10 @@ const AuthProvider = ({ children }) => {
   };
 
   // update user profile
-  const updateUserProfile = async (name, photo) => {
+  const updateUserProfile = async (
+    name,
+    photo = "https://i.ibb.co/nCCcPC7/demo-user.jpg",
+  ) => {
     setAuthLoading(true);
     return await updateProfile(auth.currentUser, {
       displayName: name,
@@ -72,7 +75,7 @@ const AuthProvider = ({ children }) => {
       // get and set token
       if (currentUser) {
         axios
-          .post("https://fashion-verse-server.vercel.app/jwt", {
+          .post("http://localhost:5000/jwt", {
             email: currentUser?.email,
           })
           .then((data) => {

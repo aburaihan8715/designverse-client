@@ -1,34 +1,48 @@
 import { Helmet } from "react-helmet-async";
 import SectionHeading from "../ui/SectionHeading";
-// import SectionHeading from "../components/SectionHeading/SectionHeading";
 
 const ContactUsPage = () => {
+  const submitHandler = (e) => {
+    e.preventDefault();
+    alert("Not implement yet...");
+  };
   return (
     <div className="py-8">
       <Helmet>
         <title>FashionVerse | ContactUsPage</title>
       </Helmet>
       <div>
-        <div className="border p-8 max-w-xl mx-auto">
-          <SectionHeading subHeading={`Send Us a Message`} heading={`contact form`}></SectionHeading>
+        <div className="mx-auto max-w-md rounded-md border p-8 shadow-lg">
+          <SectionHeading
+            subHeading={`Send Us a Message`}
+            heading={`contact form`}
+          ></SectionHeading>
 
           <div className="">
-            {/* FIXME: div with form*/}
+            {/* FIXME: implement email services*/}
             <div>
-              <div className="">
-                <div className="grid sm:grid-cols-2 gap-4 ">
+              <form onSubmit={submitHandler}>
+                <div className="grid gap-4 sm:grid-cols-2 ">
                   <div className="form-control w-full ">
                     <label className="label">
                       <span className="label-text">Name*</span>
                     </label>
-                    <input type="text" placeholder="Enter your name" className="input input-bordered w-full " />
+                    <input
+                      type="text"
+                      placeholder="Enter name"
+                      className="input-bordered input w-full "
+                    />
                   </div>
 
                   <div className="form-control w-full ">
                     <label className="label">
                       <span className="label-text">Email*</span>
                     </label>
-                    <input type="text" placeholder="Enter your email" className="input input-bordered w-full " />
+                    <input
+                      type="text"
+                      placeholder="Enter email"
+                      className="input-bordered input w-full "
+                    />
                   </div>
                 </div>
 
@@ -37,7 +51,11 @@ const ContactUsPage = () => {
                     <label className="label">
                       <span className="label-text">Phone*</span>
                     </label>
-                    <input type="text" placeholder="Enter your name" className="input input-bordered w-full " />
+                    <input
+                      type="text"
+                      placeholder="Enter phone"
+                      className="input-bordered input w-full "
+                    />
                   </div>
                 </div>
 
@@ -46,21 +64,20 @@ const ContactUsPage = () => {
                     <label className="label">
                       <span className="label-text">Message*</span>
                     </label>
-                    <textarea placeholder="Your message" rows="2" className="textarea textarea-bordered w-full"></textarea>
+                    <textarea
+                      placeholder="Your message (0-250) characters"
+                      rows="2"
+                      className="textarea-bordered textarea w-full"
+                    ></textarea>
                   </div>
                 </div>
 
-                <div className=" inline-flex bg-white mt-4 p-2 gap-10 items-center">
-                  <div className="inline-flex gap-2 items-center">
-                    <input type="checkbox" className="w-5 h-5" />
-                    <label htmlFor="">I am not a robot</label>
-                  </div>
-                  <div>🔄</div>
+                <div className="mt-4 text-center">
+                  <button className="btn-secondary btn-block btn">
+                    Send Message 🚀
+                  </button>
                 </div>
-                <div className="text-center">
-                  <button className="btn btn-secondary btn-sm">Send Message 🚀</button>
-                </div>
-              </div>
+              </form>
             </div>
           </div>
         </div>

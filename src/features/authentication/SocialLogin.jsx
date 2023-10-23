@@ -17,7 +17,7 @@ const SocialLogin = () => {
         name: loggedInUser.displayName,
         email: loggedInUser.email,
       };
-      await fetch("https://fashion-verse-server.vercel.app/users", {
+      await fetch("http://localhost:5000/users", {
         method: "POST",
         headers: {
           "Content-type": "application/json",
@@ -41,7 +41,7 @@ const SocialLogin = () => {
         email: loggedInUser.email,
       };
 
-      await fetch("https://fashion-verse-server.vercel.app/users", {
+      await fetch("http://localhost:5000/users", {
         method: "POST",
         headers: {
           "Content-type": "application/json",
