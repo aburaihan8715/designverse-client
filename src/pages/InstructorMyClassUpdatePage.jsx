@@ -1,12 +1,13 @@
-import axios from "axios";
 import { Helmet } from "react-helmet-async";
 import { useForm } from "react-hook-form";
 import { useNavigate, useParams } from "react-router-dom";
 import Swal from "sweetalert2";
+import useAxiosSecure from "../hooks/useAxiosSecure";
 
 const InstructorMyClassUpdatePage = () => {
   const { id } = useParams();
   const navigate = useNavigate();
+  const { axiosSecure } = useAxiosSecure();
   const form = useForm({
     defaultValues: async () => {
       const res = await fetch(`http://localhost:5000/classes/${id}`);
@@ -17,12 +18,12 @@ const InstructorMyClassUpdatePage = () => {
         price: data?.price,
         seats: data?.seats,
         offer: data?.offerPercent,
-        instructorName: data?.user?.userName,
-        instructorEmail: data?.user?.userEmail,
-        instructorImage: data?.user?.userImage,
-        phone: data?.user?.phoneNumber,
-        gender: data?.user?.gender,
-        address: data?.user?.address,
+        instructorName: data?.userName,
+        instructorEmail: data?.userEmail,
+        instructorImage: data?.userImage,
+        phone: data?.phoneNumber,
+        gender: data?.gender,
+        address: data?.address,
       };
     },
   });
@@ -64,7 +65,7 @@ const InstructorMyClassUpdatePage = () => {
     console.log(classData);
 
     // send data to server using axios
-    axios
+    axiosSecure
       .put(`http://localhost:5000/classes/${id}`, classData)
       .then((data) => {
         console.log(data);
@@ -107,7 +108,7 @@ const InstructorMyClassUpdatePage = () => {
       </Helmet>
 
       <div className="p-1">
-        <div className="mx-auto max-w-xl border bg-slate-50 p-8">
+        <div className="mx-auto max-w-xl rounded-md border p-8">
           <form onSubmit={handleSubmit(submitHandler)}>
             <div className="space-y-3">
               <div className="text-center ">

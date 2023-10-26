@@ -1,5 +1,11 @@
 import { Helmet } from "react-helmet-async";
-import { FaBook, FaCalendar, FaShoppingCart, FaStar, FaWallet } from "react-icons/fa";
+import {
+  FaBook,
+  FaCalendar,
+  FaShoppingCart,
+  FaStar,
+  FaWallet,
+} from "react-icons/fa";
 import useAuth from "../hooks/useAuth";
 
 const StudentHomePage = () => {
@@ -11,11 +17,11 @@ const StudentHomePage = () => {
       </Helmet>
       <div>
         <div className="mb-4">
-          <h2 className="text-2xl capitalize">Hi, Welcome back!</h2>
+          <h2 className="text-2xl capitalize">Welcome {user?.displayName}</h2>
         </div>
 
-        <div className="grid sm:grid-cols-3 gap-4">
-          <div className="flex text-white capitalize bg-green-200 py-8 px-24 gap-4 items-center rounded">
+        <div className="grid gap-4 sm:grid-cols-3">
+          <div className="flex items-center gap-4 rounded bg-green-200 px-24 py-8 capitalize text-white">
             <div className="text-3xl">
               <FaBook></FaBook>
             </div>
@@ -25,7 +31,7 @@ const StudentHomePage = () => {
             </div>
           </div>
 
-          <div className="flex text-white capitalize bg-orange-200 py-8 px-24 gap-4 items-center rounded">
+          <div className="flex items-center gap-4 rounded bg-orange-200 px-24 py-8 capitalize text-white">
             <div className="text-3xl">
               <FaBook></FaBook>
             </div>
@@ -35,7 +41,7 @@ const StudentHomePage = () => {
             </div>
           </div>
 
-          <div className="flex text-white capitalize bg-purple-200 py-8 px-24 gap-4 items-center rounded">
+          <div className="flex items-center gap-4 rounded bg-purple-200 px-24 py-8 capitalize text-white">
             <div className="text-3xl">
               <FaBook></FaBook>
             </div>
@@ -46,8 +52,8 @@ const StudentHomePage = () => {
           </div>
         </div>
 
-        <div className="grid sm:grid-cols-2 mt-4 gap-4">
-          <div className="bg-blue-50 sm:border-l-2 rounded  border-orange-300 p-8 ">
+        <div className="mt-4 grid gap-4 sm:grid-cols-2">
+          <div className="rounded border-orange-300 bg-blue-50  p-8 sm:border-l-2 ">
             <div className="flex justify-center">
               <div className="text-center">
                 <div className="avatar ">
@@ -60,30 +66,30 @@ const StudentHomePage = () => {
             </div>
           </div>
 
-          <div className="bg-cyan-100 sm:border-l-2 border-orange-300 p-8 rounded shadow-lg">
+          <div className="rounded border-orange-300 bg-cyan-100 p-8 shadow-lg sm:border-l-2">
             <h3 className="text-2xl">Your Activities</h3>
-            <div className="flex gap-4 items-center text-blue-500">
+            <div className="flex items-center gap-4 text-blue-500">
               <span>
                 <FaShoppingCart></FaShoppingCart>
               </span>
               <span>orders: 6</span>
             </div>
 
-            <div className="flex gap-4 items-center text-green-500">
+            <div className="flex items-center gap-4 text-green-500">
               <span>
                 <FaStar></FaStar>
               </span>
               <span>reviews: 1</span>
             </div>
 
-            <div className="flex gap-4 items-center text-yellow-500">
+            <div className="flex items-center gap-4 text-yellow-500">
               <span>
                 <FaCalendar></FaCalendar>
               </span>
               <span>enrolled: 1</span>
             </div>
 
-            <div className="flex gap-4 items-center text-orange-500">
+            <div className="flex items-center gap-4 text-orange-500">
               <span>
                 <FaWallet></FaWallet>
               </span>

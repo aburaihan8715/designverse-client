@@ -5,11 +5,20 @@ import PopularInstructorCard from "./PopularInstructorCard";
 
 const PopularInstructors = () => {
   const { classesData, classesLoading, classesError } = useClassesData();
-  const sortedInstructor = classesData?.sort(
+  // classes are approved by the admin
+  const approvedClasses = classesData?.filter(
+    (item) => item.status === "approved",
+  );
+  // sorted classes based on enrolled student
+  const sortedInstructorBasedOnEnrolledStudent = approvedClasses?.sort(
     (a, b) => b.studentEnrolled - a.studentEnrolled,
   );
-  const popularFourInstructor = sortedInstructor?.slice(0, 8);
-  // console.log(popularFourInstructor);
+
+  // display some classes on ui
+  const somePopularInstructor = sortedInstructorBasedOnEnrolledStudent?.slice(
+    0,
+    5,
+  );
 
   if (classesLoading) {
     return <LoadingSpinner></LoadingSpinner>;
@@ -26,7 +35,7 @@ const PopularInstructors = () => {
         ></SectionHeading>
         <div className="grid gap-8 sm:grid-cols-2 md:grid-cols-4">
           {/* FIXME: */}
-          {popularFourInstructor?.map((item) => (
+          {somePopularInstructor?.map((item) => (
             <PopularInstructorCard key={item._id} item={item} />
           ))}
         </div>

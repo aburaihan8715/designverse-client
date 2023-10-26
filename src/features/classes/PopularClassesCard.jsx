@@ -1,9 +1,10 @@
-import axios from "axios";
 import Swal from "sweetalert2";
 import { useLocation, useNavigate } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
 import useCartData from "../../hooks/useCartData";
 import useRole from "../../hooks/useRole";
+import useAxiosSecure from "../../hooks/useAxiosSecure";
+import { v4 as uuidv4 } from "uuid";
 
 const PopularClassesCard = ({ item }) => {
   const { roleData } = useRole();
@@ -11,16 +12,21 @@ const PopularClassesCard = ({ item }) => {
   const location = useLocation();
   const { user } = useAuth();
   const { refetch } = useCartData();
+  const { axiosSecure } = useAxiosSecure();
 
   const addToCartHandler = (item) => {
     const addToCartData = {
-      selectedClassId: item._id,
+      cartId: uuidv4(),
+      selectedClassId: item.classId,
       classImage: item.classImage,
       className: item.className,
-      instructorName: item.user.userName,
+      instructorName: item.instructorName,
+      instructorEmail: item.instructorEmail,
       price: item.price,
-      email: user?.email,
+      offerPercent: item.offerPercent,
+      userEmail: user?.email,
     };
+
     // console.log(cartData);
 
     if (!user) {
@@ -40,11 +46,11 @@ const PopularClassesCard = ({ item }) => {
       Swal.fire(`${roleData?.role} are not allow to take this course!!`);
       return;
     } else {
-      axios
-        .post("http://localhost:5000/cart", addToCartData)
+      axiosSecure
+        .post("/cart", addToCartData)
         .then((data) => {
+          refetch();
           if (data.data.acknowledged) {
-            refetch();
             Swal.fire({
               position: "center",
               icon: "success",
@@ -66,7 +72,7 @@ const PopularClassesCard = ({ item }) => {
   return (
     <div
       data-aos="zoom-in"
-      className="card relative rounded shadow-md hover:shadow-white"
+      className="card relative rounded-md border shadow-md hover:shadow-white"
     >
       <figure>
         <img
@@ -81,7 +87,7 @@ const PopularClassesCard = ({ item }) => {
       <div className="card-body">
         <h2 className="card-title">{item.className}</h2>
         <p>Available seats: {item.seats}</p>
-        <p>Instructor: {item.user.userName}</p>
+        <p>Instructor: {item.userName}</p>
 
         <div className="card-actions justify-end">
           <button

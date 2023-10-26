@@ -59,20 +59,26 @@ const DashboardLayout = () => {
         <div className="drawer-side">
           <label htmlFor="my-drawer-2" className="drawer-overlay"></label>
           <ul className="menu h-full w-80 gap-2 bg-gradient-to-b from-base-100 to-pink-300 p-4 text-base-content">
-            <div>
+            <div className="mb-6">
               <BrandLogo isHidden={false} />
             </div>
             {user && roleData?.role === "student" && (
               <>
                 <li>
-                  <ActiveLink to="/dashboard/student">
+                  <ActiveLink
+                    className="font-semibold uppercase"
+                    to="/dashboard/student"
+                  >
                     <FaHome></FaHome>
                     <span>Student home</span>
                   </ActiveLink>
                 </li>
 
                 <li>
-                  <ActiveLink to="/dashboard/enrolledClasses">
+                  <ActiveLink
+                    className="font-semibold uppercase"
+                    to="/dashboard/enrolledClasses"
+                  >
                     <FaBook />
                     <span>My Enrolled Classes</span>
                   </ActiveLink>
@@ -81,7 +87,10 @@ const DashboardLayout = () => {
                   roleData?.role === "student" &&
                   cartData?.length > 0 && (
                     <li>
-                      <ActiveLink className="" to="/dashboard/selectedClasses">
+                      <ActiveLink
+                        className="font-semibold uppercase"
+                        to="/dashboard/selectedClasses"
+                      >
                         <FaBookOpen />
                         <span>My Selected Classes</span>
                         <span className="badge badge-success text-white">
@@ -91,19 +100,28 @@ const DashboardLayout = () => {
                     </li>
                   )}
                 <li>
-                  <ActiveLink to="/dashboard/payment">
+                  <ActiveLink
+                    className="font-semibold uppercase"
+                    to="/dashboard/payment"
+                  >
                     <FaWallet />
                     <span>Payment</span>
                   </ActiveLink>
                 </li>
                 <li>
-                  <ActiveLink to="/dashboard/paymentHistory">
+                  <ActiveLink
+                    className="font-semibold uppercase"
+                    to="/dashboard/paymentHistory"
+                  >
                     <FaHistory />
                     <span>Payment History</span>
                   </ActiveLink>
                 </li>
                 <li>
-                  <ActiveLink to="/dashboard/addReview">
+                  <ActiveLink
+                    className="font-semibold uppercase"
+                    to="/dashboard/addReview"
+                  >
                     <FaCommentAlt />
                     <span>Add Review</span>
                   </ActiveLink>
@@ -114,19 +132,28 @@ const DashboardLayout = () => {
             {user && roleData?.role === "instructor" && (
               <>
                 <li>
-                  <ActiveLink to="/dashboard/instructor">
+                  <ActiveLink
+                    className="font-semibold uppercase"
+                    to="/dashboard/instructor"
+                  >
                     <FaHome />
                     <span>Instructor home</span>
                   </ActiveLink>
                 </li>
                 <li>
-                  <ActiveLink to="/dashboard/addClass">
+                  <ActiveLink
+                    className="font-semibold uppercase"
+                    to="/dashboard/addClass"
+                  >
                     <FaPlus />
                     <span>Add Class</span>
                   </ActiveLink>
                 </li>
                 <li>
-                  <ActiveLink to="/dashboard/instructorClasses">
+                  <ActiveLink
+                    className="font-semibold uppercase"
+                    to="/dashboard/instructorClasses"
+                  >
                     <FaBookReader />
                     <span>My classes</span>
                   </ActiveLink>
@@ -137,19 +164,28 @@ const DashboardLayout = () => {
             {user && roleData?.role === "admin" && (
               <>
                 <li>
-                  <ActiveLink to="/dashboard/admin">
+                  <ActiveLink
+                    className="font-semibold uppercase"
+                    to="/dashboard/admin"
+                  >
                     <FaHome />
                     <span>Admin home</span>
                   </ActiveLink>
                 </li>
                 <li>
-                  <ActiveLink to="/dashboard/manageClasses">
+                  <ActiveLink
+                    className="font-semibold uppercase"
+                    to="/dashboard/manageClasses"
+                  >
                     <FaBox />
                     <span>Manage classes</span>
                   </ActiveLink>
                 </li>
                 <li>
-                  <ActiveLink to="/dashboard/manageUsers">
+                  <ActiveLink
+                    className="font-semibold uppercase"
+                    to="/dashboard/manageUsers"
+                  >
                     <FaUsers />
                     <span>Manage users</span>
                   </ActiveLink>
@@ -160,14 +196,14 @@ const DashboardLayout = () => {
             <div className="divider"></div>
 
             <li>
-              <ActiveLink to="/">
+              <ActiveLink className="font-semibold uppercase" to="/">
                 <FaHome />
                 <span>Home</span>
               </ActiveLink>
             </li>
 
             <li>
-              <ActiveLink to="/contact">
+              <ActiveLink className="font-semibold uppercase" to="/contact">
                 <FaEnvelope />
                 <span>Contact</span>
               </ActiveLink>

@@ -24,6 +24,9 @@ import InstructorMyClassUpdatePage from "../pages/InstructorMyClassUpdatePage";
 import PaymentHistoryPage from "../pages/PaymentHistoryPage";
 import AddReviewPage from "../pages/AddReviewPage";
 import TestImageHosting from "../pages/TestImageHosting";
+import ForgetPassword from "../pages/ForgetPassword";
+import InstructorRoute from "./InstructorRoute";
+import AdminRoute from "./AdminRoute";
 
 // function for dynamic home route
 const router = createBrowserRouter([
@@ -61,6 +64,10 @@ const router = createBrowserRouter([
         element: <SeeInstructorClasses />,
       },
       {
+        path: "forget-password",
+        element: <ForgetPassword />,
+      },
+      {
         path: "testImageHosting",
         element: <TestImageHosting />,
       },
@@ -76,11 +83,19 @@ const router = createBrowserRouter([
       // student routes
       {
         path: "student",
-        element: <StudentHomePage />,
+        element: (
+          <PrivateRoute>
+            <StudentHomePage />
+          </PrivateRoute>
+        ),
       },
       {
         path: "enrolledClasses",
-        element: <StudentEnrolledClassesPage />,
+        element: (
+          <PrivateRoute>
+            <StudentEnrolledClassesPage />
+          </PrivateRoute>
+        ),
       },
       {
         path: "selectedClasses",
@@ -92,32 +107,60 @@ const router = createBrowserRouter([
       },
       {
         path: "paymentHistory",
-        element: <PaymentHistoryPage />,
+        element: (
+          <PrivateRoute>
+            <PaymentHistoryPage />
+          </PrivateRoute>
+        ),
       },
       {
         path: "addReview",
-        element: <AddReviewPage />,
+        element: (
+          <PrivateRoute>
+            <AddReviewPage />
+          </PrivateRoute>
+        ),
       },
       {
         path: "payment",
-        element: <PaymentPage />,
+        element: (
+          <PrivateRoute>
+            <PaymentPage />
+          </PrivateRoute>
+        ),
       },
       // instructors routes
       {
         path: "instructor",
-        element: <InstructorHomePage />,
+        element: (
+          <InstructorRoute>
+            <InstructorHomePage />
+          </InstructorRoute>
+        ),
       },
       {
         path: "addClass",
-        element: <AddClassPage />,
+        element: (
+          <InstructorRoute>
+            <AddClassPage />
+          </InstructorRoute>
+        ),
       },
       {
         path: "instructorClasses",
-        element: <InstructorMyClassesPage />,
+        element: (
+          <InstructorRoute>
+            <InstructorMyClassesPage />
+          </InstructorRoute>
+        ),
       },
       {
         path: "updateClass/:id",
-        element: <InstructorMyClassUpdatePage />,
+        element: (
+          <InstructorRoute>
+            <InstructorMyClassUpdatePage />
+          </InstructorRoute>
+        ),
       },
       // admin routes
       {
@@ -126,11 +169,19 @@ const router = createBrowserRouter([
       },
       {
         path: "manageClasses",
-        element: <ManageClassesPage />,
+        element: (
+          <AdminRoute>
+            <ManageClassesPage />
+          </AdminRoute>
+        ),
       },
       {
         path: "manageUsers",
-        element: <ManageUsersPage />,
+        element: (
+          <AdminRoute>
+            <ManageUsersPage />
+          </AdminRoute>
+        ),
       },
     ],
   },

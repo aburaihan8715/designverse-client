@@ -56,7 +56,7 @@ const SocialLogin = () => {
 
   return (
     <>
-      <div className="flex justify-center gap-6">
+      <div className="flex justify-center gap-6 rounded-md border p-3">
         {/* <button className="avatar">
           <div className="w-5 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
             <img src="https://i.ibb.co/Y7nTmxp/facebook.png" />

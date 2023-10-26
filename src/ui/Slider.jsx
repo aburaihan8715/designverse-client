@@ -13,58 +13,102 @@ const Slider = () => {
     <div>
       <div className="text-center">
         <Carousel>
-          <div className="bg-slate-500 max-h-screen">
+          {/* item 01 */}
+          <div className="">
             <img className="max-h-screen" loading="lazy" src={slide1} />
-            <p className="legend">
-              History of Fashion Design: This heading would explore the evolution of fashion design throughout different eras, from ancient
-              civilizations to modern-day trends. It would cover influential designers, iconic fashion moments, and the impact of cultural and
-              societal changes on fashion.
-            </p>
+            <div className="legend">
+              <h3 className="text-4xl">History of Fashion Design</h3>
+              <p className="mt-4 text-xl">
+                This heading would explore the evolution of fashion design
+                throughout different eras, from ancient civilizations to
+                modern-day trends. It would cover influential designers, iconic
+                fashion moments, and the impact of cultural and societal changes
+                on fashion.
+              </p>
+            </div>
           </div>
 
-          <div className="bg-slate-500 max-h-screen">
+          {/* item 02 */}
+          <div className="">
             <img className="max-h-screen" loading="lazy" src={slide2} />
-            <p className="legend">
-              Elements of Fashion Design: Under this heading, one can delve into the fundamental elements that constitute fashion design. This would
-              include topics such as color theory, fabric selection, silhouette, texture, pattern, and proportion. It would provide insights into how
-              these elements are utilized to create visually appealing and harmonious designs.
-            </p>
+
+            <div className="legend">
+              <h3 className="text-4xl">Elements of Fashion Design</h3>
+              <p className="mt-4 text-xl">
+                Under this heading, one can delve into the fundamental elements
+                that constitute fashion design. This would include topics such
+                as color theory, fabric selection, silhouette, texture, pattern,
+                and proportion. It would provide insights into how these
+                elements are utilized to create visually appealing and
+                harmonious designs.
+              </p>
+            </div>
           </div>
 
-          <div className="bg-slate-500 max-h-screen">
+          {/* item 03 */}
+          <div className="">
             <img className="max-h-screen" loading="lazy" src={slide3} />
-            <p className="legend">
-              Fashion Design Techniques: This heading would focus on the various techniques and processes involved in fashion design. It would
-              encompass topics like sketching and illustration, draping, patternmaking, sewing, garment construction, and the integration of
-              technology in the design process.
-            </p>
+
+            <div className="legend">
+              <h3 className="text-4xl">Fashion Design Techniques</h3>
+              <p className="mt-4 text-xl">
+                This heading would focus on the various techniques and processes
+                involved in fashion design. It would encompass topics like
+                sketching and illustration, draping, patternmaking, sewing,
+                garment construction, and the integration of technology in the
+                design process.
+              </p>
+            </div>
           </div>
 
-          <div className="bg-slate-500 max-h-screen">
+          {/* item 04 */}
+          <div className="">
             <img className="max-h-screen" loading="lazy" src={slide4} />
-            <p className="legend">
-              Fashion Design and Sustainability: With increasing awareness about the environmental impact of the fashion industry, this heading would
-              explore the concept of sustainable fashion design. It would cover topics such as eco-friendly materials, ethical production practices,
-              upcycling, slow fashion, and the role of designers in creating a more sustainable future.
-            </p>
+
+            <div className="legend">
+              <h3 className="text-4xl">Fashion Design and Sustainability</h3>
+              <p className="mt-4 text-xl">
+                With increasing awareness about the environmental impact of the
+                fashion industry, this heading would explore the concept of
+                sustainable fashion design. It would cover topics such as
+                eco-friendly materials, ethical production practices, upcycling,
+                slow fashion, and the role of designers in creating a more
+                sustainable future.
+              </p>
+            </div>
           </div>
 
-          <div className="bg-slate-500 max-h-screen">
+          {/* item 05 */}
+          <div className="">
             <img className="max-h-screen" loading="lazy" src={slide5} />
-            <p className="legend">
-              Fashion Design and Cultural Influences: This heading would examine how culture and diversity influence fashion design. It would explore
-              the interplay between different cultures, traditions, and fashion trends, showcasing how designers draw inspiration from global
-              perspectives to create unique and inclusive designs.
-            </p>
+            <div className="legend">
+              <h3 className="text-4xl">
+                Fashion Design and Cultural Influences
+              </h3>
+              <p className="mt-4 text-xl">
+                This heading would examine how culture and diversity influence
+                fashion design. It would explore the interplay between different
+                cultures, traditions, and fashion trends, showcasing how
+                designers draw inspiration from global perspectives to create
+                unique and inclusive designs.
+              </p>
+            </div>
           </div>
 
-          <div className="bg-slate-500 max-h-screen">
+          {/* item 06 */}
+          <div className="">
             <img className="max-h-screen" loading="lazy" src={slide6} />
-            <p className="legend">
-              Fashion Design and Technology: In this heading, the intersection of fashion design and technology would be explored. It would cover
-              topics such as digital design tools, 3D printing, wearable technology, smart textiles, and the integration of artificial intelligence in
-              fashion design processes. It would highlight the innovative ways in which technology is shaping the future of fashion.
-            </p>
+            <div className="legend">
+              <h3 className="text-4xl">Fashion Design and Technology</h3>
+              <p className="mt-4 text-xl">
+                In this heading, the intersection of fashion design and
+                technology would be explored. It would cover topics such as
+                digital design tools, 3D printing, wearable technology, smart
+                textiles, and the integration of artificial intelligence in
+                fashion design processes. It would highlight the innovative ways
+                in which technology is shaping the future of fashion.
+              </p>
+            </div>
           </div>
         </Carousel>
       </div>

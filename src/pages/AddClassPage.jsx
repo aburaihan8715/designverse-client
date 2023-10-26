@@ -1,11 +1,20 @@
 import { Helmet } from "react-helmet-async";
 import { useForm } from "react-hook-form";
-import axios from "axios";
 import Swal from "sweetalert2";
 import useAuth from "../hooks/useAuth";
+import axios from "axios";
+import { useState } from "react";
+import { v4 as uuidv4 } from "uuid";
+import useAxiosSecure from "../hooks/useAxiosSecure";
+
+const image_bb_api_key = import.meta.env.VITE_IMAGEBB_API_KEY;
+const image_hosting_url = `https://api.imgbb.com/1/upload?key=${image_bb_api_key}`;
 
 const AddClassPage = () => {
   const { user } = useAuth();
+  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
+  const { axiosSecure } = useAxiosSecure();
   const {
     register,
     handleSubmit,
@@ -13,110 +22,69 @@ const AddClassPage = () => {
     formState: { errors },
   } = useForm();
 
-  // FIXME:
-  // const img_hosting_token = import.meta.env.VITE_image_hosting_api_key;
-  // const img_hosting_url = `https://api.imgbb.com/1/upload?&key=${img_hosting_token}`;
-
-  const submitHandler = (data) => {
+  const submitHandler = async (data) => {
     // console.log(data);
-    // {
-    //   "classId": 1,
-    //   "className": "Fashion Sketching and Illustration",
-    //   "classImage": "https://i.ibb.co/tBBg1rT/class-cover-1.png",
-    //   "seats": 20,
-    //   "price": 30,
-    //   "status": "approved",
-    //   "studentEnrolled": null,
-    //   "adminFeedback": "",
-    //   "rating": null,
-    //   "ratingMessage": "",
-    //   "offerPercent": null,
-    //   "user": {
-    //     "userId": 1,
-    //     "userName": "Sarah Anderson",
-    //     "userImage": "https://i.ibb.co/XjwCw6K/instructor-1.jpg",
-    //     "userEmail": "sarah@gmail.com",
-    //     "numberOfClasses": 2,
-    //     "nameOfClasses": ["Fashion Sketching and Illustration", "Pattern Making and Garment Construction"],
-    //     "role": "instructor",
-    //     "follower": null,
-    //     "phoneNumber": "+880 1711111111",
-    //     "address": "Dhaka-1111",
-    //     "gender": "female"
-    //   }
-    // }
+    setLoading(true);
+    setError("");
+    const file = data.classImage[0];
+    let imgURL;
+    let formData = new FormData();
+    formData.append("image", file);
 
-    // {className
-    //   classImage
-    //   price
-    //   seats
-    //   offer
-    //   instructorName
-    //   instructorEmail
-    //   instructorImage
-    //   phone
-    //   gender
-    //   address}
-    const classData = {
-      className: data.className,
-      classImage: data.classImage,
-      seats: Number(data.seats),
-      price: Number(data.price),
-      status: "pending",
-      studentEnrolled: null,
-      adminFeedback: "",
-      rating: null,
-      ratingMessage: "",
-      offerPercent: Number(data.offer) || null,
-      user: {
-        userName: data.instructorName,
-        userImage: data.instructorImage,
-        userEmail: data.instructorEmail,
-        numberOfClasses: null,
-        nameOfClasses: [],
+    try {
+      const imageRes = await axios.post(image_hosting_url, formData);
+      const imageData = imageRes.data;
+      // console.log(data);
+
+      if (imageData?.success) {
+        imgURL = imageData.data.display_url;
+      }
+
+      const newClassData = {
+        classId: uuidv4(),
+        className: data?.className,
+        classImage: imgURL,
+        seats: Number(data?.seats),
+        price: Number(data?.price),
+        status: "pending",
+        studentEnrolled: null,
+        adminFeedback: "",
+        rating: null,
+        ratingMessage: "",
+        offerPercent: Number(data?.offer) || null,
+        instructorName: data?.instructorName,
+        instructorImage: data?.instructorImage,
+        instructorEmail: data?.instructorEmail,
         role: "instructor",
         follower: null,
-        phoneNumber: data.phone,
-        gender: data.gender,
-        address: data.address,
-      },
-    };
-    // console.log(classData);
-    // send data to server using axios
-    axios
-      .post("http://localhost:5000/classes", classData)
-      .then((data) => {
-        if (data.data.insertedId) {
-          Swal.fire({
-            position: "center",
-            icon: "success",
-            title: "Class added successfully!",
-            showConfirmButton: false,
-            timer: 1500,
-          });
-        }
-      })
-      .catch((error) => {
-        console.log(error.message);
-      });
+        phoneNumber: data?.phone,
+        gender: data?.gender,
+        address: data?.address,
+      };
 
-    reset();
+      // console.log(newClassData);
 
-    // FIXME: upload image on image bb
-    // const formData = new FormData();
-    // formData.append("classImage", data.classImage[0]);
-
-    // fetch(img_hosting_url, {
-    //   method: "PUT",
-    //   body: formData,
-    // })
-    //   .then((res) => res.json())
-    //   .then((data) => {
-    //     console.log(data);
-    //   })
-    //   .catch((error) => {
-    //     console.log(error.message);
-    //   });
+      const classResponse = await axiosSecure.post(
+        "http://localhost:5000/classes",
+        newClassData,
+      );
+      const classData = classResponse.data;
+      if (classData.insertedId) {
+        setLoading(false);
+        Swal.fire({
+          position: "center",
+          icon: "success",
+          title: "Class added successfully!",
+          showConfirmButton: false,
+          timer: 1500,
+        });
+        reset();
+      }
+    } catch (error) {
+      setLoading(false);
+      setError(error.message);
+      console.log(error.message);
+    }
   };
 
   return (
@@ -126,7 +94,7 @@ const AddClassPage = () => {
       </Helmet>
 
       <div className="p-1">
-        <div className="mx-auto max-w-xl border  p-8">
+        <div className="mx-auto max-w-lg rounded-md border p-8">
           <form onSubmit={handleSubmit(submitHandler)}>
             <div className="space-y-3">
               <div className="text-center ">
@@ -136,6 +104,25 @@ const AddClassPage = () => {
               </div>
 
               <div className="">
+                {/* error */}
+                {error && (
+                  <div className="alert alert-error rounded-md">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      className="h-6 w-6 shrink-0 stroke-current"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth="2"
+                        d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"
+                      />
+                    </svg>
+                    <span>{error}</span>
+                  </div>
+                )}
                 <div>
                   {/* group 01 */}
                   <div className="gap-2 sm:flex">
@@ -164,8 +151,8 @@ const AddClassPage = () => {
                       </label>
                       <input
                         {...register("classImage", { required: true })}
-                        type="url"
-                        className="input-bordered input w-full"
+                        type="file"
+                        className="file-input-secondary file-input input-bordered w-full"
                         placeholder="Enter class image url"
                       />
                       {errors.classImage?.type === "required" && (
@@ -277,6 +264,8 @@ const AddClassPage = () => {
                       <input
                         {...register("instructorImage", { required: true })}
                         type="url"
+                        defaultValue={user?.photoURL}
+                        readOnly
                         className="input-bordered input w-full"
                         placeholder="Enter instructor image url"
                       />
@@ -341,49 +330,23 @@ const AddClassPage = () => {
                         <span className="text-error">Address is required</span>
                       )}
                     </div>
-                    {/* add class button*/}
+
+                    {/* button*/}
                     <div className="w-full self-stretch">
                       <label className="label invisible">
-                        <span className="label-text">Address*</span>
+                        <span className="label-text">only place holder</span>
                       </label>
-                      <input
+                      <button
                         type="submit"
-                        value="Submit"
                         className="btn-secondary btn-block btn"
-                      />
+                      >
+                        {loading && (
+                          <span className="loading loading-spinner text-primary" />
+                        )}
+                        <span>submit</span>
+                      </button>
                     </div>
                   </div>
-                </div>
-
-                {/* class image input type file */}
-                {/* // FIXME: */}
-                {/* <div className="w-full ">
-                    <label className="label">
-                      <span className="label-text">Class image*</span>
-                    </label>
-                    <input
-                      {...register("classImage", { required: true })}
-                      type="file"
-                      className="file-input file-input-bordered file-input-warning w-full"
-                    />
-                    {errors.classImage?.type === "required" && <span className="text-error">Class image is required</span>}
-                  </div> */}
-
-                {/* right part */}
-                <div>
-                  {/* instructor image input type file*/}
-                  {/* // FIXME: */}
-                  {/* <div className="w-full ">
-                    <label className="label">
-                      <span className="label-text">Instructor image*</span>
-                    </label>
-                    <input
-                      {...register("instructorImage", { required: true })}
-                      type="file"
-                      className="file-input file-input-bordered file-input-warning w-full"
-                    />
-                    {errors.instructorImage?.type === "required" && <span className="text-error">Instructor image is required</span>}
-                  </div> */}
                 </div>
               </div>
             </div>

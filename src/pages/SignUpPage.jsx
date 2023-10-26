@@ -21,7 +21,7 @@ const SignUpPage = () => {
   } = useForm();
 
   const submitHandler = async (data) => {
-    setSignUpError(false);
+    setSignUpError("");
     setSignUpLoading(true);
     const { email, password, name } = data;
     try {
@@ -36,11 +36,13 @@ const SignUpPage = () => {
       });
 
       const data = await res.json();
+
       if (data.acknowledged) {
         setSignUpLoading(false);
         Swal.fire({
           position: "center",
-          title: `sign up success!`,
+          icon: "success",
+          title: "Sign up success!!",
           showConfirmButton: false,
           timer: 1500,
         });
@@ -61,11 +63,11 @@ const SignUpPage = () => {
       </Helmet>
 
       <div className="">
-        <div className="mx-auto max-w-md border p-8">
+        <div className="mx-auto max-w-md rounded-md border p-8">
           <form onSubmit={handleSubmit(submitHandler)}>
             <div className="space-y-3">
               <div className="text-center ">
-                <h4 className="text-4xl capitalize">Sign up</h4>
+                <h4 className="text-4xl uppercase">Sign up</h4>
               </div>
               {/* error message */}
               {signUpError && (
@@ -136,32 +138,34 @@ const SignUpPage = () => {
               </div>
 
               {/* password input */}
-              <div className="relative w-full">
+              <div className="w-full">
                 <label className="label">
                   <span className="label-text">Password</span>
                 </label>
-                <input
-                  {...register("password", {
-                    required: true,
-                    minLength: 6,
-                    maxLength: 20,
-                    pattern: /(?=.*[A-Z])(?=.*[!@#$&*])(?=.*[0-9])(?=.*[a-z])/i,
-                  })}
-                  placeholder="Enter your password"
-                  className="input-bordered input w-full "
-                  type={showPassword ? "text" : "password"}
-                />
 
-                {/* password hide and show handler */}
-                <span
-                  className="absolute right-6 top-1/2 translate-y-1/4"
-                  onClick={() => setShowPassword(!showPassword)}
-                >
-                  {!showPassword && (
-                    <FaEyeSlash className="h-6 w-6 text-gray-500" />
-                  )}
-                  {showPassword && <FaEye className="h-6 w-6 text-gray-500" />}
-                </span>
+                <div className="relative">
+                  <input
+                    {...register("password", {
+                      required: true,
+                      minLength: 6,
+                      maxLength: 20,
+                      pattern:
+                        /(?=.*[A-Z])(?=.*[!@#$&*])(?=.*[0-9])(?=.*[a-z])/i,
+                    })}
+                    placeholder="Enter your password"
+                    className="input-bordered input w-full "
+                    type={showPassword ? "text" : "password"}
+                  />
+
+                  {/* password hide and show handler */}
+                  <span
+                    className="absolute right-6 top-1/2 -translate-y-1/2"
+                    onClick={() => setShowPassword(!showPassword)}
+                  >
+                    {!showPassword && <FaEyeSlash className="h-6 w-6" />}
+                    {showPassword && <FaEye className="h-6 w-6" />}
+                  </span>
+                </div>
 
                 {/* error message for password */}
                 {errors.password?.type === "required" && (
@@ -190,7 +194,7 @@ const SignUpPage = () => {
 
               {/* sign up button*/}
               <div className="w-full ">
-                <button type="submit" className="btn-primary btn-block btn">
+                <button type="submit" className="btn-secondary btn-block btn">
                   {signUpLoading ? (
                     <img
                       className="rounded-full"
@@ -205,17 +209,23 @@ const SignUpPage = () => {
             </div>
           </form>
 
-          <p className="mt-2 text-center">
-            Already registered?
-            <Link className="text-orange-700 hover:underline" to="/login">
-              Go to login
-            </Link>
-          </p>
-
-          <p className="mb-2 text-center">Or sign up with</p>
+          <div className="divider">OR</div>
 
           {/* social login */}
-          <SocialLogin></SocialLogin>
+          <div>
+            <SocialLogin />
+          </div>
+
+          {/* link to sign up */}
+          <div className="mt-3 space-x-1 rounded-md border p-3 text-center">
+            <span>Already registered?</span>
+            <span>
+              <Link className="font-bold text-orange-600" to="/login">
+                Login
+              </Link>
+            </span>
+            <span>here.</span>
+          </div>
         </div>
       </div>
     </div>

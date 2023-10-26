@@ -27,13 +27,14 @@ const StudentEnrolledClassesPage = () => {
   });
 
   const enrolledClassesList = enrolledClassesData?.flat();
+  console.log(enrolledClassesList);
   const enrolledClassesIds = enrolledClassesList?.map((item) => {
-    return item.classItemsIds;
+    return item.selectedIClassesIds;
   });
 
   const enrolledIdsList = enrolledClassesIds?.flat();
   const totalEnrolledClasses = enrolledIdsList?.map((id) => {
-    return classesData.filter((item) => item._id === id)[0];
+    return classesData.filter((item) => item.classId === id)[0];
   });
 
   const totalSpend = totalEnrolledClasses?.reduce((total, item) => {
@@ -96,8 +97,8 @@ const StudentEnrolledClassesPage = () => {
                 </td>
 
                 <td>{item?.className}</td>
-                <td>{item?.user.userName}</td>
-                <td>{item?.user.userEmail}</td>
+                <td>{item?.instructorName}</td>
+                <td>{item?.instructorEmail}</td>
                 <td>$ {item?.price}</td>
               </tr>
             ))}

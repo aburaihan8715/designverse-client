@@ -2,21 +2,22 @@ import { Helmet } from "react-helmet-async";
 import { useForm } from "react-hook-form";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import SocialLogin from "../features/authentication/SocialLogin";
-// import {
-//   loadCaptchaEnginge,
-//   LoadCanvasTemplate,
-//   validateCaptcha,
-// } from "react-simple-captcha";
+import {
+  loadCaptchaEnginge,
+  LoadCanvasTemplate,
+  validateCaptcha,
+} from "react-simple-captcha";
 import { useState } from "react";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import useAuth from "../hooks/useAuth";
 import Swal from "sweetalert2";
+import { useEffect } from "react";
 
 const LoginPage = () => {
-  const { authenticationUsingEmailPassword } = useAuth();
-  // const [disableLoginBtn, setDisableLoginBtn] = useState(true);
+  const { authenticationUsingEmailPassword, user } = useAuth();
+  const [disableLoginBtn, setDisableLoginBtn] = useState(true);
   const [showPassword, setShowPassword] = useState(false);
-  const [authError, setAuthError] = useState("");
+  const [loginError, setLoginError] = useState("");
   const [loginLoading, setLoginLoading] = useState(false);
 
   const location = useLocation();
@@ -31,43 +32,67 @@ const LoginPage = () => {
     formState: { errors },
   } = useForm();
 
-  // useEffect(() => {
-  //   loadCaptchaEnginge(6);
-  // }, []);
+  useEffect(() => {
+    loadCaptchaEnginge(6);
+  }, []);
 
   // captcha validation handler
-  // const captchaHandler = (event) => {
-  //   const user_captcha_value = event.target.value;
-  //   if (validateCaptcha(user_captcha_value)) {
-  //     setDisableLoginBtn(false);
-  //   } else {
-  //     setDisableLoginBtn(true);
-  //   }
-  // };
+  const captchaHandler = (event) => {
+    const user_captcha_value = event.target.value;
+    if (validateCaptcha(user_captcha_value)) {
+      setDisableLoginBtn(false);
+    } else {
+      setDisableLoginBtn(true);
+    }
+  };
 
-  const submitHandler = (data) => {
-    setLoginLoading(true);
-    const { email, password } = data;
-    authenticationUsingEmailPassword(email, password)
-      .then(() => {
+  const submitHandler = async (data) => {
+    if (!user) {
+      setLoginError("");
+      setLoginLoading(true);
+      const { email, password } = data;
+
+      try {
+        await authenticationUsingEmailPassword(email, password);
         setLoginLoading(false);
-        setAuthError("");
-        // const loggedInUser = result.user;
-        // console.log(loggedInUser);
+        setLoginError("");
         Swal.fire({
           position: "center",
-          title: `login success!`,
+          icon: "success",
+          title: "Login success!!",
           showConfirmButton: false,
           timer: 1500,
         });
         reset();
         navigate(from, { replace: true });
-      })
-      .catch((error) => {
+      } catch (error) {
         setLoginLoading(false);
-        setAuthError(error.message);
+        setLoginError(error.message);
         console.log(error.message);
-      });
+      }
+    }
+
+    // authenticationUsingEmailPassword(email, password)
+    //   .then(() => {
+    //     setLoginLoading(false);
+    //     setLoginError("");
+    //     // const loggedInUser = result.user;
+    //     // console.log(loggedInUser);
+    //     Swal.fire({
+    //       position: "center",
+    //       icon: "success",
+    //       title: "Login success!!",
+    //       showConfirmButton: false,
+    //       timer: 1500,
+    //     });
+    //     reset();
+    //     navigate(from, { replace: true });
+    //   })
+    //   .catch((error) => {
+    //     setLoginLoading(false);
+    //     setLoginError(error.message);
+    //     console.log(error.message);
+    //   });
   };
 
   return (
@@ -77,15 +102,15 @@ const LoginPage = () => {
       </Helmet>
 
       <div className="">
-        <div className="mx-auto max-w-md border p-8">
+        <div className="mx-auto max-w-md rounded-md border p-8">
           <form onSubmit={handleSubmit(submitHandler)}>
             <div className="space-y-3">
               <div className="text-center ">
-                <h4 className="text-4xl capitalize">Login</h4>
+                <h4 className="text-4xl uppercase">Login</h4>
               </div>
 
               {/* error message */}
-              {authError && (
+              {loginError && (
                 <div className="alert alert-error rounded-md">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -100,7 +125,7 @@ const LoginPage = () => {
                       d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"
                     />
                   </svg>
-                  <span>{authError}</span>
+                  <span>{loginError}</span>
                 </div>
               )}
 
@@ -121,38 +146,52 @@ const LoginPage = () => {
               </div>
 
               {/* password input */}
-              <div className="relative w-full">
+              <div className="w-full">
                 <label className="label">
                   <span className="label-text">Password</span>
                 </label>
-                <input
-                  {...register("password", {
-                    required: true,
-                    minLength: 6,
-                    maxLength: 20,
-                    pattern: /(?=.*[A-Z])(?=.*[!@#$&*])(?=.*[0-9])(?=.*[a-z])/i,
-                  })}
-                  placeholder="Enter your password"
-                  className="input-bordered input w-full "
-                  type={showPassword ? "text" : "password"}
-                />
 
-                <span
-                  className="absolute right-6 top-1/2 translate-y-1/4"
-                  onClick={() => setShowPassword(!showPassword)}
-                >
-                  {!showPassword && (
-                    <FaEyeSlash className="h-6 w-6 text-gray-500" />
-                  )}
-                  {showPassword && <FaEye className="h-6 w-6 text-gray-500" />}
-                </span>
+                <div className="relative">
+                  <input
+                    {...register("password", {
+                      required: true,
+                      minLength: 6,
+                      maxLength: 20,
+                      pattern:
+                        /(?=.*[A-Z])(?=.*[!@#$&*])(?=.*[0-9])(?=.*[a-z])/i,
+                    })}
+                    placeholder="Enter your password"
+                    className="input-bordered input w-full "
+                    type={showPassword ? "text" : "password"}
+                  />
+
+                  <span
+                    className="absolute right-6 top-1/2 -translate-y-1/2"
+                    onClick={() => setShowPassword(!showPassword)}
+                  >
+                    {!showPassword && (
+                      <FaEyeSlash className="h-6 w-6 text-gray-500" />
+                    )}
+                    {showPassword && (
+                      <FaEye className="h-6 w-6 text-gray-500" />
+                    )}
+                  </span>
+                </div>
+
+                {/* password reset link */}
+                <div className="text-right">
+                  <Link to="/forget-password" className="link-error link">
+                    Forget password?
+                  </Link>
+                </div>
+
                 {errors.password?.type === "required" && (
                   <span className="text-error">Password is required</span>
                 )}
               </div>
 
               {/* captcha input */}
-              {/* <div className="w-full ">
+              <div className="w-full ">
                 <LoadCanvasTemplate />
                 <input
                   onBlur={captchaHandler}
@@ -162,15 +201,15 @@ const LoginPage = () => {
                   className="input-bordered input w-full"
                   required
                 />
-                <span className="btn-accent btn-xs btn mt-2">Check</span>
-              </div> */}
+                <span className="btn-secondary btn-xs btn mt-2">Check</span>
+              </div>
 
               {/* login button*/}
               <div className="w-full ">
                 <button
                   type="submit"
-                  className="btn-primary btn-block btn"
-                  // disabled={disableLoginBtn}
+                  className="btn-secondary btn-block btn"
+                  disabled={disableLoginBtn}
                 >
                   {loginLoading ? (
                     <img
@@ -186,17 +225,23 @@ const LoginPage = () => {
             </div>
           </form>
 
-          <p className="mt-2 text-center">
-            New here?
-            <Link className="text-orange-700 hover:underline" to="/signUp">
-              Create an account
-            </Link>
-          </p>
-
-          <p className="mb-2 text-center">Or login with</p>
+          <div className="divider">OR</div>
 
           {/* social login */}
-          <SocialLogin></SocialLogin>
+          <div>
+            <SocialLogin></SocialLogin>
+          </div>
+
+          {/* link to sign up */}
+          <div className="mt-3 space-x-1 rounded-md border p-3 text-center">
+            <span>New user?</span>
+            <span>
+              <Link className="font-bold text-orange-600" to="/signUp">
+                Sign up
+              </Link>
+            </span>
+            <span>here.</span>
+          </div>
         </div>
       </div>
     </div>

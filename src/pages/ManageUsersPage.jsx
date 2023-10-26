@@ -5,12 +5,13 @@ import useUsersData from "../hooks/useUsersData";
 import LoadingSpinner from "../ui/LoadingSpinner";
 import SectionHeading from "../ui/SectionHeading";
 import { useState } from "react";
+import useAxiosSecure from "../hooks/useAxiosSecure";
 
 const ManageUsersPage = () => {
   const { users, userLoading, userError, isUserError } = useUsersData();
 
   if (userLoading) {
-    return <LoadingSpinner></LoadingSpinner>;
+    return <LoadingSpinner />;
   }
   if (isUserError) {
     return (
@@ -26,10 +27,12 @@ const ManageUsersPage = () => {
         <title>FashionVerse | All user</title>
       </Helmet>
       <div>
-        <SectionHeading
-          subHeading={`How many?`}
-          heading={`MANAGE ALL USERS`}
-        ></SectionHeading>
+        <div className="mt-4">
+          <SectionHeading
+            subHeading={`How many?`}
+            heading={`MANAGE ALL USERS`}
+          />
+        </div>
 
         <div className="text-3xl">
           <span>Total users: </span>
@@ -61,18 +64,14 @@ const ManageUsersPage = () => {
 
                   <td className="">
                     <div className="flex flex-col gap-2 ">
-                      <MakeAdminBtn item={item} admin="admin" key={item._id} />
+                      <MakeAdminBtn item={item} admin="admin" />
 
-                      <MakeInstructorBtn
-                        item={item}
-                        instructor="instructor"
-                        key={item._id}
-                      />
+                      <MakeInstructorBtn item={item} instructor="instructor" />
                     </div>
                   </td>
 
                   <th>
-                    <UserDeleteBtn item={item} key={item._id} />
+                    <UserDeleteBtn item={item} />
                   </th>
                 </tr>
               ))}
@@ -91,19 +90,12 @@ export default ManageUsersPage;
 const MakeAdminBtn = ({ item, admin }) => {
   const [makeAdminLoading, setMakeAdminLoading] = useState(false);
   const { refetch } = useUsersData();
+  const { axiosSecure } = useAxiosSecure();
 
   const makeAdminHandler = (item, role) => {
     setMakeAdminLoading(true);
-    fetch(`http://localhost:5000/users/role/${item._id}`, {
-      method: "PATCH",
-      body: JSON.stringify({
-        role,
-      }),
-      headers: {
-        "Content-type": "application/json; charset=UTF-8",
-      },
-    })
-      .then((res) => res.json())
+    axiosSecure
+      .patch(`/users/role/${item?._id}`, { role })
       .then(() => {
         setMakeAdminLoading(false);
         refetch();
@@ -115,9 +107,9 @@ const MakeAdminBtn = ({ item, admin }) => {
 
   return (
     <button
-      disabled={item.role}
+      disabled={item?.role}
       onClick={() => makeAdminHandler(item, admin)}
-      className="btn-xs btn h-7"
+      className="btn-primary btn-xs btn h-7"
     >
       {makeAdminLoading ? " loading.." : "make admin"}
     </button>
@@ -128,32 +120,54 @@ const MakeAdminBtn = ({ item, admin }) => {
 const MakeInstructorBtn = ({ item, instructor }) => {
   const [makeInstructorLoading, setMakeInstructorLoading] = useState(false);
   const { refetch } = useUsersData();
+  const { axiosSecure } = useAxiosSecure();
 
-  const makeInstructorHandler = (item, role) => {
-    setMakeInstructorLoading(true);
-    fetch(`http://localhost:5000/users/role/${item._id}`, {
-      method: "PATCH",
-      body: JSON.stringify({
+  const makeInstructorHandler = async (item, role) => {
+    try {
+      setMakeInstructorLoading(true);
+      const res = await axiosSecure.patch(`/users/role/${item?._id}`, {
         role,
-      }),
-      headers: {
-        "Content-type": "application/json; charset=UTF-8",
-      },
-    })
-      .then((res) => res.json())
-      .then(() => {
+      });
+      const data = res.data;
+      if (data.modifiedCount > 0) {
         setMakeInstructorLoading(false);
         refetch();
-      })
-      .catch((error) => {
-        console.log(error.message);
-      });
+        Swal.fire({
+          position: "center",
+          icon: "success",
+          title: "Make instructor success!!",
+          showConfirmButton: false,
+          timer: 1500,
+        });
+      }
+    } catch (error) {
+      setMakeInstructorLoading(false);
+      console.log(error.message);
+    }
+
+    // fetch(`http://localhost:5000/users/role/${item._id}`, {
+    //   method: "PATCH",
+    //   body: JSON.stringify({
+    //     role,
+    //   }),
+    //   headers: {
+    //     "Content-type": "application/json; charset=UTF-8",
+    //   },
+    // })
+    //   .then((res) => res.json())
+    //   .then(() => {
+    //     setMakeInstructorLoading(false);
+    //     refetch();
+    //   })
+    //   .catch((error) => {
+    //     console.log(error.message);
+    //   });
   };
   return (
     <button
-      disabled={item.role}
+      disabled={item?.role}
       onClick={() => makeInstructorHandler(item, instructor)}
-      className="btn-xs btn h-7"
+      className="btn-secondary btn-xs btn h-7"
     >
       {makeInstructorLoading ? " loading.." : "make instructor"}
     </button>
@@ -164,6 +178,7 @@ const MakeInstructorBtn = ({ item, instructor }) => {
 const UserDeleteBtn = ({ item }) => {
   const [deleteLoading, setDeleteLoading] = useState(false);
   const { refetch } = useUsersData();
+  const { axiosSecure } = useAxiosSecure();
 
   const deleteHandler = (item) => {
     Swal.fire({
@@ -177,19 +192,18 @@ const UserDeleteBtn = ({ item }) => {
     }).then((result) => {
       if (result.isConfirmed) {
         setDeleteLoading(true);
-        fetch(`http://localhost:5000/users/${item._id}`, {
-          method: "DELETE",
-        })
-          .then((res) => res.json())
-          .then((data) => {
-            refetch();
-            if (data.deletedCount > 0) {
+        axiosSecure
+          .delete(`/users/${item?._id}`)
+          .then((res) => {
+            if (res.data.deletedCount > 0) {
+              refetch();
               setDeleteLoading(false);
               Swal.fire("Deleted!", "Your file has been deleted.");
             }
           })
           .catch((error) => {
             console.log(error.message);
+            setDeleteLoading(false);
           });
       }
     });

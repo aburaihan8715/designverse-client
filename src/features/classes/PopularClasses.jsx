@@ -6,11 +6,17 @@ import PopularClassesCard from "./PopularClassesCard";
 const PopularClasses = () => {
   const { classesData, classesLoading, classesError, isClassesError } =
     useClassesData();
-
-  const sortedClasses = classesData?.sort(
+  // classes are approved by the admin
+  const approvedClasses = classesData?.filter(
+    (item) => item.status === "approved",
+  );
+  // sorted classes based on enrolled student
+  const sortedClassesBasedOnEnrolledStudent = approvedClasses?.sort(
     (a, b) => b.studentEnrolled - a.studentEnrolled,
   );
-  const popularThreeClasses = sortedClasses?.slice(0, 8);
+
+  // display some classes on ui
+  const somePopularClasses = sortedClassesBasedOnEnrolledStudent?.slice(0, 5);
   // console.log(popularThreeClasses);
 
   if (classesLoading) {
@@ -28,7 +34,7 @@ const PopularClasses = () => {
         ></SectionHeading>
         <div className="grid gap-8 sm:grid-cols-2 md:grid-cols-4">
           {/* FIXME: */}
-          {popularThreeClasses?.map((item) => (
+          {somePopularClasses?.map((item) => (
             <PopularClassesCard key={item._id} item={item} />
           ))}
         </div>

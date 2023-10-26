@@ -10,7 +10,7 @@ const InstructorsPage = () => {
   // console.log(classesData);
 
   if (classesLoading) {
-    return <LoadingSpinner></LoadingSpinner>;
+    return <LoadingSpinner />;
   }
   if (isClassesError) {
     return <p>something went wrong {classesError}</p>;
@@ -46,19 +46,19 @@ const InstructorsPage = () => {
                     <div className="flex items-center space-x-3">
                       <div className="avatar">
                         <div className="mask mask-squircle h-12 w-12">
-                          <img src={item.user.userImage} alt="instructor" />
+                          <img src={item.instructorImage} alt="instructor" />
                         </div>
                       </div>
                     </div>
                   </td>
 
-                  <td>{item.user.userName}</td>
+                  <td>{item.instructorName}</td>
 
-                  <td>{item.user.userEmail}</td>
+                  <td>{item.instructorEmail}</td>
                   <td>{item.className}</td>
 
                   <th>
-                    <Link to={`/seeClasses/${item.user.userEmail}`}>
+                    <Link to={`/seeClasses/${item.instructorEmail}`}>
                       <button className="btn-secondary btn-sm btn">
                         See Classes
                       </button>

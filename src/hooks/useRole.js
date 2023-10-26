@@ -8,7 +8,7 @@ const useRole = () => {
   const {
     data: roleData,
     isLoading: roleDataLoading,
-    error:roleDataError,
+    error: roleDataError,
     isError: isRoleDataError,
   } = useQuery({
     queryKey: ["role", user?.email],

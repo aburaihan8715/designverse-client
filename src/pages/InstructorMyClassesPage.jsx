@@ -12,33 +12,36 @@ import useClassesData from "../hooks/useClassesData";
 // import axios from "axios";
 
 const InstructorMyClassesPage = () => {
-  const [myClassData, setMyClassData] = useState([]);
-  const [myClassLoading, setMyClassLoading] = useState(false);
-  const [myClassError, setMyClassError] = useState("");
-  const { user, authLoading } = useAuth();
+  const [instructorMyClassData, setInstructorMyClassData] = useState([]);
+  const [instructorMyClassLoading, setInstructorMyClassLoading] =
+    useState(false);
+  const [instructorMyClassError, setInstructorMyClassError] = useState("");
+  const { user } = useAuth();
   const { refetch, classesData, classesLoading } = useClassesData();
   // console.log(classesData);
+  // console.log(user);
+  // console.log(instructorMyClassData);
 
   useEffect(() => {
-    setMyClassLoading(true);
+    setInstructorMyClassLoading(true);
     fetch(`http://localhost:5000/classes?email=${user?.email}`)
       .then((res) => res.json())
       .then((data) => {
-        setMyClassLoading(false);
-        setMyClassData(data);
+        setInstructorMyClassData(data);
+        setInstructorMyClassLoading(false);
       })
       .catch((error) => {
-        setMyClassLoading(false);
-        setMyClassError(error.message);
+        setInstructorMyClassLoading(false);
+        setInstructorMyClassError(error.message);
         console.log(error.message);
       });
   }, [user?.email, classesData]);
 
-  if (myClassLoading || authLoading || classesLoading) {
-    return <LoadingSpinner></LoadingSpinner>;
+  if (instructorMyClassLoading || !user || classesLoading) {
+    return <LoadingSpinner />;
   }
-  if (myClassError) {
-    return <p>something went wrong ${myClassError.message}</p>;
+  if (instructorMyClassError) {
+    return <p>something went wrong ${instructorMyClassError.message}</p>;
   }
 
   return (
@@ -47,12 +50,9 @@ const InstructorMyClassesPage = () => {
         <title>FashionVerse | MyClassesPage</title>
       </Helmet>
       <div>
-        <SectionHeading
-          subHeading={`how many`}
-          heading={`my classes`}
-        ></SectionHeading>
+        <SectionHeading subHeading={`how many`} heading={`my classes`} />
       </div>
-      <p className="text-xl">Total classes :{myClassData?.length}</p>
+      <p className="text-xl">Total classes :{instructorMyClassData?.length}</p>
       <div className="overflow-x-auto">
         <table className="table border border-success">
           {/* head */}
@@ -71,7 +71,7 @@ const InstructorMyClassesPage = () => {
           </thead>
           <tbody className="">
             {/* row 1 */}
-            {myClassData?.map((item, index) => (
+            {instructorMyClassData?.map((item, index) => (
               <tr key={item._id}>
                 <th>{index + 1}</th>
                 <td>
@@ -84,7 +84,7 @@ const InstructorMyClassesPage = () => {
 
                 <td>{item?.className}</td>
                 <td>{item?.seats}</td>
-                <td>$ {item?.price}</td>
+                <td>${item?.price}</td>
                 <td>{item?.status}</td>
                 <td>
                   {item?.studentEnrolled

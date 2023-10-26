@@ -5,6 +5,7 @@ import Swal from "sweetalert2";
 import LoadingSpinner from "../ui/LoadingSpinner";
 import SectionHeading from "../ui/SectionHeading";
 import useCartData from "../hooks/useCartData";
+import useAxiosSecure from "../hooks/useAxiosSecure";
 
 const StudentSelectedClassesPage = () => {
   const { cartLoading, cartError, isCartError, cartData } = useCartData();
@@ -100,6 +101,7 @@ export default StudentSelectedClassesPage;
 //student selected class delete button component
 const StudentSelectedClassDeleteBtn = ({ id }) => {
   const { refetch } = useCartData();
+  const { axiosSecure } = useAxiosSecure();
 
   // delete handler
   const deleteHandler = () => {
@@ -112,13 +114,12 @@ const StudentSelectedClassDeleteBtn = ({ id }) => {
       confirmButtonText: "Yes, delete it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        fetch(`http://localhost:5000/cart/${id}`, {
-          method: "DELETE",
-        })
-          .then((res) => res.json())
-          .then((data) => {
+        axiosSecure
+          .delete(`http://localhost:5000/cart/${id}`)
+
+          .then((res) => {
             refetch();
-            if (data.deletedCount > 0) {
+            if (res.data.deletedCount > 0) {
               Swal.fire("Class has been deleted.!");
             }
           })

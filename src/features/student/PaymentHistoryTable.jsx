@@ -5,7 +5,7 @@ import useAuth from "../../hooks/useAuth";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 
 const PaymentHistoryTable = () => {
-  const { user } = useAuth();
+  const { user, authLoading } = useAuth();
   const { axiosSecure } = useAxiosSecure();
   // console.log(user?.email);
   const {
@@ -15,11 +15,9 @@ const PaymentHistoryTable = () => {
     isError,
   } = useQuery({
     queryKey: ["payments"],
-    enabled: !!user,
+    enabled: !authLoading,
     queryFn: async () => {
-      const res = await axiosSecure.get(
-        `http://localhost:5000/payments?email=${user?.email}`,
-      );
+      const res = await axiosSecure.get(`/payments?email=${user?.email}`);
       return res.data;
     },
   });
@@ -62,7 +60,7 @@ const PaymentHistoryTable = () => {
             {paymentsData?.map((item, index) => (
               <tr key={item._id}>
                 <th>{index + 1}</th>
-                <td>{item.email}</td>
+                <td>{item.userEmail}</td>
                 <td>{item.transactionId}</td>
                 <td className="">$ {item.price}</td>
                 <td className="">{new Date(item.date).toLocaleDateString()}</td>

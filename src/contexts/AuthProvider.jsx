@@ -5,6 +5,8 @@ import {
   createUserWithEmailAndPassword,
   getAuth,
   onAuthStateChanged,
+  sendEmailVerification,
+  sendPasswordResetEmail,
   signInWithEmailAndPassword,
   signInWithPopup,
   signOut,
@@ -21,59 +23,64 @@ const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [authLoading, setAuthLoading] = useState(true);
 
-  // TODO: send verification email
-
-  // TODO: send password reset email
   // create user using email and password
-  const createUserUsingEmailPassword = async (email, password) => {
-    setAuthLoading(true);
-    return await createUserWithEmailAndPassword(auth, email, password);
+  const createUserUsingEmailPassword = (email, password) => {
+    return createUserWithEmailAndPassword(auth, email, password);
   };
 
   // update user profile
-  const updateUserProfile = async (
-    name,
+  const updateUserProfile = (
+    name = "unknown",
     photo = "https://i.ibb.co/nCCcPC7/demo-user.jpg",
   ) => {
-    setAuthLoading(true);
-    return await updateProfile(auth.currentUser, {
+    return updateProfile(auth.currentUser, {
       displayName: name,
       photoURL: photo,
     });
   };
 
   // authentication using email and password
-  const authenticationUsingEmailPassword = async (email, password) => {
-    setAuthLoading(true);
-    return await signInWithEmailAndPassword(auth, email, password);
+  const authenticationUsingEmailPassword = (email, password) => {
+    return signInWithEmailAndPassword(auth, email, password);
   };
 
   // authentication using google
-  const authenticationUsingGoogle = async () => {
-    setAuthLoading(true);
+  const authenticationUsingGoogle = () => {
     const googleProvider = new GoogleAuthProvider();
-    return await signInWithPopup(auth, googleProvider);
+    return signInWithPopup(auth, googleProvider);
   };
 
   // authentication using github
-  const authenticationUsingGithub = async () => {
-    setAuthLoading(true);
+  const authenticationUsingGithub = () => {
     const githubProvider = new GithubAuthProvider();
-    return await signInWithPopup(auth, githubProvider);
+    return signInWithPopup(auth, githubProvider);
+  };
+
+  // email verification
+  const emailVerification = () => {
+    return sendEmailVerification(auth.currentUser);
+  };
+
+  // password reset email
+  const passwordResetEmail = (email) => {
+    return sendPasswordResetEmail(auth, email);
   };
 
   // sign out user
-  const logOutUser = async () => {
-    setAuthLoading(true);
-    return await signOut(auth);
+  const logOutUser = () => {
+    return signOut(auth);
   };
 
   // authentication state observer
   useEffect(() => {
+    setAuthLoading(true);
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
-      // get and set token
+      setAuthLoading(false);
+
       if (currentUser) {
+        console.log("user logged in", currentUser);
+        // get and set token
         axios
           .post("http://localhost:5000/jwt", {
             email: currentUser?.email,
@@ -81,14 +88,13 @@ const AuthProvider = ({ children }) => {
           .then((data) => {
             const token = data.data.token;
             localStorage.setItem("access_token", token);
-            setAuthLoading(false);
           })
           .catch((error) => {
             console.log(error.message);
           });
       } else {
+        console.log("user not logged in", currentUser);
         localStorage.removeItem("access_token");
-        setAuthLoading(false);
       }
     });
     return () => {
@@ -98,20 +104,24 @@ const AuthProvider = ({ children }) => {
 
   // console.log(user);
 
-  const authInfo = {
-    createUserUsingEmailPassword,
-    authenticationUsingEmailPassword,
-    user,
-    setUser,
-    authLoading,
-    setAuthLoading,
-    logOutUser,
-    updateUserProfile,
-    authenticationUsingGoogle,
-    authenticationUsingGithub,
-  };
   return (
-    <AuthContext.Provider value={authInfo}>{children}</AuthContext.Provider>
+    <AuthContext.Provider
+      value={{
+        createUserUsingEmailPassword,
+        authenticationUsingEmailPassword,
+        user,
+        setUser,
+        logOutUser,
+        updateUserProfile,
+        authenticationUsingGoogle,
+        authenticationUsingGithub,
+        emailVerification,
+        passwordResetEmail,
+        authLoading,
+      }}
+    >
+      {children}
+    </AuthContext.Provider>
   );
 };
 

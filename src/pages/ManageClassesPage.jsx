@@ -47,10 +47,10 @@ const ManageClassesPage = () => {
         <title>Bistro | My selected class</title>
       </Helmet>
       <div>
-        <SectionHeading
-          subHeading={`manage`}
-          heading={`all classes`}
-        ></SectionHeading>
+        <div className="mt-4">
+          <SectionHeading subHeading={`manage`} heading={`all classes`} />
+        </div>
+
         <div className="text-3xl ">
           <div className="">
             <span>Total classes: </span>
@@ -89,8 +89,8 @@ const ManageClassesPage = () => {
                   </td>
 
                   <td className="">{item.className}</td>
-                  <td className="">{item.user.userName}</td>
-                  <td className="">{item.user.userEmail}</td>
+                  <td className="">{item.userName}</td>
+                  <td className="">{item.userEmail}</td>
                   <td className="">{item.seats}</td>
                   <td className="">{item.price}</td>
                   <td className="capitalize">{item.status}</td>

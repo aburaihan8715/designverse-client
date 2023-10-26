@@ -2,8 +2,10 @@ import { Helmet } from "react-helmet-async";
 import { FaBook, FaCalendarCheck, FaUsers, FaWallet } from "react-icons/fa";
 import ShapeBarChart from "../features/dashboard/ShapeBarChart";
 import CustomPieChart from "../features/dashboard/CustomPieChart";
+import useAuth from "../hooks/useAuth";
 
 const AdminHomePage = () => {
+  const { user } = useAuth();
   return (
     <div className="px-4">
       <Helmet>
@@ -11,7 +13,7 @@ const AdminHomePage = () => {
       </Helmet>
       <div>
         <div className="mb-4">
-          <h2 className="text-2xl capitalize">Hi, Welcome back!</h2>
+          <h2 className="text-2xl capitalize">Welcome {user?.displayName}</h2>
         </div>
 
         <div className="grid gap-4 sm:grid-cols-4">

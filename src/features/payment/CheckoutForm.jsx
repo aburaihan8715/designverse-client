@@ -6,6 +6,7 @@ import useCartData from "../../hooks/useCartData";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import useAuth from "../../hooks/useAuth";
 import { useNavigate } from "react-router-dom";
+import { v4 as uuidv4 } from "uuid";
 
 // import useAxiosSecure from "../../hooks/useAxiosSecure";
 // import useAuth from "../../hooks/useAuth";
@@ -38,21 +39,9 @@ const CheckoutForm = ({ price, cartData }) => {
     // Block native form submission.
     event.preventDefault();
 
-    if (!stripe || !elements) {
-      // Stripe.js has not loaded yet. Make sure to disable
-      // form submission until Stripe.js has loaded.
-      return;
-    }
-
-    // Get a reference to a mounted CardElement. Elements knows how
-    // to find your CardElement because there can only ever be one of
-    // each type of element.
-
+    if (!stripe || !elements) return;
     const card = elements.getElement(CardElement);
-    if (card == null) {
-      return;
-    }
-
+    if (card == null) return;
     // console.log("card", card);
 
     // Use your card Element with other Stripe.js APIs
@@ -92,14 +81,13 @@ const CheckoutForm = ({ price, cartData }) => {
 
       // save payment information to the server
       const payment = {
-        email: user?.email,
+        paymentId: uuidv4(),
+        userEmail: user?.email,
         transactionId: paymentIntent.id,
         price,
         date: new Date(),
         quantity: cartData.length,
-        selectedIClassesIds: cartData.map((item) => item._id),
-        classItemsIds: cartData.map((item) => item.selectedClassId),
-        classNames: cartData.map((item) => item.className),
+        selectedIClassesIds: cartData.map((item) => item.selectedClassId),
       };
       // console.log(payment);
       axiosSecure.post("/payments", payment).then((res) => {

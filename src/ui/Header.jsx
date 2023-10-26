@@ -9,9 +9,10 @@ import BrandLogo from "./BrandLogo";
 
 const Header = () => {
   const { user, logOutUser } = useAuth();
-
+  // console.log(user);
   // const navigate = useNavigate();
   const { cartData } = useCartData();
+  // console.log(cartData);
   const { roleData } = useRole();
   // console.log(roleData);
 
@@ -71,7 +72,7 @@ const Header = () => {
   );
 
   // handle logout
-  const logOutUserHandler = async () => {
+  const logOutHandler = async () => {
     await logOutUser();
     Navigate("/");
   };
@@ -150,7 +151,7 @@ const Header = () => {
               {user && (
                 <Button
                   className="btn-secondary text-white"
-                  onClick={logOutUserHandler}
+                  onClick={logOutHandler}
                 >
                   logout
                 </Button>

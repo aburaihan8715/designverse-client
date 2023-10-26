@@ -1,3 +1,12 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+#canv {
+  border-radius: 6px;
+  width: 50%;
+}
+
+#reload_href {
+  color: rgb(255, 68, 0) !important;
+}

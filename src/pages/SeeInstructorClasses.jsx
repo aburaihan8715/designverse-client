@@ -7,7 +7,9 @@ import useRole from "../hooks/useRole";
 import useAuth from "../hooks/useAuth";
 import useCartData from "../hooks/useCartData";
 import Swal from "sweetalert2";
-import axios from "axios";
+import ErrorMessage from "../ui/ErrorMessage";
+import useAxiosSecure from "../hooks/useAxiosSecure";
+import { v4 as uuidv4 } from "uuid";
 // import { useQuery } from "react-query";
 
 const SeeInstructorClasses = () => {
@@ -17,21 +19,29 @@ const SeeInstructorClasses = () => {
   const [seeInstructorClassDataError, setSeeInstructorClassDataError] =
     useState("");
   const { email } = useParams();
-
   const { roleData } = useRole();
   const navigate = useNavigate();
   const location = useLocation();
   const { user } = useAuth();
   const { refetch } = useCartData(true);
+  const { axiosSecure } = useAxiosSecure();
+
+  const approvedClasses = seeInstructorClassData?.filter(
+    (item) => item.status === "approved",
+  );
+  // console.log(approvedClasses);
 
   const addToCartHandler = (item) => {
     const addToCartData = {
-      selectedClassId: item._id,
+      cartId: uuidv4(),
+      selectedClassId: item.classId,
       classImage: item.classImage,
       className: item.className,
-      instructorName: item.user.userName,
+      instructorName: item.instructorName,
+      instructorEmail: item.instructorEmail,
       price: item.price,
-      email: user?.email,
+      offerPercent: item.offerPercent,
+      userEmail: user?.email,
     };
     // console.log(item);
 
@@ -52,13 +62,14 @@ const SeeInstructorClasses = () => {
       Swal.fire(`${roleData?.role} are not allow to take this course!!`);
       return;
     } else {
-      axios
-        .post("http://localhost:5000/cart", addToCartData)
+      axiosSecure
+        .post("/cart", addToCartData)
         .then((data) => {
+          refetch();
           if (data.data.acknowledged) {
-            refetch();
             Swal.fire({
               position: "center",
+              icon: "success",
               title: "Class has been added to cart!",
               showConfirmButton: false,
               timer: 1500,
@@ -95,8 +106,8 @@ const SeeInstructorClasses = () => {
     const getInstructorClassesByEmail = async () => {
       setSeeInstructorClassDataLoading(true);
       try {
-        const res = await fetch(`http://localhost:5000/classes?email=${email}`);
-        const data = await res.json();
+        const res = await axiosSecure.get(`/classes?email=${email}`);
+        const data = res.data;
         setSeeInstructorClassDataLoading(false);
         setInstructorClassData(data);
       } catch (error) {
@@ -106,18 +117,19 @@ const SeeInstructorClasses = () => {
       }
     };
     getInstructorClassesByEmail();
-  }, [email]);
+  }, [email, axiosSecure]);
 
   if (seeInstructorClassDataLoading) {
-    return <LoadingSpinner></LoadingSpinner>;
+    return <LoadingSpinner />;
   }
-  if (seeInstructorClassDataError) {
+
+  if (seeInstructorClassDataError)
     return (
-      <p className="mt-10 text-center text-red-400">
+      <ErrorMessage>
         something went wrong ${seeInstructorClassDataError}
-      </p>
+      </ErrorMessage>
     );
-  }
+
   return (
     <div className="py-10">
       <div className="mb-10">
@@ -128,43 +140,49 @@ const SeeInstructorClasses = () => {
       </div>
 
       <ul className="mx-auto flex max-w-5xl flex-col gap-10">
-        {seeInstructorClassData?.map((item) => (
-          <li
-            data-aos="zoom-in"
-            className="relative rounded shadow-xl"
-            key={item._id}
-          >
-            <div className="gap-10 sm:flex">
-              <figure className="flex-1 p-5">
-                <img className="rounded" src={item?.classImage} alt="Movie" />
-              </figure>
+        {approvedClasses &&
+          approvedClasses?.map((item) => (
+            <li
+              data-aos="zoom-in"
+              className="relative rounded-md border hover:shadow-md hover:shadow-white"
+              key={item._id}
+            >
+              <div className="gap-10 sm:flex">
+                <figure className="flex-1 p-5">
+                  <img className="rounded" src={item?.classImage} alt="Movie" />
+                </figure>
 
-              <div className="flex flex-1 flex-col justify-between p-5">
-                <div className="flex flex-col gap-5">
-                  <h2 className="card-title">{item?.className}!</h2>
-                  <p>Seats : {item?.seats}</p>
-                  <p>Enroll : {item.studentEnrolled}</p>
-                  <p>Price : {item.price}</p>
-                  <p>Rating : {item.rating}</p>
-                </div>
+                <div className="flex flex-1 flex-col justify-between p-5">
+                  <div className="flex flex-col gap-5">
+                    <h2 className="card-title">{item?.className}!</h2>
+                    <p>Seats : {item?.seats}</p>
+                    <p>Enroll : {item.studentEnrolled}</p>
+                    <p>Price : {item.price}</p>
+                    <p>Rating : {item.rating}</p>
+                  </div>
 
-                <div className="text-end">
-                  <button
-                    onClick={() => addToCartHandler(item)}
-                    className="btn-secondary btn-sm btn"
-                    disabled={!item.seats}
-                  >
-                    select now
-                  </button>
+                  <div className="text-end">
+                    <button
+                      onClick={() => addToCartHandler(item)}
+                      className="btn-secondary btn-sm btn"
+                      disabled={!item.seats}
+                    >
+                      select now
+                    </button>
+                  </div>
                 </div>
               </div>
-            </div>
 
-            {!item.seats && (
-              <div className="absolute left-0 top-0 h-full w-full rounded bg-red-400 opacity-50"></div>
-            )}
-          </li>
-        ))}
+              {!item.seats && (
+                <div className="absolute left-0 top-0 h-full w-full rounded bg-red-400 opacity-50"></div>
+              )}
+            </li>
+          ))}
+
+        {/* if the instructor no classes */}
+        {approvedClasses.length < 1 && (
+          <ErrorMessage>No class added yet</ErrorMessage>
+        )}
       </ul>
     </div>
   );

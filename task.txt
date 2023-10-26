@@ -1,32 +1,35 @@
 
-// tasks has been done
-1.  router
-2.  tailwind
-3.  firebase
-
-
-
 // tasks pending
-1. all page responsive
-2. image change for card
-3. rating dynamic
-4. scroll to top
-5. some animation (framer motion or AOS)
-6. text background (image or gradient)
-7. card component should be optimized
-8. slider have to be changed
-9. instructor my-class action have to be implemented 
-10. one class can not be selected twice
-11. There is add to cart logic repetition that has to be shareable
-12. add class image have to be used image hosting site like image bb
-13. after login user will not be able to go to login or register page
-14. after only login user will be able to go to private pages not after **register
-15. handling password and email validation for login and registration in the context of using React Hook Form***
-16. gradient background for sidebar
+- all page responsive
+- image change for card
+- rating dynamic
+- card component should be optimized
+- slider have to be changed
+- There is add to cart logic repetition that has to be shareable
+- after login user will not be able to go to login or register page
+- after only login user will be able to go to private pages not after **register
+- handling password and email validation for login and registration in the context of using React Hook Form***
+- add phone authentication instead of github authentication
+- dark mode
+- MVC
+
+
+
+
+// tasks completed
+- router
+- tailwind
+- firebase
+- scroll to top
+- some animation (framer motion or AOS)
+- text background (image or gradient)
+- instructor my-class action have to be implemented 
+- gradient background for sidebar
+- add class image have to be used image hosting site like image bb
+- one class can not be selected twice
 
 
 
 
 
-// =========warning==========
-1. ***after deleting instructor my class refetch function is not working
+

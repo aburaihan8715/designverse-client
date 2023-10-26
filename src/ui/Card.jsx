@@ -10,15 +10,16 @@ const Card = ({ item }) => {
   const { user } = useAuth();
   const { refetch } = useCartData();
   const selectedClassesHandler = (selectedItem) => {
-    const selectedData = {
-      selectedId: selectedItem._id,
+    const selectedClassData = {
+      selectedClassId: selectedItem.classId,
       classImage: selectedItem.classImage,
       className: selectedItem.className,
-      instructorName: selectedItem.instructorName,
+      userName: selectedItem.userName,
+      userEmail: selectedItem.userEmail,
       price: selectedItem.price,
-      email: user?.email,
+      offerPercent: selectedItem.offerPercent,
     };
-    // console.log(selectedData);
+    // console.log(selectedClassData);
 
     if (!user) {
       Swal.fire({
@@ -36,7 +37,7 @@ const Card = ({ item }) => {
       });
     } else {
       axios
-        .post("http://localhost:5000/selectedClasses", selectedData)
+        .post("http://localhost:5000/selectedClasses", selectedClassData)
         .then((data) => {
           if (data.data.acknowledged) {
             refetch();

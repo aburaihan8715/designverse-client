@@ -9,6 +9,11 @@ const ClassesPage = () => {
     useClassesData();
   // console.log(classesData);
 
+  const approvedClasses = classesData?.filter(
+    (item) => item.status === "approved",
+  );
+  // console.log(approvedClasses);
+
   if (classesLoading) {
     return <LoadingSpinner></LoadingSpinner>;
   }
@@ -26,7 +31,7 @@ const ClassesPage = () => {
       </div>
       <div>
         <div className="grid gap-8 sm:grid-cols-2 md:grid-cols-4">
-          {classesData?.map((item) => (
+          {approvedClasses?.map((item) => (
             <ClassCard key={item._id} item={item} />
           ))}
         </div>
