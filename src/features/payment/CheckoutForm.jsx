@@ -7,42 +7,43 @@ import useAxiosSecure from "../../hooks/useAxiosSecure";
 import useAuth from "../../hooks/useAuth";
 import { useNavigate } from "react-router-dom";
 import { v4 as uuidv4 } from "uuid";
+import useClassesData from "../../hooks/useClassesData";
 
-// import useAxiosSecure from "../../hooks/useAxiosSecure";
-// import useAuth from "../../hooks/useAuth";
-// import useSelectedClassesData from "../../hooks/useSelectedClassesData";
-
-// import "../styles/common.css";
 const CheckoutForm = ({ price, cartData }) => {
+  const [cardError, setCardError] = useState("");
+  const [clientSecret, setClientSecret] = useState("");
+  const [processing, setProcessing] = useState(false);
+  const [transactionId, setTransactionId] = useState("");
+  const { refetch: classRefetch } = useClassesData();
+
   const { refetch } = useCartData();
   const stripe = useStripe();
   const elements = useElements();
-  const [cardError, setCardError] = useState("");
   const { axiosSecure } = useAxiosSecure();
-  const [clientSecret, setClientSecret] = useState("");
   const { user } = useAuth();
-  const [processing, setProcessing] = useState(false);
-  const [transactionId, setTransactionId] = useState("");
-
   const navigate = useNavigate();
 
   useEffect(() => {
     // Create PaymentIntent as soon as the page loads
     if (price > 0) {
-      axiosSecure.post("/create-payment-intent", { price }).then((res) => {
-        setClientSecret(res.data.clientSecret);
-      });
+      axiosSecure
+        .post("/create-payment-intent", { price })
+        .then((res) => {
+          setClientSecret(res.data.clientSecret);
+        })
+        .catch((error) => {
+          console.log(error.message);
+        });
     }
   }, [price, axiosSecure]);
 
   const handleSubmit = async (event) => {
-    // Block native form submission.
     event.preventDefault();
 
     if (!stripe || !elements) return;
     const card = elements.getElement(CardElement);
     if (card == null) return;
-    // console.log("card", card);
+    // console.log(card);
 
     // Use your card Element with other Stripe.js APIs
     const { error } = await stripe.createPaymentMethod({
@@ -51,7 +52,7 @@ const CheckoutForm = ({ price, cartData }) => {
     });
 
     if (error) {
-      console.log("error", error);
+      console.log(error);
       setCardError(error.message);
       setTransactionId("");
     } else {
@@ -86,16 +87,19 @@ const CheckoutForm = ({ price, cartData }) => {
         transactionId: paymentIntent.id,
         price,
         date: new Date(),
-        quantity: cartData.length,
-        selectedIClassesIds: cartData.map((item) => item.selectedClassId),
+        quantity: cartData?.length,
+        selectedIClassesIds: cartData?.map((item) => item.selectedClassId),
       };
       // console.log(payment);
       axiosSecure.post("/payments", payment).then((res) => {
         // console.log(res.data);
         if (res.data.insertResult.acknowledged) {
           refetch();
+          // class data should be refetch
+          classRefetch();
           Swal.fire({
             position: "center",
+            icon: "success",
             title: "Payments success!",
             showConfirmButton: false,
             timer: 1500,
@@ -124,6 +128,7 @@ const CheckoutForm = ({ price, cartData }) => {
             },
           }}
         />
+
         <div className="mt-4 text-right">
           <button
             className="btn-secondary btn-sm btn rounded"

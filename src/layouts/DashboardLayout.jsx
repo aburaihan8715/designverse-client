@@ -19,6 +19,7 @@ import {
 } from "react-icons/fa";
 import useAuth from "../hooks/useAuth";
 import BrandLogo from "../ui/BrandLogo";
+import LogOutBtn from "../features/authentication/LogOutBtn";
 
 const DashboardLayout = () => {
   const { roleData, roleDataLoading, roleDataError, isRoleDataError } =
@@ -28,7 +29,7 @@ const DashboardLayout = () => {
   // console.log(roleData);
 
   if (roleDataLoading || cartLoading) {
-    return <LoadingSpinner></LoadingSpinner>;
+    return <LoadingSpinner />;
   }
 
   if (isRoleDataError || isCartError) {
@@ -59,6 +60,7 @@ const DashboardLayout = () => {
         <div className="drawer-side">
           <label htmlFor="my-drawer-2" className="drawer-overlay"></label>
           <ul className="menu h-full w-80 gap-2 bg-gradient-to-b from-base-100 to-pink-300 p-4 text-base-content">
+            {/* brand logo */}
             <div className="mb-6">
               <BrandLogo isHidden={false} />
             </div>
@@ -208,6 +210,10 @@ const DashboardLayout = () => {
                 <span>Contact</span>
               </ActiveLink>
             </li>
+
+            <div className="mr-6 text-end">
+              <LogOutBtn />
+            </div>
           </ul>
         </div>
       </div>

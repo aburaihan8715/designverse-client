@@ -66,7 +66,7 @@ const InstructorMyClassUpdatePage = () => {
 
     // send data to server using axios
     axiosSecure
-      .put(`http://localhost:5000/classes/${id}`, classData)
+      .put(`/classes/${id}`, classData)
       .then((data) => {
         console.log(data);
         if (data.data.acknowledged) {
@@ -108,7 +108,7 @@ const InstructorMyClassUpdatePage = () => {
       </Helmet>
 
       <div className="p-1">
-        <div className="mx-auto max-w-xl rounded-md border p-8">
+        <div className="mx-auto max-w-lg rounded-md border p-8">
           <form onSubmit={handleSubmit(submitHandler)}>
             <div className="space-y-3">
               <div className="text-center ">

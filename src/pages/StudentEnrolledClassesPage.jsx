@@ -27,7 +27,7 @@ const StudentEnrolledClassesPage = () => {
   });
 
   const enrolledClassesList = enrolledClassesData?.flat();
-  console.log(enrolledClassesList);
+  // console.log(enrolledClassesList);
   const enrolledClassesIds = enrolledClassesList?.map((item) => {
     return item.selectedIClassesIds;
   });

@@ -148,20 +148,25 @@ const SeeInstructorClasses = () => {
               key={item._id}
             >
               <div className="gap-10 sm:flex">
-                <figure className="flex-1 p-5">
+                <figure className="flex  p-5">
                   <img className="rounded" src={item?.classImage} alt="Movie" />
                 </figure>
 
                 <div className="flex flex-1 flex-col justify-between p-5">
                   <div className="flex flex-col gap-5">
-                    <h2 className="card-title">{item?.className}!</h2>
-                    <p>Seats : {item?.seats}</p>
-                    <p>Enroll : {item.studentEnrolled}</p>
-                    <p>Price : {item.price}</p>
-                    <p>Rating : {item.rating}</p>
+                    <h2 className="card-title">{item?.className} 📖</h2>
+                    <p>Seats : {item?.seats} 🪑</p>
+                    <p>Enrolled : {item.studentEnrolled} 👩</p>
+                    <p>Price : ${item.price} 💰</p>
+
+                    <p>Offer : ${item.offerPercent || 0} 💪</p>
+                    <p>Instructor : {item.instructorName} 👨‍🏫</p>
+                    <p>Email : {item.instructorEmail} ✉</p>
+                    <p>Phone : {item.phoneNumber} ☎</p>
+                    <p>Rating : {item.rating} ⭐⭐⭐⭐⭐</p>
                   </div>
 
-                  <div className="text-end">
+                  <div className="mt-2 text-end">
                     <button
                       onClick={() => addToCartHandler(item)}
                       className="btn-secondary btn-sm btn"

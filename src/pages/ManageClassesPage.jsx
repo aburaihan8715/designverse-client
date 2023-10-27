@@ -3,25 +3,21 @@ import useClassesData from "../hooks/useClassesData";
 import LoadingSpinner from "../ui/LoadingSpinner";
 import SectionHeading from "../ui/SectionHeading";
 import AdminFeedback from "../features/admin/AdminFeedback";
+import useAxiosSecure from "../hooks/useAxiosSecure";
 
 const ManageClassesPage = () => {
   const { classesData, classesLoading, classesError, isClassesError, refetch } =
     useClassesData();
   // console.log(classesData);
+  const { axiosSecure } = useAxiosSecure();
 
   const userRoleHandler = (id, status) => {
     // console.log(id);
     // console.log(status);
-    fetch(`http://localhost:5000/classes/${id}`, {
-      method: "PATCH",
-      body: JSON.stringify({
+    axiosSecure
+      .patch(`/classes/${id}`, {
         status,
-      }),
-      headers: {
-        "Content-type": "application/json; charset=UTF-8",
-      },
-    })
-      .then((res) => res.json())
+      })
       .then(() => {
         refetch();
       })
@@ -31,9 +27,8 @@ const ManageClassesPage = () => {
   };
   // const denyHandler=(item)=>{}
 
-  if (classesLoading) {
-    return <LoadingSpinner></LoadingSpinner>;
-  }
+  if (classesLoading) return <LoadingSpinner />;
+
   if (isClassesError) {
     return (
       <p className="text-center text-red-600">
@@ -89,8 +84,8 @@ const ManageClassesPage = () => {
                   </td>
 
                   <td className="">{item.className}</td>
-                  <td className="">{item.userName}</td>
-                  <td className="">{item.userEmail}</td>
+                  <td className="">{item.instructorName}</td>
+                  <td className="">{item.instructorEmail}</td>
                   <td className="">{item.seats}</td>
                   <td className="">{item.price}</td>
                   <td className="capitalize">{item.status}</td>

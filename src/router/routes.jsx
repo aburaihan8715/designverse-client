@@ -165,7 +165,11 @@ const router = createBrowserRouter([
       // admin routes
       {
         path: "admin",
-        element: <AdminHomePage />,
+        element: (
+          <AdminRoute>
+            <AdminHomePage />
+          </AdminRoute>
+        ),
       },
       {
         path: "manageClasses",

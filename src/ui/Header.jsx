@@ -1,4 +1,4 @@
-import { Link, Navigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { FaShoppingCart } from "react-icons/fa";
 import useAuth from "../hooks/useAuth";
 import useCartData from "../hooks/useCartData";
@@ -6,11 +6,11 @@ import useRole from "../hooks/useRole";
 import ActiveLink from "./ActiveLink";
 import Button from "./Button";
 import BrandLogo from "./BrandLogo";
+import LogOutBtn from "../features/authentication/LogOutBtn";
 
 const Header = () => {
-  const { user, logOutUser } = useAuth();
+  const { user } = useAuth();
   // console.log(user);
-  // const navigate = useNavigate();
   const { cartData } = useCartData();
   // console.log(cartData);
   const { roleData } = useRole();
@@ -70,12 +70,6 @@ const Header = () => {
       )}
     </>
   );
-
-  // handle logout
-  const logOutHandler = async () => {
-    await logOutUser();
-    Navigate("/");
-  };
 
   return (
     <div className="fixed left-0 right-0 top-0 z-20">
@@ -149,12 +143,9 @@ const Header = () => {
               )}
 
               {user && (
-                <Button
-                  className="btn-secondary text-white"
-                  onClick={logOutHandler}
-                >
-                  logout
-                </Button>
+                <div>
+                  <LogOutBtn />
+                </div>
               )}
             </div>
           </div>

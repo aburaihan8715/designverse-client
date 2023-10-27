@@ -73,28 +73,38 @@ const ClassCard = ({ item }) => {
       data-aos="zoom-in"
       className="card relative rounded-md border shadow-md hover:shadow-white"
     >
-      <figure>
+      <figure className="">
         <img
           className="h-40 w-full object-cover transition duration-500 hover:scale-105"
           src={item.classImage}
           alt="Shoes"
         />
       </figure>
+
       <div className="badge badge-success absolute right-5 top-5">
         <strong className="text-slate-50">Price: ${item.price}</strong>
       </div>
-      <div className="card-body">
+      <div className="card-body relative">
+        {item?.offerPercent && (
+          <div className="badge badge-secondary badge-lg absolute left-1/2 top-0 h-10 -translate-x-1/2 -translate-y-1/2 rounded">
+            <strong className="text-slate-50">
+              Offer {item?.offerPercent}% 💪
+            </strong>
+          </div>
+        )}
         <h2 className="card-title">{item.className}</h2>
-        <p>Available seats: {item.seats}</p>
-        <p>Instructor: {item.instructorName}</p>
+        <p> Seats: {item.seats} 💺</p>
+        <p> Instr: {item.instructorName} 👨‍🏫</p>
+        <p> Enrolled: {item?.studentEnrolled || 0} 👫</p>
+        <p>Rating: ⭐⭐⭐⭐⭐</p>
 
         <div className="card-actions justify-end">
           <button
             onClick={() => addToCartHandler(item)}
             disabled={!item.seats}
-            className="btn-secondary btn-outline btn-sm btn"
+            className="btn-secondary btn-outline btn-block btn-sm btn"
           >
-            Select Now
+            Select Now 🚀
           </button>
         </div>
       </div>
