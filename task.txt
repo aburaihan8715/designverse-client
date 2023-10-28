@@ -12,6 +12,7 @@
 - add phone authentication instead of github authentication
 - dark mode
 - MVC
+- image url and image api key has repetition that has to be DRY
 
 
 

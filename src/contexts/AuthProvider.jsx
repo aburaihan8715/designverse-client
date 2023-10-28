@@ -31,7 +31,7 @@ const AuthProvider = ({ children }) => {
   // update user profile
   const updateUserProfile = (
     name = "unknown",
-    photo = "https://i.ibb.co/bPbybsH/user1.png",
+    photo = "https://i.ibb.co/nCCcPC7/demo-user.jpg",
   ) => {
     return updateProfile(auth.currentUser, {
       displayName: name,

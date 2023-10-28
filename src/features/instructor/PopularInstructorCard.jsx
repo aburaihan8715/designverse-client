@@ -11,7 +11,7 @@ const PopularInstructorCard = ({ item }) => {
     >
       <figure className="">
         <img
-          className="object-cover"
+          className="h-40 w-full object-cover transition duration-500 hover:scale-105"
           src={item.instructorImage}
           alt="instructor"
         />
