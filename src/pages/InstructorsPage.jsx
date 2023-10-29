@@ -3,11 +3,14 @@ import { Helmet } from "react-helmet-async";
 import useClassesData from "../hooks/useClassesData";
 import LoadingSpinner from "../ui/LoadingSpinner";
 import SectionHeading from "../ui/SectionHeading";
+import { removeDuplicateObjects } from "../utils/utilities";
 
 const InstructorsPage = () => {
   const { classesData, classesLoading, classesError, isClassesError } =
     useClassesData();
   // console.log(classesData);
+
+  const unique = removeDuplicateObjects(classesData, "instructorEmail");
 
   if (classesLoading) {
     return <LoadingSpinner />;
@@ -39,7 +42,7 @@ const InstructorsPage = () => {
             </thead>
             <tbody>
               {/* row */}
-              {classesData?.map((item, index) => (
+              {unique?.map((item, index) => (
                 <tr key={item._id}>
                   <th>{index + 1}</th>
                   <td>

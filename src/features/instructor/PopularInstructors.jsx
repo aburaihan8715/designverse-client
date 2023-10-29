@@ -1,7 +1,23 @@
 import useClassesData from "../../hooks/useClassesData";
 import LoadingSpinner from "../../ui/LoadingSpinner";
 import SectionHeading from "../../ui/SectionHeading";
+import { removeDuplicateObjects } from "../../utils/utilities";
 import PopularInstructorCard from "./PopularInstructorCard";
+
+// Function to remove duplicates based on the "email" property
+// function removeDuplicateObjects(array, property) {
+//   const uniqueObjects = [];
+//   const uniqueEmails = new Set();
+
+//   array.forEach((obj) => {
+//     if (!uniqueEmails.has(obj[property])) {
+//       uniqueEmails.add(obj[property]);
+//       uniqueObjects.push(obj);
+//     }
+//   });
+
+//   return uniqueObjects;
+// }
 
 const PopularInstructors = () => {
   const { classesData, classesLoading, classesError } = useClassesData();
@@ -13,19 +29,20 @@ const PopularInstructors = () => {
   const sortedInstructorBasedOnEnrolledStudent = approvedClasses?.sort(
     (a, b) => b.studentEnrolled - a.studentEnrolled,
   );
+  // console.log(sortedInstructorBasedOnEnrolledStudent);
+
+  // same instructor should not be twice
+  const unique = removeDuplicateObjects(
+    sortedInstructorBasedOnEnrolledStudent,
+    "instructorEmail",
+  );
+  // console.log(unique);
 
   // display some classes on ui
-  const somePopularInstructor = sortedInstructorBasedOnEnrolledStudent?.slice(
-    0,
-    5,
-  );
+  const somePopularInstructor = unique?.slice(0, 5);
 
-  if (classesLoading) {
-    return <LoadingSpinner></LoadingSpinner>;
-  }
-  if (classesError) {
-    return <p>something went wrong {classesError.message}</p>;
-  }
+  if (classesLoading) return <LoadingSpinner />;
+  if (classesError) return <p>something went wrong {classesError.message}</p>;
   return (
     <div className="py-8">
       <div className="mx-auto max-w-6xl p-2">

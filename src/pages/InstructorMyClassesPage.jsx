@@ -8,6 +8,7 @@ import LoadingSpinner from "../ui/LoadingSpinner";
 import { Link } from "react-router-dom";
 import Swal from "sweetalert2";
 import useClassesData from "../hooks/useClassesData";
+import useAxiosSecure from "../hooks/useAxiosSecure";
 
 // import axios from "axios";
 
@@ -121,6 +122,7 @@ export default InstructorMyClassesPage;
 // instructor my class delete button component
 const InstrMyClassDeleteBtn = ({ id, refetch }) => {
   const [classDeleteLoading, setClassDeleteLoading] = useState(false);
+  const { axiosSecure } = useAxiosSecure();
 
   const classDeleteHandler = () => {
     Swal.fire({
@@ -133,12 +135,10 @@ const InstrMyClassDeleteBtn = ({ id, refetch }) => {
     }).then((result) => {
       if (result.isConfirmed) {
         setClassDeleteLoading(true);
-        fetch(`http://localhost:5000/classes/${id}`, {
-          method: "DELETE",
-        })
-          .then((res) => res.json())
-          .then((data) => {
-            if (data.deletedCount > 0) {
+        axiosSecure
+          .delete(`/classes/${id}`)
+          .then((res) => {
+            if (res.data.deletedCount > 0) {
               setClassDeleteLoading(false);
               Swal.fire("Class has been deleted.!");
               refetch();

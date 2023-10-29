@@ -5,13 +5,18 @@ const AdminFeedback = () => {
     <Modal>
       <div>
         <div className="form-control">
-          <label className="label">
+          <label htmlFor="feedback" className="label">
             <span className="label-text">Your message</span>
           </label>
-          <textarea rows="6" className="textarea textarea-bordered" placeholder="Feedback message"></textarea>
+          <textarea
+            id="feedback"
+            rows="6"
+            className="textarea-bordered textarea"
+            placeholder="Feedback message"
+          ></textarea>
         </div>
-        <div className="text-right mt-2">
-          <button className="btn btn-xs btn-secondary">send message 🚀</button>
+        <div className="mt-2 text-right">
+          <button className="btn-secondary btn-xs btn">send message 🚀</button>
         </div>
       </div>
     </Modal>

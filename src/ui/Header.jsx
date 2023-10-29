@@ -19,7 +19,7 @@ const Header = () => {
   const [isProfileOpen, setIsProfileOpen] = useState(false);
   const [flags, setFlags] = useState(false);
   const { user } = useAuth();
-  // console.log(user);
+  console.log(user);
   const { cartData } = useCartData();
   // console.log(cartData);
   const { roleData } = useRole();
@@ -213,10 +213,11 @@ const ProfileCard = ({ setFlags }) => {
 };
 
 // profile edit form
-
 const ProfileEditForm = ({ setFlags }) => {
   const { updateUserProfile, user } = useAuth();
   const { axiosSecure } = useAxiosSecure();
+  const { roleData } = useRole();
+
   const submitHandler = async (e) => {
     e.preventDefault();
     const name = e.target[0].value;
@@ -246,14 +247,17 @@ const ProfileEditForm = ({ setFlags }) => {
         imgURL,
       });
       console.log("2st", userUpdateRes);
-      const classesUpdateRes = await axiosSecure.patch(
-        `/classes?email=${user?.email}`,
-        {
-          name,
-          imgURL,
-        },
-      );
-      console.log("3st", classesUpdateRes);
+
+      if (roleData.role === "instructor") {
+        const classesUpdateRes = await axiosSecure.patch(
+          `/classes?email=${user?.email}`,
+          {
+            name,
+            imgURL,
+          },
+        );
+        console.log("3st", classesUpdateRes);
+      }
 
       Swal.fire({
         position: "center",

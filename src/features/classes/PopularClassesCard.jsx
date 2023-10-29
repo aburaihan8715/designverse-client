@@ -5,6 +5,7 @@ import useCartData from "../../hooks/useCartData";
 import useRole from "../../hooks/useRole";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import { v4 as uuidv4 } from "uuid";
+import { Rating } from "@smastrom/react-rating";
 
 const PopularClassesCard = ({ item }) => {
   const { roleData } = useRole();
@@ -97,7 +98,9 @@ const PopularClassesCard = ({ item }) => {
         <p> Seats: {item.seats} 💺</p>
         <p> Instr: {item.instructorName} 👨‍🏫</p>
         <p> Enrolled: {item?.studentEnrolled || 0} 👫</p>
-        <p>Rating: ⭐⭐⭐⭐⭐</p>
+        <div>
+          <Rating className="" style={{ maxWidth: 120 }} value={4} readOnly />
+        </div>
 
         <div className="card-actions justify-end">
           <button

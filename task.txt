@@ -1,7 +1,7 @@
 
 // tasks pending
 - all page responsive
-- image change for card
+- accordion should be added
 - rating dynamic
 - card component should be optimized
 - slider have to be changed
@@ -13,6 +13,9 @@
 - dark mode
 - MVC
 - image url and image api key has repetition that has to be DRY
+- one user should not provide multiple testimonials
+- payment calculation with discount or offer
+- see instructor should not show a instructor twice
 
 
 
@@ -28,6 +31,13 @@
 - gradient background for sidebar
 - add class image have to be used image hosting site like image bb
 - one class can not be selected twice
+- popular instructor section same instructor should not be twice
+- image change for card
+- 
+
+
+// features
+- 
 
 
 

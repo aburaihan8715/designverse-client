@@ -81,6 +81,8 @@ const StudentEnrolledClassesPage = () => {
               <th>instructor</th>
               <th>instructor email</th>
               <th>price</th>
+
+              <th>action</th>
             </tr>
           </thead>
           <tbody>
@@ -100,6 +102,9 @@ const StudentEnrolledClassesPage = () => {
                 <td>{item?.instructorName}</td>
                 <td>{item?.instructorEmail}</td>
                 <td>$ {item?.price}</td>
+                <td>
+                  <button className="btn-info btn-xs btn">review</button>
+                </td>
               </tr>
             ))}
           </tbody>
