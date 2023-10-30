@@ -16,7 +16,7 @@ const PopularClasses = () => {
   );
 
   // display some classes on ui
-  const somePopularClasses = sortedClassesBasedOnEnrolledStudent?.slice(0, 5);
+  const somePopularClasses = sortedClassesBasedOnEnrolledStudent?.slice(0, 8);
   // console.log(popularThreeClasses);
 
   if (classesLoading) {

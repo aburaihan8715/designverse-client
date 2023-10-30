@@ -15,6 +15,20 @@ const ClassCard = ({ item }) => {
   const { refetch } = useCartData();
   const { axiosSecure } = useAxiosSecure();
 
+  // rating calculation
+  let rating;
+  const length = item?.rating.length;
+  if (length > 1) {
+    rating = Math.ceil(
+      item?.rating.reduce((total, item) => total + item) / length,
+    );
+  } else if (length === 1) {
+    rating = length;
+  } else {
+    rating = 0;
+  }
+  // console.log(rating);
+
   // add to cart
   const addToCartHandler = (item) => {
     const addToCartData = {
@@ -98,7 +112,12 @@ const ClassCard = ({ item }) => {
         <p> Instr: {item.instructorName} 👨‍🏫</p>
         <p> Enrolled: {item?.studentEnrolled || 0} 👫</p>
         <div>
-          <Rating className="" style={{ maxWidth: 120 }} value={4} readOnly />
+          <Rating
+            className=""
+            style={{ maxWidth: 120 }}
+            value={rating}
+            readOnly
+          />
         </div>
 
         <div className="card-actions justify-end">

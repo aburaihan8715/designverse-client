@@ -12,7 +12,8 @@ const queryClient = new QueryClient();
 import AOS from "aos";
 import "aos/dist/aos.css"; // You can also use <link> for styles
 import FeedbackIdContextProvider from "./contexts/FeedbackIdContext";
-
+import ModalOpenContextProvider from "./contexts/ModalOpenContext";
+import ReviewIdContextProvider from "./contexts/ReviewIdContext";
 // ..
 AOS.init();
 
@@ -22,7 +23,11 @@ ReactDOM.createRoot(document.getElementById("root")).render(
       <AuthProvider>
         <QueryClientProvider client={queryClient}>
           <FeedbackIdContextProvider>
-            <RouterProvider router={router} />
+            <ModalOpenContextProvider>
+              <ReviewIdContextProvider>
+                <RouterProvider router={router} />
+              </ReviewIdContextProvider>
+            </ModalOpenContextProvider>
           </FeedbackIdContextProvider>
         </QueryClientProvider>
       </AuthProvider>

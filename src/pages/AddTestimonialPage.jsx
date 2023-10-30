@@ -1,7 +1,7 @@
-import AddReviewForm from "../features/student/AddReviewForm";
+import AddTestimonialForm from "../features/student/AddTestimonialForm";
 import SectionHeading from "../ui/SectionHeading";
 
-const AddReviewPage = () => {
+const AddTestimonialPage = () => {
   return (
     <div className="w-full">
       <div>
@@ -11,10 +11,10 @@ const AddReviewPage = () => {
         />
       </div>
       <div>
-        <AddReviewForm />
+        <AddTestimonialForm />
       </div>
     </div>
   );
 };
 
-export default AddReviewPage;
+export default AddTestimonialPage;

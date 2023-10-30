@@ -8,13 +8,11 @@ import "swiper/css/navigation";
 import { Navigation } from "swiper";
 import SectionHeading from "../../ui/SectionHeading";
 import { useQuery } from "react-query";
-import useAxiosSecure from "../../hooks/useAxiosSecure";
 import LoadingSpinner from "../../ui/LoadingSpinner";
 import ErrorMessage from "../../ui/ErrorMessage";
+import axios from "axios";
 
 const Testimonial = () => {
-  const { axiosSecure } = useAxiosSecure();
-
   const {
     isPending,
     error,
@@ -22,7 +20,7 @@ const Testimonial = () => {
   } = useQuery({
     queryKey: ["testimonialsData"],
     queryFn: async () => {
-      const res = await axiosSecure.get("/testimonials");
+      const res = await axios.get("http://localhost:5000/testimonials");
       return res.data;
     },
   });

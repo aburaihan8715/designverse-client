@@ -4,16 +4,16 @@ import LoadingSpinner from "../ui/LoadingSpinner";
 import SectionHeading from "../ui/SectionHeading";
 import useAxiosSecure from "../hooks/useAxiosSecure";
 import Modal from "../ui/Modal";
-import { useState } from "react";
 import AdminFeedbackForm from "../features/admin/AdminFeedbackForm";
 import useFeedbackId from "../hooks/useFeedbackId";
+import useModalOpen from "../hooks/useModalOpen";
 
 const ManageClassesPage = () => {
-  const [openModal, setOpenModal] = useState(false);
   const { classesData, classesLoading, classesError, isClassesError, refetch } =
     useClassesData();
   const { axiosSecure } = useAxiosSecure();
   const { setFeedbackId } = useFeedbackId();
+  const { modalOpen, setModalOpen } = useModalOpen();
 
   const classStatusHandler = (id, status) => {
     // console.log(id);
@@ -114,10 +114,13 @@ const ManageClassesPage = () => {
                     </button>
                     <button
                       disabled={
-                        item.status === "approved" || item.adminFeedback
+                        item.status === "approved" ||
+                        item.adminFeedback ||
+                        item.status === "pending" ||
+                        item.status !== "denied"
                       }
                       onClick={() => {
-                        setOpenModal(true);
+                        setModalOpen(true);
                         setFeedbackId(item._id);
                       }}
                       className="btn-warning btn-xs btn"
@@ -133,8 +136,8 @@ const ManageClassesPage = () => {
         </div>
       </div>
       <Modal
-        openModal={openModal}
-        setOpenModal={setOpenModal}
+        modalOpen={modalOpen}
+        setModalOpen={setModalOpen}
         bgColor="bg-stone-900"
       >
         <AdminFeedbackForm />

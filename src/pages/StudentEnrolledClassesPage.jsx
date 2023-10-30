@@ -5,12 +5,18 @@ import LoadingSpinner from "../ui/LoadingSpinner";
 import useClassesData from "../hooks/useClassesData";
 import { Helmet } from "react-helmet-async";
 import SectionHeading from "../ui/SectionHeading";
+import Modal from "../ui/Modal";
+import ClassReviewForm from "../features/student/ClassReviewForm";
+import useModalOpen from "../hooks/useModalOpen";
+import useReviewId from "../hooks/useReviewId";
 
 const StudentEnrolledClassesPage = () => {
   const { user, authLoading } = useAuth();
   const { axiosSecure } = useAxiosSecure();
   const { classesData, classesLoading, classesError, isClassesError } =
     useClassesData();
+  const { modalOpen, setModalOpen } = useModalOpen();
+  const { setReviewId, reviewId } = useReviewId();
 
   const {
     isLoading: enrolledClassesDataLoading,
@@ -56,61 +62,79 @@ const StudentEnrolledClassesPage = () => {
     );
   }
   return (
-    <div className="ml-3">
-      <Helmet>
-        <title>FashionVerse | MyEnrolledClassesPage</title>
-      </Helmet>
-      <div>
-        <SectionHeading
-          subHeading={`how many`}
-          heading={`classes enrolled`}
-        ></SectionHeading>
-      </div>
-      <h2 className="font-bold">
-        {totalEnrolledClasses?.length} classes enrolled
-      </h2>
-      <h2 className="font-bold">${totalSpend} dollars spend</h2>
-      <div className="overflow-x-auto">
-        <table className="table">
-          {/* head */}
-          <thead className="capitalize">
-            <tr>
-              <th>#</th>
-              <th>image</th>
-              <th>name</th>
-              <th>instructor</th>
-              <th>instructor email</th>
-              <th>price</th>
+    <>
+      <div className="ml-3">
+        <Helmet>
+          <title>FashionVerse | MyEnrolledClassesPage</title>
+        </Helmet>
+        <div>
+          <SectionHeading
+            subHeading={`how many`}
+            heading={`classes enrolled`}
+          ></SectionHeading>
+        </div>
+        <h2 className="font-bold">
+          {totalEnrolledClasses?.length} classes enrolled
+        </h2>
+        <h2 className="font-bold">${totalSpend} dollars spend</h2>
+        <div className="overflow-x-auto">
+          <table className="table">
+            {/* head */}
+            <thead className="capitalize">
+              <tr>
+                <th>#</th>
+                <th>image</th>
+                <th>name</th>
+                <th>instructor</th>
+                <th>instructor email</th>
+                <th>price</th>
 
-              <th>action</th>
-            </tr>
-          </thead>
-          <tbody>
-            {/* row 1 */}
-            {totalEnrolledClasses?.map((item, index) => (
-              <tr key={index}>
-                <th>{index + 1}</th>
-                <td>
-                  <div className="avatar">
-                    <div className="mask mask-squircle h-12 w-12">
-                      <img src={item?.classImage} alt="class cover photo" />
-                    </div>
-                  </div>
-                </td>
-
-                <td>{item?.className}</td>
-                <td>{item?.instructorName}</td>
-                <td>{item?.instructorEmail}</td>
-                <td>$ {item?.price}</td>
-                <td>
-                  <button className="btn-info btn-xs btn">review</button>
-                </td>
+                <th>action</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              {/* row 1 */}
+              {totalEnrolledClasses?.map((item, index) => (
+                <tr key={index}>
+                  <th>{index + 1}</th>
+                  <td>
+                    <div className="avatar">
+                      <div className="mask mask-squircle h-12 w-12">
+                        <img src={item?.classImage} alt="class cover photo" />
+                      </div>
+                    </div>
+                  </td>
+
+                  <td>{item?.className}</td>
+                  <td>{item?.instructorName}</td>
+                  <td>{item?.instructorEmail}</td>
+                  <td>$ {item?.price}</td>
+                  <td>
+                    <button
+                      onClick={() => {
+                        setModalOpen(true);
+                        setReviewId(item._id);
+                      }}
+                      className="btn-info btn-xs btn"
+                    >
+                      review
+                    </button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
       </div>
-    </div>
+      {/* modal */}
+      <Modal
+        modalOpen={modalOpen}
+        setModalOpen={setModalOpen}
+        bgColor="bg-stone-900"
+      >
+        <ClassReviewForm reviewId={reviewId} />
+      </Modal>
+    </>
   );
 };
 

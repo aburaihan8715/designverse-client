@@ -22,7 +22,7 @@ import ManageUsersPage from "../pages/ManageUsersPage";
 import InstructorMyClassesPage from "../pages/InstructorMyClassesPage";
 import InstructorMyClassUpdatePage from "../pages/InstructorMyClassUpdatePage";
 import PaymentHistoryPage from "../pages/PaymentHistoryPage";
-import AddReviewPage from "../pages/AddReviewPage";
+import AddTestimonialPage from "../pages/AddTestimonialPage";
 import TestImageHosting from "../pages/TestImageHosting";
 import ForgetPassword from "../pages/ForgetPassword";
 import InstructorRoute from "./InstructorRoute";
@@ -117,7 +117,7 @@ const router = createBrowserRouter([
         path: "addReview",
         element: (
           <PrivateRoute>
-            <AddReviewPage />
+            <AddTestimonialPage />
           </PrivateRoute>
         ),
       },

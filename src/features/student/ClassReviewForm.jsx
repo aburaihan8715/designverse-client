@@ -1,48 +1,46 @@
 import Swal from "sweetalert2";
-import useAuth from "../../hooks/useAuth";
-import useAxiosSecure from "../../hooks/useAxiosSecure";
-import { useNavigate } from "react-router-dom";
 import { Rating } from "@smastrom/react-rating";
+import useAxiosSecure from "../../hooks/useAxiosSecure";
+import useClassesData from "../../hooks/useClassesData";
+import useModalOpen from "../../hooks/useModalOpen";
 
-const AddReviewForm = () => {
+const ClassReviewForm = ({ reviewId }) => {
   const { axiosSecure } = useAxiosSecure();
-  const navigate = useNavigate();
-  const { user } = useAuth();
+  const { refetch } = useClassesData();
+  const { setModalOpen } = useModalOpen();
+
   const submitHandler = async (e) => {
     e.preventDefault();
     const rating = e.target[0].value;
-    const message = e.target[1].value;
+    if (!rating) return alert("Rating should not be empty!!");
+    const newRating = Number(rating);
+    // console.log(newRating);
 
-    if (!rating || !message)
-      return alert("Rating and message should not be empty!!");
-    // console.log(rating);
-    // console.log(message);
-
-    const testimonialData = {
-      rating: Number(rating),
-      message,
-      userName: user?.displayName,
-      email: user?.email,
-      photo: user?.photoURL,
-    };
-    const res = await axiosSecure.post("/testimonials", testimonialData);
-    const data = res.data;
-    if (data.insertedId) {
-      Swal.fire({
-        position: "center",
-        icon: "success",
-        title: "Your work has been saved",
-        showConfirmButton: false,
-        timer: 1500,
+    try {
+      const res = await axiosSecure.patch(`/classes/review/${reviewId}`, {
+        newRating,
       });
-      navigate("/");
+      const data = res.data;
+      if (data.modifiedCount > 0) {
+        refetch();
+        Swal.fire({
+          position: "center",
+          icon: "success",
+          title: "Review sent successfully!!",
+          showConfirmButton: false,
+          timer: 1500,
+        });
+        setModalOpen(false);
+      }
+    } catch (error) {
+      console.log(error.message);
     }
   };
 
   return (
-    <div className="mx-auto max-w-lg rounded-md border p-10 ">
+    <div className="mx-auto max-w-lg rounded-md  p-10 ">
       <h3 className="bg-gradient-to-r from-fuchsia-500 to-pink-500 bg-clip-text text-center text-3xl font-semibold uppercase text-transparent">
-        Rate Us
+        Rate please
       </h3>
       <div className="mt-2 flex justify-center">
         <Rating className="" style={{ maxWidth: 150 }} value={5} readOnly />
@@ -68,9 +66,9 @@ const AddReviewForm = () => {
           </select>
         </div>
 
-        <div className="form-control mt-2">
+        {/* <div className="form-control mt-2">
           <label htmlFor="message" className="label">
-            <span className="label-text">Your message</span>
+            <span className="label-text">Your Review</span>
           </label>
           <textarea
             className="textarea-bordered textarea w-full"
@@ -81,7 +79,7 @@ const AddReviewForm = () => {
             minLength="100"
             placeholder="Please review within (250 characters)"
           ></textarea>
-        </div>
+        </div> */}
 
         <div className="mt-2 text-right">
           <button className="btn-secondary btn-sm btn" type="submit">
@@ -93,4 +91,4 @@ const AddReviewForm = () => {
   );
 };
 
-export default AddReviewForm;
+export default ClassReviewForm;

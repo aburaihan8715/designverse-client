@@ -1,9 +1,14 @@
+import Swal from "sweetalert2";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
+import useClassesData from "../../hooks/useClassesData";
 import useFeedbackId from "../../hooks/useFeedbackId";
+import useModalOpen from "../../hooks/useModalOpen";
 
 const AdminFeedbackForm = () => {
-  const { feedbackId } = useFeedbackId();
   const { axiosSecure } = useAxiosSecure();
+  const { feedbackId } = useFeedbackId();
+  const { refetch } = useClassesData();
+  const { setModalOpen } = useModalOpen();
 
   const submitHandler = async (e) => {
     e.preventDefault();
@@ -15,7 +20,17 @@ const AdminFeedbackForm = () => {
         feedback,
       });
       const data = res.data;
-      console.log(data);
+      if (data.modifiedCount > 0) {
+        refetch();
+        Swal.fire({
+          position: "center",
+          icon: "success",
+          title: "Feedback has been sent!!",
+          showConfirmButton: false,
+          timer: 1500,
+        });
+        setModalOpen(false);
+      }
     } catch (error) {
       console.log(error.message);
     }
