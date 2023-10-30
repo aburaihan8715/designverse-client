@@ -11,6 +11,7 @@ const queryClient = new QueryClient();
 // ==aos==
 import AOS from "aos";
 import "aos/dist/aos.css"; // You can also use <link> for styles
+import FeedbackIdContextProvider from "./contexts/FeedbackIdContext";
 
 // ..
 AOS.init();
@@ -20,7 +21,9 @@ ReactDOM.createRoot(document.getElementById("root")).render(
     <HelmetProvider>
       <AuthProvider>
         <QueryClientProvider client={queryClient}>
-          <RouterProvider router={router} />
+          <FeedbackIdContextProvider>
+            <RouterProvider router={router} />
+          </FeedbackIdContextProvider>
         </QueryClientProvider>
       </AuthProvider>
     </HelmetProvider>

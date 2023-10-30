@@ -19,7 +19,7 @@ const Header = () => {
   const [isProfileOpen, setIsProfileOpen] = useState(false);
   const [flags, setFlags] = useState(false);
   const { user } = useAuth();
-  console.log(user);
+  // console.log(user);
   const { cartData } = useCartData();
   // console.log(cartData);
   const { roleData } = useRole();

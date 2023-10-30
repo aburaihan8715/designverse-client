@@ -27,7 +27,7 @@ const Testimonial = () => {
     },
   });
 
-  console.log(testimonials);
+  // console.log(testimonials);
 
   if (isPending) return <LoadingSpinner />;
   if (error) return <ErrorMessage>{error.message}</ErrorMessage>;

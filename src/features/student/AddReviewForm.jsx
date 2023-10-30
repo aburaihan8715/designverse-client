@@ -2,6 +2,7 @@ import Swal from "sweetalert2";
 import useAuth from "../../hooks/useAuth";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import { useNavigate } from "react-router-dom";
+import { Rating } from "@smastrom/react-rating";
 
 const AddReviewForm = () => {
   const { axiosSecure } = useAxiosSecure();
@@ -14,6 +15,8 @@ const AddReviewForm = () => {
 
     if (!rating || !message)
       return alert("Rating and message should not be empty!!");
+    // console.log(rating);
+    // console.log(message);
 
     const testimonialData = {
       rating: Number(rating),
@@ -41,19 +44,19 @@ const AddReviewForm = () => {
       <h3 className="bg-gradient-to-r from-fuchsia-500 to-pink-500 bg-clip-text text-center text-3xl font-semibold uppercase text-transparent">
         Rate Us
       </h3>
-      <div className="mt-2 text-center text-3xl">
-        <span>⭐</span>
-        <span>⭐</span>
-        <span>⭐</span>
-        <span>⭐</span>
-        <span>⭐</span>
+      <div className="mt-2 flex justify-center">
+        <Rating className="" style={{ maxWidth: 150 }} value={5} readOnly />
       </div>
       <form onSubmit={submitHandler}>
         <div className="form-control w-full">
           <label htmlFor="rating" className="label">
             <span className="label-text">Rate</span>
           </label>
-          <select id="rating" className="select-bordered select">
+          <select
+            defaultValue=""
+            id="rating"
+            className="select-bordered select"
+          >
             <option value="" disabled selected>
               Rate (1-5)
             </option>

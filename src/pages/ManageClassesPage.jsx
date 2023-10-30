@@ -2,16 +2,20 @@ import { Helmet } from "react-helmet-async";
 import useClassesData from "../hooks/useClassesData";
 import LoadingSpinner from "../ui/LoadingSpinner";
 import SectionHeading from "../ui/SectionHeading";
-import AdminFeedback from "../features/admin/AdminFeedback";
 import useAxiosSecure from "../hooks/useAxiosSecure";
+import Modal from "../ui/Modal";
+import { useState } from "react";
+import AdminFeedbackForm from "../features/admin/AdminFeedbackForm";
+import useFeedbackId from "../hooks/useFeedbackId";
 
 const ManageClassesPage = () => {
+  const [openModal, setOpenModal] = useState(false);
   const { classesData, classesLoading, classesError, isClassesError, refetch } =
     useClassesData();
-  // console.log(classesData);
   const { axiosSecure } = useAxiosSecure();
+  const { setFeedbackId } = useFeedbackId();
 
-  const userRoleHandler = (id, status) => {
+  const classStatusHandler = (id, status) => {
     // console.log(id);
     // console.log(status);
     axiosSecure
@@ -25,7 +29,6 @@ const ManageClassesPage = () => {
         console.log(error.message);
       });
   };
-  // const denyHandler=(item)=>{}
 
   if (classesLoading) return <LoadingSpinner />;
 
@@ -95,7 +98,7 @@ const ManageClassesPage = () => {
                       disabled={
                         item.status === "approved" || item.status === "denied"
                       }
-                      onClick={() => userRoleHandler(item._id, "approved")}
+                      onClick={() => classStatusHandler(item._id, "approved")}
                       className="btn-success btn-xs btn "
                     >
                       approve
@@ -104,14 +107,20 @@ const ManageClassesPage = () => {
                       disabled={
                         item.status === "approved" || item.status === "denied"
                       }
-                      onClick={() => userRoleHandler(item._id, "denied")}
+                      onClick={() => classStatusHandler(item._id, "denied")}
                       className="btn-error btn-xs btn "
                     >
                       deny
                     </button>
                     <button
+                      disabled={
+                        item.status === "approved" || item.adminFeedback
+                      }
+                      onClick={() => {
+                        setOpenModal(true);
+                        setFeedbackId(item._id);
+                      }}
                       className="btn-warning btn-xs btn"
-                      onClick={() => window.my_modal_3.showModal()}
                     >
                       feedback
                     </button>
@@ -123,8 +132,13 @@ const ManageClassesPage = () => {
           </table>
         </div>
       </div>
-      {/* modal */}
-      <AdminFeedback />
+      <Modal
+        openModal={openModal}
+        setOpenModal={setOpenModal}
+        bgColor="bg-stone-900"
+      >
+        <AdminFeedbackForm />
+      </Modal>
     </div>
   );
 };
