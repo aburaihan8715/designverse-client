@@ -14,7 +14,7 @@ const AddTestimonialForm = () => {
     const message = e.target[1].value;
 
     if (!rating || !message)
-      return alert("Rating and message should not be empty!!");
+      return Swal.fire("Rating and message should not be empty!!");
     // console.log(rating);
     // console.log(message);
 

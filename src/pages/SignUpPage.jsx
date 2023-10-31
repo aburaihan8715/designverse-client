@@ -47,7 +47,7 @@ const SignUpPage = () => {
           timer: 1500,
         });
         reset();
-        navigate("/login");
+        navigate("/");
       }
     } catch (error) {
       setSignUpLoading(false);

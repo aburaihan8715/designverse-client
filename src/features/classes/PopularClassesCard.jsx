@@ -19,7 +19,7 @@ const PopularClassesCard = ({ item }) => {
   let rating;
   const length = item?.rating.length;
   if (length > 1) {
-    rating = Math.ceil(
+    rating = Math.round(
       item?.rating.reduce((total, item) => total + item) / length,
     );
   } else if (length === 1) {

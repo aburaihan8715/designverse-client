@@ -12,7 +12,7 @@ const ClassReviewForm = ({ reviewId }) => {
   const submitHandler = async (e) => {
     e.preventDefault();
     const rating = e.target[0].value;
-    if (!rating) return alert("Rating should not be empty!!");
+    if (!rating) return Swal.fire("Rating should not be empty!!");
     const newRating = Number(rating);
     // console.log(newRating);
 

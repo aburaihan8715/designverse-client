@@ -1,6 +1,4 @@
-import { useQuery } from "react-query";
 import useAuth from "../hooks/useAuth";
-import useAxiosSecure from "../hooks/useAxiosSecure";
 import LoadingSpinner from "../ui/LoadingSpinner";
 import useClassesData from "../hooks/useClassesData";
 import { Helmet } from "react-helmet-async";
@@ -9,31 +7,22 @@ import Modal from "../ui/Modal";
 import ClassReviewForm from "../features/student/ClassReviewForm";
 import useModalOpen from "../hooks/useModalOpen";
 import useReviewId from "../hooks/useReviewId";
+import useStudentEnrolledClass from "../hooks/useStudentEnrolledClass";
 
 const StudentEnrolledClassesPage = () => {
-  const { user, authLoading } = useAuth();
-  const { axiosSecure } = useAxiosSecure();
-  const { classesData, classesLoading, classesError, isClassesError } =
-    useClassesData();
   const { modalOpen, setModalOpen } = useModalOpen();
   const { setReviewId, reviewId } = useReviewId();
-
+  const { authLoading } = useAuth();
+  const { classesData, classesLoading, classesError, isClassesError } =
+    useClassesData();
   const {
-    isLoading: enrolledClassesDataLoading,
-    data: enrolledClassesData,
-    error: enrolledClassesDataError,
-    isError: isEnrolledClassesError,
-  } = useQuery({
-    queryKey: ["enrolledClasses", user?.email],
-    enabled: !authLoading,
-    queryFn: async () => {
-      const res = await axiosSecure.get(`/payments?email=${user?.email}`);
-      return res.data;
-    },
-  });
+    enrolledClassesDataLoading,
+    enrolledClassesData,
+    enrolledClassesDataError,
+    isEnrolledClassesError,
+  } = useStudentEnrolledClass();
 
   const enrolledClassesList = enrolledClassesData?.flat();
-  // console.log(enrolledClassesList);
   const enrolledClassesIds = enrolledClassesList?.map((item) => {
     return item.selectedIClassesIds;
   });
@@ -46,11 +35,9 @@ const StudentEnrolledClassesPage = () => {
   const totalSpend = totalEnrolledClasses?.reduce((total, item) => {
     return total + item?.price;
   }, 0);
-  // console.log(totalSpend);
-  // console.log(totalEnrolledClasses);
 
   if (enrolledClassesDataLoading || authLoading || classesLoading) {
-    return <LoadingSpinner></LoadingSpinner>;
+    return <LoadingSpinner />;
   }
 
   if (enrolledClassesDataError || isEnrolledClassesError || isClassesError) {

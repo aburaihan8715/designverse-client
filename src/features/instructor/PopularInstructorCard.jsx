@@ -1,9 +1,8 @@
+import { useState } from "react";
 import { Link } from "react-router-dom";
 
 const PopularInstructorCard = ({ item }) => {
-  const followerHandler = () => {
-    alert("Not implement yet!!");
-  };
+  const [love, setLove] = useState(false);
   return (
     <div
       data-aos="zoom-in"
@@ -17,16 +16,14 @@ const PopularInstructorCard = ({ item }) => {
         />
       </figure>
       <div className="card-body">
-        <h2 className="card-title">{item.instructorName}</h2>
-        <div className="space-x-2">
-          <span>Follower</span>
-          <button
-            onClick={followerHandler}
-            className="badge badge-secondary cursor-pointer text-white hover:shadow-lg hover:shadow-white"
-          >
-            +99
+        <h2 className="card-title">
+          <span>{item.instructorName}</span>
+          <button onClick={() => setLove(!love)}>
+            {!love && <span>🤍</span>}
+            {love && <span>🧡</span>}
           </button>
-        </div>
+        </h2>
+
         <p>{item.instructorEmail} 💌</p>
         <p>{item.phoneNumber} ☎</p>
 
