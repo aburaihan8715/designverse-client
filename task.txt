@@ -19,6 +19,8 @@
 - in every api should use try catch statement for handling error
 - after review class review button should disable (but not possible in one doc class review doc have to be separated that I do not know so have to learn)
 - follower features has to implement (but not possible in one doc class review doc have to be separated that I do not know so have to learn)
+- contact us action have to implement
+- search option for manage all users
 
 
 

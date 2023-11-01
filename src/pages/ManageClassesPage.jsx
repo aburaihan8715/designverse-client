@@ -40,101 +40,115 @@ const ManageClassesPage = () => {
     );
   }
   return (
-    <div className=" ml-2">
-      <Helmet>
-        <title>Bistro | My selected class</title>
-      </Helmet>
-      <div>
-        <div className="mt-4">
-          <SectionHeading subHeading={`manage`} heading={`all classes`} />
-        </div>
-
-        <div className="text-3xl ">
-          <div className="">
-            <span>Total classes: </span>
-            <span>{classesData?.length}</span>
+    <>
+      <div className=" ml-2">
+        <Helmet>
+          <title>Bistro | My selected class</title>
+        </Helmet>
+        <div>
+          <div className="mt-4">
+            <SectionHeading subHeading={`manage`} heading={`all classes`} />
           </div>
-        </div>
 
-        {/* table */}
-        <div className="mt-8 overflow-x-auto">
-          <table className="table border border-success">
-            {/* head */}
-            <thead className="">
-              <tr className="border border-success">
-                <th>image</th>
-                <th>class</th>
-                <th>instructor</th>
-                <th>instructor email</th>
-                <th>seats</th>
-                <th>price</th>
-                <th>status</th>
-                <th>actions</th>
-              </tr>
-            </thead>
-            <tbody>
-              {/* row start */}
-              {classesData?.map((item) => (
-                <tr key={item._id}>
-                  <td>
-                    <div className="flex items-center space-x-3">
-                      <div className="avatar">
-                        <div className="mask mask-squircle h-12 w-12">
-                          <img src={item.classImage} />
+          <div className="text-3xl ">
+            <div className="">
+              <span>Total classes: </span>
+              <span>{classesData?.length}</span>
+            </div>
+          </div>
+
+          {/* table */}
+          <div className="mt-8 overflow-x-auto">
+            <table className="table border border-success">
+              {/* head */}
+              <thead className="">
+                <tr className="border border-success">
+                  <th>image</th>
+                  <th>class</th>
+                  <th>instructor</th>
+                  <th>instructor email</th>
+                  <th>seats</th>
+                  <th>price</th>
+                  <th>status</th>
+                  <th>actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                {/* row start */}
+                {classesData?.map((item) => (
+                  <tr key={item._id}>
+                    <td>
+                      <div className="flex items-center space-x-3">
+                        <div className="avatar">
+                          <div className="mask mask-squircle h-12 w-12">
+                            <img src={item.classImage} />
+                          </div>
                         </div>
                       </div>
-                    </div>
-                  </td>
+                    </td>
 
-                  <td className="">{item.className}</td>
-                  <td className="">{item.instructorName}</td>
-                  <td className="">{item.instructorEmail}</td>
-                  <td className="">{item.seats}</td>
-                  <td className="">{item.price}</td>
-                  <td className="capitalize">{item.status}</td>
+                    <td className="">{item.className}</td>
+                    <td className="">{item.instructorName}</td>
+                    <td className="">{item.instructorEmail}</td>
+                    <td className="">{item.seats}</td>
+                    <td className="">{item.price}</td>
+                    <td className="">
+                      {item.status === "approved" && (
+                        <span className="badge badge-primary capitalize">
+                          {item.status}
+                        </span>
+                      )}
+                      {item.status === "denied" && (
+                        <span className="badge badge-error capitalize">
+                          {item.status}
+                        </span>
+                      )}
+                    </td>
 
-                  <th className="flex flex-col gap-2">
-                    <button
-                      disabled={
-                        item.status === "approved" || item.status === "denied"
-                      }
-                      onClick={() => classStatusHandler(item._id, "approved")}
-                      className="btn-success btn-xs btn "
-                    >
-                      approve
-                    </button>
-                    <button
-                      disabled={
-                        item.status === "approved" || item.status === "denied"
-                      }
-                      onClick={() => classStatusHandler(item._id, "denied")}
-                      className="btn-error btn-xs btn "
-                    >
-                      deny
-                    </button>
-                    <button
-                      disabled={
-                        item.status === "approved" ||
-                        item.adminFeedback ||
-                        item.status === "pending" ||
-                        item.status !== "denied"
-                      }
-                      onClick={() => {
-                        setModalOpen(true);
-                        setFeedbackId(item._id);
-                      }}
-                      className="btn-warning btn-xs btn"
-                    >
-                      feedback
-                    </button>
-                  </th>
-                </tr>
-              ))}
-              {/* row end */}
-            </tbody>
-          </table>
+                    <th className="flex flex-col gap-2">
+                      <button
+                        disabled={
+                          item.status === "approved" || item.status === "denied"
+                        }
+                        onClick={() => classStatusHandler(item._id, "approved")}
+                        className="btn-success btn-xs btn "
+                      >
+                        approve
+                      </button>
+                      <button
+                        disabled={
+                          item.status === "approved" || item.status === "denied"
+                        }
+                        onClick={() => classStatusHandler(item._id, "denied")}
+                        className="btn-error btn-xs btn "
+                      >
+                        deny
+                      </button>
+                      <button
+                        disabled={
+                          item.status === "approved" ||
+                          item.adminFeedback ||
+                          item.status === "pending" ||
+                          item.status !== "denied"
+                        }
+                        onClick={() => {
+                          setModalOpen(true);
+                          setFeedbackId(item._id);
+                        }}
+                        className="btn-warning btn-xs btn"
+                      >
+                        feedback
+                      </button>
+                    </th>
+                  </tr>
+                ))}
+                {/* row end */}
+              </tbody>
+            </table>
+          </div>
         </div>
       </div>
+      {/* feedback modal */}
       <Modal
         modalOpen={modalOpen}
         setModalOpen={setModalOpen}
@@ -142,7 +156,7 @@ const ManageClassesPage = () => {
       >
         <AdminFeedbackForm />
       </Modal>
-    </div>
+    </>
   );
 };
 

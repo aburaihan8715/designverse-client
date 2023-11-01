@@ -1,4 +1,4 @@
-// Function to remove duplicates based on the "email" property
+// Function to remove object duplicates based on the "email" property
 function removeDuplicateObjects(array, property) {
   const uniqueObjects = [];
   const uniqueEmails = new Set();
@@ -13,4 +13,10 @@ function removeDuplicateObjects(array, property) {
   return uniqueObjects;
 }
 
-export { removeDuplicateObjects };
+// remove duplicate element form an array
+const removeDuplicateElement = (array) => {
+  const unique = [...new Set(array)];
+  return unique;
+};
+
+export { removeDuplicateObjects, removeDuplicateElement };
