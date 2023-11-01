@@ -27,7 +27,7 @@ const SignUpPage = () => {
     try {
       await createUserUsingEmailPassword(email, password);
       await updateUserProfile(name);
-      const res = await fetch("http://localhost:5000/users", {
+      const res = await fetch("https://fashion-verse-server.vercel.app/users", {
         method: "POST",
         headers: {
           "Content-type": "application/json",

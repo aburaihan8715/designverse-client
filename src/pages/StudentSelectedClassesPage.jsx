@@ -115,7 +115,7 @@ const StudentSelectedClassDeleteBtn = ({ id }) => {
     }).then((result) => {
       if (result.isConfirmed) {
         axiosSecure
-          .delete(`http://localhost:5000/cart/${id}`)
+          .delete(`https://fashion-verse-server.vercel.app/cart/${id}`)
 
           .then((res) => {
             refetch();

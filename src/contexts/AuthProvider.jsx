@@ -82,7 +82,7 @@ const AuthProvider = ({ children }) => {
         console.log("user logged in", currentUser);
         // get and set token
         axios
-          .post("http://localhost:5000/jwt", {
+          .post("https://fashion-verse-server.vercel.app/jwt", {
             email: currentUser?.email,
           })
           .then((data) => {

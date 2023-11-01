@@ -20,7 +20,9 @@ const Testimonial = () => {
   } = useQuery({
     queryKey: ["testimonialsData"],
     queryFn: async () => {
-      const res = await axios.get("http://localhost:5000/testimonials");
+      const res = await axios.get(
+        "https://fashion-verse-server.vercel.app/testimonials",
+      );
       return res.data;
     },
   });

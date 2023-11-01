@@ -145,7 +145,7 @@ const MakeInstructorBtn = ({ item, instructor }) => {
       console.log(error.message);
     }
 
-    // fetch(`http://localhost:5000/users/role/${item._id}`, {
+    // fetch(`https://fashion-verse-server.vercel.app/users/role/${item._id}`, {
     //   method: "PATCH",
     //   body: JSON.stringify({
     //     role,

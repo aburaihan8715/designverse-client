@@ -67,7 +67,7 @@ const AddClassPage = () => {
       // console.log(newClassData);
 
       const classResponse = await axiosSecure.post(
-        "http://localhost:5000/classes",
+        "https://fashion-verse-server.vercel.app/classes",
         newClassData,
       );
       const classData = classResponse.data;

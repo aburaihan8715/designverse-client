@@ -10,7 +10,9 @@ const InstructorMyClassUpdatePage = () => {
   const { axiosSecure } = useAxiosSecure();
   const form = useForm({
     defaultValues: async () => {
-      const res = await fetch(`http://localhost:5000/classes/${id}`);
+      const res = await fetch(
+        `https://fashion-verse-server.vercel.app/classes/${id}`,
+      );
       const data = await res.json();
       return {
         className: data?.className,

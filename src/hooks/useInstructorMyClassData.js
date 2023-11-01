@@ -15,7 +15,7 @@ const useInstructorMyClassData = () => {
     enabled: !!user?.email && !authLoading,
     queryFn: async () => {
       const data = await axios.get(
-        `http://localhost:5000/classes?email=${user?.email}`,
+        `https://fashion-verse-server.vercel.app/classes?email=${user?.email}`,
       );
       return data.data;
     },
