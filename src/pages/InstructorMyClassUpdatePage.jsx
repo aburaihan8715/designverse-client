@@ -62,7 +62,7 @@ const InstructorMyClassUpdatePage = () => {
         address: data.address,
       },
     };
-    console.log(classData);
+    // console.log(classData);
 
     // send data to server using axios
     axiosSecure

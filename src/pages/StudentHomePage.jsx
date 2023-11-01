@@ -112,7 +112,7 @@ const StudentHomePage = () => {
             <div className="flex justify-center">
               <div className="text-center">
                 <div className="avatar ">
-                  <div className="w-24 rounded-full ring-2 ring-offset-2	">
+                  <div className="w-24 rounded-full ring-2 ring-offset-2">
                     <img src={user?.photoURL} />
                   </div>
                 </div>

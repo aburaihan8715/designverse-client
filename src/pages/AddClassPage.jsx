@@ -6,6 +6,7 @@ import axios from "axios";
 import { useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 import useAxiosSecure from "../hooks/useAxiosSecure";
+import { useNavigate } from "react-router-dom";
 
 const image_bb_api_key = import.meta.env.VITE_IMAGEBB_API_KEY;
 const image_hosting_url = `https://api.imgbb.com/1/upload?key=${image_bb_api_key}`;
@@ -15,6 +16,7 @@ const AddClassPage = () => {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const { axiosSecure } = useAxiosSecure();
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
@@ -79,6 +81,7 @@ const AddClassPage = () => {
           timer: 1500,
         });
         reset();
+        navigate("/dashboard/instructorClasses");
       }
     } catch (error) {
       setLoading(false);

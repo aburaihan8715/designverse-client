@@ -1,47 +1,24 @@
 import { Helmet } from "react-helmet-async";
-import useAuth from "../hooks/useAuth";
-
 import SectionHeading from "../ui/SectionHeading";
 import { useState } from "react";
-import { useEffect } from "react";
 import LoadingSpinner from "../ui/LoadingSpinner";
 import { Link } from "react-router-dom";
 import Swal from "sweetalert2";
-import useClassesData from "../hooks/useClassesData";
 import useAxiosSecure from "../hooks/useAxiosSecure";
-
-// import axios from "axios";
+import useInstructorMyClassData from "../hooks/useInstructorMyClassData";
 
 const InstructorMyClassesPage = () => {
-  const [instructorMyClassData, setInstructorMyClassData] = useState([]);
-  const [instructorMyClassLoading, setInstructorMyClassLoading] =
-    useState(false);
-  const [instructorMyClassError, setInstructorMyClassError] = useState("");
-  const { user } = useAuth();
-  const { refetch, classesData, classesLoading } = useClassesData();
-  // console.log(classesData);
-  // console.log(user);
-  // console.log(instructorMyClassData);
+  const {
+    instructorMyClassData,
+    instructorMyClassLoading,
+    instructorMyClassError,
+    isInstructorMyClassError,
+    refetch,
+  } = useInstructorMyClassData();
 
-  useEffect(() => {
-    setInstructorMyClassLoading(true);
-    fetch(`http://localhost:5000/classes?email=${user?.email}`)
-      .then((res) => res.json())
-      .then((data) => {
-        setInstructorMyClassData(data);
-        setInstructorMyClassLoading(false);
-      })
-      .catch((error) => {
-        setInstructorMyClassLoading(false);
-        setInstructorMyClassError(error.message);
-        console.log(error.message);
-      });
-  }, [user?.email, classesData]);
+  if (instructorMyClassLoading) return <LoadingSpinner />;
 
-  if (instructorMyClassLoading || !user || classesLoading) {
-    return <LoadingSpinner />;
-  }
-  if (instructorMyClassError) {
+  if (isInstructorMyClassError) {
     return <p>something went wrong ${instructorMyClassError.message}</p>;
   }
 
@@ -154,7 +131,10 @@ const InstrMyClassDeleteBtn = ({ id, refetch }) => {
 
   return (
     <button onClick={classDeleteHandler} className="btn-error btn-xs btn">
-      {classDeleteLoading ? "loading.." : "delete"}
+      {classDeleteLoading && (
+        <span className="loading loading-spinner loading-xs"></span>
+      )}
+      delete
     </button>
   );
 };

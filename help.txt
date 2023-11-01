@@ -5,7 +5,7 @@ gender-female
 phoneNo +880 1711111111
 address Dhaka-1111
 
-2.David Chang
+2.Instructor
 gender-male
 phoneNo +880 1722222222
 address Dhaka-2222

@@ -187,7 +187,7 @@ const ProfileCard = ({ setFlags }) => {
       <div className="flex flex-col items-center justify-center gap-1">
         <div className="relative">
           <img
-            className="rounded-full p-1 ring ring-gray-50"
+            className="h-28 w-28 rounded-full object-cover p-1 ring ring-gray-50"
             src={user?.photoURL}
             width={100}
             height={100}
@@ -212,14 +212,16 @@ const ProfileCard = ({ setFlags }) => {
   );
 };
 
-// profile edit form
+// profile edit form component
 const ProfileEditForm = ({ setFlags }) => {
+  const [profileLoading, setProfileLoading] = useState(false);
   const { updateUserProfile, user } = useAuth();
   const { axiosSecure } = useAxiosSecure();
   const { roleData } = useRole();
 
   const submitHandler = async (e) => {
     e.preventDefault();
+    setProfileLoading(true);
     const name = e.target[0].value;
     const file = e.target[1].files[0];
 
@@ -267,6 +269,7 @@ const ProfileEditForm = ({ setFlags }) => {
         timer: 1500,
       });
       setFlags(false);
+      setProfileLoading(false);
     } catch (error) {
       console.log(error.message);
     }
@@ -328,7 +331,10 @@ const ProfileEditForm = ({ setFlags }) => {
           back to profile
         </span>
         <button className="btn-secondary btn-xs btn" type="submit">
-          submit
+          {profileLoading && (
+            <span className="loading loading-spinner loading-xs" />
+          )}
+          {!profileLoading && <span>submit</span>}
         </button>
       </div>
     </form>
