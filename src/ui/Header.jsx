@@ -11,6 +11,7 @@ import { useState } from "react";
 import axios from "axios";
 import Swal from "sweetalert2";
 import useAxiosSecure from "../hooks/useAxiosSecure";
+import useClassesData from "../hooks/useClassesData";
 
 const image_bb_api_key = import.meta.env.VITE_IMAGEBB_API_KEY;
 const image_hosting_url = `https://api.imgbb.com/1/upload?key=${image_bb_api_key}`;
@@ -19,11 +20,8 @@ const Header = () => {
   const [isProfileOpen, setIsProfileOpen] = useState(false);
   const [flags, setFlags] = useState(false);
   const { user } = useAuth();
-  // console.log(user);
   const { cartData } = useCartData();
-  // console.log(cartData);
   const { roleData } = useRole();
-  // console.log(roleData);
 
   const menuItems = (
     <>
@@ -165,7 +163,6 @@ const Header = () => {
 export default Header;
 
 // profile modal
-
 const ProfileModal = ({ children, setIsProfileOpen }) => {
   return (
     <div className="absolute right-10 top-16 flex w-60 flex-col rounded-md bg-gradient-to-b from-purple-300 to-pink-300 p-2 pb-4 text-center text-gray-50 transition duration-100 hover:bg-gradient-to-t">
@@ -218,16 +215,14 @@ const ProfileEditForm = ({ setFlags }) => {
   const { updateUserProfile, user } = useAuth();
   const { axiosSecure } = useAxiosSecure();
   const { roleData } = useRole();
+  const { refetch } = useClassesData();
 
   const submitHandler = async (e) => {
     e.preventDefault();
     setProfileLoading(true);
     const name = e.target[0].value;
     const file = e.target[1].files[0];
-
     if (!name || file === undefined) return alert("Please Input valid data!!");
-    // console.log(name);
-    // console.log(file);
 
     let imgURL;
     let formData = new FormData();
@@ -236,29 +231,24 @@ const ProfileEditForm = ({ setFlags }) => {
     try {
       const imageRes = await axios.post(image_hosting_url, formData);
       const imageData = imageRes.data;
-      // console.log(data);
 
       if (imageData?.success) {
         imgURL = imageData.data.display_url;
       }
-      const profileUpdateRes = await updateUserProfile(name, imgURL);
-      console.log("1st", profileUpdateRes);
+      // call the update profile function
+      await updateUserProfile(name, imgURL);
 
-      const userUpdateRes = await axiosSecure.put(`/users/${user?.email}`, {
+      // sent update data to the server
+      await axiosSecure.put(`/users/${user?.email}`, {
         name,
         imgURL,
       });
-      console.log("2st", userUpdateRes);
 
       if (roleData.role === "instructor") {
-        const classesUpdateRes = await axiosSecure.patch(
-          `/classes?email=${user?.email}`,
-          {
-            name,
-            imgURL,
-          },
-        );
-        console.log("3st", classesUpdateRes);
+        await axiosSecure.patch(`/classes?email=${user?.email}`, {
+          name,
+          imgURL,
+        });
       }
 
       Swal.fire({
@@ -270,6 +260,7 @@ const ProfileEditForm = ({ setFlags }) => {
       });
       setFlags(false);
       setProfileLoading(false);
+      refetch();
     } catch (error) {
       console.log(error.message);
     }
@@ -334,7 +325,7 @@ const ProfileEditForm = ({ setFlags }) => {
           {profileLoading && (
             <span className="loading loading-spinner loading-xs" />
           )}
-          {!profileLoading && <span>submit</span>}
+          <span>submit</span>
         </button>
       </div>
     </form>
