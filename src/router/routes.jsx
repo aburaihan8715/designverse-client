@@ -23,7 +23,6 @@ import InstructorMyClassesPage from "../pages/InstructorMyClassesPage";
 import InstructorMyClassUpdatePage from "../pages/InstructorMyClassUpdatePage";
 import PaymentHistoryPage from "../pages/PaymentHistoryPage";
 import AddTestimonialPage from "../pages/AddTestimonialPage";
-import TestImageHosting from "../pages/TestImageHosting";
 import ForgetPassword from "../pages/ForgetPassword";
 import InstructorRoute from "./InstructorRoute";
 import AdminRoute from "./AdminRoute";
@@ -66,10 +65,6 @@ const router = createBrowserRouter([
       {
         path: "forget-password",
         element: <ForgetPassword />,
-      },
-      {
-        path: "testImageHosting",
-        element: <TestImageHosting />,
       },
     ],
   },
