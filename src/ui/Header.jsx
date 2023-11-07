@@ -165,7 +165,7 @@ export default Header;
 // profile modal
 const ProfileModal = ({ children, setIsProfileOpen }) => {
   return (
-    <div className="absolute right-10 top-16 flex w-60 flex-col rounded-md bg-gradient-to-b from-purple-300 to-pink-300 p-2 pb-4 text-center text-gray-50 transition duration-100 hover:bg-gradient-to-t">
+    <div className="absolute left-1/2 top-16 flex  w-60 -translate-x-2/3 flex-col rounded-md bg-gradient-to-b from-purple-300 to-pink-300 p-2 pb-4 text-center text-gray-50 transition duration-100 hover:bg-gradient-to-t sm:right-10">
       <div onClick={() => setIsProfileOpen(false)} className="self-end">
         <span className="flex h-10 w-10 cursor-pointer justify-center rounded-full bg-red-400 text-2xl hover:bg-red-600">
           &times;

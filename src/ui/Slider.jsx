@@ -16,9 +16,9 @@ const Slider = () => {
           {/* item 01 */}
           <div className="">
             <img className="max-h-screen" loading="lazy" src={slide1} />
-            <div className="legend">
+            <div className="legend hidden sm:block">
               <h3 className="text-4xl">History of Fashion Design</h3>
-              <p className="mt-4 text-xl">
+              <p className="mt-4 text-sm sm:text-xl">
                 This heading would explore the evolution of fashion design
                 throughout different eras, from ancient civilizations to
                 modern-day trends. It would cover influential designers, iconic
@@ -32,7 +32,7 @@ const Slider = () => {
           <div className="">
             <img className="max-h-screen" loading="lazy" src={slide2} />
 
-            <div className="legend">
+            <div className="legend hidden sm:block">
               <h3 className="text-4xl">Elements of Fashion Design</h3>
               <p className="mt-4 text-xl">
                 Under this heading, one can delve into the fundamental elements
@@ -49,7 +49,7 @@ const Slider = () => {
           <div className="">
             <img className="max-h-screen" loading="lazy" src={slide3} />
 
-            <div className="legend">
+            <div className="legend hidden sm:block">
               <h3 className="text-4xl">Fashion Design Techniques</h3>
               <p className="mt-4 text-xl">
                 This heading would focus on the various techniques and processes
@@ -65,7 +65,7 @@ const Slider = () => {
           <div className="">
             <img className="max-h-screen" loading="lazy" src={slide4} />
 
-            <div className="legend">
+            <div className="legend hidden sm:block">
               <h3 className="text-4xl">Fashion Design and Sustainability</h3>
               <p className="mt-4 text-xl">
                 With increasing awareness about the environmental impact of the
@@ -81,7 +81,7 @@ const Slider = () => {
           {/* item 05 */}
           <div className="">
             <img className="max-h-screen" loading="lazy" src={slide5} />
-            <div className="legend">
+            <div className="legend hidden sm:block">
               <h3 className="text-4xl">
                 Fashion Design and Cultural Influences
               </h3>
@@ -98,7 +98,7 @@ const Slider = () => {
           {/* item 06 */}
           <div className="">
             <img className="max-h-screen" loading="lazy" src={slide6} />
-            <div className="legend">
+            <div className="legend hidden sm:block">
               <h3 className="text-4xl">Fashion Design and Technology</h3>
               <p className="mt-4 text-xl">
                 In this heading, the intersection of fashion design and

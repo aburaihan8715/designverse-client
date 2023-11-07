@@ -108,7 +108,7 @@ const StudentHomePage = () => {
         </div>
 
         <div className="mt-4 grid gap-4 sm:grid-cols-2">
-          <div className="rounded border-orange-300 bg-blue-50  p-8 sm:border-l-2 ">
+          <div className="rounded border-orange-300 bg-blue-50 p-8 sm:border-l-2 ">
             <div className="flex justify-center">
               <div className="text-center">
                 <div className="avatar ">

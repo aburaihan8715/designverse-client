@@ -59,7 +59,7 @@ const DashboardLayout = () => {
         </div>
         <div className="drawer-side">
           <label htmlFor="my-drawer-2" className="drawer-overlay"></label>
-          <ul className="menu h-full w-80 gap-2 bg-gradient-to-b from-base-100 to-pink-300 p-4 text-base-content">
+          <ul className="menu h-full w-60 gap-2 bg-gradient-to-b from-base-100 to-pink-300 p-4 text-base-content sm:w-80">
             {/* brand logo */}
             <div className="mb-6">
               <BrandLogo isHidden={false} />
