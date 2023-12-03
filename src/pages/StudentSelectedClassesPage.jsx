@@ -31,7 +31,7 @@ const StudentSelectedClassesPage = () => {
         <SectionHeading
           subHeading={`selected classes`}
           heading={`want to add more`}
-        ></SectionHeading>
+        />
         <div className="flex space-x-20 text-3xl">
           <div className="">
             <span>Total selected classes: </span>

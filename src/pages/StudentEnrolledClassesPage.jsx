@@ -54,11 +54,11 @@ const StudentEnrolledClassesPage = () => {
         <Helmet>
           <title>FashionVerse | MyEnrolledClassesPage</title>
         </Helmet>
-        <div>
+        <div className="text-center">
           <SectionHeading
             subHeading={`how many`}
             heading={`classes enrolled`}
-          ></SectionHeading>
+          />
         </div>
         <h2 className="font-bold">
           {totalEnrolledClasses?.length} classes enrolled
