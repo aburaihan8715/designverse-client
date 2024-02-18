@@ -1,3 +1,10 @@
+const NotFoundPage = () => {
+  return <div>NotFoundPage</div>;
+};
+
+export default NotFoundPage;
+
+/*
 import { useNavigate } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 
@@ -12,7 +19,7 @@ const NotFoundPage = () => {
         <button onClick={() => navigate(-1)} className="btn btn-accent btn-xs">
           go back
         </button>
-        <div className="flex justify-center items-center">
+        <div className="flex items-center justify-center">
           <img src="https://i.ibb.co/YhZ77K0/404.png" alt="404 image" />
         </div>
       </div>
@@ -21,3 +28,4 @@ const NotFoundPage = () => {
 };
 
 export default NotFoundPage;
+*/

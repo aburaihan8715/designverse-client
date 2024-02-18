@@ -1,4 +1,16 @@
 import { Outlet } from "react-router-dom";
+
+const MainLayout = () => {
+  return (
+    <div>
+      <Outlet />
+    </div>
+  );
+};
+
+export default MainLayout;
+/*
+import { Outlet } from "react-router-dom";
 import Header from "../ui/Header";
 import Footer from "../ui/Footer";
 import ScrollToTop from "react-scroll-to-top";
@@ -9,7 +21,7 @@ const MainLayout = () => {
   return (
     <>
       <ScrollToTop color="#fff" style={{ display: "flex", justifyContent: "center", alignItems: "center", background: "#8E28C9" }} smooth />
-      <div className="flex min-h-screen flex-col justify-between">
+      <div className="flex flex-col justify-between min-h-screen">
         <Header></Header>
         <div className="mt-20">
           <Outlet></Outlet>
@@ -21,3 +33,4 @@ const MainLayout = () => {
 };
 
 export default MainLayout;
+*/

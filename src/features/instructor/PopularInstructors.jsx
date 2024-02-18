@@ -1,3 +1,9 @@
+const PopularInstructors = () => {
+  return <div>PopularInstructors</div>;
+};
+
+export default PopularInstructors;
+/*
 import useClassesData from "../../hooks/useClassesData";
 import LoadingSpinner from "../../ui/LoadingSpinner";
 import SectionHeading from "../../ui/SectionHeading";
@@ -28,7 +34,7 @@ const PopularInstructors = () => {
   if (classesError) return <p>something went wrong {classesError.message}</p>;
   return (
     <div className="py-8">
-      <div className="mx-auto max-w-6xl p-2">
+      <div className="max-w-6xl p-2 mx-auto">
         <SectionHeading
           subHeading={`stay with`}
           heading={`popular instructors`}
@@ -45,3 +51,4 @@ const PopularInstructors = () => {
 };
 
 export default PopularInstructors;
+*/

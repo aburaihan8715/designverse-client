@@ -1,3 +1,10 @@
+const DashboardLayout = () => {
+  return <div>DashboardLayout</div>;
+};
+
+export default DashboardLayout;
+
+/*
 import { Helmet } from "react-helmet-async";
 import useCartData from "../hooks/useCartData";
 import useRole from "../hooks/useRole";
@@ -48,10 +55,10 @@ const DashboardLayout = () => {
 
       <div className="drawer lg:drawer-open">
         <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
-        <div className="drawer-content flex flex-col items-center justify-center">
+        <div className="flex flex-col items-center justify-center drawer-content">
           <label
             htmlFor="my-drawer-2"
-            className="btn-secondary drawer-button btn-xs btn mt-2 lg:hidden"
+            className="mt-2 btn-secondary drawer-button btn-xs btn lg:hidden"
           >
             Open drawer
           </label>
@@ -59,8 +66,8 @@ const DashboardLayout = () => {
         </div>
         <div className="drawer-side">
           <label htmlFor="my-drawer-2" className="drawer-overlay"></label>
-          <ul className="menu h-full w-60 gap-2 bg-gradient-to-b from-base-100 to-pink-300 p-4 text-base-content sm:w-80">
-            {/* brand logo */}
+          <ul className="h-full gap-2 p-4 menu w-60 bg-gradient-to-b from-base-100 to-pink-300 text-base-content sm:w-80">
+        
             <div className="mb-6">
               <BrandLogo isHidden={false} />
             </div>
@@ -95,7 +102,7 @@ const DashboardLayout = () => {
                       >
                         <FaBookOpen />
                         <span>My Selected Classes</span>
-                        <span className="badge badge-success text-white">
+                        <span className="text-white badge badge-success">
                           +{cartData?.length || 0}
                         </span>
                       </ActiveLink>
@@ -222,3 +229,4 @@ const DashboardLayout = () => {
 };
 
 export default DashboardLayout;
+*/

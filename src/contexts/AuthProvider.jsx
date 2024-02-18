@@ -1,3 +1,4 @@
+/*
 import { createContext } from "react";
 import {
   GithubAuthProvider,
@@ -82,7 +83,7 @@ const AuthProvider = ({ children }) => {
         console.log("user logged in", currentUser);
         // get and set token
         axios
-          .post("https://fashion-verse-server.vercel.app/jwt", {
+          .post("http://localhost:5000/jwt", {
             email: currentUser?.email,
           })
           .then((data) => {
@@ -126,3 +127,4 @@ const AuthProvider = ({ children }) => {
 };
 
 export default AuthProvider;
+*/

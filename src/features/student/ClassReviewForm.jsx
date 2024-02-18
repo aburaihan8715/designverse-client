@@ -1,3 +1,11 @@
+const ClassReviewForm = () => {
+  return <div>ClassReviewForm</div>;
+};
+
+export default ClassReviewForm;
+
+/*
+
 import Swal from "sweetalert2";
 import { Rating } from "@smastrom/react-rating";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
@@ -38,15 +46,15 @@ const ClassReviewForm = ({ reviewId }) => {
   };
 
   return (
-    <div className="mx-auto max-w-lg rounded-md  p-10 ">
-      <h3 className="bg-gradient-to-r from-fuchsia-500 to-pink-500 bg-clip-text text-center text-3xl font-semibold uppercase text-transparent">
+    <div className="max-w-lg p-10 mx-auto rounded-md ">
+      <h3 className="text-3xl font-semibold text-center text-transparent uppercase bg-gradient-to-r from-fuchsia-500 to-pink-500 bg-clip-text">
         Rate please
       </h3>
-      <div className="mt-2 flex justify-center">
+      <div className="flex justify-center mt-2">
         <Rating className="" style={{ maxWidth: 150 }} value={5} readOnly />
       </div>
       <form onSubmit={submitHandler}>
-        <div className="form-control w-full">
+        <div className="w-full form-control">
           <label htmlFor="rating" className="label">
             <span className="label-text">Rate</span>
           </label>
@@ -66,20 +74,20 @@ const ClassReviewForm = ({ reviewId }) => {
           </select>
         </div>
 
-        {/* <div className="form-control mt-2">
-          <label htmlFor="message" className="label">
-            <span className="label-text">Your Review</span>
-          </label>
-          <textarea
-            className="textarea-bordered textarea w-full"
-            name=""
-            id="message"
-            rows="3"
-            maxLength="500"
-            minLength="100"
-            placeholder="Please review within (250 characters)"
-          ></textarea>
-        </div> */}
+        // <div className="mt-2 form-control">
+        //   <label htmlFor="message" className="label">
+        //     <span className="label-text">Your Review</span>
+        //   </label>
+        //   <textarea
+        //     className="w-full textarea-bordered textarea"
+        //     name=""
+        //     id="message"
+        //     rows="3"
+        //     maxLength="500"
+        //     minLength="100"
+        //     placeholder="Please review within (250 characters)"
+        //   ></textarea>
+        // </div>
 
         <div className="mt-2 text-right">
           <button className="btn-secondary btn-sm btn" type="submit">
@@ -92,3 +100,4 @@ const ClassReviewForm = ({ reviewId }) => {
 };
 
 export default ClassReviewForm;
+*/

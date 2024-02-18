@@ -1,3 +1,4 @@
+/*
 import axios from "axios";
 import { useQuery } from "react-query";
 import useAuth from "./useAuth";
@@ -15,7 +16,7 @@ const useInstructorMyClassData = () => {
     enabled: !!user?.email && !authLoading,
     queryFn: async () => {
       const data = await axios.get(
-        `https://fashion-verse-server.vercel.app/classes?email=${user?.email}`,
+        `http://localhost:5000/classes?email=${user?.email}`,
       );
       return data.data;
     },
@@ -30,3 +31,4 @@ const useInstructorMyClassData = () => {
 };
 
 export default useInstructorMyClassData;
+*/

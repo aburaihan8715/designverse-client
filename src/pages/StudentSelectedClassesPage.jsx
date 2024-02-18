@@ -1,3 +1,9 @@
+const StudentSelectedClassesPage = () => {
+  return <div>StudentSelectedClassesPage</div>;
+};
+
+export default StudentSelectedClassesPage;
+/*
 import { Helmet } from "react-helmet-async";
 import { FaTrashAlt } from "react-icons/fa";
 import { Link } from "react-router-dom";
@@ -48,10 +54,9 @@ const StudentSelectedClassesPage = () => {
           </div>
         </div>
 
-        {/* table */}
         <div className="mt-8 overflow-x-auto">
           <table className="table border border-success">
-            {/* head */}
+         
             <thead className="capitalize">
               <tr className="border border-success">
                 <th>#</th>
@@ -63,14 +68,14 @@ const StudentSelectedClassesPage = () => {
               </tr>
             </thead>
             <tbody>
-              {/* row start */}
+             
               {cartData?.map((item, index) => (
                 <tr key={item._id}>
                   <th>{index + 1}</th>
                   <td>
                     <div className="flex items-center space-x-3">
                       <div className="avatar">
-                        <div className="mask mask-squircle h-12 w-12">
+                        <div className="w-12 h-12 mask mask-squircle">
                           <img src={item.classImage} />
                         </div>
                       </div>
@@ -87,7 +92,7 @@ const StudentSelectedClassesPage = () => {
                   </th>
                 </tr>
               ))}
-              {/* row end */}
+          
             </tbody>
           </table>
         </div>
@@ -115,7 +120,7 @@ const StudentSelectedClassDeleteBtn = ({ id }) => {
     }).then((result) => {
       if (result.isConfirmed) {
         axiosSecure
-          .delete(`https://fashion-verse-server.vercel.app/cart/${id}`)
+          .delete(`http://localhost:5000/cart/${id}`)
 
           .then((res) => {
             refetch();
@@ -133,9 +138,10 @@ const StudentSelectedClassDeleteBtn = ({ id }) => {
   return (
     <button
       onClick={deleteHandler}
-      className="btn-error btn-sm btn text-white hover:bg-red-800"
+      className="text-white btn-error btn-sm btn hover:bg-red-800"
     >
       <FaTrashAlt></FaTrashAlt>
     </button>
   );
 };
+*/

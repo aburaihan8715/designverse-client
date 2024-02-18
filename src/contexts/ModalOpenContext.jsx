@@ -1,3 +1,4 @@
+/*
 import { createContext, useState } from "react";
 
 export const ModalOpenContext = createContext();
@@ -13,3 +14,4 @@ const ModalOpenContextProvider = ({ children }) => {
 };
 
 export default ModalOpenContextProvider;
+*/

@@ -1,3 +1,4 @@
+/*
 import { Navigate, useLocation } from "react-router";
 import useAuth from "../hooks/useAuth";
 import useRole from "../hooks/useRole";
@@ -16,3 +17,4 @@ const AdminRoute = ({ children }) => {
 };
 
 export default AdminRoute;
+*/

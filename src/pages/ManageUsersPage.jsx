@@ -1,3 +1,9 @@
+const ManageUsersPage = () => {
+  return <div>ManageUsersPage</div>;
+};
+
+export default ManageUsersPage;
+/*
 import { Helmet } from "react-helmet-async";
 import { FaTrashAlt } from "react-icons/fa";
 import Swal from "sweetalert2";
@@ -39,10 +45,10 @@ const ManageUsersPage = () => {
           <span>{users?.length}</span>
         </div>
 
-        {/* table */}
+       
         <div className="mt-2 overflow-x-auto">
           <table className="table border border-success">
-            {/* head */}
+         
             <thead className="capitalize">
               <tr className="border border-success">
                 <th>#</th>
@@ -54,7 +60,7 @@ const ManageUsersPage = () => {
               </tr>
             </thead>
             <tbody>
-              {/* row start */}
+          
               {users?.map((item, index) => (
                 <tr key={item._id}>
                   <th>{index + 1}</th>
@@ -75,7 +81,7 @@ const ManageUsersPage = () => {
                   </th>
                 </tr>
               ))}
-              {/* row end */}
+             
             </tbody>
           </table>
         </div>
@@ -145,7 +151,7 @@ const MakeInstructorBtn = ({ item, instructor }) => {
       console.log(error.message);
     }
 
-    // fetch(`https://fashion-verse-server.vercel.app/users/role/${item._id}`, {
+    // fetch(`http://localhost:5000/users/role/${item._id}`, {
     //   method: "PATCH",
     //   body: JSON.stringify({
     //     role,
@@ -212,9 +218,10 @@ const UserDeleteBtn = ({ item }) => {
   return (
     <button
       onClick={() => deleteHandler(item)}
-      className="btn-xs btn bg-red-600 text-white hover:bg-red-800"
+      className="text-white bg-red-600 btn-xs btn hover:bg-red-800"
     >
       {deleteLoading ? " deleting.." : <FaTrashAlt></FaTrashAlt>}
     </button>
   );
 };
+*/

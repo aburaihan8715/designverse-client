@@ -1,3 +1,9 @@
+const CheckoutForm = () => {
+  return <div>CheckoutForm</div>;
+};
+
+export default CheckoutForm;
+/*
 import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
 import { useEffect, useState } from "react";
 import "./CheckoutForm.css";
@@ -110,7 +116,7 @@ const CheckoutForm = ({ price, cartData }) => {
     }
   };
   return (
-    <div className="mx-auto max-w-lg rounded border p-8">
+    <div className="max-w-lg p-8 mx-auto border rounded">
       <form onSubmit={handleSubmit}>
         <CardElement
           options={{
@@ -131,7 +137,7 @@ const CheckoutForm = ({ price, cartData }) => {
 
         <div className="mt-4 text-right">
           <button
-            className="btn-secondary btn-sm btn rounded"
+            className="rounded btn-secondary btn-sm btn"
             type="submit"
             disabled={!stripe || !clientSecret || processing}
           >
@@ -150,3 +156,4 @@ const CheckoutForm = ({ price, cartData }) => {
 };
 
 export default CheckoutForm;
+*/

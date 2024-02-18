@@ -1,3 +1,10 @@
+const StudentEnrolledClassesPage = () => {
+  return <div>StudentEnrolledClassesPage</div>;
+};
+
+export default StudentEnrolledClassesPage;
+
+/* 
 import useAuth from "../hooks/useAuth";
 import LoadingSpinner from "../ui/LoadingSpinner";
 import useClassesData from "../hooks/useClassesData";
@@ -66,7 +73,7 @@ const StudentEnrolledClassesPage = () => {
         <h2 className="font-bold">${totalSpend} dollars spend</h2>
         <div className="overflow-x-auto">
           <table className="table">
-            {/* head */}
+        
             <thead className="capitalize">
               <tr>
                 <th>#</th>
@@ -80,13 +87,13 @@ const StudentEnrolledClassesPage = () => {
               </tr>
             </thead>
             <tbody>
-              {/* row 1 */}
+         
               {totalEnrolledClasses?.map((item, index) => (
                 <tr key={index}>
                   <th>{index + 1}</th>
                   <td>
                     <div className="avatar">
-                      <div className="mask mask-squircle h-12 w-12">
+                      <div className="w-12 h-12 mask mask-squircle">
                         <img src={item?.classImage} alt="class cover photo" />
                       </div>
                     </div>
@@ -113,7 +120,7 @@ const StudentEnrolledClassesPage = () => {
           </table>
         </div>
       </div>
-      {/* modal */}
+     
       <Modal
         modalOpen={modalOpen}
         setModalOpen={setModalOpen}
@@ -126,3 +133,4 @@ const StudentEnrolledClassesPage = () => {
 };
 
 export default StudentEnrolledClassesPage;
+*/

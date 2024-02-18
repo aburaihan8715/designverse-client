@@ -1,3 +1,10 @@
+const PopularInstructorCard = () => {
+  return <div>PopularInstructorCard</div>;
+};
+
+export default PopularInstructorCard;
+/*
+
 import { useState } from "react";
 import { Link } from "react-router-dom";
 
@@ -6,11 +13,11 @@ const PopularInstructorCard = ({ item }) => {
   return (
     <div
       data-aos="zoom-in"
-      className="card relative rounded-md border shadow-md hover:shadow-white"
+      className="relative border rounded-md shadow-md card hover:shadow-white"
     >
       <figure className="">
         <img
-          className="h-40 w-full object-cover transition duration-500 hover:scale-105"
+          className="object-cover w-full h-40 transition duration-500 hover:scale-105"
           src={item.instructorImage}
           alt="instructor"
         />
@@ -40,3 +47,4 @@ const PopularInstructorCard = ({ item }) => {
 };
 
 export default PopularInstructorCard;
+*/

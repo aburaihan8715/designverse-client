@@ -1,3 +1,9 @@
+const InstructorMyClassUpdatePage = () => {
+  return <div>InstructorMyClassUpdatePage</div>;
+};
+
+export default InstructorMyClassUpdatePage;
+/*
 import { Helmet } from "react-helmet-async";
 import { useForm } from "react-hook-form";
 import { useNavigate, useParams } from "react-router-dom";
@@ -10,9 +16,7 @@ const InstructorMyClassUpdatePage = () => {
   const { axiosSecure } = useAxiosSecure();
   const form = useForm({
     defaultValues: async () => {
-      const res = await fetch(
-        `https://fashion-verse-server.vercel.app/classes/${id}`,
-      );
+      const res = await fetch(`http://localhost:5000/classes/${id}`);
       const data = await res.json();
       return {
         className: data?.className,
@@ -110,20 +114,20 @@ const InstructorMyClassUpdatePage = () => {
       </Helmet>
 
       <div className="p-1">
-        <div className="mx-auto max-w-lg rounded-md border p-8">
+        <div className="max-w-lg p-8 mx-auto border rounded-md">
           <form onSubmit={handleSubmit(submitHandler)}>
             <div className="space-y-3">
               <div className="text-center ">
-                <h4 className="text-3xl uppercase underline decoration-secondary underline-offset-4">
+                <h4 className="text-3xl underline uppercase decoration-secondary underline-offset-4">
                   Update class
                 </h4>
               </div>
 
               <div className="">
                 <div>
-                  {/* group 01 */}
+                 
                   <div className="gap-2 sm:flex">
-                    {/* class name input */}
+                    
                     <div className="w-full">
                       <label className="label">
                         <span className="label-text">Class Name*</span>
@@ -132,7 +136,7 @@ const InstructorMyClassUpdatePage = () => {
                         {...register("className", { required: true })}
                         type="text"
                         placeholder="Enter class name"
-                        className="input-bordered input w-full "
+                        className="w-full input-bordered input "
                       />
                       {errors.className?.type === "required" && (
                         <span className="text-error">
@@ -141,7 +145,7 @@ const InstructorMyClassUpdatePage = () => {
                       )}
                     </div>
 
-                    {/* class image input type url */}
+                   
                     <div className="w-full">
                       <label className="label">
                         <span className="label-text">Class image*</span>
@@ -149,7 +153,7 @@ const InstructorMyClassUpdatePage = () => {
                       <input
                         {...register("classImage", { required: true })}
                         type="url"
-                        className="input-bordered input w-full"
+                        className="w-full input-bordered input"
                         placeholder="Enter class image url"
                       />
                       {errors.classImage?.type === "required" && (
@@ -160,9 +164,9 @@ const InstructorMyClassUpdatePage = () => {
                     </div>
                   </div>
 
-                  {/* group 02 */}
+            
                   <div className="gap-2 sm:flex">
-                    {/* price input */}
+               
                     <div className="w-full ">
                       <label className="label">
                         <span className="label-text">Price*</span>
@@ -171,14 +175,14 @@ const InstructorMyClassUpdatePage = () => {
                         {...register("price", { required: true })}
                         type="number"
                         placeholder="Enter price"
-                        className="input-bordered input w-full "
+                        className="w-full input-bordered input "
                       />
                       {errors.price?.type === "required" && (
                         <span className="text-error">Price is required</span>
                       )}
                     </div>
 
-                    {/* seats input */}
+                  
                     <div className="w-full ">
                       <label className="label">
                         <span className="label-text">Seats*</span>
@@ -187,7 +191,7 @@ const InstructorMyClassUpdatePage = () => {
                         {...register("seats", { required: true })}
                         type="number"
                         placeholder="Enter seats"
-                        className="input-bordered input w-full "
+                        className="w-full input-bordered input "
                       />
                       {errors.seats?.type === "required" && (
                         <span className="text-error">Seats is required</span>
@@ -195,9 +199,9 @@ const InstructorMyClassUpdatePage = () => {
                     </div>
                   </div>
 
-                  {/* group 03 */}
+              
                   <div className="gap-2 sm:flex">
-                    {/* offer input */}
+                  
                     <div className="w-full ">
                       <label className="label">
                         <span className="label-text">Offer</span>
@@ -206,11 +210,11 @@ const InstructorMyClassUpdatePage = () => {
                         {...register("offer")}
                         type="number"
                         placeholder="Enter offer"
-                        className="input-bordered input w-full "
+                        className="w-full input-bordered input "
                       />
                     </div>
 
-                    {/* instructor name input */}
+                 
                     <div className="w-full ">
                       <label className="label">
                         <span className="label-text">Instructor name*</span>
@@ -220,7 +224,7 @@ const InstructorMyClassUpdatePage = () => {
                         type="text"
                         readOnly
                         placeholder="Enter instructor name"
-                        className="input-bordered input w-full "
+                        className="w-full input-bordered input "
                       />
                       {errors.instructorName?.type === "required" && (
                         <span className="text-error">
@@ -230,9 +234,9 @@ const InstructorMyClassUpdatePage = () => {
                     </div>
                   </div>
 
-                  {/* group 04 */}
+               
                   <div className="gap-2 sm:flex">
-                    {/* instructor email input */}
+                  
                     <div className="w-full ">
                       <label className="label">
                         <span className="label-text">Instructor email*</span>
@@ -242,7 +246,7 @@ const InstructorMyClassUpdatePage = () => {
                         type="email"
                         readOnly
                         placeholder="Enter instructor email"
-                        className="input-bordered input w-full "
+                        className="w-full input-bordered input "
                       />
                       {errors.instructorEmail?.type === "required" && (
                         <span className="text-error">
@@ -251,7 +255,7 @@ const InstructorMyClassUpdatePage = () => {
                       )}
                     </div>
 
-                    {/* instructor image input type url*/}
+                
                     <div className="w-full ">
                       <label className="label">
                         <span className="label-text">Instructor image*</span>
@@ -259,7 +263,7 @@ const InstructorMyClassUpdatePage = () => {
                       <input
                         {...register("instructorImage", { required: true })}
                         type="url"
-                        className="input-bordered input w-full"
+                        className="w-full input-bordered input"
                         placeholder="Enter instructor image url"
                       />
                       {errors.instructorImage?.type === "required" && (
@@ -270,9 +274,9 @@ const InstructorMyClassUpdatePage = () => {
                     </div>
                   </div>
 
-                  {/* group 05 */}
+             
                   <div className="gap-2 sm:flex">
-                    {/* phone no input */}
+              
                     <div className="w-full">
                       <label className="label">
                         <span className="label-text">Phone No*</span>
@@ -281,7 +285,7 @@ const InstructorMyClassUpdatePage = () => {
                         {...register("phone", { required: true })}
                         type="tel"
                         placeholder="Enter phone no"
-                        className="input-bordered input w-full"
+                        className="w-full input-bordered input"
                       />
                       {errors.phone?.type === "required" && (
                         <span className="text-error">Phone no is required</span>
@@ -294,7 +298,7 @@ const InstructorMyClassUpdatePage = () => {
                       </label>
                       <select
                         {...register("gender", { required: true })}
-                        className="input-bordered input w-full"
+                        className="w-full input-bordered input"
                       >
                         <option value="">select gender</option>
                         <option value="male">male</option>
@@ -306,9 +310,8 @@ const InstructorMyClassUpdatePage = () => {
                     </div>
                   </div>
 
-                  {/* group 06 */}
-                  <div className="items-center gap-2  sm:flex">
-                    {/* address input */}
+                  <div className="items-center gap-2 sm:flex">
+                 
                     <div className="w-full">
                       <label className="label">
                         <span className="label-text">Address*</span>
@@ -317,15 +320,15 @@ const InstructorMyClassUpdatePage = () => {
                         {...register("address", { required: true })}
                         type="text"
                         placeholder="Enter address"
-                        className="input-bordered input w-full"
+                        className="w-full input-bordered input"
                       />
                       {errors.address?.type === "required" && (
                         <span className="text-error">Address is required</span>
                       )}
                     </div>
-                    {/* add class button*/}
-                    <div className="w-full self-stretch">
-                      <label className="label invisible">
+                 
+                    <div className="self-stretch w-full">
+                      <label className="invisible label">
                         <span className="label-text">Address*</span>
                       </label>
                       <input
@@ -337,35 +340,34 @@ const InstructorMyClassUpdatePage = () => {
                   </div>
                 </div>
 
-                {/* class image input type file */}
-                {/* // FIXME: */}
-                {/* <div className="w-full ">
+              
+          
+           <div className="w-full ">
                     <label className="label">
                       <span className="label-text">Class image*</span>
                     </label>
                     <input
                       {...register("classImage", { required: true })}
                       type="file"
-                      className="file-input file-input-bordered file-input-warning w-full"
+                      className="w-full file-input file-input-bordered file-input-warning"
                     />
                     {errors.classImage?.type === "required" && <span className="text-error">Class image is required</span>}
-                  </div> */}
+                  </div> 
 
-                {/* right part */}
+               
                 <div>
-                  {/* instructor image input type file*/}
-                  {/* // FIXME: */}
-                  {/* <div className="w-full ">
+               
+               <div className="w-full ">
                     <label className="label">
                       <span className="label-text">Instructor image*</span>
                     </label>
                     <input
                       {...register("instructorImage", { required: true })}
                       type="file"
-                      className="file-input file-input-bordered file-input-warning w-full"
+                      className="w-full file-input file-input-bordered file-input-warning"
                     />
                     {errors.instructorImage?.type === "required" && <span className="text-error">Instructor image is required</span>}
-                  </div> */}
+                  </div>
                 </div>
               </div>
             </div>
@@ -377,3 +379,4 @@ const InstructorMyClassUpdatePage = () => {
 };
 
 export default InstructorMyClassUpdatePage;
+*/

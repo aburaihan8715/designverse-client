@@ -1,3 +1,4 @@
+/*
 import { useQuery } from "react-query";
 import useAuth from "./useAuth";
 import useAxiosSecure from "./useAxiosSecure";
@@ -24,3 +25,4 @@ const useCartData = () => {
 };
 
 export default useCartData;
+*/

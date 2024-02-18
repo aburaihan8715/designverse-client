@@ -1,3 +1,4 @@
+/*
 import axios from "axios";
 import { useQuery } from "react-query";
 
@@ -11,9 +12,7 @@ const useClassesData = () => {
   } = useQuery({
     queryKey: ["classes"],
     queryFn: async () => {
-      const res = await axios.get(
-        "https://fashion-verse-server.vercel.app/classes",
-      );
+      const res = await axios.get("http://localhost:5000/classes");
       return res.data;
     },
   });
@@ -28,3 +27,4 @@ const useClassesData = () => {
 };
 
 export default useClassesData;
+*/

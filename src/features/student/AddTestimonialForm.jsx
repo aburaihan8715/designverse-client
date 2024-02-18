@@ -1,3 +1,10 @@
+const AddTestimonialForm = () => {
+  return <div>AddTestimonialForm</div>;
+};
+
+export default AddTestimonialForm;
+
+/*
 import Swal from "sweetalert2";
 import useAuth from "../../hooks/useAuth";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
@@ -40,15 +47,15 @@ const AddTestimonialForm = () => {
   };
 
   return (
-    <div className="mx-auto max-w-lg rounded-md border p-10 ">
-      <h3 className="bg-gradient-to-r from-fuchsia-500 to-pink-500 bg-clip-text text-center text-3xl font-semibold uppercase text-transparent">
+    <div className="max-w-lg p-10 mx-auto border rounded-md ">
+      <h3 className="text-3xl font-semibold text-center text-transparent uppercase bg-gradient-to-r from-fuchsia-500 to-pink-500 bg-clip-text">
         Rate Us
       </h3>
-      <div className="mt-2 flex justify-center">
+      <div className="flex justify-center mt-2">
         <Rating className="" style={{ maxWidth: 150 }} value={5} readOnly />
       </div>
       <form onSubmit={submitHandler}>
-        <div className="form-control w-full">
+        <div className="w-full form-control">
           <label htmlFor="rating" className="label">
             <span className="label-text">Rate</span>
           </label>
@@ -68,12 +75,12 @@ const AddTestimonialForm = () => {
           </select>
         </div>
 
-        <div className="form-control mt-2">
+        <div className="mt-2 form-control">
           <label htmlFor="message" className="label">
             <span className="label-text">Your message</span>
           </label>
           <textarea
-            className="textarea-bordered textarea w-full"
+            className="w-full textarea-bordered textarea"
             name=""
             id="message"
             rows="3"
@@ -94,3 +101,4 @@ const AddTestimonialForm = () => {
 };
 
 export default AddTestimonialForm;
+*/

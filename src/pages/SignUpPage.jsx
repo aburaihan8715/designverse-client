@@ -1,3 +1,9 @@
+const SignUpPage = () => {
+  return <div>SignUpPage</div>;
+};
+
+export default SignUpPage;
+/*
 import { Helmet } from "react-helmet-async";
 import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
@@ -27,7 +33,7 @@ const SignUpPage = () => {
     try {
       await createUserUsingEmailPassword(email, password);
       await updateUserProfile(name);
-      const res = await fetch("https://fashion-verse-server.vercel.app/users", {
+      const res = await fetch("http://localhost:5000/users", {
         method: "POST",
         headers: {
           "Content-type": "application/json",
@@ -63,18 +69,18 @@ const SignUpPage = () => {
       </Helmet>
 
       <div className="">
-        <div className="mx-auto max-w-md rounded-md border p-8">
+        <div className="max-w-md p-8 mx-auto border rounded-md">
           <form onSubmit={handleSubmit(submitHandler)}>
             <div className="space-y-3">
               <div className="text-center ">
                 <h4 className="text-4xl uppercase">Sign up</h4>
               </div>
-              {/* error message */}
+             
               {signUpError && (
-                <div className="alert alert-error rounded-md">
+                <div className="rounded-md alert alert-error">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
-                    className="h-6 w-6 shrink-0 stroke-current"
+                    className="w-6 h-6 stroke-current shrink-0"
                     fill="none"
                     viewBox="0 0 24 24"
                   >
@@ -89,7 +95,7 @@ const SignUpPage = () => {
                 </div>
               )}
 
-              {/* name input */}
+          
               <div className="w-full ">
                 <label className="label">
                   <span className="label-text">Name</span>
@@ -98,15 +104,15 @@ const SignUpPage = () => {
                   {...register("name", { required: true })}
                   type="text"
                   placeholder="Enter your name"
-                  className="input-bordered input w-full "
+                  className="w-full input-bordered input "
                 />
                 {errors.name?.type === "required" && (
                   <span className="text-error">Name is required</span>
                 )}
               </div>
 
-              {/* photo url input */}
-              {/* <div className="w-full ">
+           
+              <div className="w-full ">
                 <label className="label">
                   <span className="label-text">Photo</span>
                 </label>
@@ -114,14 +120,14 @@ const SignUpPage = () => {
                   {...register("photo", { required: true })}
                   type="url"
                   placeholder="Enter photo url"
-                  className="input-bordered input w-full "
+                  className="w-full input-bordered input "
                 />
                 {errors.name?.type === "required" && (
                   <span className="text-error">Photo url is required</span>
                 )}
-              </div> */}
+              </div>
 
-              {/* email input */}
+             
               <div className="w-full ">
                 <label className="label">
                   <span className="label-text">Email</span>
@@ -130,14 +136,14 @@ const SignUpPage = () => {
                   {...register("email", { required: true })}
                   type="email"
                   placeholder="Enter your email"
-                  className="input-bordered input w-full "
+                  className="w-full input-bordered input "
                 />
                 {errors.email?.type === "required" && (
                   <span className="text-error">Email is required</span>
                 )}
               </div>
 
-              {/* password input */}
+            
               <div className="w-full">
                 <label className="label">
                   <span className="label-text">Password</span>
@@ -153,21 +159,21 @@ const SignUpPage = () => {
                         /(?=.*[A-Z])(?=.*[!@#$&*])(?=.*[0-9])(?=.*[a-z])/i,
                     })}
                     placeholder="Enter your password"
-                    className="input-bordered input w-full "
+                    className="w-full input-bordered input "
                     type={showPassword ? "text" : "password"}
                   />
 
-                  {/* password hide and show handler */}
+               
                   <span
-                    className="absolute right-6 top-1/2 -translate-y-1/2"
+                    className="absolute -translate-y-1/2 right-6 top-1/2"
                     onClick={() => setShowPassword(!showPassword)}
                   >
-                    {!showPassword && <FaEyeSlash className="h-6 w-6" />}
-                    {showPassword && <FaEye className="h-6 w-6" />}
+                    {!showPassword && <FaEyeSlash className="w-6 h-6" />}
+                    {showPassword && <FaEye className="w-6 h-6" />}
                   </span>
                 </div>
 
-                {/* error message for password */}
+            
                 {errors.password?.type === "required" && (
                   <span className="text-error">Password is required</span>
                 )}
@@ -192,7 +198,7 @@ const SignUpPage = () => {
                 )}
               </div>
 
-              {/* sign up button*/}
+          
               <div className="w-full ">
                 <button type="submit" className="btn-secondary btn-block btn">
                   {signUpLoading ? (
@@ -211,13 +217,13 @@ const SignUpPage = () => {
 
           <div className="divider">OR</div>
 
-          {/* social login */}
+        
           <div>
             <SocialLogin />
           </div>
 
-          {/* link to sign up */}
-          <div className="mt-3 space-x-1 rounded-md border p-3 text-center">
+         
+          <div className="p-3 mt-3 space-x-1 text-center border rounded-md">
             <span>Already registered?</span>
             <span>
               <Link className="font-bold text-orange-600" to="/login">
@@ -233,3 +239,4 @@ const SignUpPage = () => {
 };
 
 export default SignUpPage;
+*/

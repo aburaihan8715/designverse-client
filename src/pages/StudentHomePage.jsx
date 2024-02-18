@@ -1,3 +1,9 @@
+const StudentHomePage = () => {
+  return <div>StudentHomePage</div>;
+};
+
+export default StudentHomePage;
+/*
 import { Helmet } from "react-helmet-async";
 import { FaBook, FaShoppingCart, FaWallet } from "react-icons/fa";
 import useAuth from "../hooks/useAuth";
@@ -70,36 +76,36 @@ const StudentHomePage = () => {
         </div>
 
         <div className="grid gap-4 sm:grid-cols-3">
-          <div className="flex items-center gap-4 rounded bg-green-200 px-24 py-8 capitalize text-white">
+          <div className="flex items-center gap-4 px-24 py-8 text-white capitalize bg-green-200 rounded">
             <div className="text-2xl text-orange-700">
               <FaBook></FaBook>
             </div>
             <div className="flex flex-col items-center justify-end">
-              <div className="badge badge-secondary text-white">
+              <div className="text-white badge badge-secondary">
                 +{totalEnrolledClasses?.length || 0}
               </div>
               <div className="font-semibold text-secondary">Enrolled</div>
             </div>
           </div>
 
-          <div className="flex items-center gap-4 rounded bg-orange-200 px-24 py-8 capitalize text-white">
+          <div className="flex items-center gap-4 px-24 py-8 text-white capitalize bg-orange-200 rounded">
             <div className="text-2xl text-orange-700">
               <FaShoppingCart />
             </div>
             <div className="flex flex-col items-center justify-end ">
-              <div className="badge badge-secondary text-white">
+              <div className="text-white badge badge-secondary">
                 +{cartData?.length || 0}
               </div>
               <div className="font-semibold text-secondary">cart</div>
             </div>
           </div>
 
-          <div className="flex items-center gap-4 rounded bg-purple-200 px-24 py-8 capitalize text-white">
+          <div className="flex items-center gap-4 px-24 py-8 text-white capitalize bg-purple-200 rounded">
             <div className="text-2xl text-orange-700">
               <FaWallet />
             </div>
             <div className="flex flex-col items-center justify-end ">
-              <div className="badge badge-secondary text-white">
+              <div className="text-white badge badge-secondary">
                 $ {totalSpend || 0}
               </div>
               <div className="font-semibold text-secondary">Payment</div>
@@ -107,8 +113,8 @@ const StudentHomePage = () => {
           </div>
         </div>
 
-        <div className="mt-4 grid gap-4 sm:grid-cols-2">
-          <div className="rounded border-orange-300 bg-blue-50 p-8 sm:border-l-2 ">
+        <div className="grid gap-4 mt-4 sm:grid-cols-2">
+          <div className="p-8 border-orange-300 rounded bg-blue-50 sm:border-l-2 ">
             <div className="flex justify-center">
               <div className="text-center">
                 <div className="avatar ">
@@ -123,7 +129,7 @@ const StudentHomePage = () => {
             </div>
           </div>
 
-          <div className="rounded border-orange-300 bg-cyan-100 p-8 shadow-lg sm:border-l-2">
+          <div className="p-8 border-orange-300 rounded shadow-lg bg-cyan-100 sm:border-l-2">
             <h3 className="text-2xl font-semibold text-secondary">Summary</h3>
             <div className="flex items-center gap-4 text-blue-500">
               <span>
@@ -153,3 +159,4 @@ const StudentHomePage = () => {
 };
 
 export default StudentHomePage;
+*/

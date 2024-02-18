@@ -1,3 +1,9 @@
+const ClassesPage = () => {
+  return <div>ClassesPage</div>;
+};
+
+export default ClassesPage;
+/*
 import { Helmet } from "react-helmet-async";
 import useClassesData from "../hooks/useClassesData";
 import LoadingSpinner from "../ui/LoadingSpinner";
@@ -21,7 +27,7 @@ const ClassesPage = () => {
     return <p>something went wrong ${classesError}</p>;
   }
   return (
-    <div className="mx-auto max-w-6xl px-2 py-8">
+    <div className="max-w-6xl px-2 py-8 mx-auto">
       <Helmet>
         <title>FashionVerse | ClassesPage</title>
       </Helmet>
@@ -41,3 +47,4 @@ const ClassesPage = () => {
 };
 
 export default ClassesPage;
+*/

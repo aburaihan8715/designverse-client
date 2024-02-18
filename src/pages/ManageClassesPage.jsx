@@ -1,3 +1,9 @@
+const ManageClassesPage = () => {
+  return <div>ManageClassesPage</div>;
+};
+
+export default ManageClassesPage;
+/*
 import { Helmet } from "react-helmet-async";
 import useClassesData from "../hooks/useClassesData";
 import LoadingSpinner from "../ui/LoadingSpinner";
@@ -41,7 +47,7 @@ const ManageClassesPage = () => {
   }
   return (
     <>
-      <div className=" ml-2">
+      <div className="ml-2 ">
         <Helmet>
           <title>Bistro | My selected class</title>
         </Helmet>
@@ -57,10 +63,10 @@ const ManageClassesPage = () => {
             </div>
           </div>
 
-          {/* table */}
+       
           <div className="mt-8 overflow-x-auto">
             <table className="table border border-success">
-              {/* head */}
+           
               <thead className="">
                 <tr className="border border-success">
                   <th>image</th>
@@ -74,13 +80,13 @@ const ManageClassesPage = () => {
                 </tr>
               </thead>
               <tbody>
-                {/* row start */}
+              
                 {classesData?.map((item) => (
                   <tr key={item._id}>
                     <td>
                       <div className="flex items-center space-x-3">
                         <div className="avatar">
-                          <div className="mask mask-squircle h-12 w-12">
+                          <div className="w-12 h-12 mask mask-squircle">
                             <img src={item.classImage} />
                           </div>
                         </div>
@@ -94,12 +100,12 @@ const ManageClassesPage = () => {
                     <td className="">{item.price}</td>
                     <td className="">
                       {item.status === "approved" && (
-                        <span className="badge badge-primary capitalize">
+                        <span className="capitalize badge badge-primary">
                           {item.status}
                         </span>
                       )}
                       {item.status === "denied" && (
-                        <span className="badge badge-error capitalize">
+                        <span className="capitalize badge badge-error">
                           {item.status}
                         </span>
                       )}
@@ -142,13 +148,13 @@ const ManageClassesPage = () => {
                     </th>
                   </tr>
                 ))}
-                {/* row end */}
+              
               </tbody>
             </table>
           </div>
         </div>
       </div>
-      {/* feedback modal */}
+   
       <Modal
         modalOpen={modalOpen}
         setModalOpen={setModalOpen}
@@ -161,3 +167,4 @@ const ManageClassesPage = () => {
 };
 
 export default ManageClassesPage;
+*/

@@ -1,3 +1,9 @@
+const AddTestimonialPage = () => {
+  return <div>AddTestimonialPage</div>;
+};
+
+export default AddTestimonialPage;
+/*
 import AddTestimonialForm from "../features/student/AddTestimonialForm";
 import SectionHeading from "../ui/SectionHeading";
 
@@ -18,3 +24,4 @@ const AddTestimonialPage = () => {
 };
 
 export default AddTestimonialPage;
+*/

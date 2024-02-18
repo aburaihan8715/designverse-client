@@ -1,3 +1,4 @@
+/*
 import { useQuery } from "react-query";
 import useAxiosSecure from "./useAxiosSecure";
 
@@ -20,3 +21,4 @@ const useUsersData = () => {
 };
 
 export default useUsersData;
+*/

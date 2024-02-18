@@ -1,3 +1,9 @@
+const PaymentHistoryTable = () => {
+  return <div>PaymentHistoryTable</div>;
+};
+
+export default PaymentHistoryTable;
+/*
 import { useQuery } from "react-query";
 import LoadingSpinner from "../../ui/LoadingSpinner";
 import ErrorMessage from "../../ui/ErrorMessage";
@@ -42,10 +48,10 @@ const PaymentHistoryTable = () => {
         </div>
       </div>
 
-      {/* table */}
+      
       <div className="mt-8 overflow-x-auto">
         <table className="table border border-success">
-          {/* head */}
+         
           <thead className="capitalize">
             <tr className="border border-success">
               <th>#</th>
@@ -56,7 +62,7 @@ const PaymentHistoryTable = () => {
             </tr>
           </thead>
           <tbody>
-            {/* row start */}
+           
             {paymentsData?.map((item, index) => (
               <tr key={item._id}>
                 <th>{index + 1}</th>
@@ -66,7 +72,7 @@ const PaymentHistoryTable = () => {
                 <td className="">{new Date(item.date).toLocaleDateString()}</td>
               </tr>
             ))}
-            {/* row end */}
+           
           </tbody>
         </table>
       </div>
@@ -75,3 +81,4 @@ const PaymentHistoryTable = () => {
 };
 
 export default PaymentHistoryTable;
+*/

@@ -1,3 +1,4 @@
+/*
 import { Navigate, useLocation } from "react-router-dom";
 import useAuth from "../hooks/useAuth";
 import LoadingSpinner from "../ui/LoadingSpinner";
@@ -14,3 +15,4 @@ const PrivateRoute = ({ children }) => {
 };
 
 export default PrivateRoute;
+*/

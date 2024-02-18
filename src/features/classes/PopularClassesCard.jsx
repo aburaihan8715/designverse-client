@@ -1,3 +1,9 @@
+const PopularClassesCard = () => {
+  return <div>PopularClassesCard</div>;
+};
+
+export default PopularClassesCard;
+/*
 import Swal from "sweetalert2";
 import { useLocation, useNavigate } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
@@ -86,22 +92,22 @@ const PopularClassesCard = ({ item }) => {
   return (
     <div
       data-aos="zoom-in"
-      className="card relative rounded-md border shadow-md hover:shadow-white"
+      className="relative border rounded-md shadow-md card hover:shadow-white"
     >
       <figure className="">
         <img
-          className="h-40 w-full object-cover transition duration-500 hover:scale-105"
+          className="object-cover w-full h-40 transition duration-500 hover:scale-105"
           src={item.classImage}
           alt="Shoes"
         />
       </figure>
 
-      <div className="badge badge-success absolute right-5 top-5">
+      <div className="absolute badge badge-success right-5 top-5">
         <strong className="text-slate-50">Price: ${item.price}</strong>
       </div>
-      <div className="card-body relative">
+      <div className="relative card-body">
         {item?.offerPercent && (
-          <div className="badge badge-secondary badge-lg absolute left-1/2 top-0 h-10 -translate-x-1/2 -translate-y-1/2 rounded">
+          <div className="absolute top-0 h-10 -translate-x-1/2 -translate-y-1/2 rounded badge badge-secondary badge-lg left-1/2">
             <strong className="text-slate-50">
               Offer {item?.offerPercent}% 💪
             </strong>
@@ -120,7 +126,7 @@ const PopularClassesCard = ({ item }) => {
           />
         </div>
 
-        <div className="card-actions justify-end">
+        <div className="justify-end card-actions">
           <button
             onClick={() => addToCartHandler(item)}
             disabled={!item.seats}
@@ -131,10 +137,11 @@ const PopularClassesCard = ({ item }) => {
         </div>
       </div>
       {!item.seats && (
-        <div className="absolute left-0 top-0 h-full w-full rounded bg-red-400 opacity-50"></div>
+        <div className="absolute top-0 left-0 w-full h-full bg-red-400 rounded opacity-50"></div>
       )}
     </div>
   );
 };
 
 export default PopularClassesCard;
+*/

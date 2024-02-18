@@ -2,6 +2,27 @@ import { createBrowserRouter } from "react-router-dom";
 import MainLayout from "../layouts/MainLayout";
 import NotFoundPage from "../pages/NotFoundPage";
 import HomePage from "../pages/HomePage";
+
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <MainLayout />,
+    errorElement: <NotFoundPage />,
+    children: [
+      {
+        path: "/",
+        element: <HomePage />,
+      },
+    ],
+  },
+]);
+
+export default router;
+/*
+import { createBrowserRouter } from "react-router-dom";
+import MainLayout from "../layouts/MainLayout";
+import NotFoundPage from "../pages/NotFoundPage";
+import HomePage from "../pages/HomePage";
 import InstructorsPage from "../pages/InstructorsPage";
 import ClassesPage from "../pages/ClassesPage";
 import LoginPage from "../pages/LoginPage";
@@ -187,3 +208,4 @@ const router = createBrowserRouter([
 ]);
 
 export default router;
+*/

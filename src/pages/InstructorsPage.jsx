@@ -1,3 +1,10 @@
+const InstructorsPage = () => {
+  return <div>InstructorsPage</div>;
+};
+
+export default InstructorsPage;
+
+/*
 import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import useClassesData from "../hooks/useClassesData";
@@ -19,7 +26,7 @@ const InstructorsPage = () => {
     return <p>something went wrong {classesError}</p>;
   }
   return (
-    <div className="mx-auto max-w-6xl py-8">
+    <div className="max-w-6xl py-8 mx-auto">
       <Helmet>
         <title>FashionVerse | InstructorsPage</title>
       </Helmet>
@@ -29,7 +36,7 @@ const InstructorsPage = () => {
         </div>
         <div className="overflow-x-auto">
           <table className="table">
-            {/* head */}
+        
             <thead>
               <tr>
                 <th>#</th>
@@ -41,14 +48,14 @@ const InstructorsPage = () => {
               </tr>
             </thead>
             <tbody>
-              {/* row */}
+         
               {unique?.map((item, index) => (
                 <tr key={item._id}>
                   <th>{index + 1}</th>
                   <td>
                     <div className="flex items-center space-x-3">
                       <div className="avatar">
-                        <div className="mask mask-squircle h-12 w-12">
+                        <div className="w-12 h-12 mask mask-squircle">
                           <img src={item.instructorImage} alt="instructor" />
                         </div>
                       </div>
@@ -78,3 +85,4 @@ const InstructorsPage = () => {
 };
 
 export default InstructorsPage;
+*/

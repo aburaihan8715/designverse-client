@@ -1,3 +1,9 @@
+const PopularClasses = () => {
+  return <div>PopularClasses</div>;
+};
+
+export default PopularClasses;
+/*
 import useClassesData from "../../hooks/useClassesData";
 import LoadingSpinner from "../../ui/LoadingSpinner";
 import SectionHeading from "../../ui/SectionHeading";
@@ -27,13 +33,13 @@ const PopularClasses = () => {
   }
   return (
     <section className="py-10">
-      <div className="mx-auto px-2 sm:max-w-6xl">
+      <div className="px-2 mx-auto sm:max-w-6xl">
         <SectionHeading
           subHeading={`connect with`}
           heading={`popular classes`}
         ></SectionHeading>
         <div className="grid gap-8 sm:grid-cols-2 md:grid-cols-4">
-          {/* FIXME: */}
+       
           {somePopularClasses?.map((item) => (
             <PopularClassesCard key={item._id} item={item} />
           ))}
@@ -44,3 +50,4 @@ const PopularClasses = () => {
 };
 
 export default PopularClasses;
+*/

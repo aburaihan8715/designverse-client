@@ -1,3 +1,10 @@
+const AddClassPage = () => {
+  return <div>AddClassPage</div>;
+};
+
+export default AddClassPage;
+
+/*
 import { Helmet } from "react-helmet-async";
 import { useForm } from "react-hook-form";
 import Swal from "sweetalert2";
@@ -67,7 +74,7 @@ const AddClassPage = () => {
       // console.log(newClassData);
 
       const classResponse = await axiosSecure.post(
-        "https://fashion-verse-server.vercel.app/classes",
+        "http://localhost:5000/classes",
         newClassData,
       );
       const classData = classResponse.data;
@@ -97,22 +104,22 @@ const AddClassPage = () => {
       </Helmet>
 
       <div className="p-1">
-        <div className="mx-auto max-w-lg rounded-md border p-8">
+        <div className="max-w-lg p-8 mx-auto border rounded-md">
           <form onSubmit={handleSubmit(submitHandler)}>
             <div className="space-y-3">
               <div className="text-center ">
-                <h4 className="text-3xl uppercase underline decoration-secondary underline-offset-4">
+                <h4 className="text-3xl underline uppercase decoration-secondary underline-offset-4">
                   Add class
                 </h4>
               </div>
 
               <div className="">
-                {/* error */}
+              
                 {error && (
-                  <div className="alert alert-error rounded-md">
+                  <div className="rounded-md alert alert-error">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
-                      className="h-6 w-6 shrink-0 stroke-current"
+                      className="w-6 h-6 stroke-current shrink-0"
                       fill="none"
                       viewBox="0 0 24 24"
                     >
@@ -127,9 +134,9 @@ const AddClassPage = () => {
                   </div>
                 )}
                 <div>
-                  {/* group 01 */}
+               
                   <div className="gap-2 sm:flex">
-                    {/* class name input */}
+           
                     <div className="w-full">
                       <label className="label">
                         <span className="label-text">Class Name*</span>
@@ -138,7 +145,7 @@ const AddClassPage = () => {
                         {...register("className", { required: true })}
                         type="text"
                         placeholder="Enter class name"
-                        className="input-bordered input w-full "
+                        className="w-full input-bordered input "
                       />
                       {errors.className?.type === "required" && (
                         <span className="text-error">
@@ -147,7 +154,7 @@ const AddClassPage = () => {
                       )}
                     </div>
 
-                    {/* class image input type url */}
+                   
                     <div className="w-full">
                       <label className="label">
                         <span className="label-text">Class image*</span>
@@ -155,7 +162,7 @@ const AddClassPage = () => {
                       <input
                         {...register("classImage", { required: true })}
                         type="file"
-                        className="file-input-secondary file-input input-bordered w-full"
+                        className="w-full file-input-secondary file-input input-bordered"
                         placeholder="Enter class image url"
                       />
                       {errors.classImage?.type === "required" && (
@@ -166,9 +173,9 @@ const AddClassPage = () => {
                     </div>
                   </div>
 
-                  {/* group 02 */}
+              
                   <div className="gap-2 sm:flex">
-                    {/* price input */}
+                  
                     <div className="w-full ">
                       <label className="label">
                         <span className="label-text">Price*</span>
@@ -177,14 +184,14 @@ const AddClassPage = () => {
                         {...register("price", { required: true })}
                         type="number"
                         placeholder="Enter price"
-                        className="input-bordered input w-full "
+                        className="w-full input-bordered input "
                       />
                       {errors.price?.type === "required" && (
                         <span className="text-error">Price is required</span>
                       )}
                     </div>
 
-                    {/* seats input */}
+                   
                     <div className="w-full ">
                       <label className="label">
                         <span className="label-text">Seats*</span>
@@ -193,7 +200,7 @@ const AddClassPage = () => {
                         {...register("seats", { required: true })}
                         type="number"
                         placeholder="Enter seats"
-                        className="input-bordered input w-full "
+                        className="w-full input-bordered input "
                       />
                       {errors.seats?.type === "required" && (
                         <span className="text-error">Seats is required</span>
@@ -201,9 +208,9 @@ const AddClassPage = () => {
                     </div>
                   </div>
 
-                  {/* group 03 */}
+              
                   <div className="gap-2 sm:flex">
-                    {/* offer input */}
+                
                     <div className="w-full ">
                       <label className="label">
                         <span className="label-text">Offer</span>
@@ -212,11 +219,11 @@ const AddClassPage = () => {
                         {...register("offer")}
                         type="number"
                         placeholder="Enter offer"
-                        className="input-bordered input w-full "
+                        className="w-full input-bordered input "
                       />
                     </div>
 
-                    {/* instructor name input */}
+            
                     <div className="w-full ">
                       <label className="label">
                         <span className="label-text">Instructor name*</span>
@@ -227,7 +234,7 @@ const AddClassPage = () => {
                         defaultValue={user?.displayName}
                         readOnly
                         placeholder="Enter instructor name"
-                        className="input-bordered input w-full "
+                        className="w-full input-bordered input "
                       />
                       {errors.instructorName?.type === "required" && (
                         <span className="text-error">
@@ -237,9 +244,9 @@ const AddClassPage = () => {
                     </div>
                   </div>
 
-                  {/* group 04 */}
+               
                   <div className="gap-2 sm:flex">
-                    {/* instructor email input */}
+                
                     <div className="w-full ">
                       <label className="label">
                         <span className="label-text">Instructor email*</span>
@@ -250,7 +257,7 @@ const AddClassPage = () => {
                         defaultValue={user?.email}
                         readOnly
                         placeholder="Enter instructor email"
-                        className="input-bordered input w-full "
+                        className="w-full input-bordered input "
                       />
                       {errors.instructorEmail?.type === "required" && (
                         <span className="text-error">
@@ -259,7 +266,7 @@ const AddClassPage = () => {
                       )}
                     </div>
 
-                    {/* instructor image input type url*/}
+                   
                     <div className="w-full ">
                       <label className="label">
                         <span className="label-text">Instructor image*</span>
@@ -269,7 +276,7 @@ const AddClassPage = () => {
                         type="url"
                         defaultValue={user?.photoURL}
                         readOnly
-                        className="input-bordered input w-full"
+                        className="w-full input-bordered input"
                         placeholder="Enter instructor image url"
                       />
                       {errors.instructorImage?.type === "required" && (
@@ -280,9 +287,9 @@ const AddClassPage = () => {
                     </div>
                   </div>
 
-                  {/* group 05 */}
+               
                   <div className="gap-2 sm:flex">
-                    {/* phone no input */}
+                   
                     <div className="w-full">
                       <label className="label">
                         <span className="label-text">Phone No*</span>
@@ -291,7 +298,7 @@ const AddClassPage = () => {
                         {...register("phone", { required: true })}
                         type="tel"
                         placeholder="Enter phone no"
-                        className="input-bordered input w-full"
+                        className="w-full input-bordered input"
                       />
                       {errors.phone?.type === "required" && (
                         <span className="text-error">Phone no is required</span>
@@ -304,7 +311,7 @@ const AddClassPage = () => {
                       </label>
                       <select
                         {...register("gender", { required: true })}
-                        className="input-bordered input w-full"
+                        className="w-full input-bordered input"
                       >
                         <option value="">Select gender</option>
                         <option value="male">male</option>
@@ -316,9 +323,9 @@ const AddClassPage = () => {
                     </div>
                   </div>
 
-                  {/* group 06 */}
-                  <div className="items-center gap-2  sm:flex">
-                    {/* address input */}
+              
+                  <div className="items-center gap-2 sm:flex">
+                  
                     <div className="w-full">
                       <label className="label">
                         <span className="label-text">Address*</span>
@@ -327,16 +334,16 @@ const AddClassPage = () => {
                         {...register("address", { required: true })}
                         type="text"
                         placeholder="Enter address"
-                        className="input-bordered input w-full"
+                        className="w-full input-bordered input"
                       />
                       {errors.address?.type === "required" && (
                         <span className="text-error">Address is required</span>
                       )}
                     </div>
 
-                    {/* button*/}
-                    <div className="w-full self-stretch">
-                      <label className="label invisible">
+                
+                    <div className="self-stretch w-full">
+                      <label className="invisible label">
                         <span className="label-text">only place holder</span>
                       </label>
                       <button
@@ -361,3 +368,4 @@ const AddClassPage = () => {
 };
 
 export default AddClassPage;
+*/

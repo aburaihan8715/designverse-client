@@ -1,3 +1,10 @@
+const AdminFeedbackForm = () => {
+  return <div>AdminFeedbackForm</div>;
+};
+
+export default AdminFeedbackForm;
+
+/*
 import Swal from "sweetalert2";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import useClassesData from "../../hooks/useClassesData";
@@ -59,3 +66,4 @@ const AdminFeedbackForm = () => {
 };
 
 export default AdminFeedbackForm;
+*/

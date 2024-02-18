@@ -1,3 +1,10 @@
+const PaymentHistoryPage = () => {
+  return <div>PaymentHistoryPage</div>;
+};
+
+export default PaymentHistoryPage;
+/*
+
 import PaymentHistoryTable from "../features/student/PaymentHistoryTable";
 import SectionHeading from "../ui/SectionHeading";
 
@@ -18,3 +25,4 @@ const PaymentHistoryPage = () => {
 };
 
 export default PaymentHistoryPage;
+*/

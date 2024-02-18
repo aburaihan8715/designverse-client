@@ -1,3 +1,10 @@
+const PaymentPage = () => {
+  return <div>PaymentPage</div>;
+};
+
+export default PaymentPage;
+
+/*
 import { Helmet } from "react-helmet-async";
 import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
@@ -19,7 +26,7 @@ const PaymentPage = () => {
       <Helmet>
         <title>FashionVerse | PaymentPage</title>
       </Helmet>
-      <div className=" mx-auto mt-2 px-2 py-10 sm:max-w-2xl">
+      <div className="px-2 py-10 mx-auto mt-2  sm:max-w-2xl">
         <SectionHeading subHeading={`please process`} heading={`payment`} />
         <Elements stripe={stripePromise}>
           <CheckoutForm price={price} cartData={cartData} />
@@ -30,3 +37,4 @@ const PaymentPage = () => {
 };
 
 export default PaymentPage;
+*/

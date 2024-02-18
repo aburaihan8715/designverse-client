@@ -1,3 +1,10 @@
+const ContactUsPage = () => {
+  return <div>ContactUsPage</div>;
+};
+
+export default ContactUsPage;
+/*
+
 import { Helmet } from "react-helmet-async";
 import SectionHeading from "../ui/SectionHeading";
 
@@ -12,62 +19,62 @@ const ContactUsPage = () => {
         <title>FashionVerse | ContactUsPage</title>
       </Helmet>
       <div>
-        <div className="mx-auto max-w-md rounded-md border p-8 shadow-lg">
+        <div className="max-w-md p-8 mx-auto border rounded-md shadow-lg">
           <SectionHeading
             subHeading={`Send Us a Message`}
             heading={`contact form`}
           ></SectionHeading>
 
           <div className="">
-            {/* FIXME: implement email services*/}
+           
             <div>
               <form onSubmit={submitHandler}>
                 <div className="grid gap-4 sm:grid-cols-2 ">
-                  <div className="form-control w-full ">
+                  <div className="w-full form-control ">
                     <label className="label">
                       <span className="label-text">Name*</span>
                     </label>
                     <input
                       type="text"
                       placeholder="Enter name"
-                      className="input-bordered input w-full "
+                      className="w-full input-bordered input "
                     />
                   </div>
 
-                  <div className="form-control w-full ">
+                  <div className="w-full form-control ">
                     <label className="label">
                       <span className="label-text">Email*</span>
                     </label>
                     <input
                       type="text"
                       placeholder="Enter email"
-                      className="input-bordered input w-full "
+                      className="w-full input-bordered input "
                     />
                   </div>
                 </div>
 
                 <div className="">
-                  <div className="form-control w-full ">
+                  <div className="w-full form-control ">
                     <label className="label">
                       <span className="label-text">Phone*</span>
                     </label>
                     <input
                       type="text"
                       placeholder="Enter phone"
-                      className="input-bordered input w-full "
+                      className="w-full input-bordered input "
                     />
                   </div>
                 </div>
 
                 <div className="">
-                  <div className="form-control w-full ">
+                  <div className="w-full form-control ">
                     <label className="label">
                       <span className="label-text">Message*</span>
                     </label>
                     <textarea
                       placeholder="Your message (0-250) characters"
                       rows="2"
-                      className="textarea-bordered textarea w-full"
+                      className="w-full textarea-bordered textarea"
                     ></textarea>
                   </div>
                 </div>
@@ -87,3 +94,4 @@ const ContactUsPage = () => {
 };
 
 export default ContactUsPage;
+*/

@@ -1,3 +1,10 @@
+const HomePage = () => {
+  return <div>HomePage</div>;
+};
+
+export default HomePage;
+
+/*
 import { Helmet } from "react-helmet-async";
 import PopularClasses from "../features/classes/PopularClasses";
 import PopularInstructors from "../features/instructor/PopularInstructors";
@@ -19,3 +26,4 @@ const HomePage = () => {
 };
 
 export default HomePage;
+*/

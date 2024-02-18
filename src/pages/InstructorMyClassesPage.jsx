@@ -1,3 +1,9 @@
+const InstructorMyClassesPage = () => {
+  return <div>InstructorMyClassesPage</div>;
+};
+
+export default InstructorMyClassesPage;
+/*
 import { Helmet } from "react-helmet-async";
 import SectionHeading from "../ui/SectionHeading";
 import { useState } from "react";
@@ -33,7 +39,7 @@ const InstructorMyClassesPage = () => {
       <p className="text-xl">Total classes :{instructorMyClassData?.length}</p>
       <div className="overflow-x-auto">
         <table className="table border border-success">
-          {/* head */}
+         
           <thead className="capitalize">
             <tr className="border border-success">
               <th>#</th>
@@ -48,13 +54,13 @@ const InstructorMyClassesPage = () => {
             </tr>
           </thead>
           <tbody className="">
-            {/* row 1 */}
+           
             {instructorMyClassData?.map((item, index) => (
               <tr key={item._id}>
                 <th>{index + 1}</th>
                 <td>
                   <div className="avatar">
-                    <div className="mask mask-squircle h-12 w-12">
+                    <div className="w-12 h-12 mask mask-squircle">
                       <img src={item?.classImage} alt="class cover photo" />
                     </div>
                   </div>
@@ -138,3 +144,4 @@ const InstrMyClassDeleteBtn = ({ id, refetch }) => {
     </button>
   );
 };
+*/

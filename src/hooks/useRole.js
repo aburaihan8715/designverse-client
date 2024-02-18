@@ -1,3 +1,4 @@
+/*
 import { useQuery } from "react-query";
 import useAuth from "./useAuth";
 import useAxiosSecure from "./useAxiosSecure";
@@ -21,3 +22,4 @@ const useRole = () => {
   return { roleData, roleDataLoading, roleDataError, isRoleDataError };
 };
 export default useRole;
+*/

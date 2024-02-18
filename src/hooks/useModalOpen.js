@@ -1,3 +1,4 @@
+/*
 import { useContext } from "react";
 import { ModalOpenContext } from "../contexts/ModalOpenContext";
 
@@ -6,3 +7,4 @@ const useModalOpen = () => {
 };
 
 export default useModalOpen;
+*/

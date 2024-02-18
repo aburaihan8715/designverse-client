@@ -1,3 +1,9 @@
+const SeeInstructorClasses = () => {
+  return <div>SeeInstructorClasses</div>;
+};
+
+export default SeeInstructorClasses;
+/*
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import LoadingSpinner from "../ui/LoadingSpinner";
 import SectionHeading from "../ui/SectionHeading";
@@ -48,13 +54,13 @@ const SeeInstructorClasses = () => {
         />
       </div>
 
-      <ul className="mx-auto flex max-w-5xl flex-col gap-10">
+      <ul className="flex flex-col max-w-5xl gap-10 mx-auto">
         {approvedClasses &&
           approvedClasses?.map((item) => (
             <SeeInstructorClassesCard key={item._id} item={item} />
           ))}
 
-        {/* if the instructor no classes */}
+      
         {approvedClasses.length < 1 && (
           <ErrorMessage>No class added yet</ErrorMessage>
         )}
@@ -143,14 +149,14 @@ const SeeInstructorClassesCard = ({ item }) => {
   return (
     <li
       data-aos="zoom-in"
-      className="relative rounded-md border hover:shadow-md hover:shadow-white"
+      className="relative border rounded-md hover:shadow-md hover:shadow-white"
     >
       <div className="gap-10 sm:flex">
-        <figure className="flex  p-5">
+        <figure className="flex p-5">
           <img className="rounded" src={item?.classImage} alt="Movie" />
         </figure>
 
-        <div className="flex flex-1 flex-col justify-between p-5">
+        <div className="flex flex-col justify-between flex-1 p-5">
           <div className="flex flex-col gap-5">
             <h2 className="card-title">{item?.className} 📖</h2>
             <p>Seats : {item?.seats} 🪑</p>
@@ -183,8 +189,9 @@ const SeeInstructorClassesCard = ({ item }) => {
       </div>
 
       {!item?.seats && (
-        <div className="absolute left-0 top-0 h-full w-full rounded bg-red-400 opacity-50"></div>
+        <div className="absolute top-0 left-0 w-full h-full bg-red-400 rounded opacity-50"></div>
       )}
     </li>
   );
 };
+*/
