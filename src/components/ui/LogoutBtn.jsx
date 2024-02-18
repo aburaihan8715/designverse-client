@@ -1,8 +1,8 @@
-const LogOutBtn = () => {
-  return <div>LogOutBtn</div>;
+const LogoutBtn = () => {
+  return <button className="text-white btn-secondary btn">logout</button>;
 };
 
-export default LogOutBtn;
+export default LogoutBtn;
 /*
 import { useNavigate } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
