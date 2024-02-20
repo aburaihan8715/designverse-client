@@ -1,8 +1,108 @@
-const AdminHomePage = () => {
-  return <div>AdminHomePage</div>;
+import { FaBook, FaChalkboardTeacher, FaUsers, FaWallet } from "react-icons/fa";
+
+const AdminDashboardPage = () => {
+  return (
+    <div className="px-4">
+      <div>
+        <div className="mb-4">
+          <h2 className="text-2xl capitalize">Welcome {`Name of admin`}</h2>
+        </div>
+
+        <div className="grid gap-4 sm:grid-cols-4">
+          <div className="flex items-center gap-4 p-8 text-white capitalize bg-green-200 rounded">
+            <div className="text-2xl text-orange-700">
+              <FaWallet />
+            </div>
+            <div className="flex flex-col items-center justify-end">
+              <div className="text-white badge badge-secondary">${0}</div>
+              <div className="font-semibold text-secondary">Revenue</div>
+            </div>
+          </div>
+
+          <div className="flex items-center gap-4 p-8 text-white capitalize bg-orange-200 rounded">
+            <div className="text-2xl text-orange-700">
+              <FaUsers />
+            </div>
+            <div className="flex flex-col items-center justify-end">
+              <div className="text-white badge badge-secondary">+{0}</div>
+              <div className="font-semibold text-secondary">students</div>
+            </div>
+          </div>
+
+          <div className="flex items-center gap-4 p-8 text-white capitalize bg-purple-200 rounded">
+            <div className="text-2xl text-orange-700">
+              <FaBook />
+            </div>
+            <div className="flex flex-col items-center justify-end">
+              <div className="text-white badge badge-secondary">+{0}</div>
+              <div className="font-semibold text-secondary">classes</div>
+            </div>
+          </div>
+
+          <div className="flex items-center gap-4 p-8 text-white capitalize bg-purple-200 rounded">
+            <div className="text-2xl text-orange-700">
+              <FaChalkboardTeacher />
+            </div>
+            <div className="flex flex-col items-center justify-end">
+              <div className="text-white badge badge-secondary">+{0}</div>
+              <div className="font-semibold text-secondary">Instructor</div>
+            </div>
+          </div>
+        </div>
+
+        <div className="grid gap-4 mt-4 sm:grid-cols-2">
+          <div className="p-8 border-orange-300 rounded bg-blue-50 sm:border-l-2">
+            <div className="flex justify-center">
+              <div className="text-center">
+                <div className="avatar ">
+                  <div className="w-24 rounded-full ring-2 ring-offset-2">
+                    <img src="https://images.pexels.com/photos/415829/pexels-photo-415829.jpeg?auto=compress&cs=tinysrgb&w=600" />
+                  </div>
+                </div>
+                <div className="font-semibold uppercase text-secondary">
+                  {`Name of admin`}
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div className="p-8 border-orange-300 rounded shadow-lg bg-cyan-100 sm:border-l-2">
+            <h3 className="text-2xl font-semibold text-secondary">Summary</h3>
+            <div className="flex items-center gap-4 text-blue-500">
+              <span>
+                <FaWallet />
+              </span>
+              <span>Revenue=${0}</span>
+            </div>
+
+            <div className="flex items-center gap-4 text-yellow-500">
+              <span>
+                <FaUsers />
+              </span>
+              <span>Students={0}</span>
+            </div>
+
+            <div className="flex items-center gap-4 text-orange-500">
+              <span>
+                <FaBook />
+              </span>
+              <span>Classes={0}</span>
+            </div>
+
+            <div className="flex items-center gap-4 text-orange-500">
+              <span>
+                <FaChalkboardTeacher />
+              </span>
+              <span>Instructor={0}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
 };
 
-export default AdminHomePage;
+export default AdminDashboardPage;
 /*
 import { Helmet } from "react-helmet-async";
 import { FaBook, FaChalkboardTeacher, FaUsers, FaWallet } from "react-icons/fa";

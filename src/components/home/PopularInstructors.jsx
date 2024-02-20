@@ -4,7 +4,7 @@ import SectionHeading from "../ui/SectionHeading";
 const PopularInstructors = () => {
   return (
     <div className="py-8">
-      <div className="max-w-6xl p-2 mx-auto">
+      <div className="mx-auto max-w-6xl p-2">
         {/* HEADING */}
         <SectionHeading
           subHeading={`stay with`}
@@ -16,11 +16,11 @@ const PopularInstructors = () => {
           {[1, 2, 3, 4].map((item) => (
             <div
               key={item}
-              className="relative border rounded-md shadow-md card hover:shadow-white"
+              className="card relative rounded-md border shadow-md hover:shadow-white"
             >
               <figure className="">
                 <img
-                  className="object-cover w-full h-40 transition duration-500 hover:scale-105"
+                  className="h-40 w-full object-cover transition duration-500 hover:scale-105"
                   src="https://images.pexels.com/photos/7562313/pexels-photo-7562313.jpeg?auto=compress&cs=tinysrgb&w=600"
                   alt="instructor"
                 />
@@ -36,7 +36,7 @@ const PopularInstructors = () => {
                 <div className="">
                   <Link to={`#`}>
                     <button className="btn-secondary btn-outline btn-block btn-sm btn">
-                      See Classes &rarr;
+                      Courses &rarr;
                     </button>
                   </Link>
                 </div>

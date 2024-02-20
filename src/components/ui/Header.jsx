@@ -25,8 +25,8 @@ const Header = () => {
   // const { user } = useAuth();
   // const { cartData } = useCartData();
   // const { roleData } = useRole();
-
   // const user = true;
+  const role = "admin";
 
   const menuItems = (
     <>
@@ -41,20 +41,23 @@ const Header = () => {
         </ActiveLink>
       </li>
       <li>
-        <ActiveLink className="font-semibold uppercase" to="/classes">
+        <ActiveLink className="font-semibold uppercase" to="/courses">
           Courses
         </ActiveLink>
       </li>
 
       <li>
         <ActiveLink className="font-semibold uppercase" to="/contact">
-          Contact us
+          Contact
         </ActiveLink>
       </li>
       {/* { pointerEvents: "none", backgroundColor: "grey" } */}
 
       <li>
-        <ActiveLink className="font-semibold uppercase" to={`/dashboard/user`}>
+        <ActiveLink
+          className="font-semibold uppercase"
+          to={`/dashboard/${role}`}
+        >
           Dashboard
         </ActiveLink>
       </li>
@@ -66,7 +69,7 @@ const Header = () => {
         >
           <button className="bg-transparent btn-sm btn hover:bg-transparent">
             <span className="text-error">
-              <FaShoppingCart></FaShoppingCart>
+              <FaShoppingCart />
             </span>
             <div className="text-white badge badge-success">+{0}</div>
           </button>

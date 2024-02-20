@@ -2,6 +2,13 @@ import { createBrowserRouter } from "react-router-dom";
 import MainLayout from "../layouts/MainLayout";
 import NotFoundPage from "../pages/NotFoundPage";
 import HomePage from "../pages/HomePage";
+import AllCoursesPage from "../pages/AllCoursesPage";
+import AllInstructorsPage from "../pages/AllInstructorsPage";
+import ContactPage from "../pages/ContactPage";
+import DashboardLayout from "../layouts/DashboardLayout";
+import UserDashboardPage from "../pages/dashboardPages/UserDashboardPage";
+import InstructorDashboardPage from "../pages/dashboardPages/InstructorDashboardPage";
+import AdminDashboardPage from "../pages/dashboardPages/AdminDashboardPage";
 
 const router = createBrowserRouter([
   {
@@ -12,6 +19,39 @@ const router = createBrowserRouter([
       {
         path: "/",
         element: <HomePage />,
+      },
+      {
+        path: "courses",
+        element: <AllCoursesPage />,
+      },
+      {
+        path: "instructors",
+        element: <AllInstructorsPage />,
+      },
+      {
+        path: "contact",
+        element: <ContactPage />,
+      },
+    ],
+  },
+
+  // dashboard routes
+  {
+    path: "dashboard",
+    element: <DashboardLayout />,
+    errorElement: <NotFoundPage />,
+    children: [
+      {
+        path: "user",
+        element: <UserDashboardPage />,
+      },
+      {
+        path: "instructor",
+        element: <InstructorDashboardPage />,
+      },
+      {
+        path: "admin",
+        element: <AdminDashboardPage />,
       },
     ],
   },
@@ -90,7 +130,7 @@ const router = createBrowserRouter([
     ],
   },
 
-  // dashboard layout
+  // dashboard routes
   {
     path: "dashboard",
     element: <DashboardLayout />,
