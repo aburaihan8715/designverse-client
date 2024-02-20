@@ -76,7 +76,7 @@ const Header = () => {
   );
 
   return (
-    <div className="fixed top-0 left-0 right-0 z-20">
+    <div className="sticky top-0 z-10">
       <div className="">
         <div className="h-20 px-10 shadow-md navbar bg-base-100">
           <div className="navbar-start">

@@ -1,8 +1,10 @@
+const date = new Date().toUTCString().slice(4, 16);
+
 const Footer = () => {
   return (
     <div className="">
       <div>
-        <footer className="footer border-t border-gray-800 px-10 py-8 text-base-content">
+        <footer className="px-10 py-8 border-t border-gray-800 footer text-base-content">
           <div>
             <span className="footer-title">Services</span>
             <a className="link-hover link">Branding</a>
@@ -56,9 +58,9 @@ const Footer = () => {
             </div>
           </div>
         </footer>
-        <footer className="footer footer-center bg-neutral p-4 text-neutral-content">
+        <footer className="p-4 footer footer-center bg-neutral text-neutral-content">
           <div>
-            <p>Copyright © 2023 - All right reserved by FashionVerse school</p>
+            <p>Copyright © {date} - All right reserved by Designverse Ltd.</p>
           </div>
         </footer>
       </div>

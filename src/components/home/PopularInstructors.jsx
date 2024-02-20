@@ -1,8 +1,56 @@
+import { Link } from "react-router-dom";
+import SectionHeading from "../ui/SectionHeading";
+
 const PopularInstructors = () => {
-  return <div>PopularInstructors</div>;
+  return (
+    <div className="py-8">
+      <div className="max-w-6xl p-2 mx-auto">
+        {/* HEADING */}
+        <SectionHeading
+          subHeading={`stay with`}
+          heading={`popular instructors`}
+        />
+
+        <div className="grid gap-8 sm:grid-cols-2 md:grid-cols-4">
+          {/* POPULAR INSTRUCTOR CARD */}
+          {[1, 2, 3, 4].map((item) => (
+            <div
+              key={item}
+              className="relative border rounded-md shadow-md card hover:shadow-white"
+            >
+              <figure className="">
+                <img
+                  className="object-cover w-full h-40 transition duration-500 hover:scale-105"
+                  src="https://images.pexels.com/photos/7562313/pexels-photo-7562313.jpeg?auto=compress&cs=tinysrgb&w=600"
+                  alt="instructor"
+                />
+              </figure>
+              <div className="card-body">
+                <h2 className="card-title">
+                  <span>{`Name of Instructor`}</span>
+                </h2>
+
+                <p>{`example@gmail.com`} 💌</p>
+                <p>{`01711111111`} ☎</p>
+
+                <div className="">
+                  <Link to={`#`}>
+                    <button className="btn-secondary btn-outline btn-block btn-sm btn">
+                      See Classes &rarr;
+                    </button>
+                  </Link>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
 };
 
 export default PopularInstructors;
+
 /*
 import useClassesData from "../../hooks/useClassesData";
 import LoadingSpinner from "../../ui/LoadingSpinner";
