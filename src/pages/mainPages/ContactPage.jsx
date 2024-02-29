@@ -1,4 +1,4 @@
-import SectionHeading from "../components/ui/SectionHeading";
+import SectionHeading from "../../components/ui/SectionHeading";
 
 const ContactPage = () => {
   const submitHandler = (e) => {
@@ -8,7 +8,7 @@ const ContactPage = () => {
   return (
     <div className="py-8">
       <div>
-        <div className="max-w-md p-8 mx-auto border rounded-md shadow-lg">
+        <div className="mx-auto max-w-md rounded-md border p-8 shadow-lg">
           <SectionHeading
             subHeading={`Send Us a Message`}
             heading={`contact form`}
@@ -18,51 +18,51 @@ const ContactPage = () => {
             <div>
               <form onSubmit={submitHandler}>
                 <div className="grid gap-4 sm:grid-cols-2 ">
-                  <div className="w-full form-control ">
+                  <div className="form-control w-full ">
                     <label className="label">
                       <span className="label-text">Name*</span>
                     </label>
                     <input
                       type="text"
                       placeholder="Enter name"
-                      className="w-full input-bordered input "
+                      className="input-bordered input w-full "
                     />
                   </div>
 
-                  <div className="w-full form-control ">
+                  <div className="form-control w-full ">
                     <label className="label">
                       <span className="label-text">Email*</span>
                     </label>
                     <input
                       type="text"
                       placeholder="Enter email"
-                      className="w-full input-bordered input "
+                      className="input-bordered input w-full "
                     />
                   </div>
                 </div>
 
                 <div className="">
-                  <div className="w-full form-control ">
+                  <div className="form-control w-full ">
                     <label className="label">
                       <span className="label-text">Phone*</span>
                     </label>
                     <input
                       type="text"
                       placeholder="Enter phone"
-                      className="w-full input-bordered input "
+                      className="input-bordered input w-full "
                     />
                   </div>
                 </div>
 
                 <div className="">
-                  <div className="w-full form-control ">
+                  <div className="form-control w-full ">
                     <label className="label">
                       <span className="label-text">Message*</span>
                     </label>
                     <textarea
                       placeholder="Your message (0-250) characters"
                       rows="2"
-                      className="w-full textarea-bordered textarea"
+                      className="textarea-bordered textarea w-full"
                     ></textarea>
                   </div>
                 </div>

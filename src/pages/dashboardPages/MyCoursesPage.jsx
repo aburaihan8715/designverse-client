@@ -1,8 +1,67 @@
-const InstructorMyClassesPage = () => {
-  return <div>InstructorMyClassesPage</div>;
+import { Link } from "react-router-dom";
+import SectionHeading from "../../components/ui/SectionHeading";
+
+const MyCoursesPage = () => {
+  return (
+    <div className="px-5">
+      <div>
+        <SectionHeading subHeading={`how many`} heading={`my courses`} />
+      </div>
+      <p className="text-xl">Total courses :{0}</p>
+      <div className="overflow-x-auto">
+        <table className="table border border-success">
+          <thead className="capitalize">
+            <tr className="border border-success">
+              <th>#</th>
+              <th>image</th>
+              <th>name</th>
+              <th>price</th>
+              <th>status</th>
+              <th>enrolled</th>
+              <th>feedback</th>
+              <th>actions</th>
+            </tr>
+          </thead>
+          <tbody className="">
+            {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((item) => (
+              <tr key={item}>
+                <th>{item}</th>
+                <td>
+                  <div className="avatar">
+                    <div className="w-12 h-12 mask mask-squircle">
+                      <img
+                        src="https://media.istockphoto.com/id/1266344101/photo/digitally-generated-domestic-bedroom-interior.jpg?b=1&s=612x612&w=0&k=20&c=GC3ycV8hAJE_KfOO6C3egojD0i-HSHoMZa1KIujzLLM="
+                        alt="class cover photo"
+                      />
+                    </div>
+                  </div>
+                </td>
+
+                <td>{`name of course`}</td>
+
+                <td>${120}</td>
+                <td>{`pending/approved/declined`}</td>
+                <td>20/not enrolled yet</td>
+                <td>{`feedback`}</td>
+
+                <td className="">
+                  <div className="flex gap-2">
+                    <Link to={`/dashboard/updateMyCourse/${item}`}>
+                      <button className="btn-info btn-xs btn">update</button>
+                    </Link>
+                    <button className="btn-error btn-xs btn">delete</button>
+                  </div>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  );
 };
 
-export default InstructorMyClassesPage;
+export default MyCoursesPage;
 /*
 import { Helmet } from "react-helmet-async";
 import SectionHeading from "../ui/SectionHeading";

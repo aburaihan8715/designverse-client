@@ -1,8 +1,64 @@
-const StudentEnrolledClassesPage = () => {
-  return <div>StudentEnrolledClassesPage</div>;
+import SectionHeading from "../../components/ui/SectionHeading";
+
+const MyEnrollmentsPage = () => {
+  return (
+    <>
+      <div className="ml-3">
+        <div className="text-center">
+          <SectionHeading
+            subHeading={`how many`}
+            heading={`courses enrolled`}
+          />
+        </div>
+        <h2 className="font-bold">{0} classes enrolled</h2>
+        <h2 className="font-bold">${0} dollars spend</h2>
+        <div className="overflow-x-auto">
+          <table className="table">
+            <thead className="capitalize">
+              <tr>
+                <th>#</th>
+                <th>image</th>
+                <th>name</th>
+                <th>instructor</th>
+                <th>instructor email</th>
+                <th>price</th>
+
+                <th>action</th>
+              </tr>
+            </thead>
+            <tbody>
+              {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10]?.map((item) => (
+                <tr key={item}>
+                  <th>{item}</th>
+                  <td>
+                    <div className="avatar">
+                      <div className="w-12 h-12 mask mask-squircle">
+                        <img
+                          src="https://media.istockphoto.com/id/1266344101/photo/digitally-generated-domestic-bedroom-interior.jpg?b=1&s=612x612&w=0&k=20&c=GC3ycV8hAJE_KfOO6C3egojD0i-HSHoMZa1KIujzLLM="
+                          alt="class cover photo"
+                        />
+                      </div>
+                    </div>
+                  </td>
+
+                  <td>{`name of course`}</td>
+                  <td>{`name of instructor`}</td>
+                  <td>{`example@gmail.com`}</td>
+                  <td>$ {120}</td>
+                  <td>
+                    <button className="btn-info btn-xs btn">review</button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </>
+  );
 };
 
-export default StudentEnrolledClassesPage;
+export default MyEnrollmentsPage;
 
 /* 
 import useAuth from "../hooks/useAuth";

@@ -1,5 +1,83 @@
+import { useState } from "react";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
+import { Link } from "react-router-dom";
+import SocialLogin from "../../components/ui/SocialLogin";
+
 const LoginPage = () => {
-  return <div>LoginPage</div>;
+  const [showPassword, setShowPassword] = useState(false);
+  return (
+    <div className="max-w-md p-8 mx-auto border rounded-md">
+      <form>
+        <div className="space-y-3">
+          <div className="text-center ">
+            <h4 className="text-4xl uppercase">Login</h4>
+          </div>
+
+          <div className="relative w-full">
+            <label className="label">
+              <span className="label-text">Email</span>
+            </label>
+            <input
+              type="email"
+              placeholder="Enter your email"
+              className="w-full input-bordered input "
+            />
+          </div>
+
+          <div className="w-full">
+            <label className="label">
+              <span className="label-text">Password</span>
+            </label>
+
+            <div className="relative">
+              <input
+                placeholder="Enter your password"
+                className="w-full input-bordered input "
+                type={showPassword ? "text" : "password"}
+              />
+
+              <span
+                className="absolute -translate-y-1/2 right-6 top-1/2"
+                onClick={() => setShowPassword(!showPassword)}
+              >
+                {!showPassword && (
+                  <FaEyeSlash className="w-6 h-6 text-gray-500" />
+                )}
+                {showPassword && <FaEye className="w-6 h-6 text-gray-500" />}
+              </span>
+            </div>
+
+            <div className="text-right">
+              <Link to="/forgetPassword" className="link-error link">
+                Forget password?
+              </Link>
+            </div>
+          </div>
+
+          <div className="w-full ">
+            <button type="submit" className="btn-secondary btn-block btn">
+              login
+            </button>
+          </div>
+        </div>
+      </form>
+
+      <div className="divider">OR</div>
+
+      {/* SOCIAL LOGIN */}
+      <SocialLogin />
+
+      <div className="p-3 mt-3 space-x-1 text-center border rounded-md">
+        <span>New user?</span>
+        <span>
+          <Link className="font-bold text-orange-600" to="/signUp">
+            Sign up
+          </Link>
+        </span>
+        <span>here.</span>
+      </div>
+    </div>
+  );
 };
 
 export default LoginPage;

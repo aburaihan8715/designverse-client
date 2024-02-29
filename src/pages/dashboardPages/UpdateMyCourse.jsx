@@ -1,8 +1,196 @@
-const InstructorMyClassUpdatePage = () => {
-  return <div>InstructorMyClassUpdatePage</div>;
+const UpdateMyCourse = () => {
+  return (
+    <div className="my-4">
+      <div className="p-1">
+        <div className="max-w-lg p-8 mx-auto border rounded-md">
+          <form>
+            <div className="space-y-3">
+              <div className="text-center ">
+                <h4 className="text-3xl underline uppercase decoration-secondary underline-offset-4">
+                  Update My Course
+                </h4>
+              </div>
+
+              <div className="">
+                <div>
+                  <div className="gap-2 sm:flex">
+                    <div className="w-full">
+                      <label className="label">
+                        <span className="label-text">Class Name*</span>
+                      </label>
+                      <input
+                        type="text"
+                        placeholder="Enter class name"
+                        className="w-full input-bordered input "
+                      />
+                    </div>
+
+                    <div className="w-full">
+                      <label className="label">
+                        <span className="label-text">Class image*</span>
+                      </label>
+                      <input
+                        type="url"
+                        className="w-full input-bordered input"
+                        placeholder="Enter class image url"
+                      />
+                    </div>
+                  </div>
+
+                  <div className="gap-2 sm:flex">
+                    <div className="w-full ">
+                      <label className="label">
+                        <span className="label-text">Price*</span>
+                      </label>
+                      <input
+                        type="number"
+                        placeholder="Enter price"
+                        className="w-full input-bordered input "
+                      />
+                    </div>
+
+                    <div className="w-full ">
+                      <label className="label">
+                        <span className="label-text">Seats*</span>
+                      </label>
+                      <input
+                        type="number"
+                        placeholder="Enter seats"
+                        className="w-full input-bordered input "
+                      />
+                    </div>
+                  </div>
+
+                  <div className="gap-2 sm:flex">
+                    <div className="w-full ">
+                      <label className="label">
+                        <span className="label-text">Offer</span>
+                      </label>
+                      <input
+                        type="number"
+                        placeholder="Enter offer"
+                        className="w-full input-bordered input "
+                      />
+                    </div>
+
+                    <div className="w-full ">
+                      <label className="label">
+                        <span className="label-text">Instructor name*</span>
+                      </label>
+                      <input
+                        type="text"
+                        readOnly
+                        placeholder="Enter instructor name"
+                        className="w-full input-bordered input "
+                      />
+                    </div>
+                  </div>
+
+                  <div className="gap-2 sm:flex">
+                    <div className="w-full ">
+                      <label className="label">
+                        <span className="label-text">Instructor email*</span>
+                      </label>
+                      <input
+                        type="email"
+                        readOnly
+                        placeholder="Enter instructor email"
+                        className="w-full input-bordered input "
+                      />
+                    </div>
+
+                    <div className="w-full ">
+                      <label className="label">
+                        <span className="label-text">Instructor image*</span>
+                      </label>
+                      <input
+                        type="url"
+                        className="w-full input-bordered input"
+                        placeholder="Enter instructor image url"
+                      />
+                    </div>
+                  </div>
+
+                  <div className="gap-2 sm:flex">
+                    <div className="w-full">
+                      <label className="label">
+                        <span className="label-text">Phone No*</span>
+                      </label>
+                      <input
+                        type="tel"
+                        placeholder="Enter phone no"
+                        className="w-full input-bordered input"
+                      />
+                    </div>
+
+                    <div className="w-full">
+                      <label className="label">
+                        <span className="label-text">Gender*</span>
+                      </label>
+                      <select className="w-full input-bordered input">
+                        <option value="">select gender</option>
+                        <option value="male">male</option>
+                        <option value="female">female</option>
+                      </select>
+                    </div>
+                  </div>
+
+                  <div className="items-center gap-2 sm:flex">
+                    <div className="w-full">
+                      <label className="label">
+                        <span className="label-text">Address*</span>
+                      </label>
+                      <input
+                        type="text"
+                        placeholder="Enter address"
+                        className="w-full input-bordered input"
+                      />
+                    </div>
+
+                    <div className="self-stretch w-full">
+                      <label className="invisible label">
+                        <span className="label-text">Address*</span>
+                      </label>
+                      <input
+                        type="submit"
+                        value="Submit"
+                        className="btn-secondary btn-block btn"
+                      />
+                    </div>
+                  </div>
+                </div>
+
+                <div className="w-full ">
+                  <label className="label">
+                    <span className="label-text">Class image*</span>
+                  </label>
+                  <input
+                    type="file"
+                    className="w-full file-input-bordered file-input-warning file-input"
+                  />
+                </div>
+
+                <div>
+                  <div className="w-full ">
+                    <label className="label">
+                      <span className="label-text">Instructor image*</span>
+                    </label>
+                    <input
+                      type="file"
+                      className="w-full file-input-bordered file-input-warning file-input"
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  );
 };
 
-export default InstructorMyClassUpdatePage;
+export default UpdateMyCourse;
 /*
 import { Helmet } from "react-helmet-async";
 import { useForm } from "react-hook-form";

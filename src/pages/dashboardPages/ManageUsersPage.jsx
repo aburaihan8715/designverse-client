@@ -1,5 +1,67 @@
+import SectionHeading from "../../components/ui/SectionHeading";
+import { FaTrashAlt } from "react-icons/fa";
+
 const ManageUsersPage = () => {
-  return <div>ManageUsersPage</div>;
+  return (
+    <div className="">
+      <div>
+        <div className="mt-4">
+          <SectionHeading
+            subHeading={`How many?`}
+            heading={`MANAGE ALL USERS`}
+          />
+        </div>
+
+        <div className="text-3xl">
+          <span>Total users: </span>
+          <span>{0}</span>
+        </div>
+
+        <div className="mt-2 overflow-x-auto">
+          <table className="table border border-success">
+            <thead className="capitalize">
+              <tr className="border border-success">
+                <th>#</th>
+                <th>name</th>
+                <th>email</th>
+                <th>role</th>
+                <th className="text-center">change role</th>
+                <th>action</th>
+              </tr>
+            </thead>
+            <tbody>
+              {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((item) => (
+                <tr key={item}>
+                  <th>{item}</th>
+                  <td>{`name of user`}</td>
+                  <td>{`example@gmail.com`}</td>
+                  <td>student/admin/instructor</td>
+
+                  <td className="">
+                    <div className="flex flex-col gap-2 ">
+                      <button className="btn-primary btn-xs btn h-7">
+                        make admin
+                      </button>
+
+                      <button className="btn-secondary btn-xs btn h-7">
+                        make instructor
+                      </button>
+                    </div>
+                  </td>
+
+                  <th>
+                    <button className="text-white bg-red-600 btn-xs btn hover:bg-red-800">
+                      <FaTrashAlt />
+                    </button>
+                  </th>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  );
 };
 
 export default ManageUsersPage;

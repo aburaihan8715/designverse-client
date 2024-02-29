@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import SectionHeading from "../components/ui/SectionHeading";
+import SectionHeading from "../../components/ui/SectionHeading";
 
 const AllInstructorsPage = () => {
   return (

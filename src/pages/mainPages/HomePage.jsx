@@ -1,6 +1,6 @@
-import PopularCourses from "../components/home/PopularCourses";
-import PopularInstructors from "../components/home/PopularInstructors";
-import Slider from "../components/home/Slider";
+import PopularCourses from "../../components/home/PopularCourses";
+import PopularInstructors from "../../components/home/PopularInstructors";
+import Slider from "../../components/home/Slider";
 
 const HomePage = () => {
   return (

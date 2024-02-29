@@ -15,10 +15,11 @@ import {
   FaWallet,
 } from "react-icons/fa";
 import LogoutBtn from "../components/ui/LogoutBtn";
+import useUserAuth from "../hooks/useUserAuth";
 
 const DashboardLayout = () => {
-  const user = true;
-  const role = "admin";
+  const { user, role } = useUserAuth();
+
   return (
     <div className="">
       <div className="drawer lg:drawer-open">
@@ -50,7 +51,7 @@ const DashboardLayout = () => {
                 <li>
                   <ActiveLink
                     className="font-semibold uppercase"
-                    to="/dashboard/student"
+                    to="/dashboard/user"
                   >
                     <FaHome />
                     <span>User Dashboard</span>
@@ -60,7 +61,7 @@ const DashboardLayout = () => {
                 <li>
                   <ActiveLink
                     className="font-semibold uppercase"
-                    to="/dashboard/enrolledClasses"
+                    to="/dashboard/myEnrollments"
                   >
                     <FaBook />
                     <span>My Enrollments</span>
@@ -70,7 +71,7 @@ const DashboardLayout = () => {
                 <li>
                   <ActiveLink
                     className="font-semibold uppercase"
-                    to="/dashboard/selectedClasses"
+                    to="/dashboard/myCart"
                   >
                     <FaBookOpen />
                     <span>My Cart</span>
@@ -90,7 +91,7 @@ const DashboardLayout = () => {
                 <li>
                   <ActiveLink
                     className="font-semibold uppercase"
-                    to="/dashboard/paymentHistory"
+                    to="/dashboard/myPaymentHistory"
                   >
                     <FaHistory />
                     <span>Payment History</span>
@@ -123,7 +124,7 @@ const DashboardLayout = () => {
                 <li>
                   <ActiveLink
                     className="font-semibold uppercase"
-                    to="/dashboard/addClass"
+                    to="/dashboard/addCourse"
                   >
                     <FaPlus />
                     <span>Add Course</span>
@@ -132,7 +133,7 @@ const DashboardLayout = () => {
                 <li>
                   <ActiveLink
                     className="font-semibold uppercase"
-                    to="/dashboard/instructorClasses"
+                    to="/dashboard/myCourses"
                   >
                     <FaBookReader />
                     <span>My Courses</span>
@@ -156,7 +157,7 @@ const DashboardLayout = () => {
                 <li>
                   <ActiveLink
                     className="font-semibold uppercase"
-                    to="/dashboard/manageClasses"
+                    to="/dashboard/manageCourses"
                   >
                     <FaBox />
                     <span>Manage Courses</span>

@@ -1,14 +1,31 @@
 import { createBrowserRouter } from "react-router-dom";
 import MainLayout from "../layouts/MainLayout";
-import NotFoundPage from "../pages/NotFoundPage";
-import HomePage from "../pages/HomePage";
-import AllCoursesPage from "../pages/AllCoursesPage";
-import AllInstructorsPage from "../pages/AllInstructorsPage";
-import ContactPage from "../pages/ContactPage";
+import NotFoundPage from "../pages/mainPages/NotFoundPage";
+import HomePage from "../pages/mainPages/HomePage";
+import AllCoursesPage from "../pages/mainPages/AllCoursesPage";
+import AllInstructorsPage from "../pages/mainPages/AllInstructorsPage";
+import ContactPage from "../pages/mainPages/ContactPage";
 import DashboardLayout from "../layouts/DashboardLayout";
 import UserDashboardPage from "../pages/dashboardPages/UserDashboardPage";
 import InstructorDashboardPage from "../pages/dashboardPages/InstructorDashboardPage";
 import AdminDashboardPage from "../pages/dashboardPages/AdminDashboardPage";
+import LoginPage from "../pages/mainPages/LoginPage";
+import SignUpPage from "../pages/mainPages/SignUpPage";
+import ForgetPasswordPage from "../pages/mainPages/ForgetPasswordPage";
+import MyCartPage from "../pages/dashboardPages/MyCartPage";
+import PaymentPage from "../pages/dashboardPages/PaymentPage";
+import ManageCoursesPage from "../pages/dashboardPages/ManageCoursesPage";
+import ManageUsersPage from "../pages/dashboardPages/ManageUsersPage";
+import AddCoursePage from "../pages/dashboardPages/AddCoursePage";
+import MyCoursesPage from "../pages/dashboardPages/MyCoursesPage";
+import UpdateMyCourse from "../pages/dashboardPages/UpdateMyCourse";
+import MyEnrollmentsPage from "../pages/dashboardPages/MyEnrollmentsPage";
+import MyPaymentHistoryPage from "../pages/dashboardPages/MyPaymentHistoryPage";
+import AddReviewPage from "../pages/dashboardPages/AddReviewPage";
+
+// TODO:
+// No need to create extra files for authentication routes and authorization routes
+// All should be in one file (routes.jsx)
 
 const router = createBrowserRouter([
   {
@@ -16,6 +33,7 @@ const router = createBrowserRouter([
     element: <MainLayout />,
     errorElement: <NotFoundPage />,
     children: [
+      // MAIN ROUTES
       {
         path: "/",
         element: <HomePage />,
@@ -32,26 +50,83 @@ const router = createBrowserRouter([
         path: "contact",
         element: <ContactPage />,
       },
+      {
+        path: "login",
+        element: <LoginPage />,
+      },
+      {
+        path: "signUp",
+        element: <SignUpPage />,
+      },
+      {
+        path: "forgetPassword",
+        element: <ForgetPasswordPage />,
+      },
     ],
   },
 
-  // dashboard routes
+  // DASHBOARD ROUTES
   {
     path: "dashboard",
     element: <DashboardLayout />,
     errorElement: <NotFoundPage />,
     children: [
+      // USER ROUTES
       {
         path: "user",
         element: <UserDashboardPage />,
       },
       {
+        path: "myCart",
+        element: <MyCartPage />,
+      },
+      {
+        path: "payment",
+        element: <PaymentPage />,
+      },
+      {
+        path: "myPaymentHistory",
+        element: <MyPaymentHistoryPage />,
+      },
+      {
+        path: "myEnrollments",
+        element: <MyEnrollmentsPage />,
+      },
+      {
+        path: "addReview",
+        element: <AddReviewPage />,
+      },
+
+      // INSTRUCTOR ROUTES
+      {
         path: "instructor",
         element: <InstructorDashboardPage />,
       },
       {
+        path: "addCourse",
+        element: <AddCoursePage />,
+      },
+      {
+        path: "myCourses",
+        element: <MyCoursesPage />,
+      },
+      {
+        path: "updateMyCourse/:id",
+        element: <UpdateMyCourse />,
+      },
+
+      // ADMIN ROUTES
+      {
         path: "admin",
         element: <AdminDashboardPage />,
+      },
+      {
+        path: "manageCourses",
+        element: <ManageCoursesPage />,
+      },
+      {
+        path: "manageUsers",
+        element: <ManageUsersPage />,
       },
     ],
   },

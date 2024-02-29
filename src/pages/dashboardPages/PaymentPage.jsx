@@ -26,7 +26,7 @@ const PaymentPage = () => {
       <Helmet>
         <title>FashionVerse | PaymentPage</title>
       </Helmet>
-      <div className="px-2 py-10 mx-auto mt-2  sm:max-w-2xl">
+      <div className="px-2 py-10 mx-auto mt-2 sm:max-w-2xl">
         <SectionHeading subHeading={`please process`} heading={`payment`} />
         <Elements stripe={stripePromise}>
           <CheckoutForm price={price} cartData={cartData} />

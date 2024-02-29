@@ -1,3 +1,24 @@
+import { createContext } from "react";
+
+export const UserAuthContext = createContext(null);
+const user = true;
+const role = "user";
+
+const UserAuthContextProvider = ({ children }) => {
+  return (
+    <UserAuthContext.Provider
+      value={{
+        role,
+        user,
+      }}
+    >
+      {children}
+    </UserAuthContext.Provider>
+  );
+};
+
+export default UserAuthContextProvider;
+
 /*
 import { createContext } from "react";
 import {

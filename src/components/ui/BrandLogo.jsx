@@ -10,7 +10,7 @@ const BrandLogo = ({ isHidden }) => {
         <h1 className="text-3xl tracking-tighter text-transparent bg-gradient-to-r from-pink-500 to-purple-200 bg-clip-text text-secondary">
           DesignVerse
         </h1>
-        <span className="tracking-[7px]">Be Designer</span>
+        <span className="text-center tracking-[5px]">Be A Designer</span>
       </div>
     </Link>
   );

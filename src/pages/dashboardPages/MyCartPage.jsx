@@ -1,8 +1,72 @@
-const StudentSelectedClassesPage = () => {
-  return <div>StudentSelectedClassesPage</div>;
+import { Link } from "react-router-dom";
+import SectionHeading from "../../components/ui/SectionHeading";
+import { FaTrashAlt } from "react-icons/fa";
+
+const MyCartPage = () => {
+  return (
+    <div className="">
+      <div>
+        <SectionHeading subHeading={`My Cart`} heading={`want to add more`} />
+        <div className="flex space-x-20 text-3xl">
+          <div className="">
+            <span>Total courses: </span>
+            <span>{0}</span>
+          </div>
+          <div>
+            <span>Total Price: </span>
+            <span>${0}</span>
+          </div>
+          <div>
+            <Link to="/dashboard/payment">
+              <button className="btn-secondary btn">pay</button>
+            </Link>
+          </div>
+        </div>
+
+        <div className="mt-8 overflow-x-auto">
+          <table className="table border border-success">
+            <thead className="capitalize">
+              <tr className="border border-success">
+                <th>#</th>
+                <th>image</th>
+                <th>course</th>
+                <th>price</th>
+                <th>instructor</th>
+                <th>action</th>
+              </tr>
+            </thead>
+            <tbody>
+              {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((item) => (
+                <tr key={item}>
+                  <th>{item}</th>
+                  <td>
+                    <div className="flex items-center space-x-3">
+                      <div className="avatar">
+                        <div className="w-12 h-12 mask mask-squircle">
+                          <img src="https://images.pexels.com/photos/19399844/pexels-photo-19399844/free-photo-of-young-woman-in-white-blouse-and-black-waistcoat.jpeg?auto=compress&cs=tinysrgb&w=600&lazy=load" />
+                        </div>
+                      </div>
+                    </div>
+                  </td>
+                  <td>{`Name of course`}</td>
+                  <td className="">$ {150}</td>
+                  <td className="">{`Name fo Instructor`}</td>
+                  <th>
+                    <button className="text-white btn-error btn-sm btn hover:bg-red-800">
+                      <FaTrashAlt />
+                    </button>
+                  </th>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  );
 };
 
-export default StudentSelectedClassesPage;
+export default MyCartPage;
 /*
 import { Helmet } from "react-helmet-async";
 import { FaTrashAlt } from "react-icons/fa";

@@ -3,6 +3,7 @@ import { FaShoppingCart } from "react-icons/fa";
 import ActiveLink from "./ActiveLink";
 import BrandLogo from "./BrandLogo";
 import LogoutBtn from "./LogoutBtn";
+import useUserAuth from "../../hooks/useUserAuth";
 // import useAuth from "../hooks/useAuth";
 // import useCartData from "../hooks/useCartData";
 // import useRole from "../hooks/useRole";
@@ -26,7 +27,8 @@ const Header = () => {
   // const { cartData } = useCartData();
   // const { roleData } = useRole();
   // const user = true;
-  const role = "admin";
+
+  const { role } = useUserAuth();
 
   const menuItems = (
     <>
@@ -62,19 +64,21 @@ const Header = () => {
         </ActiveLink>
       </li>
 
-      <li>
-        <Link
-          to="/dashboard/selectedClasses"
-          className="p-0 bg-transparent hover:bg-transparent"
-        >
-          <button className="bg-transparent btn-sm btn hover:bg-transparent">
-            <span className="text-error">
-              <FaShoppingCart />
-            </span>
-            <div className="text-white badge badge-success">+{0}</div>
-          </button>
-        </Link>
-      </li>
+      {role === "user" && (
+        <li>
+          <Link
+            to="/dashboard/myCart"
+            className="p-0 bg-transparent hover:bg-transparent"
+          >
+            <button className="bg-transparent btn-sm btn hover:bg-transparent">
+              <span className="text-error">
+                <FaShoppingCart />
+              </span>
+              <div className="text-white badge badge-success">+{0}</div>
+            </button>
+          </Link>
+        </li>
+      )}
     </>
   );
 

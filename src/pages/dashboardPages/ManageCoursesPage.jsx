@@ -1,8 +1,71 @@
-const ManageClassesPage = () => {
-  return <div>ManageClassesPage</div>;
+import SectionHeading from "../../components/ui/SectionHeading";
+
+const ManageCoursesPage = () => {
+  return (
+    <>
+      <div className="ml-2 ">
+        <div>
+          <div className="mt-4">
+            <SectionHeading subHeading={`manage`} heading={`all courses`} />
+          </div>
+
+          <div className="text-3xl ">
+            <div className="">
+              <span>Total Classes: </span>
+              <span>{0}</span>
+            </div>
+          </div>
+
+          <div className="mt-8 overflow-x-auto">
+            <table className="table border border-success">
+              <thead className="">
+                <tr className="border border-success">
+                  <th>image</th>
+                  <th>courses</th>
+                  <th>instructor</th>
+                  <th>instructor email</th>
+                  <th>price</th>
+                  <th>status</th>
+                  <th>actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((item) => (
+                  <tr key={item}>
+                    <td>
+                      <div className="flex items-center space-x-3">
+                        <div className="avatar">
+                          <div className="w-12 h-12 mask mask-squircle">
+                            <img src="https://images.pexels.com/photos/20344852/pexels-photo-20344852/free-photo-of-woman-in-sweater.jpeg?auto=compress&cs=tinysrgb&w=600&lazy=load" />
+                          </div>
+                        </div>
+                      </div>
+                    </td>
+
+                    <td className="">{`Name of course`}</td>
+                    <td className="">{`Name of instructor`}</td>
+                    <td className="">{`example@gmail.com`}</td>
+
+                    <td className="">{120}</td>
+                    <td className="">pending/approved</td>
+
+                    <th className="flex flex-col gap-2">
+                      <button>approve</button>
+                      <button>deny</button>
+                      <button>feedback</button>
+                    </th>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </>
+  );
 };
 
-export default ManageClassesPage;
+export default ManageCoursesPage;
 /*
 import { Helmet } from "react-helmet-async";
 import useClassesData from "../hooks/useClassesData";
