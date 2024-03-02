@@ -1,14 +1,8 @@
-const LogoutBtn = () => {
-  return <button className="text-white btn-secondary btn">logout</button>;
-};
-
-export default LogoutBtn;
-/*
 import { useNavigate } from "react-router-dom";
-import useAuth from "../../hooks/useAuth";
+import useUserAuth from "../../hooks/useUserAuth";
 
 const LogOutBtn = () => {
-  const { logOutUser } = useAuth();
+  const { logOutUser } = useUserAuth();
   const navigate = useNavigate();
 
   const logOutHandler = async () => {
@@ -23,4 +17,3 @@ const LogOutBtn = () => {
 };
 
 export default LogOutBtn;
-*/

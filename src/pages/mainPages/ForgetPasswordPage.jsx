@@ -1,6 +1,11 @@
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
+import useUserAuth from "../../hooks/useUserAuth";
 
 const ForgetPasswordPage = () => {
+  const { user } = useUserAuth();
+
+  if (user) return <Navigate to="/" />;
+
   return (
     <div className="py-4">
       <div className="max-w-md p-4 mx-auto border rounded-md shadow-lg">

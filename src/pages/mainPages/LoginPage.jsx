@@ -1,10 +1,15 @@
 import { useState } from "react";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import SocialLogin from "../../components/ui/SocialLogin";
+import useUserAuth from "../../hooks/useUserAuth";
 
 const LoginPage = () => {
   const [showPassword, setShowPassword] = useState(false);
+  const { user } = useUserAuth();
+
+  if (user) return <Navigate to="/" />;
+
   return (
     <div className="max-w-md p-8 mx-auto border rounded-md">
       <form>
@@ -12,18 +17,18 @@ const LoginPage = () => {
           <div className="text-center ">
             <h4 className="text-4xl uppercase">Login</h4>
           </div>
-
+          {/* EMAIL */}
           <div className="relative w-full">
             <label className="label">
               <span className="label-text">Email</span>
             </label>
             <input
               type="email"
-              placeholder="Enter your email"
+              placeholder="Enter email"
               className="w-full input-bordered input "
             />
           </div>
-
+          {/* PASSWORD */}
           <div className="w-full">
             <label className="label">
               <span className="label-text">Password</span>
@@ -31,7 +36,7 @@ const LoginPage = () => {
 
             <div className="relative">
               <input
-                placeholder="Enter your password"
+                placeholder="Enter password"
                 className="w-full input-bordered input "
                 type={showPassword ? "text" : "password"}
               />
@@ -46,12 +51,38 @@ const LoginPage = () => {
                 {showPassword && <FaEye className="w-6 h-6 text-gray-500" />}
               </span>
             </div>
+          </div>
 
-            <div className="text-right">
-              <Link to="/forgetPassword" className="link-error link">
-                Forget password?
-              </Link>
+          {/* PASSWORD CONFIRM */}
+          <div className="w-full">
+            <label className="label">
+              <span className="label-text">Password</span>
+            </label>
+
+            <div className="relative">
+              <input
+                placeholder="Enter password"
+                className="w-full input-bordered input "
+                type={showPassword ? "text" : "password"}
+              />
+
+              <span
+                className="absolute -translate-y-1/2 right-6 top-1/2"
+                onClick={() => setShowPassword(!showPassword)}
+              >
+                {!showPassword && (
+                  <FaEyeSlash className="w-6 h-6 text-gray-500" />
+                )}
+                {showPassword && <FaEye className="w-6 h-6 text-gray-500" />}
+              </span>
             </div>
+          </div>
+
+          {/* FORGET PASSWORD LINK */}
+          <div className="text-right">
+            <Link to="/forgetPassword" className="link-error link">
+              Forget password?
+            </Link>
           </div>
 
           <div className="w-full ">

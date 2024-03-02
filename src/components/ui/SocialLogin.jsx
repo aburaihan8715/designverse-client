@@ -1,26 +1,41 @@
+import { useNavigate } from "react-router-dom";
+import useUserAuth from "../../hooks/useUserAuth";
+
 const SocialLogin = () => {
+  const { authenticationUsingGoogle, authenticationUsingGithub } =
+    useUserAuth();
+  const navigate = useNavigate();
+
+  const googleHandler = async () => {
+    try {
+      await authenticationUsingGoogle();
+      navigate("/");
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  const githubHandler = async () => {
+    try {
+      await authenticationUsingGithub();
+      navigate("/");
+    } catch (error) {
+      console.log(error);
+    }
+  };
   return (
-    <>
-      <div className="flex justify-center gap-6 p-3 border rounded-md">
-        {/* <button className="avatar">
-          <div className="w-5 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
-            <img src="https://i.ibb.co/Y7nTmxp/facebook.png" />
-          </div>
-        </button> */}
+    <div className="flex justify-center gap-6 p-3 border rounded-md">
+      <button onClick={googleHandler} className="avatar">
+        <div className="w-5 rounded-full ring ring-primary ring-offset-2 ring-offset-base-100">
+          <img src="https://i.ibb.co/72bXZqD/google.png" />
+        </div>
+      </button>
 
-        <button className="avatar">
-          <div className="w-5 rounded-full ring ring-primary ring-offset-2 ring-offset-base-100">
-            <img src="https://i.ibb.co/72bXZqD/google.png" />
-          </div>
-        </button>
-
-        <button className="avatar">
-          <div className="w-5 rounded-full ring ring-primary ring-offset-2 ring-offset-base-100">
-            <img src="https://i.ibb.co/JHJ7PMt/github.png" />
-          </div>
-        </button>
-      </div>
-    </>
+      <button onClick={githubHandler} className="avatar">
+        <div className="w-5 rounded-full ring ring-primary ring-offset-2 ring-offset-base-100">
+          <img src="https://i.ibb.co/JHJ7PMt/github.png" />
+        </div>
+      </button>
+    </div>
   );
 };
 

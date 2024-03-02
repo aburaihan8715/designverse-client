@@ -28,8 +28,8 @@ const Header = () => {
   // const { roleData } = useRole();
   // const user = true;
 
-  const { role } = useUserAuth();
-
+  const { role, user } = useUserAuth();
+  // MENU ITEMS
   const menuItems = (
     <>
       <li>
@@ -122,20 +122,26 @@ const Header = () => {
 
           <div className="navbar-end">
             <div className="inline-flex items-center gap-4">
-              <Link className="text-white btn-secondary btn" to="/login">
-                login
-              </Link>
+              {!user && (
+                <Link className="text-white btn-secondary btn" to="/login">
+                  login
+                </Link>
+              )}
 
-              <div className="relative flex items-center gap-4">
-                <button title="Abu Raihan" className="inline-flex items-center">
-                  <div className="avatar">
-                    <div className="w-8 rounded-full ring ring-primary ring-offset-2 ring-offset-base-100">
-                      <img src="https://images.pexels.com/photos/3763188/pexels-photo-3763188.jpeg?auto=compress&cs=tinysrgb&w=600" />
+              {user && (
+                <div className="relative flex items-center gap-4">
+                  <button
+                    title="Abu Raihan"
+                    className="inline-flex items-center"
+                  >
+                    <div className="avatar">
+                      <div className="w-8 rounded-full ring ring-primary ring-offset-2 ring-offset-base-100">
+                        <img src="https://images.pexels.com/photos/3763188/pexels-photo-3763188.jpeg?auto=compress&cs=tinysrgb&w=600" />
+                      </div>
                     </div>
-                  </div>
-                </button>
+                  </button>
 
-                {/* {isProfileOpen && (
+                  {/* {isProfileOpen && (
                     <ProfileModal setIsProfileOpen={setIsProfileOpen}>
                       {!flags && (
                         <ProfileCard flags={flags} setFlags={setFlags} />
@@ -144,10 +150,9 @@ const Header = () => {
                     </ProfileModal>
                   )} */}
 
-                <div>
                   <LogoutBtn />
                 </div>
-              </div>
+              )}
             </div>
           </div>
         </div>

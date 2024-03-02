@@ -145,7 +145,7 @@ https://i.ibb.co/bPbybsH/user1.png
 
 
 // default demo user link
-https://i.ibb.co/nCCcPC7/demo-user.jpg
+https://i.ibb.co/KwgKgw1/noavatar.png
 
 
 

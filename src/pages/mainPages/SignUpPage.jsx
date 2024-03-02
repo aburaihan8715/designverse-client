@@ -1,10 +1,15 @@
 import { useState } from "react";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import SocialLogin from "../../components/ui/SocialLogin";
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
+import useUserAuth from "../../hooks/useUserAuth";
 
 const SignUpPage = () => {
   const [showPassword, setShowPassword] = useState(false);
+  const { user } = useUserAuth();
+
+  if (user) return <Navigate to="/" />;
+
   return (
     <div className="my-4">
       <div className="">
@@ -15,28 +20,31 @@ const SignUpPage = () => {
                 <h4 className="text-4xl uppercase">Sign up</h4>
               </div>
 
+              {/* USER NAME */}
               <div className="w-full ">
                 <label className="label">
-                  <span className="label-text">Name</span>
+                  <span className="label-text">Username</span>
                 </label>
                 <input
                   type="text"
-                  placeholder="Enter your name"
+                  placeholder="Enter username"
                   className="w-full input-bordered input "
                 />
               </div>
 
+              {/* EMAIL */}
               <div className="w-full ">
                 <label className="label">
                   <span className="label-text">Email</span>
                 </label>
                 <input
                   type="email"
-                  placeholder="Enter your email"
+                  placeholder="Enter email"
                   className="w-full input-bordered input "
                 />
               </div>
 
+              {/* PASSWORD */}
               <div className="w-full">
                 <label className="label">
                   <span className="label-text">Password</span>
@@ -44,7 +52,7 @@ const SignUpPage = () => {
 
                 <div className="relative">
                   <input
-                    placeholder="Enter your password"
+                    placeholder="Enter password"
                     className="w-full input-bordered input "
                     type={showPassword ? "text" : "password"}
                   />
@@ -53,12 +61,44 @@ const SignUpPage = () => {
                     className="absolute -translate-y-1/2 right-6 top-1/2"
                     onClick={() => setShowPassword(!showPassword)}
                   >
-                    {!showPassword && <FaEyeSlash className="w-6 h-6" />}
-                    {showPassword && <FaEye className="w-6 h-6" />}
+                    {!showPassword && (
+                      <FaEyeSlash className="w-6 h-6 text-gray-500" />
+                    )}
+                    {showPassword && (
+                      <FaEye className="w-6 h-6 text-gray-500" />
+                    )}
                   </span>
                 </div>
               </div>
 
+              {/* PASSWORD CONFIRM */}
+              <div className="w-full">
+                <label className="label">
+                  <span className="label-text">Password</span>
+                </label>
+
+                <div className="relative">
+                  <input
+                    placeholder="Enter password"
+                    className="w-full input-bordered input "
+                    type={showPassword ? "text" : "password"}
+                  />
+
+                  <span
+                    className="absolute -translate-y-1/2 right-6 top-1/2"
+                    onClick={() => setShowPassword(!showPassword)}
+                  >
+                    {!showPassword && (
+                      <FaEyeSlash className="w-6 h-6 text-gray-500" />
+                    )}
+                    {showPassword && (
+                      <FaEye className="w-6 h-6 text-gray-500" />
+                    )}
+                  </span>
+                </div>
+              </div>
+
+              {/* LOGIN BUTTON */}
               <div className="w-full ">
                 <button type="submit" className="btn-secondary btn-block btn">
                   login
