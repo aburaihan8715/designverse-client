@@ -3,31 +3,45 @@ import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { Link, Navigate } from "react-router-dom";
 import SocialLogin from "../../components/ui/SocialLogin";
 import useUserAuth from "../../hooks/useUserAuth";
+import { useForm } from "react-hook-form";
 
+// NOTE: if any problem see doc
+// ERROR MESSAGE: can be string or object
+// we should use two by need
 const LoginPage = () => {
   const [showPassword, setShowPassword] = useState(false);
+  // const [error, setError] = useState("Wrong credentials!!");
   const { user } = useUserAuth();
+
+  const form = useForm();
+  const { register, handleSubmit, formState } = form;
+  const { errors } = formState;
+
+  const submitHandler = (data) => console.log(data);
 
   if (user) return <Navigate to="/" />;
 
   return (
     <div className="max-w-md p-8 mx-auto border rounded-md">
-      <form>
+      <h4 className="text-4xl text-center uppercase">Login</h4>
+      <form onSubmit={handleSubmit(submitHandler)}>
         <div className="space-y-3">
-          <div className="text-center ">
-            <h4 className="text-4xl uppercase">Login</h4>
-          </div>
           {/* EMAIL */}
-          <div className="relative w-full">
+          <div className="w-full ">
             <label className="label">
               <span className="label-text">Email</span>
             </label>
             <input
+              {...register("email", { required: "email is required" })}
               type="email"
-              placeholder="Enter email"
+              placeholder="john@example.com"
               className="w-full input-bordered input "
             />
+            {errors.email && (
+              <span className="text-error">{errors.email.message}</span>
+            )}
           </div>
+
           {/* PASSWORD */}
           <div className="w-full">
             <label className="label">
@@ -36,7 +50,10 @@ const LoginPage = () => {
 
             <div className="relative">
               <input
-                placeholder="Enter password"
+                {...register("password", {
+                  required: "password is required!",
+                })}
+                placeholder="••••••"
                 className="w-full input-bordered input "
                 type={showPassword ? "text" : "password"}
               />
@@ -51,31 +68,10 @@ const LoginPage = () => {
                 {showPassword && <FaEye className="w-6 h-6 text-gray-500" />}
               </span>
             </div>
-          </div>
 
-          {/* PASSWORD CONFIRM */}
-          <div className="w-full">
-            <label className="label">
-              <span className="label-text">Password</span>
-            </label>
-
-            <div className="relative">
-              <input
-                placeholder="Enter password"
-                className="w-full input-bordered input "
-                type={showPassword ? "text" : "password"}
-              />
-
-              <span
-                className="absolute -translate-y-1/2 right-6 top-1/2"
-                onClick={() => setShowPassword(!showPassword)}
-              >
-                {!showPassword && (
-                  <FaEyeSlash className="w-6 h-6 text-gray-500" />
-                )}
-                {showPassword && <FaEye className="w-6 h-6 text-gray-500" />}
-              </span>
-            </div>
+            {errors.password && (
+              <span className="text-error">{errors.password.message}</span>
+            )}
           </div>
 
           {/* FORGET PASSWORD LINK */}
@@ -90,6 +86,8 @@ const LoginPage = () => {
               login
             </button>
           </div>
+
+          {/* {error && <p className="text-center text-red-500">{error}</p>} */}
         </div>
       </form>
 

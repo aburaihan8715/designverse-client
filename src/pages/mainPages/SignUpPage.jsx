@@ -1,126 +1,201 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
-import SocialLogin from "../../components/ui/SocialLogin";
+import toast, { Toaster } from "react-hot-toast";
 import { Link, Navigate } from "react-router-dom";
-import useUserAuth from "../../hooks/useUserAuth";
+import { useForm } from "react-hook-form";
 
+import SocialLogin from "../../components/ui/SocialLogin";
+import useUserAuth from "../../hooks/useUserAuth";
+import { publicRequest } from "../../utils/requestMethod";
+
+// NOTE: if any problem see doc
+// ERROR MESSAGE: can be string or object
+// we should use two by need
 const SignUpPage = () => {
   const [showPassword, setShowPassword] = useState(false);
   const { user } = useUserAuth();
+
+  const form = useForm({
+    defaultValues: {
+      username: "",
+      email: "",
+      password: "",
+      passwordConfirm: "",
+    },
+  });
+  const { register, handleSubmit, formState, getValues, reset } = form;
+  const { errors, isSubmitSuccessful, isSubmitting, isDirty, isValid } =
+    formState;
+
+  useEffect(() => {
+    reset();
+  }, [isSubmitSuccessful, reset]);
+
+  const submitHandler = async (data) => {
+    const toastId = toast.loading("Loading...");
+    const { username, email, password, passwordConfirm } = data;
+
+    try {
+      const res = await publicRequest.post(
+        "users",
+        {
+          username,
+          email,
+          password,
+          passwordConfirm,
+        },
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        },
+      );
+
+      if (res.data.status === "success") {
+        toast.success("User created successfully!", {
+          id: toastId,
+        });
+      }
+    } catch (error) {
+      // TODO: we should show error message on ui
+      console.log(error.response.data);
+    }
+  };
 
   if (user) return <Navigate to="/" />;
 
   return (
     <div className="my-4">
-      <div className="">
-        <div className="max-w-md p-8 mx-auto border rounded-md">
-          <form>
-            <div className="space-y-3">
-              <div className="text-center ">
-                <h4 className="text-4xl uppercase">Sign up</h4>
-              </div>
-
-              {/* USER NAME */}
-              <div className="w-full ">
-                <label className="label">
-                  <span className="label-text">Username</span>
-                </label>
-                <input
-                  type="text"
-                  placeholder="Enter username"
-                  className="w-full input-bordered input "
-                />
-              </div>
-
-              {/* EMAIL */}
-              <div className="w-full ">
-                <label className="label">
-                  <span className="label-text">Email</span>
-                </label>
-                <input
-                  type="email"
-                  placeholder="Enter email"
-                  className="w-full input-bordered input "
-                />
-              </div>
-
-              {/* PASSWORD */}
-              <div className="w-full">
-                <label className="label">
-                  <span className="label-text">Password</span>
-                </label>
-
-                <div className="relative">
-                  <input
-                    placeholder="Enter password"
-                    className="w-full input-bordered input "
-                    type={showPassword ? "text" : "password"}
-                  />
-
-                  <span
-                    className="absolute -translate-y-1/2 right-6 top-1/2"
-                    onClick={() => setShowPassword(!showPassword)}
-                  >
-                    {!showPassword && (
-                      <FaEyeSlash className="w-6 h-6 text-gray-500" />
-                    )}
-                    {showPassword && (
-                      <FaEye className="w-6 h-6 text-gray-500" />
-                    )}
-                  </span>
-                </div>
-              </div>
-
-              {/* PASSWORD CONFIRM */}
-              <div className="w-full">
-                <label className="label">
-                  <span className="label-text">Password</span>
-                </label>
-
-                <div className="relative">
-                  <input
-                    placeholder="Enter password"
-                    className="w-full input-bordered input "
-                    type={showPassword ? "text" : "password"}
-                  />
-
-                  <span
-                    className="absolute -translate-y-1/2 right-6 top-1/2"
-                    onClick={() => setShowPassword(!showPassword)}
-                  >
-                    {!showPassword && (
-                      <FaEyeSlash className="w-6 h-6 text-gray-500" />
-                    )}
-                    {showPassword && (
-                      <FaEye className="w-6 h-6 text-gray-500" />
-                    )}
-                  </span>
-                </div>
-              </div>
-
-              {/* LOGIN BUTTON */}
-              <div className="w-full ">
-                <button type="submit" className="btn-secondary btn-block btn">
-                  login
-                </button>
-              </div>
+      <div className="max-w-md p-8 mx-auto border rounded-md">
+        <h4 className="text-4xl text-center uppercase">Sign up</h4>
+        <form onSubmit={handleSubmit(submitHandler)} noValidate>
+          <div className="space-y-3">
+            {/* USER NAME */}
+            <div className="w-full ">
+              <label className="label">
+                <span className="label-text">Username</span>
+              </label>
+              <input
+                {...register("username", {
+                  required: "username is required!",
+                })}
+                type="text"
+                placeholder="johndoe"
+                className="w-full input-bordered input "
+              />
+              <span className="text-error">{errors.username?.message}</span>
             </div>
-          </form>
 
-          <div className="divider">OR</div>
+            {/* EMAIL */}
+            <div className="w-full ">
+              <label className="label">
+                <span className="label-text">Email</span>
+              </label>
+              <input
+                {...register("email", { required: "email is required" })}
+                type="email"
+                placeholder="john@example.com"
+                className="w-full input-bordered input "
+              />
+              <span className="text-error">{errors.email?.message}</span>
+            </div>
 
-          {/* SOCIAL LOGIN */}
-          <SocialLogin />
+            {/* PASSWORD */}
+            <div className="w-full">
+              <label className="label">
+                <span className="label-text">Password</span>
+              </label>
 
-          <div className="p-3 mt-3 space-x-1 text-center border rounded-md">
-            <span>Already registered?</span>
-            <span>
-              <Link className="font-bold text-orange-600" to="/login">
-                Login
-              </Link>
-            </span>
-            <span>here.</span>
+              <div className="relative">
+                <input
+                  {...register("password", {
+                    required: "password is required!",
+                    minLength: {
+                      value: 6,
+                      message: "password need to be minimum 6 characters!",
+                    },
+                    maxLength: {
+                      value: 20,
+                      message: "password should not exceeds 20 characters!",
+                    },
+
+                    pattern: {
+                      value: /(?=.*[A-Z])(?=.*[!@#$&*])(?=.*[0-9])(?=.*[a-z])/i,
+                      message:
+                        "password should have one uppercase, one lowercase, one special character and one digits!",
+                    },
+                  })}
+                  placeholder="••••••"
+                  className="w-full input-bordered input "
+                  type={showPassword ? "text" : "password"}
+                />
+
+                <span
+                  className="absolute -translate-y-1/2 right-6 top-1/2"
+                  onClick={() => setShowPassword(!showPassword)}
+                >
+                  {!showPassword && (
+                    <FaEyeSlash className="w-6 h-6 text-gray-500" />
+                  )}
+                  {showPassword && <FaEye className="w-6 h-6 text-gray-500" />}
+                </span>
+              </div>
+              <span className="text-error">{errors.password?.message}</span>
+            </div>
+
+            {/* PASSWORD CONFIRM */}
+            <div className="w-full">
+              <label className="label">
+                <span className="label-text">Password Confirm</span>
+              </label>
+
+              <div className="relative">
+                <input
+                  {...register("passwordConfirm", {
+                    required: "password confirm is required",
+                    validate: (value) => {
+                      const password = getValues("password");
+                      return password === value || "passwords should match!";
+                    },
+                  })}
+                  placeholder="••••••"
+                  className="w-full input-bordered input "
+                  type="password"
+                />
+              </div>
+
+              <span className="text-error">
+                {errors.passwordConfirm?.message}
+              </span>
+            </div>
+
+            {/* LOGIN BUTTON */}
+            <div className="w-full ">
+              <button
+                disabled={!isDirty || !isValid || isSubmitting}
+                type="submit"
+                className="btn-secondary btn-block btn"
+              >
+                {isSubmitting ? "submitting..." : "submit"}
+              </button>
+              <Toaster />
+            </div>
           </div>
+        </form>
+
+        <div className="divider">OR</div>
+
+        {/* SOCIAL LOGIN */}
+        <SocialLogin />
+
+        <div className="p-3 mt-3 space-x-1 text-center border rounded-md">
+          <span>Already registered?</span>
+          <span>
+            <Link className="font-bold text-orange-600" to="/login">
+              Login
+            </Link>
+          </span>
+          <span>here.</span>
         </div>
       </div>
     </div>
