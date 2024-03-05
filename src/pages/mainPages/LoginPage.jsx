@@ -1,23 +1,49 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
-import { Link, Navigate } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 import SocialLogin from "../../components/ui/SocialLogin";
 import useUserAuth from "../../hooks/useUserAuth";
 import { useForm } from "react-hook-form";
+import toast from "react-hot-toast";
 
 // NOTE: if any problem see doc
 // ERROR MESSAGE: can be string or object
 // we should use two by need
 const LoginPage = () => {
   const [showPassword, setShowPassword] = useState(false);
-  // const [error, setError] = useState("Wrong credentials!!");
-  const { user } = useUserAuth();
+  const [error, setError] = useState("");
+  const { user, authenticationUsingEmailPassword } = useUserAuth();
+  const navigate = useNavigate();
 
   const form = useForm();
-  const { register, handleSubmit, formState } = form;
-  const { errors } = formState;
+  const { register, handleSubmit, formState, reset } = form;
+  const { errors, isSubmitSuccessful, isSubmitting, isDirty, isValid } =
+    formState;
 
-  const submitHandler = (data) => console.log(data);
+  useEffect(() => {
+    reset();
+  }, [isSubmitSuccessful, reset]);
+
+  const submitHandler = async (data) => {
+    setError("");
+    const toastId = toast.loading("Loading...");
+    const { email, password } = data;
+
+    try {
+      const res = await authenticationUsingEmailPassword(email, password);
+      if (res.user) {
+        toast.success("Login success!", {
+          id: toastId,
+        });
+        navigate("/");
+      }
+    } catch (error) {
+      // show error message and dismiss loading toast
+      toast.dismiss(toastId);
+      setError(error.message || "Failed to login");
+      console.log(error);
+    }
+  };
 
   if (user) return <Navigate to="/" />;
 
@@ -37,9 +63,7 @@ const LoginPage = () => {
               placeholder="john@example.com"
               className="w-full input-bordered input "
             />
-            {errors.email && (
-              <span className="text-error">{errors.email.message}</span>
-            )}
+            <span className="text-error">{errors.email?.message}</span>
           </div>
 
           {/* PASSWORD */}
@@ -68,10 +92,7 @@ const LoginPage = () => {
                 {showPassword && <FaEye className="w-6 h-6 text-gray-500" />}
               </span>
             </div>
-
-            {errors.password && (
-              <span className="text-error">{errors.password.message}</span>
-            )}
+            <span className="text-error">{errors.password?.message}</span>
           </div>
 
           {/* FORGET PASSWORD LINK */}
@@ -82,12 +103,16 @@ const LoginPage = () => {
           </div>
 
           <div className="w-full ">
-            <button type="submit" className="btn-secondary btn-block btn">
-              login
+            <button
+              disabled={!isDirty || !isValid || isSubmitting}
+              type="submit"
+              className="btn-secondary btn-block btn"
+            >
+              {isSubmitting ? "submitting..." : "submit"}
             </button>
           </div>
 
-          {/* {error && <p className="text-center text-red-500">{error}</p>} */}
+          {error && <p className="text-center text-red-500">{error}</p>}
         </div>
       </form>
 

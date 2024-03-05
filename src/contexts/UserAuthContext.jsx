@@ -68,7 +68,7 @@ const UserAuthContextProvider = ({ children }) => {
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
       setUser(currentUser);
-      console.log(currentUser);
+      console.log(currentUser?.email);
       if (currentUser) {
         try {
           const res = await publicRequest.post("users/token", {

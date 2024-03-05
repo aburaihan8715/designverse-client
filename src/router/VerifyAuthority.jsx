@@ -1,7 +1,7 @@
 import { Navigate } from "react-router-dom";
 import { useUserAuth } from "../hooks/useUserAuth";
 
-const ProtectedByRole = ({ children, roles }) => {
+const VerifyAuthority = ({ children, roles }) => {
   const { user, role } = useUserAuth();
 
   if (user && roles.includes(role)) {
@@ -11,4 +11,4 @@ const ProtectedByRole = ({ children, roles }) => {
   return <Navigate to="/login" replace={true} />;
 };
 
-export default ProtectedByRole;
+export default VerifyAuthority;

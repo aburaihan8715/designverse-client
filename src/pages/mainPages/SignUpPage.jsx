@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import toast, { Toaster } from "react-hot-toast";
-import { Link, Navigate } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 
 import SocialLogin from "../../components/ui/SocialLogin";
@@ -13,7 +13,9 @@ import { publicRequest } from "../../utils/requestMethod";
 // we should use two by need
 const SignUpPage = () => {
   const [showPassword, setShowPassword] = useState(false);
-  const { user } = useUserAuth();
+  const [error, setError] = useState("");
+  const { user, createUserUsingEmailPassword } = useUserAuth();
+  const navigate = useNavigate();
 
   const form = useForm({
     defaultValues: {
@@ -23,6 +25,7 @@ const SignUpPage = () => {
       passwordConfirm: "",
     },
   });
+
   const { register, handleSubmit, formState, getValues, reset } = form;
   const { errors, isSubmitSuccessful, isSubmitting, isDirty, isValid } =
     formState;
@@ -32,10 +35,15 @@ const SignUpPage = () => {
   }, [isSubmitSuccessful, reset]);
 
   const submitHandler = async (data) => {
+    setError("");
     const toastId = toast.loading("Loading...");
     const { username, email, password, passwordConfirm } = data;
 
     try {
+      // create user to firebase
+      await createUserUsingEmailPassword(email, password);
+
+      // create user our database
       const res = await publicRequest.post(
         "users",
         {
@@ -51,14 +59,18 @@ const SignUpPage = () => {
         },
       );
 
+      // show success info and navigate to home
       if (res.data.status === "success") {
         toast.success("User created successfully!", {
           id: toastId,
         });
+
+        navigate("/");
       }
     } catch (error) {
-      // TODO: we should show error message on ui
-      console.log(error.response.data);
+      // show error message and dismiss loading toast
+      toast.dismiss(toastId);
+      setError(error.message || "Failed to create user");
     }
   };
 
@@ -180,6 +192,8 @@ const SignUpPage = () => {
               </button>
               <Toaster />
             </div>
+
+            {error && <p className="text-center text-red-500">{error}</p>}
           </div>
         </form>
 

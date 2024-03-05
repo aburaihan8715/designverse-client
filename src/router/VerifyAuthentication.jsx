@@ -1,7 +1,7 @@
 import { Navigate, useLocation } from "react-router-dom";
 import useUserAuth from "../hooks/useUserAuth";
 
-const Protected = ({ children }) => {
+const VerifyAuthentication = ({ children }) => {
   const { user } = useUserAuth();
   const location = useLocation();
 
@@ -10,4 +10,4 @@ const Protected = ({ children }) => {
   return <Navigate to="/login" state={{ from: location }} replace />;
 };
 
-export default Protected;
+export default VerifyAuthentication;

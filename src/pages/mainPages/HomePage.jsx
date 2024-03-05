@@ -11,7 +11,7 @@ const HomePage = () => {
   //       const res = await userRequest.get("users");
   //       console.log(res);
   //     } catch (error) {
-  //       console.log(error);
+  //       console.log(error.response.data.message);
   //     }
   //   };
 
